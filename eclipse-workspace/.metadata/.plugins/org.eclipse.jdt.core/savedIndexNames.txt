@@ -1,3 +1,0 @@
-INDEX VERSION 1.131+/Users/isaac/Desktop/MediaVault/eclipse-workspace/.metadata/.plugins/org.eclipse.jdt.core
-1865797976.index
-1923573942.index

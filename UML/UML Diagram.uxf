@@ -4,8 +4,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>378</x>
-      <y>224</y>
+      <x>280</x>
+      <y>504</y>
       <w>147</w>
       <h>91</h>
     </coordinates>
@@ -15,37 +15,14 @@
 -releaseDate:Date
 --
 +getName():String
-+getReleaseDate():String
-+getRating():Double</panel_attributes>
++getReleaseDate():String</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>252</x>
-      <y>350</y>
-      <w>147</w>
-      <h>63</h>
-    </coordinates>
-    <panel_attributes>/WatchableMedia (Abstract)/</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>504</x>
-      <y>350</y>
-      <w>147</w>
-      <h>56</h>
-    </coordinates>
-    <panel_attributes>/ReadableMedia (Abstract)/</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>252</x>
-      <y>448</y>
+      <x>280</x>
+      <y>630</y>
       <w>147</w>
       <h>56</h>
     </coordinates>
@@ -53,69 +30,156 @@
     <additional_attributes/>
   </element>
   <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>343</x>
+      <y>588</y>
+      <w>21</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>504</x>
-      <y>448</y>
-      <w>147</w>
-      <h>56</h>
+      <x>476</x>
+      <y>196</y>
+      <w>266</w>
+      <h>98</h>
     </coordinates>
-    <panel_attributes>Book</panel_attributes>
+    <panel_attributes>Login
+--
++createAccount(String:username,String:password):User
++login(String:username,String:password):User</panel_attributes>
     <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>385</x>
-      <y>308</y>
-      <w>21</w>
-      <h>56</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>511</x>
-      <y>308</y>
-      <w>21</w>
-      <h>56</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>315</x>
-      <y>406</y>
-      <w>21</w>
-      <h>56</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>574</x>
-      <y>399</y>
-      <w>21</w>
-      <h>63</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>805</x>
-      <y>203</y>
-      <w>147</w>
+      <y>196</y>
+      <w>224</w>
+      <h>105</h>
+    </coordinates>
+    <panel_attributes>Encryption
+--
+-file:File
+-logins:hashmap&lt;&gt;
+--
++store(String:username,String:password)
+-encryptUsername(String:username):String
+-encryptPassword(String:password):String
++verify(String:username:Password):User</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>735</x>
+      <y>231</y>
+      <w>84</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+uses</panel_attributes>
+    <additional_attributes>100.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>476</x>
+      <y>0</y>
+      <w>266</w>
       <h>133</h>
     </coordinates>
-    <panel_attributes/>
+    <panel_attributes>LoginUI
+--</panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>602</x>
+      <y>126</y>
+      <w>42</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+uses</panel_attributes>
+    <additional_attributes>10.0;100.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>490</x>
+      <y>343</y>
+      <w>224</w>
+      <h>98</h>
+    </coordinates>
+    <panel_attributes>User
+--
+-username:String
+-mediaCollection:MediaCollection
+-
++getUsername():String
++addMedia(Media:media):bool
++removeMedia(Media:media):bool
++getMediaList():ArrayList&lt;Media&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>511</x>
+      <y>504</y>
+      <w>161</w>
+      <h>98</h>
+    </coordinates>
+    <panel_attributes>MediaCollection
+--
+-media:ArrayList&lt;Media&gt;
+--
++getMediaList():ArrayList&lt;Movies&gt;
++addMedia(Media):bool
++removeMedia(Media:media):bool
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>588</x>
+      <y>287</y>
+      <w>42</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+uses</panel_attributes>
+    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>420</x>
+      <y>539</y>
+      <w>105</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+uses</panel_attributes>
+    <additional_attributes>10.0;20.0;130.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>581</x>
+      <y>434</y>
+      <w>42</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+uses</panel_attributes>
+    <additional_attributes>10.0;100.0;10.0;10.0</additional_attributes>
   </element>
 </diagram>

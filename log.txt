@@ -1,0 +1,19 @@
+Log File
+
+8th Feb 2023
+Meeting Notes
+- Created the base UML diagram for the project
+
+Task Assignments + Estimates
+- Isaac: Create the abstract Media class to store media information and a 
+movie class to extend it (6 days).
+- Herman: Create the User class to store the user's username and media 
+list as well as the MediaCollection class to store a list of the user's 
+media. (6 days).
+- Mate: Create login and encryption classes to allow users create an 
+account and login to it safely (9 days).
+- Ruth: Create a UI for the Account Creation and Login (9 days).
+- Mohammed: Create extensive JUnit test cases (9 days).
+
+Time taken
+

@@ -115,19 +115,7 @@
       <w>147</w>
       <h>133</h>
     </coordinates>
-    <panel_attributes>&lt;&lt;Stereotype&gt;&gt;
-Package::FatClass
-{Some Properties}
---
--id: Long {composite}
-_-ClassAttribute: Long_
---
-#Operation(i: int): int
-/+AbstractOperation()/
---
-Responsibilities
--- Resp1
--- Resp2</panel_attributes>
+    <panel_attributes/>
     <additional_attributes/>
   </element>
 </diagram>

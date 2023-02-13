@@ -32,6 +32,7 @@ public class Login extends JFrame {
 			public void run() {
 				try {
 					Login frame = new Login();
+					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -119,6 +120,7 @@ public class Login extends JFrame {
 		signUpPrompt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				SignUp frame = new SignUp();
+				frame.setLocationRelativeTo(null);
 				frame.setVisible(true);
 				Login.this.dispose();
 			}

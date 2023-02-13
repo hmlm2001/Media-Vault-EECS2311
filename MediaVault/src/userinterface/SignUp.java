@@ -33,6 +33,7 @@ public class SignUp extends JFrame {
 			public void run() {
 				try {
 					SignUp frame = new SignUp();
+					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -125,6 +126,7 @@ public class SignUp extends JFrame {
 		signUpPrompt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Login frame = new Login();
+				frame.setLocationRelativeTo(null);
 				frame.setVisible(true);
 				SignUp.this.dispose();
 			}

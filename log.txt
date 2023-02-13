@@ -15,7 +15,24 @@ media. (6 days).
 - Mate: Create login and encryption classes to allow users create an 
 account and login to it safely (9 days).
 - Ruth: Create a UI for the Account Creation and Login (9 days).
-- Mohammed: Create a stub database to store movies (4 days).
+- Muhammad: Create a stub database to store movies (4 days).
 
 Time taken
 OVERALL: 
+
+10th Feb 2023
+Meeting Notes
+- Talked about overall implementation
+- How we should approach putting together the project prior to deadline
+- Managed to get everyone's git connections working and sarted making appropriate classes and package
+
+Task Assignments + Estimates
+Reallocated tasks and updated estimates
+Login & Encryption: Mate (4 days)
+Media and MediaCollection: Muhammad (4 days)
+LoginUI: Isaac (6 days)
+User & Allmedia: Ruth (4 days)
+Test Cases: Lim (4 days)
+
+
+The deadline for all team members to complete their allocated tasks is Wednesday Feb 15th.

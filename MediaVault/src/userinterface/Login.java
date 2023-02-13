@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
+import javax.swing.Timer;
 import javax.swing.border.LineBorder;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
@@ -99,6 +100,16 @@ public class Login extends JFrame {
 					successPrompt.setForeground(new Color(52, 200, 15));
 					successPrompt.setBounds(543, 343, 110, 16);
 					successPrompt.setText("Login successful!");
+					Timer t = new Timer(1000, new ActionListener() {
+					    public void actionPerformed(ActionEvent e) {
+					    	Explore frame = new Explore();
+					    	frame.setLocationRelativeTo(null);
+							frame.setVisible(true);
+							Login.this.dispose();
+					    }
+					});
+					t.setRepeats(false);
+					t.start();
 				} else {
 					successPrompt.setForeground(Color.RED);
 					successPrompt.setBounds(480, 343, 250, 16);

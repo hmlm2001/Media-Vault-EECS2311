@@ -16,6 +16,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.ImageIcon;
+import javax.swing.Timer;
 
 @SuppressWarnings("serial")
 public class SignUp extends JFrame {
@@ -109,6 +110,16 @@ public class SignUp extends JFrame {
 					successPrompt.setForeground(new Color(52, 200, 15));
 					successPrompt.setBounds(535, 350, 150, 16);
 					successPrompt.setText("Sign up successful!");
+					Timer t = new Timer(1000, new ActionListener() {
+					    public void actionPerformed(ActionEvent e) {
+					    	Explore frame = new Explore();
+					    	frame.setLocationRelativeTo(null);
+							frame.setVisible(true);
+							SignUp.this.dispose();
+					    }
+					});
+					t.setRepeats(false);
+					t.start();
 				}
 			}
 		});

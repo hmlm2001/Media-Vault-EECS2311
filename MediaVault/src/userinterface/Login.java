@@ -16,7 +16,6 @@ import javax.swing.border.LineBorder;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.ImageIcon;
-import java.awt.Font;
 
 @SuppressWarnings("serial")
 public class Login extends JFrame {
@@ -33,7 +32,6 @@ public class Login extends JFrame {
 			public void run() {
 				try {
 					Login frame = new Login();
-					frame.setResizable(false);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -45,7 +43,8 @@ public class Login extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Login() {	      
+	public Login() {
+		setResizable(false);	      
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 500);
 		contentPane = new JPanel();
@@ -119,6 +118,9 @@ public class Login extends JFrame {
 		signUpPrompt.setForeground(Color.BLUE);
 		signUpPrompt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				SignUp frame = new SignUp();
+				frame.setVisible(true);
+				Login.this.dispose();
 			}
 		});
 		signUpPrompt.setBorder(null);

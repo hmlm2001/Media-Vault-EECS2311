@@ -33,7 +33,7 @@ public class SignUp extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Login frame = new Login();
+					SignUp frame = new SignUp();
 					frame.setResizable(false);
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -95,15 +95,20 @@ public class SignUp extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String username = usernameField.getText();
 				String password = new String(passwordField.getPassword());
+				String confirmPassword = new String(confirmPasswordField.getPassword());
 				
-				if (username.equals("USERNAME") && password.equals("PASSWORD")) {
-					successPrompt.setForeground(new Color(52, 200, 15));
-					successPrompt.setBounds(543, 343, 110, 16);
-					successPrompt.setText("Login successful!");
-				} else {
+				if (username.equals("") || password.equals("")) {
 					successPrompt.setForeground(Color.RED);
-					successPrompt.setBounds(480, 343, 250, 16);
-					successPrompt.setText("Invalid username/password. Try again.");
+					successPrompt.setBounds(480, 348, 250, 16);
+					successPrompt.setText("Username/Password can not be empty.");
+				} else if (!password.equals(confirmPassword)) {
+					successPrompt.setForeground(Color.RED);
+					successPrompt.setBounds(490, 348, 250, 16);
+					successPrompt.setText("Passwords do not match. Try again.");
+				} else {
+					successPrompt.setForeground(new Color(52, 200, 15));
+					successPrompt.setBounds(535, 348, 150, 16);
+					successPrompt.setText("Sign up successful!");
 				}
 			}
 		});

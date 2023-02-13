@@ -120,10 +120,10 @@ public class SignUp extends JFrame {
 		textPrompt.setBounds(498, 417, 164, 16);
 		contentPane.add(textPrompt);
 		
-		JButton signUpPrompt = new JButton("<HTML><U>Login</U></HTML>");
-		signUpPrompt.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		signUpPrompt.setForeground(Color.BLUE);
-		signUpPrompt.addActionListener(new ActionListener() {
+		JButton loginPrompt = new JButton("<HTML><U>Login</U></HTML>");
+		loginPrompt.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		loginPrompt.setForeground(Color.BLUE);
+		loginPrompt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Login frame = new Login();
 				frame.setLocationRelativeTo(null);
@@ -131,9 +131,9 @@ public class SignUp extends JFrame {
 				SignUp.this.dispose();
 			}
 		});
-		signUpPrompt.setBorder(null);
-		signUpPrompt.setBounds(650, 414, 57, 23);
-		contentPane.add(signUpPrompt);
+		loginPrompt.setBorder(null);
+		loginPrompt.setBounds(650, 414, 57, 23);
+		contentPane.add(loginPrompt);
 		
 		confirmPasswordField = new JPasswordField();
 		confirmPasswordField.setBorder(new LineBorder(new Color(0, 0, 0)));

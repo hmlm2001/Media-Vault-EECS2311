@@ -13,13 +13,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
-import javax.swing.border.BevelBorder;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.ImageIcon;
 import java.awt.Font;
-import javax.swing.border.EtchedBorder;
 
+@SuppressWarnings("serial")
 public class SignUp extends JFrame {
 
 	private JPanel contentPane;

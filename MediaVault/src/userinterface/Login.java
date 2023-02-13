@@ -45,6 +45,7 @@ public class Login extends JFrame {
 	 * Create the frame.
 	 */
 	public Login() {
+		setTitle("MediaVault");
 		setResizable(false);	      
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 500);
@@ -60,10 +61,10 @@ public class Login extends JFrame {
 		leftPanel.setBounds(0, -17, 400, 489);
 		contentPane.add(leftPanel);
 		
-		JLabel mvLogo = new JLabel("");
-		leftPanel.add(mvLogo);
-		mvLogo.setIcon(new ImageIcon(Login.class.getResource("/images/mv-logo-white-with-text-no-bg.png")));
-		mvLogo.setForeground(Color.WHITE);
+		JLabel mediaVaultLogo = new JLabel("");
+		leftPanel.add(mediaVaultLogo);
+		mediaVaultLogo.setIcon(new ImageIcon(Login.class.getResource("/images/logos/mv-logo-white-with-text-no-bg.png")));
+		mediaVaultLogo.setForeground(Color.WHITE);
 		
 		JLabel successPrompt = new JLabel("");
 		contentPane.add(successPrompt);

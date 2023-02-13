@@ -16,6 +16,7 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+@SuppressWarnings("serial")
 public class Explore extends JFrame {
 
 	private JPanel contentPane;
@@ -43,6 +44,7 @@ public class Explore extends JFrame {
 	 * Create the frame.
 	 */
 	public Explore() {
+		setTitle("MediaVault");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1650, 1000);
@@ -90,7 +92,7 @@ public class Explore extends JFrame {
 		wishlistButton.setForeground(Color.WHITE);
 		wishlistButton.setFont(new Font("Lucida Grande", Font.BOLD, 18));
 		wishlistButton.setBorder(null);
-		wishlistButton.setBounds(392, 20, 88, 29);
+		wishlistButton.setBounds(404, 20, 88, 29);
 		navbar.add(wishlistButton);
 		
 		JButton vaultButton = new JButton("VAULT");
@@ -98,18 +100,42 @@ public class Explore extends JFrame {
 		vaultButton.setForeground(Color.WHITE);
 		vaultButton.setFont(new Font("Lucida Grande", Font.BOLD, 18));
 		vaultButton.setBorder(null);
-		vaultButton.setBounds(298, 20, 76, 29);
+		vaultButton.setBounds(304, 20, 76, 29);
 		navbar.add(vaultButton);
 		
-		JButton button = new JButton("");
-		button.addActionListener(new ActionListener() {
+		JButton profileButton = new JButton("PROFILE");
+		profileButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		profileButton.setForeground(Color.WHITE);
+		profileButton.setFont(new Font("Lucida Grande", Font.BOLD, 18));
+		profileButton.setBorder(null);
+		profileButton.setBounds(515, 20, 88, 29);
+		navbar.add(profileButton);
+		
+		JButton userIcon = new JButton("");
+		userIcon.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		button.setIcon(new ImageIcon(user_icon));
-		button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		button.setBorder(null);
-		button.setBounds(1578, 2, 66, 64);
-		navbar.add(button);
+		userIcon.setIcon(new ImageIcon(user_icon));
+		userIcon.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		userIcon.setBorder(null);
+		userIcon.setBounds(1472, 1, 66, 64);
+		navbar.add(userIcon);
+		
+		JButton logOutButton = new JButton("LOG OUT");
+		logOutButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Login frame = new Login();
+				frame.setLocationRelativeTo(null);
+				frame.setVisible(true);
+				Explore.this.dispose();
+			}
+		});
+		logOutButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		logOutButton.setForeground(Color.WHITE);
+		logOutButton.setFont(new Font("Lucida Grande", Font.BOLD, 18));
+		logOutButton.setBorder(null);
+		logOutButton.setBounds(1548, 20, 88, 29);
+		navbar.add(logOutButton);
 	}
 }

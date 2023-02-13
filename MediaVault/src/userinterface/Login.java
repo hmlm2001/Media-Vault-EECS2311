@@ -70,22 +70,21 @@ public class Login extends JFrame {
 		
 		usernameField = new JTextField();
 		usernameField.setBorder(new LineBorder(new Color(0, 0, 0)));
-		usernameField.setFont(new Font("Arial", Font.PLAIN, 13));
-		usernameField.setBounds(437, 124, 325, 30);
+		usernameField.setBounds(439, 140, 325, 30);
 		contentPane.add(usernameField);
 		usernameField.setColumns(10);
 		
 		JLabel usernameLabel = new JLabel("USERNAME");
-		usernameLabel.setBounds(437, 96, 77, 16);
+		usernameLabel.setBounds(439, 112, 77, 16);
 		contentPane.add(usernameLabel);
 		
 		passwordField = new JPasswordField();
 		passwordField.setBorder(new LineBorder(new Color(0, 0, 0)));
-		passwordField.setBounds(437, 229, 325, 30);
+		passwordField.setBounds(439, 228, 325, 30);
 		contentPane.add(passwordField);
 		
 		JLabel passwordLabel = new JLabel("PASSWORD");
-		passwordLabel.setBounds(437, 201, 77, 16);
+		passwordLabel.setBounds(439, 200, 77, 16);
 		contentPane.add(passwordLabel);
 		
 		JButton loginButton = new JButton("Login");
@@ -112,7 +111,7 @@ public class Login extends JFrame {
 		contentPane.add(loginButton);
 		
 		JLabel textPrompt = new JLabel("Don't have an account?");
-		textPrompt.setBounds(498, 412, 151, 16);
+		textPrompt.setBounds(498, 417, 151, 16);
 		contentPane.add(textPrompt);
 		
 		JButton signUpPrompt = new JButton("<HTML><U>Sign Up</U></HTML>");
@@ -123,7 +122,7 @@ public class Login extends JFrame {
 			}
 		});
 		signUpPrompt.setBorder(null);
-		signUpPrompt.setBounds(643, 409, 57, 23);
+		signUpPrompt.setBounds(643, 414, 57, 23);
 		contentPane.add(signUpPrompt);
 	}
 }

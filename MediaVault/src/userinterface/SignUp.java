@@ -71,7 +71,6 @@ public class SignUp extends JFrame {
 		
 		usernameField = new JTextField();
 		usernameField.setBorder(new LineBorder(new Color(0, 0, 0)));
-		usernameField.setFont(new Font("Arial", Font.PLAIN, 13));
 		usernameField.setBounds(437, 75, 325, 30);
 		contentPane.add(usernameField);
 		usernameField.setColumns(10);
@@ -99,15 +98,15 @@ public class SignUp extends JFrame {
 				
 				if (username.equals("") || password.equals("")) {
 					successPrompt.setForeground(Color.RED);
-					successPrompt.setBounds(480, 348, 250, 16);
+					successPrompt.setBounds(480, 350, 250, 16);
 					successPrompt.setText("Username/Password can not be empty.");
 				} else if (!password.equals(confirmPassword)) {
 					successPrompt.setForeground(Color.RED);
-					successPrompt.setBounds(490, 348, 250, 16);
+					successPrompt.setBounds(490, 350, 250, 16);
 					successPrompt.setText("Passwords do not match. Try again.");
 				} else {
 					successPrompt.setForeground(new Color(52, 200, 15));
-					successPrompt.setBounds(535, 348, 150, 16);
+					successPrompt.setBounds(535, 350, 150, 16);
 					successPrompt.setText("Sign up successful!");
 				}
 			}
@@ -129,7 +128,7 @@ public class SignUp extends JFrame {
 			}
 		});
 		signUpPrompt.setBorder(null);
-		signUpPrompt.setBounds(652, 414, 57, 23);
+		signUpPrompt.setBounds(650, 414, 57, 23);
 		contentPane.add(signUpPrompt);
 		
 		confirmPasswordField = new JPasswordField();

@@ -6,6 +6,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
+import java.awt.Cursor;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -14,6 +16,9 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.BevelBorder;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
+import javax.swing.ImageIcon;
+import java.awt.Font;
+import javax.swing.border.EtchedBorder;
 
 public class Login extends JFrame {
 
@@ -29,6 +34,7 @@ public class Login extends JFrame {
 			public void run() {
 				try {
 					Login frame = new Login();
+					frame.setResizable(false);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -40,7 +46,7 @@ public class Login extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Login() {
+	public Login() {	      
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 500);
 		contentPane = new JPanel();
@@ -51,22 +57,21 @@ public class Login extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel leftPanel = new JPanel();
-		leftPanel.setBackground(Color.BLACK);
-		leftPanel.setBounds(0, 0, 400, 472);
+		leftPanel.setBackground(Color.DARK_GRAY);
+		leftPanel.setBounds(0, -17, 400, 489);
 		contentPane.add(leftPanel);
 		
-		JButton loginButton = new JButton("Login");
-		loginButton.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		loginButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		loginButton.setBackground(Color.DARK_GRAY);
-		loginButton.setBounds(525, 307, 137, 29);
-		contentPane.add(loginButton);
+		JLabel mvLogo = new JLabel("");
+		leftPanel.add(mvLogo);
+		mvLogo.setIcon(new ImageIcon(Login.class.getResource("/images/mv-logo-white-with-text-no-bg.png")));
+		mvLogo.setForeground(Color.WHITE);
+		
+		JLabel successPrompt = new JLabel("");
+		contentPane.add(successPrompt);
 		
 		usernameField = new JTextField();
 		usernameField.setBorder(new LineBorder(new Color(0, 0, 0)));
+		usernameField.setFont(new Font("Arial", Font.PLAIN, 13));
 		usernameField.setBounds(437, 124, 325, 30);
 		contentPane.add(usernameField);
 		usernameField.setColumns(10);
@@ -84,18 +89,42 @@ public class Login extends JFrame {
 		passwordLabel.setBounds(437, 201, 77, 16);
 		contentPane.add(passwordLabel);
 		
+		JButton loginButton = new JButton("Login");
+		loginButton.setBorder(new LineBorder(Color.BLACK, 1, true));
+		loginButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String username = usernameField.getText();
+				String password = new String(passwordField.getPassword());
+				
+				if (username.equals("USERNAME") && password.equals("PASSWORD")) {
+					successPrompt.setForeground(new Color(52, 200, 15));
+					successPrompt.setBounds(543, 343, 110, 16);
+					successPrompt.setText("Login successful!");
+				} else {
+					successPrompt.setForeground(Color.RED);
+					successPrompt.setBounds(480, 343, 250, 16);
+					successPrompt.setText("Invalid username/password. Try again.");
+				}
+			}
+		});
+		loginButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		loginButton.setBackground(Color.WHITE);
+		loginButton.setBounds(528, 303, 137, 29);
+		contentPane.add(loginButton);
+		
 		JLabel textPrompt = new JLabel("Don't have an account?");
-		textPrompt.setBounds(497, 395, 151, 16);
+		textPrompt.setBounds(498, 412, 151, 16);
 		contentPane.add(textPrompt);
 		
-		JButton signUpPrompt = new JButton("Sign Up");
-		signUpPrompt.setForeground(Color.RED);
+		JButton signUpPrompt = new JButton("<HTML><U>Sign Up</U></HTML>");
+		signUpPrompt.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		signUpPrompt.setForeground(Color.BLUE);
 		signUpPrompt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
 		signUpPrompt.setBorder(null);
-		signUpPrompt.setBounds(640, 392, 63, 23);
+		signUpPrompt.setBounds(643, 409, 57, 23);
 		contentPane.add(signUpPrompt);
 	}
 }

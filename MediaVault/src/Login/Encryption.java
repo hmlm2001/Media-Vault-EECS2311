@@ -6,21 +6,17 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;  
 
 public class Encryption {
+	LoginDB db;
+	public Encryption () {
+		db = new LoginDB();
+	}
 	public boolean newAccount(String username, String password) {
-		return true;
+		return db.newAccount(encrypt(username),encrypt(password));
 	}
 	public boolean verifyLogin(String username, String password) {
-		return true;
+		return db.verifyLogin(encrypt(username),encrypt(password));;
 	}
-	private String encrpytUsername(String username) {
-		return encryptString(username);
-		
-	}
-	private static String encryptPassword(String password) {
-		return encryptString(password);
-		
-	}
-	private static String encryptString(String input) {
+	private static String encrypt(String input) {
 		try {
 			return toHexString(getSHA(input));
 		} catch (NoSuchAlgorithmException e) {

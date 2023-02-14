@@ -1,12 +1,12 @@
 package Login;
 
 public class Login {
-	public User createAccount(String username, String password) {
-		return null;
+	public boolean createAccount(String username, String password) {
+		return Encryption.encryptNewAccount(username, password);
 		
 	}
-	public User login(String username, String password) {
-		return null;
+	public boolean login(String username, String password) {
+		return Encryption.encryptVerifyLogin(username, password);
 		
 	}
 }

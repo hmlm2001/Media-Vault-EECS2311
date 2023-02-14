@@ -4,8 +4,14 @@ import java.util.HashMap;
 
 public class LoginDB {
 	HashMap<String,String> logins;
-	public LoginDB () {
+	static LoginDB instance = null;
+	private LoginDB () {
 		logins = new HashMap<String,String>();
+	}
+	public static LoginDB getInstance() {
+		if (instance == null) instance = new LoginDB();
+		return instance;
+		
 	}
 	public boolean newAccount(String username, String password) {
 		if(logins.containsKey(username)) return false;

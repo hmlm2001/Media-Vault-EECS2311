@@ -6,15 +6,12 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;  
 
 public class Encryption {
-	LoginDB db;
-	public Encryption () {
-		db = new LoginDB();
+
+	public static boolean encryptNewAccount(String username, String password) {
+		return LoginDB.getInstance().newAccount(encrypt(username),encrypt(password));
 	}
-	public boolean newAccount(String username, String password) {
-		return db.newAccount(encrypt(username),encrypt(password));
-	}
-	public boolean verifyLogin(String username, String password) {
-		return db.verifyLogin(encrypt(username),encrypt(password));;
+	public static boolean encryptVerifyLogin(String username, String password) {
+		return LoginDB.getInstance().verifyLogin(encrypt(username),encrypt(password));;
 	}
 	private static String encrypt(String input) {
 		try {
@@ -43,8 +40,4 @@ public class Encryption {
   
         return hexString.toString();  
     }  
-	public static void main(String[] args) {
-		String pass = "Hello";
-		System.out.println(encryptPassword(pass));
-	}
 }

@@ -41,7 +41,7 @@ public class Encryption {
 	}
 	/**
 	 * Converts an input string into an array of bytes using SHA-512 encryption
-	 * @param input is the input string that is to be convereted into byte
+	 * @param input is the input string that is to be converted into byte
 	 * @return the byte form of the input string
 	 * @throws NoSuchAlgorithmException
 	 */

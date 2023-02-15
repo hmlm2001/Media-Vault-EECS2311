@@ -12,18 +12,19 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
-import javax.swing.Timer;
 import javax.swing.border.LineBorder;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.ImageIcon;
+import javax.swing.Timer;
 
 @SuppressWarnings("serial")
-public class Login extends JFrame {
+public class SignUpUI extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField usernameField;
 	private JPasswordField passwordField;
+	private JPasswordField confirmPasswordField;
 
 	/**
 	 * Launch the application.
@@ -32,7 +33,7 @@ public class Login extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Login frame = new Login();
+					SignUpUI frame = new SignUpUI();
 					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -45,9 +46,9 @@ public class Login extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Login() {
+	public SignUpUI() {
 		setTitle("MediaVault");
-		setResizable(false);	      
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 500);
 		contentPane = new JPanel();
@@ -64,7 +65,7 @@ public class Login extends JFrame {
 		
 		JLabel mediaVaultLogo = new JLabel("");
 		leftPanel.add(mediaVaultLogo);
-		mediaVaultLogo.setIcon(new ImageIcon(Login.class.getResource("/images/logos/mv-logo-white-with-text-no-bg.png")));
+		mediaVaultLogo.setIcon(new ImageIcon(LoginUI.class.getResource("/images/logos/mv-logo-white-with-text-no-bg.png")));
 		mediaVaultLogo.setForeground(Color.WHITE);
 		
 		JLabel successPrompt = new JLabel("");
@@ -72,73 +73,87 @@ public class Login extends JFrame {
 		
 		usernameField = new JTextField();
 		usernameField.setBorder(new LineBorder(new Color(0, 0, 0)));
-		usernameField.setBounds(439, 140, 325, 30);
+		usernameField.setBounds(437, 75, 325, 30);
 		contentPane.add(usernameField);
 		usernameField.setColumns(10);
 		
 		JLabel usernameLabel = new JLabel("USERNAME");
-		usernameLabel.setBounds(439, 112, 77, 16);
+		usernameLabel.setBounds(437, 47, 77, 16);
 		contentPane.add(usernameLabel);
 		
 		passwordField = new JPasswordField();
 		passwordField.setBorder(new LineBorder(new Color(0, 0, 0)));
-		passwordField.setBounds(439, 228, 325, 30);
+		passwordField.setBounds(437, 163, 325, 30);
 		contentPane.add(passwordField);
 		
 		JLabel passwordLabel = new JLabel("PASSWORD");
-		passwordLabel.setBounds(439, 200, 77, 16);
+		passwordLabel.setBounds(437, 135, 77, 16);
 		contentPane.add(passwordLabel);
 		
-		JButton loginButton = new JButton("Login");
-		loginButton.setBorder(new LineBorder(Color.BLACK, 1, true));
-		loginButton.addActionListener(new ActionListener() {
+		JButton signUpButton = new JButton("Sign Up");
+		signUpButton.setBorder(new LineBorder(Color.BLACK, 1, true));
+		signUpButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String username = usernameField.getText();
 				String password = new String(passwordField.getPassword());
+				String confirmPassword = new String(confirmPasswordField.getPassword());
 				
-				if (username.equals("USERNAME") && password.equals("PASSWORD")) {
+				if (username.equals("") || password.equals("")) {
+					successPrompt.setForeground(Color.RED);
+					successPrompt.setBounds(480, 350, 250, 16);
+					successPrompt.setText("Username/Password can not be empty.");
+				} else if (!password.equals(confirmPassword)) {
+					successPrompt.setForeground(Color.RED);
+					successPrompt.setBounds(490, 350, 250, 16);
+					successPrompt.setText("Passwords do not match. Try again.");
+				} else {
 					successPrompt.setForeground(new Color(52, 200, 15));
-					successPrompt.setBounds(543, 343, 110, 16);
-					successPrompt.setText("Login successful!");
+					successPrompt.setBounds(535, 350, 150, 16);
+					successPrompt.setText("Sign up successful!");
 					Timer t = new Timer(1000, new ActionListener() {
 					    public void actionPerformed(ActionEvent e) {
-					    	Explore frame = new Explore();
+					    	ExploreUI frame = new ExploreUI();
 					    	frame.setLocationRelativeTo(null);
 							frame.setVisible(true);
-							Login.this.dispose();
+							SignUpUI.this.dispose();
 					    }
 					});
 					t.setRepeats(false);
 					t.start();
-				} else {
-					successPrompt.setForeground(Color.RED);
-					successPrompt.setBounds(480, 343, 250, 16);
-					successPrompt.setText("Invalid username/password. Try again.");
 				}
 			}
 		});
-		loginButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		loginButton.setBackground(Color.WHITE);
-		loginButton.setBounds(528, 303, 137, 29);
-		contentPane.add(loginButton);
+		signUpButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		signUpButton.setBackground(Color.WHITE);
+		signUpButton.setBounds(529, 310, 137, 29);
+		contentPane.add(signUpButton);
 		
-		JLabel textPrompt = new JLabel("Don't have an account?");
-		textPrompt.setBounds(498, 417, 151, 16);
+		JLabel textPrompt = new JLabel("Already have an account?");
+		textPrompt.setBounds(498, 417, 164, 16);
 		contentPane.add(textPrompt);
 		
-		JButton signUpPrompt = new JButton("<HTML><U>Sign Up</U></HTML>");
-		signUpPrompt.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		signUpPrompt.setForeground(Color.BLUE);
-		signUpPrompt.addActionListener(new ActionListener() {
+		JButton loginPrompt = new JButton("<HTML><U>Login</U></HTML>");
+		loginPrompt.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		loginPrompt.setForeground(Color.BLUE);
+		loginPrompt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SignUp frame = new SignUp();
+				LoginUI frame = new LoginUI();
 				frame.setLocationRelativeTo(null);
 				frame.setVisible(true);
-				Login.this.dispose();
+				SignUpUI.this.dispose();
 			}
 		});
-		signUpPrompt.setBorder(null);
-		signUpPrompt.setBounds(643, 414, 57, 23);
-		contentPane.add(signUpPrompt);
+		loginPrompt.setBorder(null);
+		loginPrompt.setBounds(650, 414, 57, 23);
+		contentPane.add(loginPrompt);
+		
+		confirmPasswordField = new JPasswordField();
+		confirmPasswordField.setBorder(new LineBorder(new Color(0, 0, 0)));
+		confirmPasswordField.setBounds(437, 249, 325, 30);
+		contentPane.add(confirmPasswordField);
+		
+		JLabel confirmPasswordLabel = new JLabel("CONFIRM PASSWORD");
+		confirmPasswordLabel.setBounds(437, 221, 137, 16);
+		contentPane.add(confirmPasswordLabel);
 	}
 }

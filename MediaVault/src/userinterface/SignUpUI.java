@@ -2,8 +2,6 @@ package userinterface;
 import backend.Login;
 import backend.User;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -27,23 +25,6 @@ public class SignUpUI extends JFrame {
 	private JTextField usernameField;
 	private JPasswordField passwordField;
 	private JPasswordField confirmPasswordField;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					SignUpUI frame = new SignUpUI();
-					frame.setLocationRelativeTo(null);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.

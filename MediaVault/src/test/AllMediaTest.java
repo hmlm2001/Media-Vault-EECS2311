@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import main.*;
+import backend.*;
 
 class AllMediaTest {
 
@@ -45,6 +45,7 @@ class AllMediaTest {
 		assertDoesNotThrow(allMedia.searchMedia("se7en"));
 		Media media = allMedia.searchMedia("se7en");
 		assertEquals(media.name, "se7en");
+		//TODO Figure out how to test "Date" objects
 		//assertEquals(media.releaseDate, );
 	}
 	
@@ -54,6 +55,7 @@ class AllMediaTest {
 		assertTrue(allMedia.MediaMap != null);
 		assertFalse(allMedia.MediaMap.size == 0);
 		assertFalse(allMedia.MediaMap.values().isEmpty());
+		//TODO Create "SearchNotFoundException"
 		//assertThrows(SearchNotFoundException.class, ()-> allMedia.searchMedia("How To Train Your Dragon"));
 	}
 

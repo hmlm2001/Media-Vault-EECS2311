@@ -17,7 +17,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
-public class Explore extends JFrame {
+public class ExploreUI extends JFrame {
 
 	private JPanel contentPane;
 	private Image mv_logo = new ImageIcon(getClass().getResource("/images/logos/mv-logo-white-with-text-no-bg.png")).getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
@@ -30,7 +30,7 @@ public class Explore extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Explore frame = new Explore();
+					ExploreUI frame = new ExploreUI();
 					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -43,7 +43,7 @@ public class Explore extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Explore() {
+	public ExploreUI() {
 		setTitle("MediaVault");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -125,10 +125,10 @@ public class Explore extends JFrame {
 		JButton logOutButton = new JButton("LOG OUT");
 		logOutButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Login frame = new Login();
+				LoginUI frame = new LoginUI();
 				frame.setLocationRelativeTo(null);
 				frame.setVisible(true);
-				Explore.this.dispose();
+				ExploreUI.this.dispose();
 			}
 		});
 		logOutButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

@@ -19,7 +19,7 @@ import javax.swing.ImageIcon;
 import javax.swing.Timer;
 
 @SuppressWarnings("serial")
-public class SignUp extends JFrame {
+public class SignUpUI extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField usernameField;
@@ -33,7 +33,7 @@ public class SignUp extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					SignUp frame = new SignUp();
+					SignUpUI frame = new SignUpUI();
 					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -46,7 +46,7 @@ public class SignUp extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public SignUp() {
+	public SignUpUI() {
 		setTitle("MediaVault");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -65,7 +65,7 @@ public class SignUp extends JFrame {
 		
 		JLabel mediaVaultLogo = new JLabel("");
 		leftPanel.add(mediaVaultLogo);
-		mediaVaultLogo.setIcon(new ImageIcon(Login.class.getResource("/images/logos/mv-logo-white-with-text-no-bg.png")));
+		mediaVaultLogo.setIcon(new ImageIcon(LoginUI.class.getResource("/images/logos/mv-logo-white-with-text-no-bg.png")));
 		mediaVaultLogo.setForeground(Color.WHITE);
 		
 		JLabel successPrompt = new JLabel("");
@@ -112,10 +112,10 @@ public class SignUp extends JFrame {
 					successPrompt.setText("Sign up successful!");
 					Timer t = new Timer(1000, new ActionListener() {
 					    public void actionPerformed(ActionEvent e) {
-					    	Explore frame = new Explore();
+					    	ExploreUI frame = new ExploreUI();
 					    	frame.setLocationRelativeTo(null);
 							frame.setVisible(true);
-							SignUp.this.dispose();
+							SignUpUI.this.dispose();
 					    }
 					});
 					t.setRepeats(false);
@@ -133,14 +133,15 @@ public class SignUp extends JFrame {
 		contentPane.add(textPrompt);
 		
 		JButton loginPrompt = new JButton("<HTML><U>Login</U></HTML>");
+		loginPrompt.setBackground(Color.WHITE);
 		loginPrompt.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		loginPrompt.setForeground(Color.BLUE);
 		loginPrompt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Login frame = new Login();
+				LoginUI frame = new LoginUI();
 				frame.setLocationRelativeTo(null);
 				frame.setVisible(true);
-				SignUp.this.dispose();
+				SignUpUI.this.dispose();
 			}
 		});
 		loginPrompt.setBorder(null);

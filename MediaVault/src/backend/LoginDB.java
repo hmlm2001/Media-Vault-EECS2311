@@ -39,6 +39,6 @@ public class LoginDB {
 	 */
 	public static boolean verifyLogin(String username, String password) {
 		if(logins.get(username)==password) return true;
-		return true;
+		return false;
 	}
 }

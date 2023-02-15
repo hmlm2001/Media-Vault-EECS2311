@@ -47,7 +47,7 @@ public class ExploreUI extends JFrame {
 		setTitle("MediaVault");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1300, 800);
+		setBounds(100, 100, 1300, 700);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -123,8 +123,9 @@ public class ExploreUI extends JFrame {
 		});
 		userIcon.setIcon(new ImageIcon(user_icon));
 		userIcon.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		userIcon.setBackground(Color.DARK_GRAY);
 		userIcon.setBorder(null);
-		userIcon.setBounds(1135, 6, 53, 53);
+		userIcon.setBounds(1120, 6, 53, 53);
 		navbar.add(userIcon);
 		
 		JButton logOutButton = new JButton("LOG OUT");
@@ -141,7 +142,7 @@ public class ExploreUI extends JFrame {
 		logOutButton.setForeground(Color.WHITE);
 		logOutButton.setFont(new Font("Lucida Grande", Font.BOLD, 18));
 		logOutButton.setBorder(null);
-		logOutButton.setBounds(1200, 17, 88, 29);
+		logOutButton.setBounds(1185, 17, 88, 29);
 		navbar.add(logOutButton);
 	}
 }

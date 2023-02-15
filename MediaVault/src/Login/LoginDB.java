@@ -3,8 +3,8 @@ package Login;
 import java.util.HashMap;
 
 public class LoginDB {
-	static HashMap<String,String> logins;	//stores logins in a HashMap for O(1) access time
-	static LoginDB instance = null;			//only one instance of LoginDB will exists
+	static private HashMap<String,String> logins;	//stores logins in a HashMap for O(1) access time
+	static private LoginDB instance = null;			//only one instance of LoginDB will exists
 	/**
 	 * LoginDB is private as the getInstance() method will ensure that only one copy of LoginDB exists
 	 */

@@ -34,6 +34,13 @@ LoginUI: Isaac (6 days)
 User & Allmedia: Ruth (4 days)
 Test Cases: Lim (4 days)
 
+Mate Progress:
+Feb 11th-13th:
+	Compelted classes Login.java, Encryption.java and LoginDB.java. Testing required to fully implement desired fucntionality. Overall time taken is about 3 days. The class Login.java is used by the UI classes to verify login or to create an account. The login.java class uses the Encryption.java class to encrypt the password and username then pass it onto LoginDB which will store or verify the provided encrypted data.
+Feb 14th:
+	Fixed some issues with LoginDB.java where the string comparison was done incorrectly.
+Feb 15th:
+	Met with team and discussed project. Login encryption and access sucessfully linked together with LoginUI to be able to successfully login with existing users. (You would still have to create it first as there are no existing users due to the static natrue of the classes)
 
 The deadline for all team members to complete their allocated tasks is Wednesday Feb 15th.
 

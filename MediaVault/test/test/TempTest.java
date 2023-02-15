@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 class TempTest {
 
 	@Test
-	void test() {
+	void test() throws Exception {
 		AllMedia sampledata = new AllMedia();
 		
 		System.out.print(sampledata.MediaMap.get("Saving Private Ryan").name + " "+ sampledata.MediaMap.get("Saving Private Ryan").releaseDate );

@@ -5,25 +5,25 @@ import java.util.ArrayList;
 public class User {
 
 	private String username;
-	private String mediaCollection; // to be changed to type mediaCollection 
+	private MediaCollection mediaCollection; 
 	
 	public String getUsername() {
 		
 		return this.username;
 	} 
 	
-	public boolean addMedia(String media) { // to be changed to type media 
+	public boolean addMedia(Media media) {
 		
-		return false;
+		return this.mediaCollection.addMedia(media);
 	} 
 
-	public boolean removeMedia(String media) {// to be changed to type media 
+	public boolean removeMedia(Media media) {
 		
-		return false;
+		return this.mediaCollection.removeMedia(media);
 	} 
 
-	public ArrayList<String> getmediaList() {// to be changed to type mediaCollection 
+	public ArrayList<Media> getMediaList() {
 		
-		return new ArrayList<>(); //mediacollection.media;
+		return this.mediaCollection.getMediaList(); 
 	} 
 }

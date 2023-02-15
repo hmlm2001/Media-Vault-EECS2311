@@ -24,7 +24,7 @@ public class Encryption {
 	 */
 	public static boolean encryptVerifyLogin(String username, String password) {
 		LoginDB.getInstance();
-		return LoginDB.verifyLogin(encrypt(username),encrypt(password));;
+		return LoginDB.verifyLogin(encrypt(username),encrypt(password));
 	}
 	/**
 	 * Encrypts input string using getSHA and toHexString

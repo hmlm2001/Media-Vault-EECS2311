@@ -54,7 +54,7 @@ class AllMediaTest {
 		assertTrue(allMedia.MediaMap != null);
 		assertFalse(allMedia.MediaMap.size == 0);
 		assertFalse(allMedia.MediaMap.values().isEmpty());
-		//assertThrows(Exception.class, ()-> allMedia.searchMedia("How To Train Your Dragon"));
+		//assertThrows(SearchNotFoundException.class, ()-> allMedia.searchMedia("How To Train Your Dragon"));
 	}
 
 }

@@ -20,8 +20,8 @@ import java.awt.event.ActionEvent;
 public class ExploreUI extends JFrame {
 
 	private JPanel contentPane;
-	private Image mv_logo = new ImageIcon(getClass().getResource("/images/logos/mv-logo-white-with-text-no-bg.png")).getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
-	private Image user_icon = new ImageIcon(getClass().getResource("/images/icons/user-icon.png")).getImage().getScaledInstance(65, 65, Image.SCALE_SMOOTH);
+	private Image mv_logo = new ImageIcon(getClass().getResource("/images/logos/mv-logo-white-with-text-no-bg.png")).getImage().getScaledInstance(110, 110, Image.SCALE_SMOOTH);
+	private Image user_icon = new ImageIcon(getClass().getResource("/images/icons/user-icon.png")).getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
 
 	/**
 	 * Launch the application.
@@ -47,7 +47,7 @@ public class ExploreUI extends JFrame {
 		setTitle("MediaVault");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1650, 1000);
+		setBounds(100, 100, 1300, 800);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -57,14 +57,14 @@ public class ExploreUI extends JFrame {
 		
 		JPanel navbar = new JPanel();
 		navbar.setBackground(Color.DARK_GRAY);
-		navbar.setBounds(0, 0, 1650, 70);
+		navbar.setBounds(0, 0, 1650, 61);
 		contentPane.add(navbar);
 		navbar.setLayout(null);
 		
 		JLabel mediaVaultLogo = new JLabel("");
 		mediaVaultLogo.setHorizontalAlignment(SwingConstants.CENTER);
 		mediaVaultLogo.setIcon(new ImageIcon(mv_logo));
-		mediaVaultLogo.setBounds(6, 6, 88, 59);
+		mediaVaultLogo.setBounds(3, 6, 88, 59);
 		navbar.add(mediaVaultLogo);
 		
 		JButton moviesButton = new JButton("MOVIES");
@@ -74,41 +74,46 @@ public class ExploreUI extends JFrame {
 		});
 		moviesButton.setFont(new Font("Lucida Grande", Font.BOLD, 18));
 		moviesButton.setForeground(Color.WHITE);
+		moviesButton.setBackground(Color.DARK_GRAY);
 		moviesButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		moviesButton.setBorder(null);
-		moviesButton.setBounds(109, 20, 76, 29);
+		moviesButton.setBounds(111, 17, 76, 29);
 		navbar.add(moviesButton);
 		
 		JButton booksButton = new JButton("BOOKS");
 		booksButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		booksButton.setForeground(Color.WHITE);
+		booksButton.setBackground(Color.DARK_GRAY);
 		booksButton.setFont(new Font("Lucida Grande", Font.BOLD, 18));
 		booksButton.setBorder(null);
-		booksButton.setBounds(209, 20, 76, 29);
+		booksButton.setBounds(211, 17, 76, 29);
 		navbar.add(booksButton);
 		
 		JButton wishlistButton = new JButton("WISHLIST");
 		wishlistButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		wishlistButton.setForeground(Color.WHITE);
+		wishlistButton.setBackground(Color.DARK_GRAY);
 		wishlistButton.setFont(new Font("Lucida Grande", Font.BOLD, 18));
 		wishlistButton.setBorder(null);
-		wishlistButton.setBounds(404, 20, 88, 29);
+		wishlistButton.setBounds(406, 17, 88, 29);
 		navbar.add(wishlistButton);
 		
 		JButton vaultButton = new JButton("VAULT");
 		vaultButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		vaultButton.setForeground(Color.WHITE);
+		vaultButton.setBackground(Color.DARK_GRAY);
 		vaultButton.setFont(new Font("Lucida Grande", Font.BOLD, 18));
 		vaultButton.setBorder(null);
-		vaultButton.setBounds(304, 20, 76, 29);
+		vaultButton.setBounds(306, 17, 76, 29);
 		navbar.add(vaultButton);
 		
 		JButton profileButton = new JButton("PROFILE");
 		profileButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		profileButton.setForeground(Color.WHITE);
+		profileButton.setBackground(Color.DARK_GRAY);
 		profileButton.setFont(new Font("Lucida Grande", Font.BOLD, 18));
 		profileButton.setBorder(null);
-		profileButton.setBounds(515, 20, 88, 29);
+		profileButton.setBounds(517, 17, 88, 29);
 		navbar.add(profileButton);
 		
 		JButton userIcon = new JButton("");
@@ -119,10 +124,11 @@ public class ExploreUI extends JFrame {
 		userIcon.setIcon(new ImageIcon(user_icon));
 		userIcon.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		userIcon.setBorder(null);
-		userIcon.setBounds(1472, 1, 66, 64);
+		userIcon.setBounds(1135, 6, 53, 53);
 		navbar.add(userIcon);
 		
 		JButton logOutButton = new JButton("LOG OUT");
+		logOutButton.setBackground(Color.DARK_GRAY);
 		logOutButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				LoginUI frame = new LoginUI();
@@ -135,7 +141,7 @@ public class ExploreUI extends JFrame {
 		logOutButton.setForeground(Color.WHITE);
 		logOutButton.setFont(new Font("Lucida Grande", Font.BOLD, 18));
 		logOutButton.setBorder(null);
-		logOutButton.setBounds(1548, 20, 88, 29);
+		logOutButton.setBounds(1200, 17, 88, 29);
 		navbar.add(logOutButton);
 	}
 }

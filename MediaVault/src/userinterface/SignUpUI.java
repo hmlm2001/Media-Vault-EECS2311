@@ -1,5 +1,6 @@
 package userinterface;
 import backend.Login;
+import backend.User;
 
 import java.awt.EventQueue;
 
@@ -108,6 +109,7 @@ public class SignUpUI extends JFrame {
 					successPrompt.setBounds(490, 350, 250, 16);
 					successPrompt.setText("Passwords do not match. Try again.");
 				} else if (backend.Login.createAccount(username, password)) {
+					User user = new User(username); // for now
 					successPrompt.setForeground(new Color(52, 200, 15));
 					successPrompt.setBounds(535, 350, 150, 16);
 					successPrompt.setText("Sign up successful!");
@@ -123,7 +125,7 @@ public class SignUpUI extends JFrame {
 					t.start();
 				} else {
 					successPrompt.setForeground(Color.RED);
-					successPrompt.setBounds(485, 350, 250, 16);
+					successPrompt.setBounds(535, 350, 250, 16);
 					successPrompt.setText("User already exists.");
 				}
 			}

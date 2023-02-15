@@ -35,7 +35,7 @@ public class LoginDB {
 	 * Check if the provided username and password match the ones on record
 	 * @param username the username encrypted that should already be a key in the logins HashMap
 	 * @param password the password encrypted that should be the value to the username key
-	 * @return true if the username and password combo match the ones on file, false otherwise
+	 * @return true if the username and password combo match the ones on file, false otherwise 
 	 */
 	public static boolean verifyLogin(String username, String password) {
 		if (logins.get(username)==null) return false;

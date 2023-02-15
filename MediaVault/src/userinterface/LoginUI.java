@@ -127,6 +127,7 @@ public class LoginUI extends JFrame {
 		contentPane.add(textPrompt);
 		
 		JButton signUpPrompt = new JButton("<HTML><U>Sign Up</U></HTML>");
+		signUpPrompt.setBackground(Color.WHITE);
 		signUpPrompt.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		signUpPrompt.setForeground(Color.BLUE);
 		signUpPrompt.addActionListener(new ActionListener() {

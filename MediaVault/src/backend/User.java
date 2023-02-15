@@ -7,6 +7,10 @@ public class User {
 	private String username;
 	private MediaCollection mediaCollection; 
 	
+	public User(String username) {
+		this.username = username;
+		this.mediaCollection = new MediaCollection();
+	}
 	public String getUsername() {
 		
 		return this.username;

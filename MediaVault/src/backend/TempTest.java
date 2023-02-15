@@ -1,6 +1,6 @@
-package test;
+package backend;
 
-import  main.*;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
@@ -11,7 +11,7 @@ class TempTest {
 	void test() throws Exception {
 		AllMedia sampledata = new AllMedia();
 		
-		System.out.print(sampledata.MediaMap.get("Saving Private Ryan").name + " "+ sampledata.MediaMap.get("Saving Private Ryan").releaseDate );
+		System.out.print(sampledata.searchMedia("Saving Private Ryan").name + " "+ sampledata.searchMedia("Saving Private Ryan").releaseDate );
 		
 		Media inception = sampledata.searchMedia("Inception");
 		

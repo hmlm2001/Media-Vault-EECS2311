@@ -1,4 +1,4 @@
-package main;
+package backend;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -16,8 +16,8 @@ public class AllMedia {
 	 * AllMedia stores all available media in a Hashmap.
 	 * It provides a search feature to navigate though the media. 
 	 * */
-	//should be private
-	public HashMap<String, Media> MediaMap; // the second string parameter will be replaced by "Media" the class has built.
+	
+	private HashMap<String, Media> MediaMap; // the second string parameter will be replaced by "Media" the class has built.
 	
 	/**
 	 * creates a new HashMap and updates the values; 

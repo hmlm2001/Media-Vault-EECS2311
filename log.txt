@@ -45,5 +45,8 @@ Feb 15th:
 The deadline for all team members to complete their allocated tasks is Wednesday Feb 15th.
 
 Progress as of 15 February:
+	All parts of the iteration 1 requirements have been completed. Now just need a day to properly connect them all and write appropriate test cases.
+	Time estimates were mostly accurate. All members contributed and managed to do their assigned tasks.
+	In today's meeting we talked about the way to submit the iteration 1 required parts, and decided to meet tomorrow (Feb 16th) at around 8:40pm when it is convinient for everyone. The README.md file has been updated to give a fresher and more accurate description of the project as well as the way to launch the project.
 
 	

@@ -1,4 +1,5 @@
 package userinterface;
+import backend.Login;
 
 import java.awt.EventQueue;
 
@@ -96,7 +97,7 @@ public class LoginUI extends JFrame {
 				String username = usernameField.getText();
 				String password = new String(passwordField.getPassword());
 				
-				if (username.equals("USERNAME") && password.equals("PASSWORD")) {
+				if (backend.Login.login(username, password)) {
 					successPrompt.setForeground(new Color(52, 200, 15));
 					successPrompt.setBounds(543, 343, 110, 16);
 					successPrompt.setText("Login successful!");

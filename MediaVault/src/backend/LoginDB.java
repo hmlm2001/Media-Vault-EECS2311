@@ -38,7 +38,7 @@ public class LoginDB {
 	 * @return true if the username and password combo match the ones on file, false otherwise
 	 */
 	public static boolean verifyLogin(String username, String password) {
-		if(logins.get(username)==password) return true;
-		return false;
+		if (logins.get(username)==null) return false;
+		return logins.get(username).compareTo(password)==0;
 	}
 }

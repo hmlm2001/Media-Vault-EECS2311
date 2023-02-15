@@ -13,7 +13,7 @@ import java.text.SimpleDateFormat;
 public class AllMedia {
 
 	/**
-	 * AllMedia stores all available media in a Hashmap.
+	 * AllMedia stores all available media in a HashMap.
 	 * It provides a search feature to navigate though the media. 
 	 * */
 	

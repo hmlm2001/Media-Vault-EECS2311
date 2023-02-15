@@ -45,7 +45,7 @@ public class Encryption {
 	 * @return the byte form of the input string
 	 * @throws NoSuchAlgorithmException
 	 */
-	public static byte[] getSHA(String input) throws NoSuchAlgorithmException  
+	private static byte[] getSHA(String input) throws NoSuchAlgorithmException  
     {  
         MessageDigest md = MessageDigest.getInstance("SHA-512"); 
         return md.digest(input.getBytes(StandardCharsets.UTF_8));  //convert the input string into bytes and SHA-512
@@ -55,7 +55,7 @@ public class Encryption {
 	 * @param hash is the array of input bytes
 	 * @return the encrypted string
 	 */
-	public static String toHexString(byte[] hash)  
+	private static String toHexString(byte[] hash)  
     {    
         BigInteger number = new BigInteger(1, hash);  
         StringBuilder hexString = new StringBuilder(number.toString(16));  

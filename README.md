@@ -11,7 +11,7 @@ Created by group 3 of EECS2311.
 
 ## Table of Contents 
 - [Description](#description)
-- [Iteration 1](#review)
+- [Iteration 1](#iteration-1)
   - [Overview](#overview)
   - [Architecture](#architecture)
     - [Backend](#backend)

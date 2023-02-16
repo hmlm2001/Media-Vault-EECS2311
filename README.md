@@ -39,6 +39,7 @@ The architecture of MediaVault is separated into 3 layers (packages) with classe
 The backend layer contains the domain-specific classes such as User.java and Media.java which act as a template for user and media information respectively. 
 
 AllMedia.java uses a HashMap to function as a media database for the MediaVault library; a stub database was created for testing its functionality in this iteration. MediaCollection.java works with the User and Media classes to store a user's personal list of media.
+
 Login.java and Encryption.java work together to create user accounts securely using SHA-256 encryption and store them in the Login database (LoginDB.java). Login.java also allows users to login to their accounts using their credentials.
 
 #### Persistence

@@ -17,8 +17,6 @@ account and login to it safely (9 days).
 - Ruth: Create a UI for the Account Creation and Login (9 days).
 - Muhammad: Create a stub database to store movies (4 days).
 
-Time taken
-OVERALL: 
 
 10th Feb 2023
 Meeting Notes
@@ -27,12 +25,14 @@ Meeting Notes
 - Managed to get everyone's git connections working and sarted making appropriate classes and package
 
 Task Assignments + Estimates
-Reallocated tasks and updated estimates
+GENERAL: Reallocated tasks and updated estimates
 Login & Encryption: Mate (4 days)
 Media and MediaCollection: Muhammad (4 days)
 LoginUI: Isaac (6 days)
 User & Allmedia: Ruth (4 days)
 Test Cases: Lim (4 days)
+
+The deadline for all team members to complete their allocated tasks is Wednesday Feb 15th.
 
 Mate Progress:
 Feb 11th-13th:
@@ -41,12 +41,17 @@ Feb 14th:
 	Fixed some issues with LoginDB.java where the string comparison was done incorrectly.
 Feb 15th:
 	Met with team and discussed project. Login encryption and access sucessfully linked together with LoginUI to be able to successfully login with existing users. (You would still have to create it first as there are no existing users due to the static natrue of the classes)
-
-The deadline for all team members to complete their allocated tasks is Wednesday Feb 15th.
+	
+Isaac's Progress:
+Feb 12th:
+	Started working on the user interface with LoginUI.java and SignUpUI.java. Created fields as appropriate and basic validation checks for logging in and signing up.
+Feb 13th:
+	Created Explore.java to act as a temporary explore page for the application. Successful account creation/log in redirects to the explore page.
+Feb 15th:
+	Met with team and arranged classes into appropriate layers (packages). Successfully inked Login.java to LoginUI.java and SignUp.java to connect the backend with the UI.
 
 Progress as of 15 February:
 	All parts of the iteration 1 requirements have been completed. Now just need a day to properly connect them all and write appropriate test cases.
 	Time estimates were mostly accurate. All members contributed and managed to do their assigned tasks.
 	In today's meeting we talked about the way to submit the iteration 1 required parts, and decided to meet tomorrow (Feb 16th) at around 8:40pm when it is convinient for everyone. The README.md file has been updated to give a fresher and more accurate description of the project as well as the way to launch the project.
-
 	

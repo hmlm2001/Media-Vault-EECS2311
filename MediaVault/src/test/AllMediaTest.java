@@ -10,6 +10,7 @@ import backend.*;
 class AllMediaTest {
 
 	AllMedia allMedia;
+	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	
 	@BeforeEach
 	void init() {
@@ -42,11 +43,10 @@ class AllMediaTest {
 		assertTrue(allMedia.MediaMap != null);
 		assertFalse(allMedia.MediaMap.size == 0);
 		assertFalse(allMedia.MediaMap.values().isEmpty());
-		assertDoesNotThrow(allMedia.searchMedia("se7en"));
-		Media media = allMedia.searchMedia("se7en");
-		assertEquals(media.name, "se7en");
-		//TODO Figure out how to test "Date" objects
-		//assertEquals(media.releaseDate, );
+		assertDoesNotThrow(allMedia.searchMedia("Se7en"));
+		Media media = allMedia.searchMedia("Se7en");
+		assertEquals(media.name, "Se7en");
+		assertEquals(media.releaseDate, dateFormat.parse("1995-09-22"));
 	}
 	
 	//Test search for nonexisting element

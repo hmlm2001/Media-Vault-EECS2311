@@ -49,6 +49,15 @@ Feb 13th:
 	Created Explore.java to act as a temporary explore page for the application. Successful account creation/log in redirects to the explore page.
 Feb 15th:
 	Met with team and arranged classes into appropriate layers (packages). Successfully inked Login.java to LoginUI.java and SignUp.java to connect the backend with the UI.
+	
+Ruth's Progress:
+Feb 12th:
+	Created AllMedia and User classes with mostly  skeleton code.
+Feb 13th:
+	added stub database of movies and implemented reading from file and the rest of the methods for AllMedia and User classes
+	Tested object creation and read from file.
+Feb 15:
+	added case insensitivity to the search function of all media. remains to be tested.
 
 Progress as of 15 February:
 	All parts of the iteration 1 requirements have been completed. Now just need a day to properly connect them all and write appropriate test cases.

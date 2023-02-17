@@ -36,7 +36,7 @@ public class MediaCollection {
 		}
 		
 	}
-	public ArrayList<Media>getMediaList(){
+	public ArrayList<Media> getMediaList(){
 		return mediaList;
 	}
 }

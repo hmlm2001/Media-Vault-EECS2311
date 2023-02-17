@@ -17,7 +17,7 @@ public class AllMedia {
 	 * It provides a search feature to navigate though the media. 
 	 * */
 	
-	private HashMap<String, Media> MediaMap; // the second string parameter will be replaced by "Media" the class has built.
+	private HashMap<String, Media> MediaMap;
 	
 	/**
 	 * creates a new HashMap and updates the values; 
@@ -58,7 +58,7 @@ public class AllMedia {
 	 */
 	private void updateMediaMap() {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		try (BufferedReader reader = new BufferedReader(new FileReader("src\\resources\\sampleMedia.csv"))) {
+		try (BufferedReader reader = new BufferedReader(new FileReader("src/resources/sampleMedia.csv"))) {
 		    String line;
 		    while ((line = reader.readLine()) != null) {
 		    	

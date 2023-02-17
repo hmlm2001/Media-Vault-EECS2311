@@ -11,21 +11,12 @@ public class Media {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public Date getReleaseDate() {
 		return releaseDate;
 	}
-
-	public void setReleaseDate(Date releaseDate) {
-		this.releaseDate = releaseDate;
-	}
-	
 	
 	public Media(String name, Date releaseDate) {
-		this.setName(name);
+		this.name = name;
 		this.releaseDate = releaseDate;
 	}
 	

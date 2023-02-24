@@ -1,4 +1,4 @@
-package test.backend;
+package backendTests;
 
 import backend.*;
 

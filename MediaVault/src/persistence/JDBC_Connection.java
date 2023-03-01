@@ -27,4 +27,24 @@ public class JDBC_Connection {
 		
 		return null;
 	}
+	
+	public static void execute(String query) {
+		String url = "jdbc:mysql://localhost:3306/mediavault";
+		String user = "admin";
+		String password = "0000";
+
+		try {
+			// create connection
+			Connection con = DriverManager.getConnection(url, user, password);
+			
+			// create statement
+			Statement statement = con.createStatement();
+			
+			// create resultset
+			statement.executeUpdate(query);
+			
+		} catch (SQLException e) { 
+			e.printStackTrace();
+		}
+	}
 }

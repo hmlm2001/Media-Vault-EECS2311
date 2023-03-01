@@ -1,25 +1,10 @@
 package persistence;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 
 public class LoginDB {
-	static private HashMap<String,String> logins;	//stores logins in a HashMap for O(1) access time
-	static private LoginDB instance = null;			//only one instance of LoginDB will exists
-	/**
-	 * LoginDB is private as the getInstance() method will ensure that only one copy of LoginDB exists
-	 */
-	private LoginDB () {
-		logins = new HashMap<String,String>();
-	}
-	/**
-	 * Gets the single instance of LoginDB
-	 * @return the only copy of LoginDB
-	 */
-	public static LoginDB getInstance() {
-		if (instance == null) instance = new LoginDB();
-		return instance;
-		
-	}
 	/**
 	 * Add new user into logins if the username is not already taken
 	 * @param username the username encrypted to be stored (as the key to the password)
@@ -27,8 +12,17 @@ public class LoginDB {
 	 * @return true if operation is successful
 	 */
 	public static boolean newAccount(String username, String password) {
-		if(logins.containsKey(username)) return false;
-		else logins.put(username, password);
+		ResultSet result;
+		result = JDBC_Connection.getResult("SELECT * FROM logins WHERE usernameEnc='"+username+"';");
+		try {
+			while (result.next()) {
+				if(username.compareTo(result.getString(1))==0) return false;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		JDBC_Connection.execute("INSERT INTO logins(usernameEnc,passwordEnc) VALUES ('"+username+"','"+password+"');");
 		return true;
 	}
 	/**
@@ -38,7 +32,16 @@ public class LoginDB {
 	 * @return true if the username and password combo match the ones on file, false otherwise 
 	 */
 	public static boolean verifyLogin(String username, String password) {
-		if (logins.get(username)==null) return false;
-		return logins.get(username).compareTo(password)==0;
+		ResultSet result;
+		result = JDBC_Connection.getResult("SELECT * FROM logins WHERE usernameEnc='"+username+"';");
+		try {
+			while (result.next()) {
+				return result.getString(2).compareTo(password)==0;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
 	}
 }

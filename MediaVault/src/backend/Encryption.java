@@ -14,7 +14,6 @@ public class Encryption {
 	 * @return returns true if account creation is successful, false otherwise
 	 */
 	public static boolean encryptNewAccount(String username, String password) {
-		LoginDB.getInstance();
 		return LoginDB.newAccount(encrypt(username),encrypt(password));
 	}
 	/**
@@ -24,7 +23,6 @@ public class Encryption {
 	 * @return returns true if the account info matches
 	 */
 	public static boolean encryptVerifyLogin(String username, String password) {
-		LoginDB.getInstance();
 		return LoginDB.verifyLogin(encrypt(username),encrypt(password));
 	}
 	/**
@@ -68,18 +66,4 @@ public class Encryption {
   
         return hexString.toString();  
     }  
-	public static void main(String[] args) {
-		System.out.println("INSERT INTO logins(usernameEnc,passwordEnc) VALUES");
-		System.out.println("('" + Encryption.encrypt("user1") + "','" + Encryption.encrypt("111")+"'),");
-		System.out.println("('" + Encryption.encrypt("user2") + "','" + Encryption.encrypt("222")+"'),");
-		System.out.println("('" + Encryption.encrypt("user3") + "','" + Encryption.encrypt("333")+"'),");
-		System.out.println("('" + Encryption.encrypt("user4") + "','" + Encryption.encrypt("444")+"'),");
-		System.out.println("('" + Encryption.encrypt("user5") + "','" + Encryption.encrypt("555")+"'),");
-		System.out.println("('" + Encryption.encrypt("user6") + "','" + Encryption.encrypt("666")+"'),");
-		System.out.println("('" + Encryption.encrypt("user7") + "','" + Encryption.encrypt("777")+"'),");
-		System.out.println("('" + Encryption.encrypt("user8") + "','" + Encryption.encrypt("888")+"'),");
-		System.out.println("('" + Encryption.encrypt("user9") + "','" + Encryption.encrypt("999")+"'),");
-		System.out.println("('" + Encryption.encrypt("user10") + "','" + Encryption.encrypt("101010")+"'),");
-		System.out.println("('" + Encryption.encrypt("user11") + "','" + Encryption.encrypt("111111")+"');");
-	}
 }

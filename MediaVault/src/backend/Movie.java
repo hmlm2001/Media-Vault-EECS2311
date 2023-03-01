@@ -19,5 +19,17 @@ public class Movie extends Media{
 		return movie;
 	}
 	
+	public int getId() {
+		return this.id;
+	}
+	
+	public String getPoster() {
+		return this.poster;
+	}
+	
+	public String getGenre() {
+		return this.genre;
+	}
+	
 
 }

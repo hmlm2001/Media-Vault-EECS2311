@@ -3,20 +3,20 @@ package backend;
 import java.util.Date;
 
 public class Media {
-	private String name;
+	private String title;
 	private Date releaseDate;
 	
 
 	public String getName() {
-		return name;
+		return this.title;
 	}
 
 	public Date getReleaseDate() {
-		return releaseDate;
+		return this.releaseDate;
 	}
 	
 	public Media(String name, Date releaseDate) {
-		this.name = name;
+		this.title = name;
 		this.releaseDate = releaseDate;
 	}
 	

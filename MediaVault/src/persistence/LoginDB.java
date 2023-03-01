@@ -2,7 +2,6 @@ package persistence;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
 
 public class LoginDB {
 	/**
@@ -19,7 +18,6 @@ public class LoginDB {
 				if(username.compareTo(result.getString(1))==0) return false;
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		JDBC_Connection.execute("INSERT INTO logins(usernameEnc,passwordEnc) VALUES ('"+username+"','"+password+"');");
@@ -39,7 +37,6 @@ public class LoginDB {
 				return result.getString(2).compareTo(password)==0;
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return false;

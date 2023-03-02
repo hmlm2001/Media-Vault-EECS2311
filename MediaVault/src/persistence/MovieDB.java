@@ -15,11 +15,11 @@ public class MovieDB {
 		List<MovieDb> allMovies = new ArrayList<>();
 		
 		// Retrieving most popular movies (20 each)
-		List<MovieDb> popularMovies1 = movies.getPopularMovies("en", 0).getResults();
-		List<MovieDb> popularMovies2 = movies.getPopularMovies("en", 1).getResults();
-		List<MovieDb> popularMovies3 = movies.getPopularMovies("en", 2).getResults();
-		List<MovieDb> popularMovies4 = movies.getPopularMovies("en", 3).getResults();
-		List<MovieDb> popularMovies5 = movies.getPopularMovies("en", 4).getResults();
+		List<MovieDb> popularMovies1 = movies.getPopularMovies("en", 1).getResults();
+		List<MovieDb> popularMovies2 = movies.getPopularMovies("en", 2).getResults();
+		List<MovieDb> popularMovies3 = movies.getPopularMovies("en", 3).getResults();
+		List<MovieDb> popularMovies4 = movies.getPopularMovies("en", 4).getResults();
+		List<MovieDb> popularMovies5 = movies.getPopularMovies("en", 5).getResults();
 		
 		// Adding all movies to a single list 
 		allMovies.addAll(popularMovies1);

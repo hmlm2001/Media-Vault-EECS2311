@@ -1,4 +1,3 @@
-DROP DATABASE mediavault;
 CREATE DATABASE mediavault;
 USE mediavault;
 
@@ -28,7 +27,7 @@ CREATE TABLE mediarelations (
     PRIMARY KEY (mediaID)
 );
 
-CREATE TABLE movies (
+CREATE TABLE allmovies (
 	id INT NOT NULL,
     title VARCHAR(255),
     releaseDate DATE,

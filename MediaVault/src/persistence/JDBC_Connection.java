@@ -6,7 +6,7 @@ public class JDBC_Connection {
 	
 	public static ResultSet getResult(String query) {
 		String url = "jdbc:mysql://localhost:3306/mediavault";
-		String user = "root";
+		String user = "mediavaultadmin";
 		String password = "0000";
 
 		try {
@@ -30,7 +30,7 @@ public class JDBC_Connection {
 	
 	public static boolean execute(String query) {
 		String url = "jdbc:mysql://localhost:3306/mediavault";
-		String user = "root";
+		String user = "mediavaultadmin";
 		String password = "0000";
 
 		try {

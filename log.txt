@@ -1,5 +1,6 @@
 Log File
 
+ITERATION 1
 8th Feb 2023
 Meeting Notes
 - Created the base UML diagram for the project
@@ -64,3 +65,16 @@ Progress as of 15 February:
 	Time estimates were mostly accurate. All members contributed and managed to do their assigned tasks.
 	In today's meeting we talked about the way to submit the iteration 1 required parts, and decided to meet tomorrow (Feb 16th) at around 8:40pm when it is convinient for everyone. The README.md file has been updated to give a fresher and more accurate description of the project as well as the way to launch the project.
 	
+	
+ITERATION 2
+1st March 2023
+Meeting Notes
+- Made a list of goals for iteration 2 and re-evaluated previous user stories.
+- Created a MySQL script to initialize the mediavault database.
+- Added dummy user logins and passwords to test database functionality.
+- Fully implemented the sign up and login section using the database.
+- Populated the MySQL database with a list of 99 movies and their respective information. 
+- Created a csv file with all the movies in the database for stub DB testing.
+	
+4th March 2023
+Tasks Assignments + Estimates

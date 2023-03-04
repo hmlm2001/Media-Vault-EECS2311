@@ -78,3 +78,24 @@ Meeting Notes
 	
 4th March 2023
 Tasks Assignments + Estimates
+- Set deadline for inidividual work for Wednesday March 8th
+- Allocation
+	Backend
+		Vault 				-Mate	[3 days]
+	User Interface	
+		Explore				-Isaac	[3 days]
+		MediaCollection (vaults)	-Ruth	[3 days]
+		Search Bar			-Isaac	[1 day]
+		Individual Pages		-Isaac	[2 days
+	Persistence/Other
+		Tests				-Ruth/Herman	[4 days]
+		Stubs				-Mate		[2 days]
+		UML				-Mate		[4 days]
+		Explain why no books 		-Herman		[2 days]
+		Redo Detailed User Stories	-Herman		[2 days]
+
+Meeting Notes
+- Discussed allocation of work for this Iteration
+- Went into detail about how to implement features
+- Talked about user requirments and stories
+- Spoke to the user, they specified what parts need work and what parts work well

@@ -2,6 +2,7 @@ package userinterface;
 
 import java.awt.Image;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -13,14 +14,20 @@ import javax.swing.SwingConstants;
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.net.URL;
 import java.awt.event.ActionEvent;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
+
+import persistence.MovieDB;
+import persistence.Movie;
 
 @SuppressWarnings("serial")
 public class ExploreMoviesUI extends JFrame {
 
 	private JPanel contentPane;
-	private Image mv_logo = new ImageIcon(getClass().getResource("/images/logos/mv-logo-white-with-text-no-bg.png")).getImage().getScaledInstance(110, 110, Image.SCALE_SMOOTH);
-	private Image user_icon = new ImageIcon(getClass().getResource("/images/icons/user-icon.png")).getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+	private MovieDB allMovies;
 
 	/**
 	 * Create the frame.
@@ -45,6 +52,7 @@ public class ExploreMoviesUI extends JFrame {
 		
 		JLabel mediaVaultLogo = new JLabel("");
 		mediaVaultLogo.setHorizontalAlignment(SwingConstants.CENTER);
+		Image mv_logo = new ImageIcon(getClass().getResource("/images/logos/mv-logo-white-with-text-no-bg.png")).getImage().getScaledInstance(110, 110, Image.SCALE_SMOOTH);
 		mediaVaultLogo.setIcon(new ImageIcon(mv_logo));
 		mediaVaultLogo.setBounds(3, 6, 88, 59);
 		navbar.add(mediaVaultLogo);
@@ -52,62 +60,44 @@ public class ExploreMoviesUI extends JFrame {
 		JButton moviesButton = new JButton("MOVIES");
 		moviesButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ExploreMoviesUI frame = new ExploreMoviesUI();
+				frame.setLocationRelativeTo(null);
+				frame.setVisible(true);
+				ExploreMoviesUI.this.dispose();
 			}
 		});
+		moviesButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		moviesButton.setFont(new Font("Lucida Grande", Font.BOLD, 18));
 		moviesButton.setForeground(Color.WHITE);
 		moviesButton.setBackground(Color.DARK_GRAY);
-		moviesButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		moviesButton.setBorder(null);
-		moviesButton.setBounds(111, 17, 76, 29);
+		moviesButton.setBounds(103, 17, 76, 29);
 		navbar.add(moviesButton);
 		
-		JButton booksButton = new JButton("BOOKS");
-		booksButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		booksButton.setForeground(Color.WHITE);
-		booksButton.setBackground(Color.DARK_GRAY);
-		booksButton.setFont(new Font("Lucida Grande", Font.BOLD, 18));
-		booksButton.setBorder(null);
-		booksButton.setBounds(211, 17, 76, 29);
-		navbar.add(booksButton);
-		
-		JButton wishlistButton = new JButton("WISHLIST");
-		wishlistButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		wishlistButton.setForeground(Color.WHITE);
-		wishlistButton.setBackground(Color.DARK_GRAY);
-		wishlistButton.setFont(new Font("Lucida Grande", Font.BOLD, 18));
-		wishlistButton.setBorder(null);
-		wishlistButton.setBounds(406, 17, 88, 29);
-		navbar.add(wishlistButton);
-		
 		JButton vaultButton = new JButton("VAULT");
+		vaultButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		vaultButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		vaultButton.setForeground(Color.WHITE);
 		vaultButton.setBackground(Color.DARK_GRAY);
 		vaultButton.setFont(new Font("Lucida Grande", Font.BOLD, 18));
 		vaultButton.setBorder(null);
-		vaultButton.setBounds(306, 17, 76, 29);
+		vaultButton.setBounds(203, 17, 76, 29);
 		navbar.add(vaultButton);
-		
-		JButton profileButton = new JButton("PROFILE");
-		profileButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		profileButton.setForeground(Color.WHITE);
-		profileButton.setBackground(Color.DARK_GRAY);
-		profileButton.setFont(new Font("Lucida Grande", Font.BOLD, 18));
-		profileButton.setBorder(null);
-		profileButton.setBounds(517, 17, 88, 29);
-		navbar.add(profileButton);
 		
 		JButton userIcon = new JButton("");
 		userIcon.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
+		Image user_icon = new ImageIcon(getClass().getResource("/images/icons/user-icon.png")).getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
 		userIcon.setIcon(new ImageIcon(user_icon));
 		userIcon.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		userIcon.setBackground(Color.DARK_GRAY);
 		userIcon.setBorder(null);
-		userIcon.setBounds(1120, 6, 53, 53);
+		userIcon.setBounds(1116, 6, 53, 53);
 		navbar.add(userIcon);
 		
 		JButton logOutButton = new JButton("LOG OUT");
@@ -126,5 +116,34 @@ public class ExploreMoviesUI extends JFrame {
 		logOutButton.setBorder(null);
 		logOutButton.setBounds(1185, 17, 88, 29);
 		navbar.add(logOutButton);
+		
+		JPanel mainContent = new JPanel();
+		mainContent.setBackground(Color.WHITE);
+		JScrollPane mainScrollPane = new JScrollPane(mainContent);
+		mainContent.setLayout(null);
+		
+		JLabel actionLabel = new JLabel("ACTION");
+		actionLabel.setFont(new Font("Lucida Grande", Font.BOLD, 18));
+		actionLabel.setBackground(Color.WHITE);
+		actionLabel.setBounds(6, 41, 77, 21);
+		mainContent.add(actionLabel);
+		
+		mainScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		mainScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		mainScrollPane.setBounds(0, 61, 1300, 611);
+		contentPane.add(mainScrollPane);
+		
+		allMovies = new MovieDB();
+		String path = allMovies.get(6).getPosterPath();
+		try {
+			URL url = new URL(path);
+			BufferedImage image = ImageIO.read(url);
+			Image poster = new ImageIcon(image).getImage().getScaledInstance(180, 250, Image.SCALE_SMOOTH);
+	        JLabel label = new JLabel(new ImageIcon(poster));
+	        label.setBounds(6, 71, 162, 247);
+	        mainContent.add(label);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

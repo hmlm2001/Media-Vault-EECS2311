@@ -16,7 +16,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
-public class ExploreUI extends JFrame {
+public class ExploreMoviesUI extends JFrame {
 
 	private JPanel contentPane;
 	private Image mv_logo = new ImageIcon(getClass().getResource("/images/logos/mv-logo-white-with-text-no-bg.png")).getImage().getScaledInstance(110, 110, Image.SCALE_SMOOTH);
@@ -25,7 +25,7 @@ public class ExploreUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ExploreUI() {
+	public ExploreMoviesUI() {
 		setTitle("MediaVault");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -117,7 +117,7 @@ public class ExploreUI extends JFrame {
 				LoginUI frame = new LoginUI();
 				frame.setLocationRelativeTo(null);
 				frame.setVisible(true);
-				ExploreUI.this.dispose();
+				ExploreMoviesUI.this.dispose();
 			}
 		});
 		logOutButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

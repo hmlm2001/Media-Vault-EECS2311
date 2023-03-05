@@ -96,7 +96,7 @@ public class SignUpUI extends JFrame {
 					successPrompt.setText("Sign up successful!");
 					Timer t = new Timer(1000, new ActionListener() {
 					    public void actionPerformed(ActionEvent e) {
-					    	ExploreUI frame = new ExploreUI();
+					    	ExploreMoviesUI frame = new ExploreMoviesUI();
 					    	frame.setLocationRelativeTo(null);
 							frame.setVisible(true);
 							SignUpUI.this.dispose();

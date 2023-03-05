@@ -14,8 +14,10 @@ public class Movie extends Media {
 	private String genre;
 	private int runtime;
 	
-	
-	
+	/**
+	 * Takes the id and sets up an object of movie with the help of the databaase
+	 * @param id is the id of the movie
+	 */
 	public Movie(int id) {
 		super(id);
 		try {
@@ -34,21 +36,39 @@ public class Movie extends Media {
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * @return the title of the movie
+	 */
 	public String getTitle() {
 		return this.title;
 	}
+	/**
+	 * @return the release date of the movie
+	 */
 	public Date getReleaseDate() {
 		return this.releaseDate;
 	}
+	/**
+	 * @return the overview of the movie
+	 */
 	public String getOverview() {
 		return this.overview;
 	}
+	/**
+	 * @return the poster path of the movie (in the form of a url)
+	 */
 	public String getPosterPath() {
 		return this.posterPath;
 	}
+	/**
+	 * @return the genre of the movie
+	 */
 	public String getGenre() {
 		return this.genre;
 	}
+	/**
+	 * @return the runtime of the movie in minutes
+	 */
 	public int getRuntime() {
 		return this.runtime;
 	}

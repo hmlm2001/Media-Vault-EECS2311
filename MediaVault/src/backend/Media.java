@@ -1,23 +1,12 @@
 package backend;
 
-import java.util.Date;
-
 public class Media {
-	private String name;
-	private Date releaseDate;
+	private int id;
 	
-
-	public String getName() {
-		return name;
+	public Media(int id) {
+		this.id=id;
 	}
-
-	public Date getReleaseDate() {
-		return releaseDate;
+	public int getId() {
+		return this.id;
 	}
-	
-	public Media(String name, Date releaseDate) {
-		this.name = name;
-		this.releaseDate = releaseDate;
-	}
-	
 }

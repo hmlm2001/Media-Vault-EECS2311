@@ -90,7 +90,7 @@ public class Movie {
 		return this.genre;
 	}
 	
-	public int getRuntime() {
+	public int getRuntimeInMinutes() {
 		ResultSet result;
 		result = JDBC_Connection.getResult("SELECT runtime FROM allmovies WHERE id='"+id+"';");
 		try {
@@ -102,4 +102,11 @@ public class Movie {
 		}
 		return this.runtime;
 	}	
+	
+	public String getRuntimeAsString() {
+		int runtimeInt = this.getRuntimeInMinutes();
+		int hours = runtimeInt / 60;
+		int minutes = runtimeInt % 60;
+		return hours + "h " + minutes + "m";
+	}
 }

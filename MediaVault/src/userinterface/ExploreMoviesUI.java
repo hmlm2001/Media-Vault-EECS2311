@@ -1,17 +1,21 @@
 package userinterface;
 
-import java.awt.Image;
+import persistence.*;
 
+import java.awt.Image;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -20,15 +24,29 @@ import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
-import persistence.MovieDB;
-import persistence.Movie;
-
 @SuppressWarnings("serial")
 public class ExploreMoviesUI extends JFrame {
 
 	private JPanel contentPane;
 	private MovieDB allMovies;
 
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ExploreMoviesUI frame = new ExploreMoviesUI();
+					frame.setLocationRelativeTo(null);
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	
 	/**
 	 * Create the frame.
 	 */
@@ -117,33 +135,80 @@ public class ExploreMoviesUI extends JFrame {
 		logOutButton.setBounds(1185, 17, 88, 29);
 		navbar.add(logOutButton);
 		
-		JPanel mainContent = new JPanel();
-		mainContent.setBackground(Color.WHITE);
-		JScrollPane mainScrollPane = new JScrollPane(mainContent);
-		mainContent.setLayout(null);
-		
-		JLabel actionLabel = new JLabel("ACTION");
-		actionLabel.setFont(new Font("Lucida Grande", Font.BOLD, 18));
-		actionLabel.setBackground(Color.WHITE);
-		actionLabel.setBounds(6, 41, 77, 21);
-		mainContent.add(actionLabel);
-		
-		mainScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		mainScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		mainScrollPane.setBounds(0, 61, 1300, 611);
-		contentPane.add(mainScrollPane);
-		
 		allMovies = new MovieDB();
-		String path = allMovies.get(6).getPosterPath();
-		try {
-			URL url = new URL(path);
-			BufferedImage image = ImageIO.read(url);
-			Image poster = new ImageIcon(image).getImage().getScaledInstance(180, 250, Image.SCALE_SMOOTH);
-	        JLabel label = new JLabel(new ImageIcon(poster));
-	        label.setBounds(6, 71, 162, 247);
-	        mainContent.add(label);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+			
+        JScrollPane mainScrollPane = new JScrollPane();
+        mainScrollPane.setBounds(0, 101, 1300, 571);
+        contentPane.add(mainScrollPane);
+        mainScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        mainScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        
+        JPanel mainContent = new JPanel();
+        mainContent.setPreferredSize(new Dimension(1300, 1000));
+        mainScrollPane.setViewportView(mainContent);
+        mainContent.setBackground(Color.WHITE);
+        mainContent.setLayout(null);
+        
+        // Action Movies
+        JLabel actionLabel = new JLabel("ACTION");
+        actionLabel.setBounds(6, 6, 73, 22);
+        actionLabel.setFont(new Font("Lucida Grande", Font.BOLD, 18));
+        actionLabel.setBackground(Color.WHITE);
+        mainContent.add(actionLabel);
+        
+        JScrollPane actionScrollPane = new JScrollPane();
+        actionScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        actionScrollPane.setBounds(6, 40, 1275, 312);
+        mainContent.add(actionScrollPane);
+        
+        JPanel actionContent = new JPanel();
+        actionContent.setPreferredSize(new Dimension(2262, 270));
+        actionScrollPane.setViewportView(actionContent);
+        actionContent.setBackground(Color.WHITE);
+        actionContent.setLayout(null);
+        
+        try {
+        	int movieCount = 0;
+        	int xPosition = 1;
+        	JLabel[] actionMoviePosters = new JLabel[10];
+        	JLabel[] actionMovieLabels = new JLabel[10];
+        	for (int i = 0; i < allMovies.size() && movieCount < 10; i++) {
+        		if (allMovies.get(i).getGenre().equals("Action")) {
+        			String title = allMovies.get(i).getTitle();
+	        		String path = allMovies.get(i).getPosterPath();
+	    	        URL url = new URL(path);
+	    			BufferedImage image = ImageIO.read(url);
+	    			Image poster = new ImageIcon(image).getImage().getScaledInstance(195, 265, Image.SCALE_SMOOTH);
+	    			
+	        		actionMoviePosters[movieCount] = createMoviePoster(new ImageIcon(poster), xPosition, 0);
+	        		actionMovieLabels[movieCount] = createMovieLabel(title, xPosition, 270);
+	    	        actionContent.add(actionMoviePosters[movieCount]);
+	    	        actionContent.add(actionMovieLabels[movieCount]);
+	    	        
+	    	        xPosition += 230;
+	        		movieCount++;
+        		}
+        	}
+	        			        
+        } catch (Exception e) {
+        	e.printStackTrace();
+        }
+	    
 	}
+	
+	private JLabel createMoviePoster(ImageIcon img, int x, int y) {
+		JLabel moviePoster = new JLabel(img);
+		moviePoster.setBounds(x, y, 190, 265);
+		return moviePoster;
+	}
+	
+	private JLabel createMovieLabel(String title, int x, int y) {
+		JLabel movieLabel = new JLabel(title, SwingConstants.CENTER);
+		movieLabel.setBounds(x, y, 190, 20);
+		movieLabel.setForeground(Color.BLACK);
+		movieLabel.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+        movieLabel.setBackground(Color.WHITE);
+		return movieLabel;
+	}
+	
 }

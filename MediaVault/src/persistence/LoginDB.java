@@ -5,8 +5,9 @@ import java.sql.SQLException;
 import java.util.HashMap;
 
 import backend.UseStub;
+import backend.User;
 
-public class LoginDB extends UseStub{
+public class LoginDB{
 	static HashMap<String, String> logins;
 	/**
 	 * Add new user into logins if the username is not already taken
@@ -14,7 +15,7 @@ public class LoginDB extends UseStub{
 	 * @param password the password encrypted
 	 * @return true if operation is successful
 	 */
-	public static boolean newAccount(String username, String password) {
+	public static boolean newAccount(String username, String password, String unEncUser) {
 		if (!UseStub.getStubFlag()) {
 			ResultSet result;
 			result = JDBC_Connection.getResult("SELECT * FROM logins WHERE usernameEnc='"+username+"';");
@@ -27,6 +28,7 @@ public class LoginDB extends UseStub{
 				e.printStackTrace();
 			}
 			JDBC_Connection.execute("INSERT INTO logins(usernameEnc,passwordEnc) VALUES ('"+username+"','"+password+"');");
+			JDBC_Connection.execute("INSERT INTO users(username) VALUES ('"+username+")");
 			return true;
 		} else {
 			if (logins==null) LoginDB.createStubLogins();
@@ -34,6 +36,7 @@ public class LoginDB extends UseStub{
 				return false;
 			} else {
 				logins.put(username,password);
+				new User(unEncUser);
 				return true;
 			}
 		}
@@ -63,6 +66,12 @@ public class LoginDB extends UseStub{
 		}
 		return false;
 	}
+	/**
+	 * Creates stub database with login username password pairs:
+	 * user1, 111
+	 * user2, 222
+	 * user3, 333
+	 */
 	private static void createStubLogins() {
 		logins=new HashMap<String,String>();
 		logins.put("9ec62c20118ff506dac139ec30a521d12b9883e55da92b7d9adeefe09ed4e0bd152e2a099339871424263784f8103391f83b781c432f45eccb03e18e28060d2f", "fb131bc57a477c8c9d068f1ee5622ac304195a77164ccc2d75d82dfe1a727ba8d674ed87f96143b2b416aacefb555e3045c356faa23e6d21de72b85822e39fdd");

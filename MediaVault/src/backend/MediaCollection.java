@@ -29,18 +29,20 @@ public class MediaCollection {
 	}
 	
 	// this method removes the user selected media
-	public boolean removeMedia(Media m) {
-		//first checks if the media is actually in the ArrayList or not 
-		if (!mediaList.contains(m)) {
-			return false;
+	public boolean removeMedia(int id) {
+		for (int i = 0; i<this.mediaList.size();i++) {
+			if (this.mediaList.get(i).getId()==id) {
+				this.mediaList.remove(i);
+				return true;
+			}
 		}
-		//if it is, then removes the selected user media from the ArrayList
-		else {
-			mediaList.remove(m);
-			return true;
-		}
+		return false;
 	}
-
+	
+	/**
+	 * returns the size of the mediaList
+	 * @return
+	 */
 	public int size() {
 		return mediaList.size();
 	}

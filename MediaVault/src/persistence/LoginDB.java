@@ -15,7 +15,7 @@ public class LoginDB extends UseStub{
 	 * @return true if operation is successful
 	 */
 	public static boolean newAccount(String username, String password) {
-		if (UseStub.getStubFlag()) {
+		if (!UseStub.getStubFlag()) {
 			ResultSet result;
 			result = JDBC_Connection.getResult("SELECT * FROM logins WHERE usernameEnc='"+username+"';");
 			try {
@@ -30,13 +30,13 @@ public class LoginDB extends UseStub{
 			return true;
 		} else {
 			if (logins==null) LoginDB.createStubLogins();
-			if (logins.get(username)!=null) {
+			if (logins.containsKey(username)) {
 				return false;
 			} else {
 				logins.put(username,password);
+				return true;
 			}
 		}
-		return false;
 	}
 	/**
 	 * Check if the provided username and password match the ones on record
@@ -45,7 +45,7 @@ public class LoginDB extends UseStub{
 	 * @return true if the username and password combo match the ones on file, false otherwise 
 	 */
 	public static boolean verifyLogin(String username, String password) {
-		if (UseStub.getStubFlag()) {
+		if (!UseStub.getStubFlag()) {
 			ResultSet result;
 			result = JDBC_Connection.getResult("SELECT * FROM logins WHERE usernameEnc='"+username+"';");
 			try {

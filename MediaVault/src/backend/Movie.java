@@ -19,7 +19,7 @@ public class Movie extends Media {
 	 */
 	public Movie(int id) {
 		super(id);
-		if (!stubFlag) {	//checks if the stub is being used
+		if (!UseStub.getStubFlag()) {	//checks if the stub is being used
 			try {
 				ResultSet result=MovieDB.getMovie(this.getId());
 				while (result.next()) {

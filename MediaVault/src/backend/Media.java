@@ -1,6 +1,6 @@
 package backend;
 
-public class Media extends UseStub{
+public class Media {
 	private int id;
 	protected String title;
 	

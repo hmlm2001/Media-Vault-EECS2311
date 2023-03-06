@@ -43,8 +43,7 @@ public class Movie extends Media {
 				this.posterPath="http://image.tmdb.org/t/p/w500/dm06L9pxDOL9jNSK4Cb6y139rrG.jpg";
 				this.genre="Horror";
 				this.runtime=100;
-			}
-			if (id==505642){
+			} else if (id==505642){
 				this.title="Black Panther: Wakanda Forever";
 				this.releaseDate=Date.valueOf("2022-11-09");
 				this.overview="Queen Ramonda, Shuri, M’Baku, Okoye and the Dora Milaje fight to protect their nation from intervening world powers in the wake of King T’Challa’s death.  As the Wakandans strive to embrace their next chapter, the heroes must band together with the help of War Dog Nakia and Everett Ross and forge a new path for the kingdom of Wakanda.";
@@ -111,20 +110,5 @@ public class Movie extends Media {
 	 */
 	public int getRuntime() {
 		return this.runtime;
-	}
-	public static void main(String args[]) {
-		DBvsStub.setStubFlag(false);
-		Movie mov = new Movie(631842);
-		System.out.println(mov.getTitle());
-		mov = new Movie(505642);
-		System.out.println(mov.getTitle());
-		mov = new Movie(315162);
-		System.out.println(mov.getTitle());
-		mov = new Movie(646389);
-		System.out.println(mov.getTitle());
-		mov = new Movie(772515);
-		System.out.println(mov.getTitle());
-		mov = new Movie(758009);
-		System.out.println(mov.getTitle());
 	}
 }

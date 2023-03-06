@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 
-import backend.DBvsStub;
+import backend.UseStub;
 
 public class LoginDB {
 	/**

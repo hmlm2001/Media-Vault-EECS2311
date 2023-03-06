@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 
+import backend.DBvsStub;
+
 public class LoginDB {
 	/**
 	 * Add new user into logins if the username is not already taken

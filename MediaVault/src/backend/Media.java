@@ -1,6 +1,6 @@
 package backend;
 
-public class Media {
+public class Media extends DBvsStub{
 	private int id;
 	protected String title;
 	

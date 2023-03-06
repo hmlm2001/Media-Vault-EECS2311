@@ -12,36 +12,41 @@ public class User {
 	public static HashMap<String, Integer> stub;
 	private String username;
 	private int id;
-	private static final AtomicInteger count = new AtomicInteger(0); 
+	private static final AtomicInteger count = new AtomicInteger(0); //for global id for stub users 
 	/**
 	 * Create a user with username and search for its id, if non-existent then create it
 	 * @param username
 	 */
 	public User(String username) {
 		this.username = username;
-		if (!UseStub.getStubFlag()) {
+		if (!UseStub.getStubFlag()) { //checks if DB is being used
 			this.id = UserDB.getId(username);
-		} else {
+		} else {	//if stub is being used use the hardcoded values in makeStub
 			if (stub==null) User.makeStub();
 			if (!stub.containsKey(username)) stub.put(username, count.incrementAndGet());
 			this.id = stub.get(username);
 		}
 		this.mediaList = new MediaCollection(this.id);
 	}
-	public static void makeStub() {
+	/**
+	 * Help with testing, makes a stub DB
+	 */
+	private static void makeStub() {
 		stub = new HashMap<String, Integer>();
 		stub.put("user1", count.incrementAndGet());
 		stub.put("user2", count.incrementAndGet());
 		stub.put("user3", count.incrementAndGet());
 	}
 	/**
-	 * Returns the user's username
-	 * @return
+	 * @return the user's username
 	 */
 	public String getUsername() {
 		
 		return this.username;
 	} 
+	/**
+	 * @return the user's id
+	 */
 	public int getId() {
 		return this.id;
 	}

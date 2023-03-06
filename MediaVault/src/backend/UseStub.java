@@ -8,6 +8,9 @@ public class UseStub {
 	public static void setStubFlag(boolean flag) {
 		stubFlag=flag;
 	}
+	/**
+	 * @return true if stub is being used, false if DB is being used
+	 */
 	public static boolean getStubFlag() { 
 		return stubFlag;
 	}

@@ -16,7 +16,7 @@ public class LoginDB{
 	 * @return true if operation is successful
 	 */
 	public static boolean newAccount(String username, String password, String unEncUser) {
-		if (!UseStub.getStubFlag()) {
+		if (!UseStub.getStubFlag()) { //checks if it needs to use the DB
 			ResultSet result;
 			result = JDBC_Connection.getResult("SELECT * FROM logins WHERE usernameEnc='"+username+"';");
 			try {
@@ -30,7 +30,7 @@ public class LoginDB{
 			JDBC_Connection.execute("INSERT INTO logins(usernameEnc,passwordEnc) VALUES ('"+username+"','"+password+"');");
 			JDBC_Connection.execute("INSERT INTO users(username) VALUES ('"+username+")");
 			return true;
-		} else {
+		} else { // checks if it needs to use the Stub DB
 			if (logins==null) LoginDB.createStubLogins();
 			if (logins.containsKey(username)) {
 				return false;

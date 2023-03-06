@@ -13,6 +13,9 @@ public class Media {
 	public String getTitle() {
 		return this.title;
 	}
+	/**
+	 * @return the id of the movie
+	 */
 	public int getId() {
 		return this.id;
 	}

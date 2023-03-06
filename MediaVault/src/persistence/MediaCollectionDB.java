@@ -8,9 +8,14 @@ import backend.Media;
 import backend.Movie;
 
 public class MediaCollectionDB {
+	/**
+	 * get the media collection associated with a user
+	 * @param userid is the userid thats associated with the mediacollection
+	 * @return theid of the mediacollection
+	 */
 	public static int getMediaCollectionId(int userid) {
 		ResultSet result;
-		result = JDBC_Connection.getResult("SELECT * FROM mediacollections WHERE userid='"+userid+"';");
+		result = JDBC_Connection.getResult("SELECT * FROM mediacollections WHERE userid='"+userid+"';"); //first goes through, if it does not return anything then it means that no collection exists yet (new user)
 		try {
 			while (result.next()) {
 				return result.getInt(1);
@@ -19,8 +24,8 @@ public class MediaCollectionDB {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		JDBC_Connection.execute("INSERT INTO mediacollections(userid) VALUES ("+userid+");");
-		result = JDBC_Connection.getResult("SELECT * FROM mediacollections WHERE userid='"+userid+"';");
+		JDBC_Connection.execute("INSERT INTO mediacollections(userid) VALUES ("+userid+");"); //create a new mediacollection for the new user
+		result = JDBC_Connection.getResult("SELECT * FROM mediacollections WHERE userid='"+userid+"';"); //now get the id that was assigned to the mediacollection
 		try {
 			while (result.next()) {
 				return result.getInt(1);
@@ -29,8 +34,13 @@ public class MediaCollectionDB {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return 0;
+		return 0; //default return incase anythign goes wrong
 	}
+	/**
+	 * get the movies held in the media collection
+	 * @param collectionid is the collectionid where the movies are stored
+	 * @return an ArrayList of Media
+	 */
 	public static ArrayList<Media> getMediaCollection(int collectionid) {
 		ArrayList<Media> collection = new ArrayList<Media>();
 		ResultSet result;
@@ -45,9 +55,19 @@ public class MediaCollectionDB {
 		}
 		return collection;
 	}
+	/**
+	 * add to the media collection
+	 * @param collectionid is the target collection
+	 * @param mediaid is the media to be added
+	 */
 	public static void addMediaCollection(int collectionid, int mediaid) {
 		JDBC_Connection.execute("INSERT INTO mediarelations(mediaID,mediaCollectionID) VALUES ('"+mediaid+"','"+collectionid+"');");
 	}
+	/**
+	 * add to the media collection
+	 * @param collectionid is the target collection
+	 * @param mediaid is the media to be removed
+	 */
 	public static void removeMediaCollection(int collectionid, int mediaid) {
 		JDBC_Connection.execute("DELETE FROM mediarelations WHERE mediaID='"+mediaid+"' AND mediaCollectionID='"+collectionid+"';");
 	}

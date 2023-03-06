@@ -19,9 +19,9 @@ public class Movie extends Media {
 	 */
 	public Movie(int id) {
 		super(id);
-		if (!UseStub.getStubFlag()) {	//checks if the stub is being used
+		if (!UseStub.getStubFlag()) {	//checks if the DB is being used
 			try {
-				ResultSet result=MovieDB.getMovie(this.getId());
+				ResultSet result=MovieDB.getMovie(this.getId());	//get the values assocaited with the id
 				while (result.next()) {
 					this.title=result.getString(2);
 					this.releaseDate=result.getDate(3);
@@ -35,7 +35,7 @@ public class Movie extends Media {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		} else { //if using stub, use one of the following
+		} else { //if using stub, use one of the following hardcoded values
 			if (id==631842){
 				this.title="Knock at the Cabin";
 				this.releaseDate=Date.valueOf("2023-02-01");

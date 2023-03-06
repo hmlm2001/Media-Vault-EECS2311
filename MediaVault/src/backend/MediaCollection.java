@@ -13,11 +13,15 @@ public class MediaCollection {
 	private ArrayList<Media> mediaList;
 	private int id;
 	
+	/**
+	 * Create a mediacollection object with the input of userid, if using stub, the nuse hardcoded values, if not, the nuse MediaCollectionDB
+	 * @param userid is the user's id
+	 */
 	public MediaCollection(int userid) {
-		if (!UseStub.getStubFlag()) {
-			this.id = MediaCollectionDB.getMediaCollectionId(userid);
-			mediaList = MediaCollectionDB.getMediaCollection(this.id);
-		} else {
+		if (!UseStub.getStubFlag()) {	//if not using stub, use DB
+			this.id = MediaCollectionDB.getMediaCollectionId(userid); //get the collection id associated with the user
+			mediaList = MediaCollectionDB.getMediaCollection(this.id); //get the ArrayList<Media> associated with the collection id
+		} else {	//if using stub, use hardcoded values where users with id 1, 2 and 3 have collections with existing movies
 			mediaList = new ArrayList<Media>();
 			if (userid == 1) {
 				this.id=1;
@@ -33,12 +37,18 @@ public class MediaCollection {
 			}
 		}
 	}
-	
+	/**
+	 * @return the collection
+	 */
 	public ArrayList<Media> getMediaList(){
 		return mediaList;
 	}
 	
-	// this method adds the media into the list
+	/**
+	 * Adds a media to a collection
+	 * @param is the input media
+	 * @return true if add successful, false otherwise (such as in the case where it is already in the list)
+	 */
 	public boolean addMedia(Media m) {
 		//first checks if the user selected media is in the list already
 		for (int i = 0; i<mediaList.size(); i++) {
@@ -50,8 +60,13 @@ public class MediaCollection {
 		return true;
 	}
 	
-	// this method removes the user selected media
+	/**
+	 * remove a media form the list
+	 * @param id is the id of the to-be removed id
+	 * @return true if successful, false otherwise
+	 */
 	public boolean removeMedia(int id) {
+		
 		for (int i = 0; i<this.mediaList.size();i++) {
 			if (this.mediaList.get(i).getId()==id) {
 				this.mediaList.remove(i);

@@ -41,15 +41,13 @@ public class MediaCollection {
 	// this method adds the media into the list
 	public boolean addMedia(Media m) {
 		//first checks if the user selected media is in the list already
-		if (mediaList.contains(m)) {
-			return false;
+		for (int i = 0; i<mediaList.size(); i++) {
+			if(m.getId()==mediaList.get(i).getId()) return false;
 		}
 		//if not already in the list it then adds the media to the ArrayList
-		else {
-			mediaList.add(m);
-			if (!UseStub.getStubFlag()) MediaCollectionDB.addMediaCollection(this.id, m.getId());
-			return true;
-		}
+		mediaList.add(m);
+		if (!UseStub.getStubFlag()) MediaCollectionDB.addMediaCollection(this.id, m.getId());
+		return true;
 	}
 	
 	// this method removes the user selected media
@@ -70,8 +68,5 @@ public class MediaCollection {
 	 */
 	public int size() {
 		return mediaList.size();
-	}
-	public static void main (String[] args) {
-		
 	}
 }

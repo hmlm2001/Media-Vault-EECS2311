@@ -73,14 +73,13 @@ public class User {
 		UseStub.setStubFlag(false);
 		User user = new User("mate");
 		System.out.println(user.getId());
-		user.addMedia(505642);
-		user.addMedia(772515);
-		user.addMedia(631842);
 		System.out.println(user.getMediaList().size());
 		for (int i = 0; i <user.getMediaList().size(); i++) {
 			System.out.println(i + " - " + user.getMediaList().get(i).getId() + " - " + user.getMediaList().get(i).getTitle());
 		}
 		user=new User("user4");
-		System.out.println(user.getMediaList().size());
+		for (int i = 0; i <user.getMediaList().size(); i++) {
+			System.out.println(i + " - " + user.getMediaList().get(i).getId() + " - " + user.getMediaList().get(i).getTitle());
+		}
 	}
 }

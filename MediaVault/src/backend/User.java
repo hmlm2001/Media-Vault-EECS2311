@@ -19,7 +19,6 @@ public class User {
 	 */
 	public User(String username) {
 		this.username = username;
-		this.mediaList = new MediaCollection();
 		if (!UseStub.getStubFlag()) {
 			this.id = UserDB.getId(username);
 		} else {
@@ -27,6 +26,7 @@ public class User {
 			if (!stub.containsKey(username)) stub.put(username, count.incrementAndGet());
 			this.id = stub.get(username);
 		}
+		this.mediaList = new MediaCollection(this.id);
 	}
 	public static void makeStub() {
 		stub = new HashMap<String, Integer>();
@@ -68,4 +68,19 @@ public class User {
 	public ArrayList<Media> getMediaList() {
 		return this.mediaList.getMediaList(); 
 	} 
+
+	public static void main (String[] args) {
+		UseStub.setStubFlag(false);
+		User user = new User("mate");
+		System.out.println(user.getId());
+		user.addMedia(505642);
+		user.addMedia(772515);
+		user.addMedia(631842);
+		System.out.println(user.getMediaList().size());
+		for (int i = 0; i <user.getMediaList().size(); i++) {
+			System.out.println(i + " - " + user.getMediaList().get(i).getId() + " - " + user.getMediaList().get(i).getTitle());
+		}
+		user=new User("user4");
+		System.out.println(user.getMediaList().size());
+	}
 }

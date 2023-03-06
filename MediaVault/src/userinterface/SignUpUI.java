@@ -91,8 +91,8 @@ public class SignUpUI extends JFrame {
 				} else if (backend.Login.createAccount(username, password)) {
 					// User user = new User(username); // for now
 					successPrompt.setForeground(new Color(52, 200, 15));
-					successPrompt.setBounds(535, 350, 150, 16);
-					successPrompt.setText("Sign up successful!");
+					successPrompt.setBounds(537, 350, 150, 16);
+					successPrompt.setText("Creating account...");
 					Timer t = new Timer(0, new ActionListener() {
 					    public void actionPerformed(ActionEvent e) {
 					    	ExploreMoviesUI frame = new ExploreMoviesUI();

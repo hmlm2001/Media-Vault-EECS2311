@@ -6,7 +6,10 @@ public class User {
 
 	private String username;
 	private ArrayList<Media> mediaCollection;
-	
+	/**
+	 * Create a user with username
+	 * @param username
+	 */
 	public User(String username) {
 		this.username = username;
 		this.mediaCollection = new ArrayList<Media>();

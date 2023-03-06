@@ -20,6 +20,8 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.net.URL;
 import java.awt.event.ActionEvent;
@@ -65,7 +67,7 @@ public class ExploreMoviesUI extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+				
 		JPanel navbar = new JPanel();
 		navbar.setBackground(Color.DARK_GRAY);
 		navbar.setBounds(0, 0, 1650, 61);
@@ -155,7 +157,7 @@ public class ExploreMoviesUI extends JFrame {
         
         // Action Movies
         JLabel actionLabel = new JLabel("ACTION");
-        actionLabel.setBounds(608, 6, 85, 22);
+        actionLabel.setBounds(605, 6, 78, 22);
         actionLabel.setFont(new Font("Lucida Grande", Font.BOLD, 19));
         actionLabel.setBackground(Color.WHITE);
         mainContent.add(actionLabel);
@@ -168,14 +170,15 @@ public class ExploreMoviesUI extends JFrame {
         JViewport viewport = actionScrollPane.getViewport();
         
         JPanel actionContent = new JPanel();
-        actionContent.setPreferredSize(new Dimension(2262, 270));
+        actionContent.setPreferredSize(new Dimension(3412, 270));
         actionScrollPane.setViewportView(actionContent);
         actionContent.setBackground(Color.WHITE);
         actionContent.setLayout(null);
         
-        JButton leftButton = new JButton("<");
-        leftButton.setFont(new Font("Lucida Grande", Font.BOLD, 18));
-        leftButton.addActionListener(new ActionListener() {
+        JButton actionLeftButton = new JButton("<");
+        actionLeftButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        actionLeftButton.setFont(new Font("Lucida Grande", Font.BOLD, 18));
+        actionLeftButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) { 
 				Point origin = viewport.getViewPosition();
@@ -185,14 +188,15 @@ public class ExploreMoviesUI extends JFrame {
 				}
 			}
 		});
-        leftButton.setBorder(new LineBorder(new Color(0, 0, 0)));
-        leftButton.setBackground(Color.DARK_GRAY);
-        leftButton.setBounds(555, 4, 29, 29);
-        mainContent.add(leftButton);
+        actionLeftButton.setBorder(new LineBorder(new Color(0, 0, 0)));
+        actionLeftButton.setBackground(Color.DARK_GRAY);
+        actionLeftButton.setBounds(555, 4, 29, 29);
+        mainContent.add(actionLeftButton);
         
-        JButton rightButton = new JButton(">");
-        rightButton.setFont(new Font("Lucida Grande", Font.BOLD, 18));
-        rightButton.addActionListener(new ActionListener() {
+        JButton actionRightButton = new JButton(">");
+        actionRightButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        actionRightButton.setFont(new Font("Lucida Grande", Font.BOLD, 18));
+        actionRightButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Point origin = viewport.getViewPosition();
@@ -200,25 +204,27 @@ public class ExploreMoviesUI extends JFrame {
 				viewport.setViewPosition(newOrigin);
 			}
 		});
-        rightButton.setBorder(new LineBorder(new Color(0, 0, 0)));
-        rightButton.setBackground(Color.DARK_GRAY);
-        rightButton.setBounds(705, 4, 29, 29);
-        mainContent.add(rightButton);
+        actionRightButton.setBorder(new LineBorder(new Color(0, 0, 0)));
+        actionRightButton.setBackground(Color.DARK_GRAY);
+        actionRightButton.setBounds(705, 4, 29, 29);
+        mainContent.add(actionRightButton);
         
         try {
         	int movieCount = 0;
         	int xPosition = 1;
-        	JLabel[] actionMoviePosters = new JLabel[10];
-        	JLabel[] actionMovieLabels = new JLabel[10];
-        	for (int i = 0; i < allMovies.size() && movieCount < 10; i++) {
+        	JLabel[] actionMoviePosters = new JLabel[15];
+        	JLabel[] actionMovieLabels = new JLabel[15];
+        	for (int i = 0; i < allMovies.size() && movieCount < 15; i++) {
         		if (allMovies.get(i).getGenre().equals("Action")) {
         			String title = allMovies.get(i).getTitle();
 	        		String path = allMovies.get(i).getPosterPath();
+	        		int id = allMovies.get(i).getId();
 	    	        URL url = new URL(path);
 	    			BufferedImage image = ImageIO.read(url);
 	    			Image poster = new ImageIcon(image).getImage().getScaledInstance(195, 265, Image.SCALE_SMOOTH);
 	    			
 	        		actionMoviePosters[movieCount] = createMoviePoster(new ImageIcon(poster), xPosition, 0);
+	        		actionMoviePosters[movieCount].addMouseListener(new MyMouseAdapter(id));
 	        		actionMovieLabels[movieCount] = createMovieLabel(title, xPosition, 270);
 	    	        actionContent.add(actionMoviePosters[movieCount]);
 	    	        actionContent.add(actionMovieLabels[movieCount]);
@@ -237,6 +243,7 @@ public class ExploreMoviesUI extends JFrame {
 	private JLabel createMoviePoster(ImageIcon img, int x, int y) {
 		JLabel moviePoster = new JLabel(img);
 		moviePoster.setBounds(x, y, 190, 265);
+		moviePoster.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		return moviePoster;
 	}
 	
@@ -248,5 +255,20 @@ public class ExploreMoviesUI extends JFrame {
         movieLabel.setBackground(Color.WHITE);
 		return movieLabel;
 	}
+}
+
+class MyMouseAdapter extends MouseAdapter {
+	private int movieId;
+	public MyMouseAdapter(int id) {
+		this.movieId = id;
+	}
 	
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		MoviePageUI frame = new MoviePageUI(new Movie(movieId));
+    	frame.setLocationRelativeTo(null);
+    	frame.toFront();
+    	frame.requestFocus();
+		frame.setVisible(true);
+	}
 }

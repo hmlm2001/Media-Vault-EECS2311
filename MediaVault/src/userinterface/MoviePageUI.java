@@ -3,7 +3,6 @@ package userinterface;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Image;
-import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -35,7 +34,7 @@ public class MoviePageUI extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MoviePageUI frame = new MoviePageUI(new Movie(411));
+					MoviePageUI frame = new MoviePageUI(new Movie(67308));
 					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -51,7 +50,6 @@ public class MoviePageUI extends JFrame {
 	public MoviePageUI(Movie movie) {
 		setTitle(movie.getTitle());
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 550);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
@@ -81,26 +79,26 @@ public class MoviePageUI extends JFrame {
 		
 		JLabel releaseAndGenre = new JLabel(movie.getReleaseDate() + " | " + movie.getGenre());
 		releaseAndGenre.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
-		releaseAndGenre.setBounds(399, 73, 383, 31);
+		releaseAndGenre.setBounds(399, 70, 383, 31);
 		releaseAndGenre.setVerticalAlignment(JLabel.TOP);
 		contentPane.add(releaseAndGenre);
 		
 		JLabel runtime = new JLabel(movie.getRuntimeAsString());
 		runtime.setVerticalAlignment(SwingConstants.TOP);
 		runtime.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
-		runtime.setBounds(399, 108, 383, 31);
+		runtime.setBounds(399, 102, 383, 31);
 		contentPane.add(runtime);
 		
 		JLabel overviewLabel = new JLabel("Overview");
 		overviewLabel.setVerticalAlignment(SwingConstants.BOTTOM);
 		overviewLabel.setFont(new Font("Lucida Grande", Font.BOLD, 18));
-		overviewLabel.setBounds(399, 140, 383, 31);
+		overviewLabel.setBounds(399, 132, 383, 31);
 		contentPane.add(overviewLabel);
 		
 		JLabel overview = new JLabel("<html>" + movie.getOverview() + "</html>");
 		overview.setVerticalAlignment(SwingConstants.TOP);
 		overview.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
-		overview.setBounds(399, 175, 383, 292);
+		overview.setBounds(399, 167, 383, 292);
 		contentPane.add(overview);
 		
 		JButton addToVaultButton = new JButton("+ Add to Vault");
@@ -110,15 +108,12 @@ public class MoviePageUI extends JFrame {
 		addToVaultButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ExploreMoviesUI frame = new ExploreMoviesUI();
-		    	frame.setLocationRelativeTo(null);
-				frame.setVisible(true);
 				MoviePageUI.this.dispose();
 			}
 		});
 		addToVaultButton.setOpaque(true);
 		addToVaultButton.setBackground(Color.WHITE);
-		addToVaultButton.setBounds(495, 470, 181, 31);
+		addToVaultButton.setBounds(495, 463, 181, 31);
 		contentPane.add(addToVaultButton);
 		
 	}

@@ -1,7 +1,6 @@
 package userinterface;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import javax.swing.Timer;
 import javax.swing.JButton;
 import java.awt.Cursor;
 
@@ -26,23 +26,6 @@ import java.awt.Cursor;
 public class MoviePageUI extends JFrame {
 
 	private JPanel contentPane;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MoviePageUI frame = new MoviePageUI(new Movie(67308));
-					frame.setLocationRelativeTo(null);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 	
 	/**
 	 * Create the frame.
@@ -101,6 +84,9 @@ public class MoviePageUI extends JFrame {
 		overview.setBounds(399, 167, 383, 292);
 		contentPane.add(overview);
 		
+		JLabel successPrompt = new JLabel();
+		contentPane.add(successPrompt);
+		
 		JButton addToVaultButton = new JButton("+ Add to Vault");
 		addToVaultButton.setBorder(new LineBorder(new Color(0, 0, 0)));
 		addToVaultButton.setFont(new Font("Lucida Grande", Font.BOLD, 16));
@@ -108,7 +94,16 @@ public class MoviePageUI extends JFrame {
 		addToVaultButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MoviePageUI.this.dispose();
+				successPrompt.setForeground(new Color(52, 200, 15));
+				successPrompt.setBounds(525, 500, 200, 16);
+				successPrompt.setText("Successfully Added!");
+				Timer t = new Timer(1300, new ActionListener() {
+				    public void actionPerformed(ActionEvent e) {
+						MoviePageUI.this.dispose();
+				    }
+				});
+				t.setRepeats(false);
+				t.start();
 			}
 		});
 		addToVaultButton.setOpaque(true);

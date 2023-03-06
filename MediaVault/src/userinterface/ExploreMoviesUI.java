@@ -150,7 +150,7 @@ public class ExploreMoviesUI extends JFrame {
         mainScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         
         JPanel mainContent = new JPanel();
-        mainContent.setPreferredSize(new Dimension(1300, 1000));
+        mainContent.setPreferredSize(new Dimension(1300, 1385));
         mainScrollPane.setViewportView(mainContent);
         mainContent.setBackground(Color.WHITE);
         mainContent.setLayout(null);
@@ -167,7 +167,7 @@ public class ExploreMoviesUI extends JFrame {
         actionScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         actionScrollPane.setBounds(6, 40, 1275, 300);
         mainContent.add(actionScrollPane);
-        JViewport viewport = actionScrollPane.getViewport();
+        JViewport actionViewport = actionScrollPane.getViewport();
         
         JPanel actionContent = new JPanel();
         actionContent.setPreferredSize(new Dimension(3412, 270));
@@ -181,10 +181,10 @@ public class ExploreMoviesUI extends JFrame {
         actionLeftButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) { 
-				Point origin = viewport.getViewPosition();
+				Point origin = actionViewport.getViewPosition();
 				Point newOrigin = new Point(origin.x-150, origin.y);
 				if (origin.x != 0) { 
-					viewport.setViewPosition(newOrigin);
+					actionViewport.setViewPosition(newOrigin);
 				}
 			}
 		});
@@ -199,9 +199,9 @@ public class ExploreMoviesUI extends JFrame {
         actionRightButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Point origin = viewport.getViewPosition();
+				Point origin = actionViewport.getViewPosition();
 				Point newOrigin = new Point(origin.x+150, origin.y);
-				viewport.setViewPosition(newOrigin);
+				actionViewport.setViewPosition(newOrigin);
 			}
 		});
         actionRightButton.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -237,9 +237,266 @@ public class ExploreMoviesUI extends JFrame {
         } catch (Exception e) {
         	e.printStackTrace();
         }
+        
+        // Animation Movies
+        JLabel animationLabel = new JLabel("ANIMATION");
+        animationLabel.setBounds(579, 352, 120, 22);
+        animationLabel.setFont(new Font("Lucida Grande", Font.BOLD, 19));
+        animationLabel.setBackground(Color.WHITE);
+        mainContent.add(animationLabel);
+        
+        JScrollPane animationScrollPane = new JScrollPane();
+        animationScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        animationScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        animationScrollPane.setBounds(6, 386, 1275, 300);
+        mainContent.add(animationScrollPane);
+        JViewport animationViewport = animationScrollPane.getViewport();
+        
+        JPanel animationContent = new JPanel();
+        animationContent.setPreferredSize(new Dimension(2952, 270));
+        animationScrollPane.setViewportView(animationContent);
+        animationContent.setBackground(Color.WHITE);
+        animationContent.setLayout(null);
+        
+        JButton animationLeftButton = new JButton("<");
+        animationLeftButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        animationLeftButton.setFont(new Font("Lucida Grande", Font.BOLD, 18));
+        animationLeftButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) { 
+				Point origin = animationViewport.getViewPosition();
+				Point newOrigin = new Point(origin.x-150, origin.y);
+				if (origin.x != 0) { 
+					animationViewport.setViewPosition(newOrigin);
+				}
+			}
+		});
+        animationLeftButton.setBorder(new LineBorder(new Color(0, 0, 0)));
+        animationLeftButton.setBackground(Color.DARK_GRAY);
+        animationLeftButton.setBounds(538, 350, 29, 29);
+        mainContent.add(animationLeftButton);
+        
+        JButton animationRightButton = new JButton(">");
+        animationRightButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        animationRightButton.setFont(new Font("Lucida Grande", Font.BOLD, 18));
+        animationRightButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Point origin = animationViewport.getViewPosition();
+				Point newOrigin = new Point(origin.x+150, origin.y);
+				animationViewport.setViewPosition(newOrigin);
+			}
+		});
+        animationRightButton.setBorder(new LineBorder(new Color(0, 0, 0)));
+        animationRightButton.setBackground(Color.DARK_GRAY);
+        animationRightButton.setBounds(705, 350, 29, 29);
+        mainContent.add(animationRightButton);
+        
+        try {
+        	int movieCount = 0;
+        	int xPosition = 1;
+        	JLabel[] animationMoviePosters = new JLabel[13];
+        	JLabel[] animationMovieLabels = new JLabel[13];
+        	for (int i = 0; i < allMovies.size() && movieCount < 13; i++) {
+        		if (allMovies.get(i).getGenre().equals("Animation")) {
+        			String title = allMovies.get(i).getTitle();
+	        		String path = allMovies.get(i).getPosterPath();
+	        		int id = allMovies.get(i).getId();
+	    	        URL url = new URL(path);
+	    			BufferedImage image = ImageIO.read(url);
+	    			Image poster = new ImageIcon(image).getImage().getScaledInstance(195, 265, Image.SCALE_SMOOTH);
+	    			
+	        		animationMoviePosters[movieCount] = createMoviePoster(new ImageIcon(poster), xPosition, 0);
+	        		animationMoviePosters[movieCount].addMouseListener(new MyMouseAdapter(id));
+	        		animationMovieLabels[movieCount] = createMovieLabel(title, xPosition, 270);
+	    	        animationContent.add(animationMoviePosters[movieCount]);
+	    	        animationContent.add(animationMovieLabels[movieCount]);
+	    	        
+	    	        xPosition += 230;
+	        		movieCount++;
+        		}
+        	}
+	        			        
+        } catch (Exception e) {
+        	e.printStackTrace();
+        }
+        
+        // Drama Movies
+        JLabel dramaLabel = new JLabel("DRAMA");
+        dramaLabel.setBounds(608, 698, 100, 22);
+        dramaLabel.setFont(new Font("Lucida Grande", Font.BOLD, 19));
+        dramaLabel.setBackground(Color.WHITE);
+        mainContent.add(dramaLabel);
+        
+        JScrollPane dramaScrollPane = new JScrollPane();
+        dramaScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        dramaScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        dramaScrollPane.setBounds(6, 732, 1275, 300);
+        mainContent.add(dramaScrollPane);
+        JViewport dramaViewport = dramaScrollPane.getViewport();
+        
+        JPanel dramaContent = new JPanel();
+        dramaContent.setPreferredSize(new Dimension(2034, 270));
+        dramaScrollPane.setViewportView(dramaContent);
+        dramaContent.setBackground(Color.WHITE);
+        dramaContent.setLayout(null);
+        
+        JButton dramaLeftButton = new JButton("<");
+        dramaLeftButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        dramaLeftButton.setFont(new Font("Lucida Grande", Font.BOLD, 18));
+        dramaLeftButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) { 
+				Point origin = dramaViewport.getViewPosition();
+				Point newOrigin = new Point(origin.x-150, origin.y);
+				if (origin.x != 0) { 
+					dramaViewport.setViewPosition(newOrigin);
+				}
+			}
+		});
+        dramaLeftButton.setBorder(new LineBorder(new Color(0, 0, 0)));
+        dramaLeftButton.setBackground(Color.DARK_GRAY);
+        dramaLeftButton.setBounds(560, 696, 29, 29);
+        mainContent.add(dramaLeftButton);
+        
+        JButton dramaRightButton = new JButton(">");
+        dramaRightButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        dramaRightButton.setFont(new Font("Lucida Grande", Font.BOLD, 18));
+        dramaRightButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Point origin = dramaViewport.getViewPosition();
+				Point newOrigin = new Point(origin.x+150, origin.y);
+				dramaViewport.setViewPosition(newOrigin);
+			}
+		});
+        dramaRightButton.setBorder(new LineBorder(new Color(0, 0, 0)));
+        dramaRightButton.setBackground(Color.DARK_GRAY);
+        dramaRightButton.setBounds(700, 696, 29, 29);
+        mainContent.add(dramaRightButton);
+        
+        try {
+        	int movieCount = 0;
+        	int xPosition = 1;
+        	JLabel[] dramaMoviePosters = new JLabel[9];
+        	JLabel[] dramaMovieLabels = new JLabel[9];
+        	for (int i = 0; i < allMovies.size() && movieCount < 9; i++) {
+        		if (allMovies.get(i).getGenre().equals("Drama")) {
+        			String title = allMovies.get(i).getTitle();
+	        		String path = allMovies.get(i).getPosterPath();
+	        		int id = allMovies.get(i).getId();
+	    	        URL url = new URL(path);
+	    			BufferedImage image = ImageIO.read(url);
+	    			Image poster = new ImageIcon(image).getImage().getScaledInstance(195, 265, Image.SCALE_SMOOTH);
+	    			
+	        		dramaMoviePosters[movieCount] = createMoviePoster(new ImageIcon(poster), xPosition, 0);
+	        		dramaMoviePosters[movieCount].addMouseListener(new MyMouseAdapter(id));
+	        		dramaMovieLabels[movieCount] = createMovieLabel(title, xPosition, 270);
+	    	        dramaContent.add(dramaMoviePosters[movieCount]);
+	    	        dramaContent.add(dramaMovieLabels[movieCount]);
+	    	        
+	    	        xPosition += 230;
+	        		movieCount++;
+        		}
+        	}
+	        			        
+        } catch (Exception e) {
+        	e.printStackTrace();
+        }
+        
+     // Horror Movies
+        JLabel horrorLabel = new JLabel("HORROR");
+        horrorLabel.setBounds(603, 1044, 100, 22);
+        horrorLabel.setFont(new Font("Lucida Grande", Font.BOLD, 19));
+        horrorLabel.setBackground(Color.WHITE);
+        mainContent.add(horrorLabel);
+        
+        JScrollPane horrorScrollPane = new JScrollPane();
+        horrorScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        horrorScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        horrorScrollPane.setBounds(6, 1078, 1275, 300);
+        mainContent.add(horrorScrollPane);
+        JViewport horrorViewport = horrorScrollPane.getViewport();
+        
+        JPanel horrorContent = new JPanel();
+        horrorContent.setPreferredSize(new Dimension(2952, 270));
+        horrorScrollPane.setViewportView(horrorContent);
+        horrorContent.setBackground(Color.WHITE);
+        horrorContent.setLayout(null);
+        
+        JButton horrorLeftButton = new JButton("<");
+        horrorLeftButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        horrorLeftButton.setFont(new Font("Lucida Grande", Font.BOLD, 18));
+        horrorLeftButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) { 
+				Point origin = horrorViewport.getViewPosition();
+				Point newOrigin = new Point(origin.x-150, origin.y);
+				if (origin.x != 0) { 
+					horrorViewport.setViewPosition(newOrigin);
+				}
+			}
+		});
+        horrorLeftButton.setBorder(new LineBorder(new Color(0, 0, 0)));
+        horrorLeftButton.setBackground(Color.DARK_GRAY);
+        horrorLeftButton.setBounds(555, 1042, 29, 29);
+        mainContent.add(horrorLeftButton);
+        
+        JButton horrorRightButton = new JButton(">");
+        horrorRightButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        horrorRightButton.setFont(new Font("Lucida Grande", Font.BOLD, 18));
+        horrorRightButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Point origin = horrorViewport.getViewPosition();
+				Point newOrigin = new Point(origin.x+150, origin.y);
+				horrorViewport.setViewPosition(newOrigin);
+			}
+		});
+        horrorRightButton.setBorder(new LineBorder(new Color(0, 0, 0)));
+        horrorRightButton.setBackground(Color.DARK_GRAY);
+        horrorRightButton.setBounds(705, 1042, 29, 29);
+        mainContent.add(horrorRightButton);
+        
+        try {
+        	int movieCount = 0;
+        	int xPosition = 1;
+        	JLabel[] horrorMoviePosters = new JLabel[13];
+        	JLabel[] horrorMovieLabels = new JLabel[13];
+        	for (int i = 0; i < allMovies.size() && movieCount < 13; i++) {
+        		if (allMovies.get(i).getGenre().equals("Horror")) {
+        			String title = allMovies.get(i).getTitle();
+	        		String path = allMovies.get(i).getPosterPath();
+	        		int id = allMovies.get(i).getId();
+	    	        URL url = new URL(path);
+	    			BufferedImage image = ImageIO.read(url);
+	    			Image poster = new ImageIcon(image).getImage().getScaledInstance(195, 265, Image.SCALE_SMOOTH);
+	    			
+	        		horrorMoviePosters[movieCount] = createMoviePoster(new ImageIcon(poster), xPosition, 0);
+	        		horrorMoviePosters[movieCount].addMouseListener(new MyMouseAdapter(id));
+	        		horrorMovieLabels[movieCount] = createMovieLabel(title, xPosition, 270);
+	    	        horrorContent.add(horrorMoviePosters[movieCount]);
+	    	        horrorContent.add(horrorMovieLabels[movieCount]);
+	    	        
+	    	        xPosition += 230;
+	        		movieCount++;
+        		}
+        	}
+	        			        
+        } catch (Exception e) {
+        	e.printStackTrace();
+        }
 	    
 	}
 	
+	
+	/**
+	 * Used to create movie posters using a JLabel
+	 * @param img - the poster to be used
+	 * @param x - the x coordinate of the image
+	 * @param y - the y coordinate of the image
+	 * @return JLabel containing the poster
+	 */
 	private JLabel createMoviePoster(ImageIcon img, int x, int y) {
 		JLabel moviePoster = new JLabel(img);
 		moviePoster.setBounds(x, y, 190, 265);
@@ -247,6 +504,13 @@ public class ExploreMoviesUI extends JFrame {
 		return moviePoster;
 	}
 	
+	/**
+	 * Used to create movie labels for the titles
+	 * @param title - the title of the movie
+	 * @param x - the x coordinate of the title
+	 * @param y - the y coordinate of the title
+	 * @return
+	 */
 	private JLabel createMovieLabel(String title, int x, int y) {
 		JLabel movieLabel = new JLabel(title, SwingConstants.CENTER);
 		movieLabel.setBounds(x, y, 190, 20);
@@ -257,6 +521,9 @@ public class ExploreMoviesUI extends JFrame {
 	}
 }
 
+/**
+ * MouseAdapter class used to create new movie pages using movie IDs
+ */
 class MyMouseAdapter extends MouseAdapter {
 	private int movieId;
 	public MyMouseAdapter(int id) {

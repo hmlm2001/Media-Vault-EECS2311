@@ -95,7 +95,8 @@ public class MoviePageUI extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				successPrompt.setForeground(new Color(52, 200, 15));
-				successPrompt.setBounds(525, 500, 200, 16);
+				successPrompt.setBounds(518, 498, 200, 20);
+				successPrompt.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 				successPrompt.setText("Successfully Added!");
 				Timer t = new Timer(1300, new ActionListener() {
 				    public void actionPerformed(ActionEvent e) {

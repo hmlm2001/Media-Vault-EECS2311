@@ -14,7 +14,7 @@ public class User {
 	private int id;
 	private static final AtomicInteger count = new AtomicInteger(0); 
 	/**
-	 * Create a user with username
+	 * Create a user with username and search for its id, if non-existent then create it
 	 * @param username
 	 */
 	public User(String username) {
@@ -68,18 +68,4 @@ public class User {
 	public ArrayList<Media> getMediaList() {
 		return this.mediaList.getMediaList(); 
 	} 
-
-	public static void main (String[] args) {
-		UseStub.setStubFlag(false);
-		User user = new User("mate");
-		System.out.println(user.getId());
-		System.out.println(user.getMediaList().size());
-		for (int i = 0; i <user.getMediaList().size(); i++) {
-			System.out.println(i + " - " + user.getMediaList().get(i).getId() + " - " + user.getMediaList().get(i).getTitle());
-		}
-		user=new User("user4");
-		for (int i = 0; i <user.getMediaList().size(); i++) {
-			System.out.println(i + " - " + user.getMediaList().get(i).getId() + " - " + user.getMediaList().get(i).getTitle());
-		}
-	}
 }

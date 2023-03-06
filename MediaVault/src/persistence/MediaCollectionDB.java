@@ -60,15 +60,15 @@ public class MediaCollectionDB {
 	 * @param collectionid is the target collection
 	 * @param mediaid is the media to be added
 	 */
-	public static void addMediaCollection(int collectionid, int mediaid) {
-		JDBC_Connection.execute("INSERT INTO mediarelations(mediaID,mediaCollectionID) VALUES ('"+mediaid+"','"+collectionid+"');");
+	public static boolean addMediaCollection(int collectionid, int mediaid) {
+		return JDBC_Connection.execute("INSERT INTO mediarelations(mediaID,mediaCollectionID) VALUES ('"+mediaid+"','"+collectionid+"');");
 	}
 	/**
 	 * add to the media collection
 	 * @param collectionid is the target collection
 	 * @param mediaid is the media to be removed
 	 */
-	public static void removeMediaCollection(int collectionid, int mediaid) {
-		JDBC_Connection.execute("DELETE FROM mediarelations WHERE mediaID='"+mediaid+"' AND mediaCollectionID='"+collectionid+"';");
+	public static boolean removeMediaCollection(int collectionid, int mediaid) {
+		return JDBC_Connection.execute("DELETE FROM mediarelations WHERE mediaID='"+mediaid+"' AND mediaCollectionID='"+collectionid+"';");
 	}
 }

@@ -70,8 +70,7 @@ public class MediaCollection {
 		for (int i = 0; i<this.mediaList.size();i++) {
 			if (this.mediaList.get(i).getId()==id) {
 				this.mediaList.remove(i);
-				if (!UseStub.getStubFlag()) MediaCollectionDB.removeMediaCollection(this.id, id);
-				return true;
+				if (!UseStub.getStubFlag()) return MediaCollectionDB.removeMediaCollection(this.id, id);
 			}
 		}
 		return false;

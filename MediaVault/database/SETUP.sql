@@ -4,7 +4,6 @@ GRANT ALL PRIVILEGES ON * . * TO 'mediavaultadmin'@'localhost';
 FLUSH PRIVILEGES;
 
 -- Create mediavault database
-DROP DATABASE mediavault;
 CREATE DATABASE mediavault;
 USE mediavault;
 
@@ -23,7 +22,6 @@ CREATE TABLE logins (
 CREATE TABLE mediacollections (
 	id INT NOT NULL AUTO_INCREMENT,
     userID INT NOT NULL,
-    FOREIGN KEY (userID) REFERENCES users(userID),
     PRIMARY KEY (id)
 );
 

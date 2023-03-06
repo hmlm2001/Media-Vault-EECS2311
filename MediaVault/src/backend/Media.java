@@ -1,6 +1,6 @@
 package backend;
 
-public class Media {
+public abstract class Media {
 	private int id;
 	protected String title;
 	

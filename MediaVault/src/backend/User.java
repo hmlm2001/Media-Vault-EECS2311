@@ -22,8 +22,13 @@ public class User {
 	} 
 
 	public boolean removeMedia(int id) {
-		
-		return this.mediaCollection.remove(new Movie(id));
+		for (int i = 0; i<this.mediaCollection.size();i++) {
+			if (this.mediaCollection.get(i).getId()==id) {
+				this.mediaCollection.remove(i);
+				return true;
+			}
+		}
+		return false;
 	} 
 
 	public ArrayList<Media> getMediaList() {

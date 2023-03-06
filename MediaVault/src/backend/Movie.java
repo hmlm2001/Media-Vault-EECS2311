@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import persistence.MovieDB;
 
 public class Movie extends Media {
-	private String title;
 	private Date releaseDate;
 	private String overview;
 	private String posterPath;
@@ -35,12 +34,6 @@ public class Movie extends Media {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-	/**
-	 * @return the title of the movie
-	 */
-	public String getTitle() {
-		return this.title;
 	}
 	/**
 	 * @return the release date of the movie

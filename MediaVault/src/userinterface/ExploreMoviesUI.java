@@ -3,6 +3,8 @@ package userinterface;
 import persistence.*;
 
 import java.awt.Image;
+import java.awt.Point;
+
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -22,7 +24,9 @@ import java.awt.image.BufferedImage;
 import java.net.URL;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
+import javax.swing.JViewport;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.border.LineBorder;
 
 @SuppressWarnings("serial")
 public class ExploreMoviesUI extends JFrame {
@@ -151,21 +155,55 @@ public class ExploreMoviesUI extends JFrame {
         
         // Action Movies
         JLabel actionLabel = new JLabel("ACTION");
-        actionLabel.setBounds(6, 6, 73, 22);
-        actionLabel.setFont(new Font("Lucida Grande", Font.BOLD, 18));
+        actionLabel.setBounds(608, 6, 85, 22);
+        actionLabel.setFont(new Font("Lucida Grande", Font.BOLD, 19));
         actionLabel.setBackground(Color.WHITE);
         mainContent.add(actionLabel);
         
         JScrollPane actionScrollPane = new JScrollPane();
         actionScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-        actionScrollPane.setBounds(6, 40, 1275, 312);
+        actionScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        actionScrollPane.setBounds(6, 40, 1275, 300);
         mainContent.add(actionScrollPane);
+        JViewport viewport = actionScrollPane.getViewport();
         
         JPanel actionContent = new JPanel();
         actionContent.setPreferredSize(new Dimension(2262, 270));
         actionScrollPane.setViewportView(actionContent);
         actionContent.setBackground(Color.WHITE);
         actionContent.setLayout(null);
+        
+        JButton leftButton = new JButton("<");
+        leftButton.setFont(new Font("Lucida Grande", Font.BOLD, 18));
+        leftButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) { 
+				Point origin = viewport.getViewPosition();
+				Point newOrigin = new Point(origin.x-150, origin.y);
+				if (origin.x != 0) { 
+					viewport.setViewPosition(newOrigin);
+				}
+			}
+		});
+        leftButton.setBorder(new LineBorder(new Color(0, 0, 0)));
+        leftButton.setBackground(Color.DARK_GRAY);
+        leftButton.setBounds(555, 4, 29, 29);
+        mainContent.add(leftButton);
+        
+        JButton rightButton = new JButton(">");
+        rightButton.setFont(new Font("Lucida Grande", Font.BOLD, 18));
+        rightButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Point origin = viewport.getViewPosition();
+				Point newOrigin = new Point(origin.x+150, origin.y);
+				viewport.setViewPosition(newOrigin);
+			}
+		});
+        rightButton.setBorder(new LineBorder(new Color(0, 0, 0)));
+        rightButton.setBackground(Color.DARK_GRAY);
+        rightButton.setBounds(705, 4, 29, 29);
+        mainContent.add(rightButton);
         
         try {
         	int movieCount = 0;

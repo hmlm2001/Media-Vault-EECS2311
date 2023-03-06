@@ -5,29 +5,29 @@ import java.util.ArrayList;
 public class User {
 
 	private String username;
-	private MediaCollection mediaCollection; 
+	private ArrayList<Media> mediaCollection;
 	
 	public User(String username) {
 		this.username = username;
-		this.mediaCollection = new MediaCollection();
+		this.mediaCollection = new ArrayList<Media>();
 	}
 	public String getUsername() {
 		
 		return this.username;
 	} 
 	
-	public boolean addMedia(Media media) {
+	public boolean addMedia(int id) {
 		
-		return this.mediaCollection.addMedia(media);
+		return this.mediaCollection.add(new Movie(id));
 	} 
 
-	public boolean removeMedia(Media media) {
+	public boolean removeMedia(int id) {
 		
-		return this.mediaCollection.removeMedia(media);
+		return this.mediaCollection.remove(new Movie(id));
 	} 
 
 	public ArrayList<Media> getMediaList() {
 		
-		return this.mediaCollection.getMediaList(); 
+		return this.mediaCollection; 
 	} 
 }

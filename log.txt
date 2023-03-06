@@ -91,8 +91,8 @@ Tasks Assignments + Estimates
 		Tests				-Ruth/Herman	[4 days]
 		Stubs				-Mate		[2 days]
 		UML				-Mate		[4 days]
-		Explain why no books 		-Herman		[2 days]
-		Redo Detailed User Stories	-Herman		[2 days]
+		Explain why no books 		-Herman/Muhammad[2 days]
+		Redo Detailed User Stories	-Herman/Muhammad[2 days]
 
 Meeting Notes
 - Discussed allocation of work for this Iteration

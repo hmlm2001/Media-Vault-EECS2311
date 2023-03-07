@@ -93,7 +93,8 @@ public class SearchItem extends JPanel {
         		.addGroup(layout.createSequentialGroup()
         			.addComponent(lbIcon, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
         			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(lbText, GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE))
+        			.addComponent(lbText, GroupLayout.DEFAULT_SIZE, 511, Short.MAX_VALUE)
+        			.addContainerGap())
         );
         layout.setVerticalGroup(
         	layout.createParallelGroup(Alignment.LEADING)

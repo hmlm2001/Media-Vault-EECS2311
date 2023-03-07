@@ -1,15 +1,17 @@
 package userinterface;
 
 import persistence.*;
-import userinterface.swing.MyTextField;
+import userinterface.swing.*;
 
 import java.awt.Image;
 import java.awt.Point;
 
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.border.EmptyBorder;
 
 import java.awt.Color;
@@ -25,12 +27,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.JViewport;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.LineBorder;
-import javax.swing.JTextField;
 
 @SuppressWarnings("serial")
 public class ExploreMoviesUI extends JFrame {
@@ -38,6 +41,8 @@ public class ExploreMoviesUI extends JFrame {
 	private JPanel contentPane;
 	private MovieDB allMovies;
 	private MyTextField searchbar;
+	private JPopupMenu menu;
+    private PanelSearch search;
 
 	/**
 	 * Launch the application.
@@ -63,14 +68,15 @@ public class ExploreMoviesUI extends JFrame {
 		setTitle("MediaVault");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1300, 700);
+		setBounds(100, 100, 1300, 660);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-				
+			
+		// Navbar
 		JPanel navbar = new JPanel();
 		navbar.setBackground(Color.DARK_GRAY);
 		navbar.setBounds(0, 0, 1650, 61);
@@ -152,16 +158,54 @@ public class ExploreMoviesUI extends JFrame {
 		logOutButton.setBounds(1185, 17, 88, 29);
 		navbar.add(logOutButton);
 		
+		// Searchbar
+		searchbar = new MyTextField();
+		searchbar.setBounds(520, 13, 550, 40);
+		navbar.add(searchbar);
+		searchbar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		searchbar.setPrefixIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search.png")));
+		
+		searchbar.addMouseListener(new java.awt.event.MouseAdapter() {
+		    public void mouseClicked(java.awt.event.MouseEvent evt) {
+		        txtSearchMouseClicked(evt);
+		    }
+		});
+		searchbar.addKeyListener(new java.awt.event.KeyAdapter() {
+		    public void keyReleased(java.awt.event.KeyEvent evt) {
+		        txtSearchKeyReleased(evt);
+		    }
+		});
+		
+		menu = new JPopupMenu();
+        search = new PanelSearch();
+        menu.setBorder(BorderFactory.createLineBorder(new Color(164, 164, 164)));
+        menu.add(search);
+        menu.setFocusable(false);
+        search.addEventClick(new EventClick() {
+            @Override
+            public void itemClick(Movie movie) {
+                menu.setVisible(false);
+                searchbar.setText(movie.getTitle());
+                
+                MoviePageUI frame = new MoviePageUI(new Movie(movie.getId()));
+            	frame.setLocationRelativeTo(null);
+            	frame.toFront();
+            	frame.requestFocus();
+        		frame.setVisible(true);
+            }
+        });
+        
+        // Main Section
 		allMovies = new MovieDB();
 			
         JScrollPane mainScrollPane = new JScrollPane();
-        mainScrollPane.setBounds(0, 101, 1300, 571);
+        mainScrollPane.setBounds(0, 61, 1300, 572);
         contentPane.add(mainScrollPane);
         mainScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         mainScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         
         JPanel mainContent = new JPanel();
-        mainContent.setPreferredSize(new Dimension(1300, 1385));
+        mainContent.setPreferredSize(new Dimension(1300, 1382));
         mainScrollPane.setViewportView(mainContent);
         mainContent.setBackground(Color.WHITE);
         mainContent.setLayout(null);
@@ -415,7 +459,7 @@ public class ExploreMoviesUI extends JFrame {
         	e.printStackTrace();
         }
         
-     // Horror Movies
+        // Horror Movies
         JLabel horrorLabel = new JLabel("HORROR");
         horrorLabel.setBounds(603, 1044, 100, 22);
         horrorLabel.setFont(new Font("Lucida Grande", Font.BOLD, 19));
@@ -469,19 +513,6 @@ public class ExploreMoviesUI extends JFrame {
         horrorRightButton.setBounds(705, 1042, 29, 29);
         mainContent.add(horrorRightButton);
         
-        searchbar = new MyTextField();
-        searchbar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-        searchbar.setPrefixIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search.png")));
-        searchbar.setBounds(0, 61, 1156, 40);
-        contentPane.add(searchbar);
-        
-        JButton searchButton = new JButton("Search");
-        searchButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        searchButton.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-        searchButton.setBorder(new LineBorder(new Color(0, 0, 0), 1));
-        searchButton.setBounds(1156, 61, 143, 40);
-        contentPane.add(searchButton);
-        
         try {
         	int movieCount = 0;
         	int xPosition = 1;
@@ -513,7 +544,6 @@ public class ExploreMoviesUI extends JFrame {
 	    
 	}
 	
-	
 	/**
 	 * Used to create movie posters using a JLabel
 	 * @param img - the poster to be used
@@ -543,23 +573,49 @@ public class ExploreMoviesUI extends JFrame {
         movieLabel.setBackground(Color.WHITE);
 		return movieLabel;
 	}
-}
-
-/**
- * MouseAdapter class used to create new movie pages using movie IDs
- */
-class MyMouseAdapter extends MouseAdapter {
-	private int movieId;
-	public MyMouseAdapter(int id) {
-		this.movieId = id;
-	}
+		
+	/**
+	 * Used to show the menu when the searchbar is clicked
+	 * @param evt - occurs when the mouse is clicked
+	 */
+	private void txtSearchMouseClicked(java.awt.event.MouseEvent evt) {
+        if (search.getItemSize() > 0) {
+            menu.show(searchbar, 0, searchbar.getHeight());
+        }
+    }
 	
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		MoviePageUI frame = new MoviePageUI(new Movie(movieId));
-    	frame.setLocationRelativeTo(null);
-    	frame.toFront();
-    	frame.requestFocus();
-		frame.setVisible(true);
-	}
+	/**
+	 * Used to search the database when a key is pressed
+	 * @param evt - occurs when a key is released
+	 */
+    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {
+        String text = searchbar.getText().trim().toLowerCase();
+        search.setMovies(search(text));
+        if (search.getItemSize() > 0) {
+            menu.show(searchbar, 0, searchbar.getHeight());
+            menu.setPopupSize(menu.getWidth(), (search.getItemSize() * 35) + 2);
+        } else {
+            menu.setVisible(false);
+        }
+    }
+
+    /**
+     * Used to search through all the movies database 
+     * @param search - the title to be searched for
+     * @return a list of movies with titles containing the search query
+     */
+    private List<Movie> search(String search) {
+    	int limitData = 10;
+        List<Movie> list = new ArrayList<>();
+        for (int i = 0; i < allMovies.size(); i++) {
+        	if (allMovies.get(i).getTitle().toLowerCase().contains(search)) {
+            	list.add(allMovies.get(i));
+            	
+                if (list.size() == limitData) {
+                    break;
+                }
+            }
+        }
+        return list;
+    }
 }

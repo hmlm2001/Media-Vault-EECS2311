@@ -1,6 +1,7 @@
 package userinterface;
 
 import persistence.*;
+import userinterface.swing.MyTextField;
 
 import java.awt.Image;
 import java.awt.Point;
@@ -29,12 +30,14 @@ import javax.swing.JScrollPane;
 import javax.swing.JViewport;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.LineBorder;
+import javax.swing.JTextField;
 
 @SuppressWarnings("serial")
 public class ExploreMoviesUI extends JFrame {
 
 	private JPanel contentPane;
 	private MovieDB allMovies;
+	private MyTextField searchbar;
 
 	/**
 	 * Launch the application.
@@ -81,7 +84,7 @@ public class ExploreMoviesUI extends JFrame {
 		mediaVaultLogo.setBounds(3, 6, 88, 59);
 		navbar.add(mediaVaultLogo);
 		
-		JButton moviesButton = new JButton("<html><U>MOVIES</U></html>");
+		JButton moviesButton = new JButton("MOVIES");
 		moviesButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ExploreMoviesUI frame = new ExploreMoviesUI();
@@ -103,8 +106,16 @@ public class ExploreMoviesUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
+		vaultButton.addMouseListener(new MouseAdapter() {
+			public void mouseEntered(MouseEvent e) {
+				vaultButton.setForeground(Color.WHITE);
+			}
+			public void mouseExited(MouseEvent e) {
+				vaultButton.setForeground(Color.GRAY);
+			}
+		});
 		vaultButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		vaultButton.setForeground(Color.WHITE);
+		vaultButton.setForeground(Color.GRAY);
 		vaultButton.setBackground(Color.DARK_GRAY);
 		vaultButton.setFont(new Font("Lucida Grande", Font.BOLD, 18));
 		vaultButton.setBorder(null);
@@ -457,6 +468,19 @@ public class ExploreMoviesUI extends JFrame {
         horrorRightButton.setBackground(Color.DARK_GRAY);
         horrorRightButton.setBounds(705, 1042, 29, 29);
         mainContent.add(horrorRightButton);
+        
+        searchbar = new MyTextField();
+        searchbar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+        searchbar.setPrefixIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search.png")));
+        searchbar.setBounds(0, 61, 1156, 40);
+        contentPane.add(searchbar);
+        
+        JButton searchButton = new JButton("Search");
+        searchButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        searchButton.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+        searchButton.setBorder(new LineBorder(new Color(0, 0, 0), 1));
+        searchButton.setBounds(1156, 61, 143, 40);
+        contentPane.add(searchButton);
         
         try {
         	int movieCount = 0;

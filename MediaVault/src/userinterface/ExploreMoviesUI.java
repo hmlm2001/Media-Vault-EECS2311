@@ -81,7 +81,7 @@ public class ExploreMoviesUI extends JFrame {
 		mediaVaultLogo.setBounds(3, 6, 88, 59);
 		navbar.add(mediaVaultLogo);
 		
-		JButton moviesButton = new JButton("MOVIES");
+		JButton moviesButton = new JButton("<html><U>MOVIES</U></html>");
 		moviesButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ExploreMoviesUI frame = new ExploreMoviesUI();
@@ -240,7 +240,7 @@ public class ExploreMoviesUI extends JFrame {
         
         // Animation Movies
         JLabel animationLabel = new JLabel("ANIMATION");
-        animationLabel.setBounds(579, 352, 120, 22);
+        animationLabel.setBounds(583, 352, 120, 22);
         animationLabel.setFont(new Font("Lucida Grande", Font.BOLD, 19));
         animationLabel.setBackground(Color.WHITE);
         mainContent.add(animationLabel);
@@ -273,7 +273,7 @@ public class ExploreMoviesUI extends JFrame {
 		});
         animationLeftButton.setBorder(new LineBorder(new Color(0, 0, 0)));
         animationLeftButton.setBackground(Color.DARK_GRAY);
-        animationLeftButton.setBounds(538, 350, 29, 29);
+        animationLeftButton.setBounds(542, 350, 29, 29);
         mainContent.add(animationLeftButton);
         
         JButton animationRightButton = new JButton(">");
@@ -289,7 +289,7 @@ public class ExploreMoviesUI extends JFrame {
 		});
         animationRightButton.setBorder(new LineBorder(new Color(0, 0, 0)));
         animationRightButton.setBackground(Color.DARK_GRAY);
-        animationRightButton.setBounds(705, 350, 29, 29);
+        animationRightButton.setBounds(709, 350, 29, 29);
         mainContent.add(animationRightButton);
         
         try {

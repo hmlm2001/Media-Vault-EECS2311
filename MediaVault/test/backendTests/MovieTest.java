@@ -35,8 +35,26 @@ class MovieTest {
 	@Test
 	void getTitleTest() {
 		assertEquals("Black Panther: Wakanda Forever", movie1.getTitle());
+	}	
+	
+	@Test
+	void getOverviewTest() {
+		assertEquals("Queen Ramonda, Shuri, M’Baku, Okoye and the Dora Milaje fight to protect their nation from intervening world powers in the wake of King T’Challa’s death.  As the Wakandans strive to embrace their next chapter, the heroes must band together with the help of War Dog Nakia and Everett Ross and forge a new path for the kingdom of Wakanda.", movie1.getOverview());
 	}
 	
+	@Test
+	void getPosterPathTest() {
+		assertEquals("http://image.tmdb.org/t/p/w500/sv1xJUazXeYqALzczSZ3O6nkH75.jpg", movie1.getPosterPath());
+	}
+	
+	@Test
+	void getGenreTest() {
+		assertEquals("Action", movie1.getGenre());
+	}
+	@Test
+	void getRuntimeTest() {
+		assertEquals(162, movie1.getRuntime());
+	}
 //	@Test	
 //	void getTitleTest2() {
 //		assertEquals("Movie2", movie2.getName());
@@ -53,7 +71,7 @@ class MovieTest {
 //	}
 //	
 	@AfterAll
-	void cleanup() {
+	static void cleanup() {
 		UseStub.setStubFlag(false);
 	}
 }

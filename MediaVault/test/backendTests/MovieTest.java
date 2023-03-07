@@ -65,6 +65,11 @@ class MovieTest {
 		assertEquals(Date.valueOf("2022-11-09"), movie1.getReleaseDate());
 	}
 	
+	@Test
+	void getReleaseDateTest2() throws ParseException {
+		assertEquals(dateFormat.parse("2022-11-09"), movie1.getReleaseDate());
+	}
+	
 //	@Test
 //	void getReleaseDateTest2() throws ParseException {
 //		assertEquals(dateFormat.parse("2021-05-02"), movie2.getReleaseDate());

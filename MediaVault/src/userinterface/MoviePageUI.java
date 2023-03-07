@@ -62,26 +62,26 @@ public class MoviePageUI extends JFrame {
 		
 		JLabel releaseAndGenre = new JLabel(movie.getReleaseDate() + " | " + movie.getGenre());
 		releaseAndGenre.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
-		releaseAndGenre.setBounds(399, 70, 383, 31);
+		releaseAndGenre.setBounds(399, 67, 383, 31);
 		releaseAndGenre.setVerticalAlignment(JLabel.TOP);
 		contentPane.add(releaseAndGenre);
 		
 		JLabel runtime = new JLabel(movie.getRuntimeAsString());
 		runtime.setVerticalAlignment(SwingConstants.TOP);
 		runtime.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
-		runtime.setBounds(399, 102, 383, 31);
+		runtime.setBounds(399, 98, 383, 31);
 		contentPane.add(runtime);
 		
 		JLabel overviewLabel = new JLabel("Overview");
 		overviewLabel.setVerticalAlignment(SwingConstants.BOTTOM);
 		overviewLabel.setFont(new Font("Lucida Grande", Font.BOLD, 18));
-		overviewLabel.setBounds(399, 132, 383, 31);
+		overviewLabel.setBounds(399, 123, 383, 31);
 		contentPane.add(overviewLabel);
 		
 		JLabel overview = new JLabel("<html>" + movie.getOverview() + "</html>");
 		overview.setVerticalAlignment(SwingConstants.TOP);
 		overview.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
-		overview.setBounds(399, 167, 383, 292);
+		overview.setBounds(399, 158, 383, 308);
 		contentPane.add(overview);
 		
 		JLabel successPrompt = new JLabel();
@@ -109,7 +109,7 @@ public class MoviePageUI extends JFrame {
 		});
 		addToVaultButton.setOpaque(true);
 		addToVaultButton.setBackground(Color.WHITE);
-		addToVaultButton.setBounds(495, 463, 181, 31);
+		addToVaultButton.setBounds(495, 470, 181, 28);
 		contentPane.add(addToVaultButton);
 		
 	}

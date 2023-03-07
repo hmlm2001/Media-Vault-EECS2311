@@ -16,5 +16,6 @@
 	<classpathentry kind="lib" path="lib/jackson-annotations-2.14.2.jar"/>
 	<classpathentry kind="lib" path="lib/commons-lang3-3.12.0.jar"/>
 	<classpathentry kind="lib" path="lib/mysql-connector-j-8.0.32.jar"/>
+	<classpathentry kind="lib" path="lib/miglayout-4.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

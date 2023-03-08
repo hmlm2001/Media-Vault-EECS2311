@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="15.0.0">
-  <zoom_level>6</zoom_level>
+  <zoom_level>4</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>810</x>
-      <y>642</y>
-      <w>126</w>
-      <h>78</h>
+      <x>756</x>
+      <y>604</y>
+      <w>84</w>
+      <h>52</h>
     </coordinates>
     <panel_attributes>/Media (Abstract)/
 --
@@ -21,10 +21,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>810</x>
-      <y>780</y>
-      <w>126</w>
-      <h>132</h>
+      <x>756</x>
+      <y>696</y>
+      <w>84</w>
+      <h>88</h>
     </coordinates>
     <panel_attributes>Movie
 --
@@ -45,10 +45,10 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>864</x>
-      <y>714</y>
-      <w>18</w>
-      <h>78</h>
+      <x>792</x>
+      <y>652</y>
+      <w>12</w>
+      <h>52</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;110.0</additional_attributes>
@@ -56,10 +56,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>444</x>
-      <y>312</y>
-      <w>228</w>
-      <h>66</h>
+      <x>512</x>
+      <y>384</y>
+      <w>152</w>
+      <h>60</h>
     </coordinates>
     <panel_attributes>Login
 --
@@ -70,10 +70,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>726</x>
-      <y>312</y>
-      <w>258</w>
-      <h>90</h>
+      <x>700</x>
+      <y>384</y>
+      <w>172</w>
+      <h>60</h>
     </coordinates>
     <panel_attributes>Encryption
 --
@@ -87,10 +87,10 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>666</x>
-      <y>342</y>
-      <w>72</w>
-      <h>24</h>
+      <x>660</x>
+      <y>404</y>
+      <w>48</w>
+      <h>16</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 uses</panel_attributes>
@@ -99,10 +99,10 @@ uses</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>360</x>
-      <y>120</y>
-      <w>228</w>
-      <h>66</h>
+      <x>396</x>
+      <y>256</y>
+      <w>152</w>
+      <h>52</h>
     </coordinates>
     <panel_attributes>LoginUI
 --
@@ -116,10 +116,10 @@ uses</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>768</x>
-      <y>456</y>
-      <w>192</w>
-      <h>138</h>
+      <x>728</x>
+      <y>480</y>
+      <w>128</w>
+      <h>92</h>
     </coordinates>
     <panel_attributes>User
 --
@@ -141,10 +141,10 @@ uses</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>774</x>
-      <y>978</y>
-      <w>186</w>
-      <h>84</h>
+      <x>732</x>
+      <y>828</y>
+      <w>124</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>MediaCollection
 --
@@ -161,22 +161,22 @@ uses</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>540</x>
-      <y>372</y>
-      <w>240</w>
-      <h>162</h>
+      <x>576</x>
+      <y>440</y>
+      <w>160</w>
+      <h>92</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 uses</panel_attributes>
-    <additional_attributes>380.0;250.0;260.0;250.0;260.0;40.0;10.0;40.0;10.0;10.0</additional_attributes>
+    <additional_attributes>380.0;210.0;10.0;210.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>870</x>
-      <y>906</y>
-      <w>36</w>
-      <h>84</h>
+      <x>796</x>
+      <y>780</y>
+      <w>24</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 uses</panel_attributes>
@@ -185,75 +185,39 @@ uses</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>450</x>
-      <y>432</y>
-      <w>198</w>
-      <h>84</h>
-    </coordinates>
-    <panel_attributes>AllMedia
---
--MediaMap:HashMap&lt;String:name,Media:media&gt;
---
-+searchMedia(name:String):Media
--updateMediaMap()
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>1044</x>
-      <y>612</y>
-      <w>228</w>
-      <h>84</h>
+      <x>928</x>
+      <y>584</y>
+      <w>152</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>LoginDB
 --
 -logins:HashMap&lt;String,String&gt;
--instance:LoginDB
 --
--loginDB()	
--getInstance():LoginDB
 +newAccount(String:username,String:password):bool
-+verifyLogin(String:username,String:password):bool</panel_attributes>
++verifyLogin(String:username,String:password):bool
++createStubLogins():void</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>978</x>
-      <y>354</y>
-      <w>78</w>
-      <h>318</h>
+      <x>868</x>
+      <y>412</y>
+      <w>68</w>
+      <h>212</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 uses</panel_attributes>
-    <additional_attributes>110.0;510.0;80.0;510.0;80.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>150.0;510.0;50.0;510.0;50.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>84</x>
-      <y>120</y>
-      <w>228</w>
-      <h>66</h>
-    </coordinates>
-    <panel_attributes>ExploreUI
---
-contentPane:JPanel
--mv_logo:Image
--user_icon:Image
---
-+Explore()</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>630</x>
-      <y>120</y>
-      <w>228</w>
-      <h>78</h>
+      <x>572</x>
+      <y>256</y>
+      <w>152</w>
+      <h>52</h>
     </coordinates>
     <panel_attributes>SignUpUI
 --
@@ -266,24 +230,12 @@ contentPane:JPanel
     <additional_attributes/>
   </element>
   <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>306</x>
-      <y>144</y>
-      <w>66</w>
-      <h>24</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-
-uses</panel_attributes>
-    <additional_attributes>10.0;20.0;90.0;20.0</additional_attributes>
-  </element>
-  <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>444</x>
-      <y>0</y>
-      <w>60</w>
-      <h>18</h>
+      <x>336</x>
+      <y>100</y>
+      <w>40</w>
+      <h>12</h>
     </coordinates>
     <panel_attributes>JFrame</panel_attributes>
     <additional_attributes/>
@@ -291,43 +243,32 @@ uses</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>468</x>
-      <y>12</y>
-      <w>18</w>
-      <h>120</h>
+      <x>352</x>
+      <y>108</y>
+      <w>128</w>
+      <h>156</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;180.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;290.0;300.0;290.0;300.0;370.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>192</x>
-      <y>12</y>
-      <w>288</w>
-      <h>120</h>
+      <x>352</x>
+      <y>108</y>
+      <w>304</w>
+      <h>156</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>460.0;10.0;10.0;180.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>480</x>
-      <y>12</y>
-      <w>276</w>
-      <h>120</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;440.0;180.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;290.0;740.0;290.0;740.0;370.0</additional_attributes>
   </element>
   <element>
     <id>UMLPackage</id>
     <coordinates>
       <x>0</x>
-      <y>0</y>
-      <w>954</w>
-      <h>246</h>
+      <y>72</y>
+      <w>1444</w>
+      <h>288</h>
     </coordinates>
     <panel_attributes>userinterface
 --
@@ -337,10 +278,10 @@ bg=green</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>402</x>
-      <y>276</y>
-      <w>618</w>
-      <h>828</h>
+      <x>496</x>
+      <y>368</y>
+      <w>412</w>
+      <h>552</h>
     </coordinates>
     <panel_attributes>backend
 --
@@ -350,10 +291,10 @@ bg=orange</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>1032</x>
-      <y>552</y>
-      <w>624</w>
-      <h>372</h>
+      <x>916</x>
+      <y>484</y>
+      <w>416</w>
+      <h>336</h>
     </coordinates>
     <panel_attributes>presistance
 --
@@ -363,10 +304,10 @@ bg=blue</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1044</x>
-      <y>828</y>
-      <w>228</w>
-      <h>66</h>
+      <x>928</x>
+      <y>728</y>
+      <w>152</w>
+      <h>44</h>
     </coordinates>
     <panel_attributes>MediaCollectionDB
 --
@@ -379,10 +320,10 @@ bg=blue</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1044</x>
-      <y>774</y>
-      <w>228</w>
-      <h>36</h>
+      <x>928</x>
+      <y>692</y>
+      <w>152</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>MovieDB
 --
@@ -392,10 +333,10 @@ bg=blue</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1044</x>
-      <y>720</y>
-      <w>228</w>
-      <h>36</h>
+      <x>928</x>
+      <y>656</y>
+      <w>152</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>UserDB
 --
@@ -405,10 +346,10 @@ bg=blue</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1380</x>
-      <y>744</y>
-      <w>228</w>
-      <h>54</h>
+      <x>1136</x>
+      <y>672</y>
+      <w>152</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>JDBC_Connection
 --
@@ -419,97 +360,414 @@ bg=blue</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>684</x>
-      <y>552</y>
-      <w>96</w>
-      <h>474</h>
+      <x>672</x>
+      <y>544</y>
+      <w>68</w>
+      <h>316</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 uses</panel_attributes>
-    <additional_attributes>140.0;770.0;10.0;770.0;10.0;10.0;140.0;10.0</additional_attributes>
+    <additional_attributes>150.0;770.0;10.0;770.0;10.0;10.0;140.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>954</x>
-      <y>510</y>
-      <w>102</w>
-      <h>246</h>
+      <x>852</x>
+      <y>516</y>
+      <w>84</w>
+      <h>164</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 uses</panel_attributes>
-    <additional_attributes>150.0;390.0;80.0;390.0;80.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>190.0;390.0;40.0;390.0;40.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>930</x>
-      <y>774</y>
-      <w>126</w>
-      <h>54</h>
+      <x>836</x>
+      <y>692</y>
+      <w>100</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 uses</panel_attributes>
-    <additional_attributes>190.0;20.0;60.0;20.0;60.0;70.0;10.0;70.0</additional_attributes>
+    <additional_attributes>230.0;20.0;60.0;20.0;60.0;70.0;10.0;70.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>954</x>
-      <y>858</y>
-      <w>102</w>
-      <h>174</h>
+      <x>852</x>
+      <y>748</y>
+      <w>84</w>
+      <h>116</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 uses</panel_attributes>
-    <additional_attributes>150.0;10.0;50.0;10.0;50.0;270.0;10.0;270.0</additional_attributes>
+    <additional_attributes>190.0;10.0;50.0;10.0;50.0;270.0;10.0;270.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1266</x>
-      <y>642</y>
-      <w>126</w>
-      <h>120</h>
+      <x>1076</x>
+      <y>604</y>
+      <w>68</w>
+      <h>88</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 uses</panel_attributes>
-    <additional_attributes>190.0;180.0;120.0;180.0;120.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>150.0;200.0;80.0;200.0;80.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1266</x>
-      <y>726</y>
-      <w>126</w>
-      <h>48</h>
+      <x>1076</x>
+      <y>660</y>
+      <w>68</w>
+      <h>32</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 uses</panel_attributes>
-    <additional_attributes>190.0;60.0;60.0;60.0;60.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>150.0;60.0;20.0;60.0;20.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1266</x>
-      <y>768</y>
-      <w>126</w>
+      <x>1076</x>
+      <y>680</y>
+      <w>68</w>
       <h>24</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 uses</panel_attributes>
-    <additional_attributes>190.0;10.0;150.0;10.0;150.0;20.0;10.0;20.0</additional_attributes>
+    <additional_attributes>150.0;10.0;70.0;10.0;70.0;40.0;10.0;40.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1266</x>
-      <y>780</y>
-      <w>126</w>
-      <h>78</h>
+      <x>1076</x>
+      <y>680</y>
+      <w>68</w>
+      <h>68</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 uses</panel_attributes>
-    <additional_attributes>190.0;10.0;90.0;10.0;90.0;110.0;10.0;110.0</additional_attributes>
+    <additional_attributes>150.0;10.0;110.0;10.0;110.0;60.0;50.0;60.0;50.0;150.0;10.0;150.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>928</x>
+      <y>520</y>
+      <w>152</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>AllMoviesDB
+--
+-movieList:ArrayList&lt;Movie&gt; 
+--
++AllMoviesDB()	
+-updateMovieList()
++contains(movieDuplicate:Movie):boolean
++get(index:int):Movie
++size():int</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>904</x>
+      <y>340</y>
+      <w>32</w>
+      <h>228</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+uses</panel_attributes>
+    <additional_attributes>60.0;550.0;10.0;550.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>904</x>
+      <y>252</y>
+      <w>152</w>
+      <h>92</h>
+    </coordinates>
+    <panel_attributes>ExploreMoviesUI
+--
+-contentPane:JPanel
+-allMovies:AllMoviesDB
+-searchbar:MyTextField
+-menu:JPopupMenu
+-search:PanelSearch
+--
++ExploreMoviesUI()
+-createMoviePoster(img:, x:int, y:int):JLabel
+-createMovieLabel(title:String, x:int, y:int):JLabel
+-txtSearchMouseClicked(evt:java.awt.event.MouseEvent):
+-txtSearchKeyReleased(evt:java.awt.event.KeyEvent):
+-search(search:String):List&lt;Movie&gt; </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>352</x>
+      <y>108</y>
+      <w>636</w>
+      <h>152</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;290.0;1570.0;290.0;1570.0;360.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>924</x>
+      <y>0</y>
+      <w>152</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>MediaVault
+--
+main(args:String[]):</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>52</x>
+      <y>256</y>
+      <w>152</w>
+      <h>52</h>
+    </coordinates>
+    <panel_attributes>MoviePageUI
+--
+-contentPane:JPanel
+--
++MoviePageUI(movie:Movie)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>140</x>
+      <y>108</y>
+      <w>224</w>
+      <h>156</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>540.0;10.0;540.0;290.0;10.0;290.0;10.0;370.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>544</x>
+      <y>272</y>
+      <w>36</w>
+      <h>16</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+uses</panel_attributes>
+    <additional_attributes>10.0;20.0;70.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1192</x>
+      <y>196</y>
+      <w>148</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+EventClick
+--
++itemClick(movie:Movie)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1072</x>
+      <y>156</y>
+      <w>76</w>
+      <h>12</h>
+    </coordinates>
+    <panel_attributes>MouesAdapter</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1036</x>
+      <y>192</y>
+      <w>148</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>MyMouesAdapter
+--
+-movieId:int
+--
++MyMouseAdapter(id:int)
++mouseClicked(e:MouseEvent):</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>736</x>
+      <y>256</y>
+      <w>148</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>SearchItem
+--
+-eventClick:ActionListener
+-lbIcon:javax.swing.JLabel
+-lbText:javax.swing.JLabel
+--
++SearchItem(movie:Movie)
+-setMovie(movie:Movie):
+-addEventMouse(com:Component):
++addEvent(eventClick:ActionListener):
+-initComponents():
++lbTextMouseClicked(evt:MouseEvent):
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>352</x>
+      <y>108</y>
+      <w>464</w>
+      <h>156</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;290.0;1140.0;290.0;1140.0;370.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1052</x>
+      <y>220</y>
+      <w>240</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+uses</panel_attributes>
+    <additional_attributes>10.0;200.0;580.0;200.0;580.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1104</x>
+      <y>164</y>
+      <w>12</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1052</x>
+      <y>224</y>
+      <w>64</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+uses</panel_attributes>
+    <additional_attributes>10.0;190.0;110.0;190.0;110.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>228</x>
+      <y>256</y>
+      <w>152</w>
+      <h>52</h>
+    </coordinates>
+    <panel_attributes>MediaCollectionUI
+--
+-contentPane:JPanel
+-mv_logo:Image
+-user:User
+--
++MediaCollectionUI()
+-addMediaButtons(panel:JPanel):
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>284</x>
+      <y>108</y>
+      <w>80</w>
+      <h>156</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>180.0;10.0;180.0;290.0;10.0;290.0;10.0;370.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>576</x>
+      <y>304</y>
+      <w>68</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+uses</panel_attributes>
+    <additional_attributes>10.0;200.0;10.0;90.0;150.0;90.0;150.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>492</x>
+      <y>304</y>
+      <w>96</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+uses</panel_attributes>
+    <additional_attributes>220.0;200.0;220.0;90.0;10.0;90.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>292</x>
+      <y>304</y>
+      <w>448</w>
+      <h>556</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+uses</panel_attributes>
+    <additional_attributes>1100.0;1370.0;870.0;1370.0;860.0;610.0;670.0;610.0;670.0;420.0;10.0;420.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>880</x>
+      <y>288</y>
+      <w>32</w>
+      <h>16</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+uses</panel_attributes>
+    <additional_attributes>10.0;20.0;60.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>96</x>
+      <y>304</y>
+      <w>668</w>
+      <h>456</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+uses</panel_attributes>
+    <additional_attributes>1650.0;1120.0;860.0;1120.0;860.0;520.0;10.0;520.0;10.0;10.0</additional_attributes>
   </element>
 </diagram>

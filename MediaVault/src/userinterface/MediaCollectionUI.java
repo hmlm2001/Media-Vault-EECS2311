@@ -2,6 +2,10 @@ package userinterface;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -13,10 +17,15 @@ import java.awt.Cursor;
 
 import javax.swing.border.EmptyBorder;
 
-
+import backend.Movie;
+import backend.UseStub;
+import backend.User;
+import persistence.MediaCollectionDB;
+import persistence.UserDB;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -33,7 +42,7 @@ public class MediaCollectionUI  extends JFrame{
 	private JPanel contentPane;
 	private Image mv_logo = new ImageIcon(getClass().getResource("/images/logos/mv-logo-white-with-text-no-bg.png")).getImage().getScaledInstance(110, 110, Image.SCALE_SMOOTH);
 	private Image user_icon = new ImageIcon(getClass().getResource("/images/icons/user-icon.png")).getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
-	private backend.User user;
+	private User user;
 	
 	public MediaCollectionUI () {
 		setTitle("MediaVault");
@@ -138,13 +147,16 @@ public class MediaCollectionUI  extends JFrame{
 		layeredPane.add(WatchListVault);
 		
 		JPanel panel = new JPanel();
+		layeredPane.setLayer(panel, 1);
+		panel.setForeground(new Color(192, 192, 192));
 		panel.setBackground(new Color(31, 31, 31));
-		panel.setBounds(0, 37, 1290, 600);
-		layeredPane.add(panel);
+		panel.setBounds(0, 37, 1, 1000);
 		
+		System.out.println("before add");
 		addMediaButtons(panel);
-		panel.setLayout(new GridLayout(1, 0, 0, 0));
-		
+		System.out.println("after add");
+		panel.setLayout(new GridLayout(0, 3 , 20, 20));
+		//layeredPane.add(panel);
 		
 //		JButton CompletedVault = new JButton("Completed");
 //		CompletedVault.setHorizontalAlignment(SwingConstants.LEFT);
@@ -154,9 +166,9 @@ public class MediaCollectionUI  extends JFrame{
 //		CompletedVault.setBounds(0, 200, 1282, 37);
 //		layeredPane.add(CompletedVault);
 //		
-//		JScrollPane scrollPane_1 = new JScrollPane();
-//		scrollPane_1.setBounds(0, 200, 1284, 200);
-//		layeredPane.add(scrollPane_1);
+		JScrollPane scrollPane_1 = new JScrollPane(panel);
+		scrollPane_1.setBounds(0, 37, 1284, 600);
+		layeredPane.add(scrollPane_1);
 //		
 //		JButton InProgressVault = new JButton("In progress");
 //		InProgressVault.setHorizontalAlignment(SwingConstants.LEFT);
@@ -173,15 +185,48 @@ public class MediaCollectionUI  extends JFrame{
 	}
 	
 	private void addMediaButtons(JPanel panel ) {
-		ArrayList<backend.Media> mediaCollection = user.getMediaList();
-		//ArrayList<JButton> buttons = new ArrayList<JButton>();
-		JButton mediaButton = null; 
-		for(backend.Media media: mediaCollection)
-			mediaButton = new JButton(media.getName());
-			panel.add(mediaButton);
-			//mediaButton.setIcon(null);
-			//buttons.add();
+		//Image movieIcon;
+		Movie movie;
+		UseStub.setStubFlag(true);
+		//user = new User("UIuser");
+		//ArrayList<backend.Media> mediaCollection = user.getMediaList();
+		int userid = UserDB.getId("user3");
+		int collectionid = MediaCollectionDB.getMediaCollectionId(userid);
+		ArrayList<backend.Media> mediaCollection =MediaCollectionDB.getMediaCollection( collectionid);
 		
-		//return null;
+		JButton mediaButton; 
+		URL url;
+		BufferedImage c;
+		
+		System.out.println(mediaCollection.size());
+		System.out.println("inside addmediaButtons");
+		for(backend.Media media: mediaCollection) {
+			
+			mediaButton = new JButton(media.getTitle());
+			
+			System.out.println(media.getId());
+			movie = new Movie(media.getId());
+			//movieIcon = new ImageIcon(getClass().getResource(movie.getPosterPath())).getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+			System.out.println("inside forloop");
+			
+			
+			try {				
+				url = new URL(movie.getPosterPath());
+				c = ImageIO.read(url);
+				//mediaButton.setIcon(new ImageIcon(c));
+				mediaButton.setIcon(new ImageIcon(c.getScaledInstance(250, 375, 0)));
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+			}
+			
+			mediaButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			mediaButton.setBackground(Color.DARK_GRAY);
+			mediaButton.setSize(200, 375);
+			mediaButton.setBorder(null);
+			panel.add(mediaButton);
+			
+		}
+	
 	}
 }

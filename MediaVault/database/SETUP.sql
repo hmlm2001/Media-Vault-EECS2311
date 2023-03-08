@@ -33,7 +33,7 @@ CREATE TABLE mediarelations (
 CREATE TABLE allmovies (
 	id INT NOT NULL,
     title VARCHAR(255),
-    releaseDate Date,
+    releaseDate VARCHAR(20),
     overview VARCHAR(900),
     posterPath VARCHAR(100),
     genre VARCHAR(50),

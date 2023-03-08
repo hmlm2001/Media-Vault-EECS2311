@@ -166,7 +166,7 @@ public class MediaCollectionUI  extends JFrame{
 	
 	}
 	
-	@SuppressWarnings("deprecation")
+	
 	private void addMediaButtons(JPanel panel ) {
 		
 		Movie movie;
@@ -196,15 +196,17 @@ public class MediaCollectionUI  extends JFrame{
 				url = new URL(movie.getPosterPath());
 				c = ImageIO.read(url);
 				mediaButton.setIcon(new ImageIcon(c.getScaledInstance(350, 470, 0)));
-				//mediaButton.setIcon(new ImageIcon(c));
+				
 			} catch (Exception e) {
 				
 				e.printStackTrace();
 			}
+			//mediaButton.addActionListener(new MyMouseAdapter(media.getId()) {
+				
+			
 			mediaButton.setText(null);
 			mediaButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			mediaButton.setBackground(Color.black);
-			//mediaButton.setSize(100, 275);
 			mediaButton.setBorder(null);
 			panel.add(mediaButton);
 			

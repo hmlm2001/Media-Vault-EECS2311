@@ -18,6 +18,5 @@ public class Login {
 	 */
 	public static boolean login(String username, String password) {
 		return Encryption.encryptVerifyLogin(username, password);
-		
 	}
 }

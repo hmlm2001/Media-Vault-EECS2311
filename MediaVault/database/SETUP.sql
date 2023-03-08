@@ -22,15 +22,12 @@ CREATE TABLE logins (
 CREATE TABLE mediacollections (
 	id INT NOT NULL AUTO_INCREMENT,
     userID INT NOT NULL,
-    FOREIGN KEY (userID) REFERENCES users(userID),
     PRIMARY KEY (id)
 );
 
 CREATE TABLE mediarelations (
-	mediaID INT NOT NULL AUTO_INCREMENT,
-    mediaCollectionID INT NOT NULL,
-    FOREIGN KEY (mediaCollectionID) REFERENCES mediacollections(id),
-    PRIMARY KEY (mediaID)
+	mediaID INT NOT NULL,
+    mediaCollectionID INT NOT NULL
 );
 
 CREATE TABLE allmovies (
@@ -44,6 +41,15 @@ CREATE TABLE allmovies (
     PRIMARY KEY(id)
 );
 
+INSERT INTO users(username) VALUES
+('user1'),('user2'),('user3'),('user4'),('user5'),('user6'),('user7'),('user8'),
+('user9'),('user10'),('user11');
+
+INSERT INTO mediacollections(userid) VALUES 
+(1), (2), (3), (4);
+
+INSERT INTO mediarelations(mediacollectionid, mediaid) VALUES
+(1, 631842), (1, 505642), (2, 631842), (3, 631842), (4, 631842), (4,19995);
 
 INSERT INTO logins(usernameEnc,passwordEnc) VALUES
 ('9ec62c20118ff506dac139ec30a521d12b9883e55da92b7d9adeefe09ed4e0bd152e2a099339871424263784f8103391f83b781c432f45eccb03e18e28060d2f','fb131bc57a477c8c9d068f1ee5622ac304195a77164ccc2d75d82dfe1a727ba8d674ed87f96143b2b416aacefb555e3045c356faa23e6d21de72b85822e39fdd'),

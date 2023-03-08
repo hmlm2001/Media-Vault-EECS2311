@@ -2,26 +2,44 @@ package persistence;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 
-public class LoginDB {
+import backend.UseStub;
+import backend.User;
+
+public class LoginDB{
+	static HashMap<String, String> logins;
 	/**
 	 * Add new user into logins if the username is not already taken
 	 * @param username the username encrypted to be stored (as the key to the password)
 	 * @param password the password encrypted
 	 * @return true if operation is successful
 	 */
-	public static boolean newAccount(String username, String password) {
-		ResultSet result;
-		result = JDBC_Connection.getResult("SELECT * FROM logins WHERE usernameEnc='"+username+"';");
-		try {
-			while (result.next()) {
-				if(username.compareTo(result.getString(1))==0) return false;
+	public static boolean newAccount(String username, String password, String unEncUser) {
+		if (!UseStub.getStubFlag()) { //if it needs to use the DB
+			ResultSet result;
+			result = JDBC_Connection.getResult("SELECT * FROM logins WHERE usernameEnc='"+username+"';");
+			try {
+				while (result.next()) {
+					if(username.compareTo(result.getString(1))==0) return false; //checks if user exists
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+			JDBC_Connection.execute("INSERT INTO logins(usernameEnc,passwordEnc) VALUES ('"+username+"','"+password+"');");
+			JDBC_Connection.execute("INSERT INTO users(username) VALUES ('"+username+")"); //if users doesn't exist then create a login and a user
+			return true;
+		} else { // if it needs to use the Stub DB
+			if (logins==null) LoginDB.createStubLogins(); //create stub if it hasnt been created
+			if (logins.containsKey(username)) { //if a user doesnt exists
+				return false;
+			} else { //if user exists
+				logins.put(username,password); //put the new user and create User
+				new User(unEncUser);
+				return true;
+			}
 		}
-		JDBC_Connection.execute("INSERT INTO logins(usernameEnc,passwordEnc) VALUES ('"+username+"','"+password+"');");
-		return true;
 	}
 	/**
 	 * Check if the provided username and password match the ones on record
@@ -30,15 +48,34 @@ public class LoginDB {
 	 * @return true if the username and password combo match the ones on file, false otherwise 
 	 */
 	public static boolean verifyLogin(String username, String password) {
-		ResultSet result;
-		result = JDBC_Connection.getResult("SELECT * FROM logins WHERE usernameEnc='"+username+"';");
-		try {
-			while (result.next()) {
-				return result.getString(2).compareTo(password)==0;
+		if (!UseStub.getStubFlag()) { //if it needs to use DB, then do the below
+			ResultSet result;
+			result = JDBC_Connection.getResult("SELECT * FROM logins WHERE usernameEnc='"+username+"';");
+			try {
+				while (result.next()) {
+					return result.getString(2).compareTo(password)==0; //checks the password of the gotten username
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} else {	//if it needs to use the stub DB then do the below
+			if (logins==null) LoginDB.createStubLogins(); //checks if the stub has already been created
+			if (logins.get(username)==null) return false; //if a username doesn't exist
+			if (logins.get(username).compareTo(password)==0) return true; //if the user and exists and the password matches
 		}
 		return false;
+	}
+	/**
+	 * Creates stub database with login username password pairs:
+	 * user1, 111
+	 * user2, 222
+	 * user3, 333
+	 * NOTE: They are encrypted and thus they have to put into hardcode
+	 */
+	private static void createStubLogins() {
+		logins=new HashMap<String,String>();
+		logins.put("9ec62c20118ff506dac139ec30a521d12b9883e55da92b7d9adeefe09ed4e0bd152e2a099339871424263784f8103391f83b781c432f45eccb03e18e28060d2f", "fb131bc57a477c8c9d068f1ee5622ac304195a77164ccc2d75d82dfe1a727ba8d674ed87f96143b2b416aacefb555e3045c356faa23e6d21de72b85822e39fdd");
+		logins.put("291116775902b38dd09587ad6235cec503fc14dbf9c09cad761f2e5a5755102eaceb54b95ffd179c22652c3910dbc6ed85ddde7e09eef1ecf3ad219225f509f5", "5f28f24f5520230fd1e66ea6ac649e9f9637515f516b2ef74fc90622b60f165eafca8f34db8471b85b9b4a2cdf72f75099ae0eb8860c4f339252261778d406eb");
+		logins.put("8ac4145c8e388ddfe3cd94886f026260d917cab07903c533f3a26945019bc4a50e6f23f266acbb0cbae89130fa3242c9a5145e4218c3ef1deebccb58d1a64a43", "5e3155774d39d97c5f9e17c108c2b3e0485a43ae34ebd196f61a6f8bf732ef71a49e5710594cfc7391db114edf99f5da3ed96ef1d6ca5e598e85f91bd41e7eeb");
 	}
 }

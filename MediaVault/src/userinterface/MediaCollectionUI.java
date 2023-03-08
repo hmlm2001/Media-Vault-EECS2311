@@ -17,6 +17,7 @@ import java.awt.Cursor;
 
 import javax.swing.border.EmptyBorder;
 
+import backend.MediaCollection;
 import backend.Movie;
 import backend.UseStub;
 import backend.User;
@@ -132,7 +133,7 @@ public class MediaCollectionUI  extends JFrame{
 		layeredPane.setBounds(0, 61, 1280, 600);
 		contentPane.add(layeredPane);
 		
-		JButton WatchListVault = new JButton("   WatchList");
+		JButton WatchListVault = new JButton("   VAULT");
 		WatchListVault.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -143,7 +144,7 @@ public class MediaCollectionUI  extends JFrame{
 		WatchListVault.setFont(new Font("Georgia", Font.BOLD, 22));
 		WatchListVault.setBackground(new Color(31, 31, 31));
 		WatchListVault.setBorder(null);
-		WatchListVault.setBounds(0, 0, 1282, 48);
+		WatchListVault.setBounds(0, 0, 1282, 73);
 		layeredPane.add(WatchListVault);
 		
 		JPanel panel = new JPanel();
@@ -155,74 +156,55 @@ public class MediaCollectionUI  extends JFrame{
 		System.out.println("before add");
 		addMediaButtons(panel);
 		System.out.println("after add");
-		panel.setLayout(new GridLayout(0, 3 , 20, 20));
+		//panel.setLayout(new GridLayout(0, 3 , 20, 20));
+		panel.setLayout(new FlowLayout());
 		//layeredPane.add(panel);
-		
-//		JButton CompletedVault = new JButton("Completed");
-//		CompletedVault.setHorizontalAlignment(SwingConstants.LEFT);
-//		CompletedVault.setForeground(Color.BLACK);
-//		CompletedVault.setFont(new Font("Dialog", Font.BOLD, 22));
-//		CompletedVault.setBackground(Color.LIGHT_GRAY);
-//		CompletedVault.setBounds(0, 200, 1282, 37);
-//		layeredPane.add(CompletedVault);
-//		
+	
 		JScrollPane scrollPane_1 = new JScrollPane(panel);
-		scrollPane_1.setBounds(0, 37, 1284, 600);
+		scrollPane_1.setBounds(0, 70, 1284, 600);
 		layeredPane.add(scrollPane_1);
-//		
-//		JButton InProgressVault = new JButton("In progress");
-//		InProgressVault.setHorizontalAlignment(SwingConstants.LEFT);
-//		InProgressVault.setForeground(Color.BLACK);
-//		InProgressVault.setFont(new Font("Dialog", Font.BOLD, 22));
-//		InProgressVault.setBackground(Color.LIGHT_GRAY);
-//		InProgressVault.setBounds(0, 400, 1282, 37);
-//		layeredPane.add(InProgressVault);
-//		
-//		JScrollPane scrollPane_2 = new JScrollPane();
-//		scrollPane_2.setBounds(0, 400, 1284, 200);
-//		layeredPane.add(scrollPane_2);
-		
+	
 	}
 	
+	@SuppressWarnings("deprecation")
 	private void addMediaButtons(JPanel panel ) {
-		//Image movieIcon;
-		Movie movie;
-		UseStub.setStubFlag(true);
-		//user = new User("UIuser");
-		//ArrayList<backend.Media> mediaCollection = user.getMediaList();
-		int userid = UserDB.getId("user3");
-		int collectionid = MediaCollectionDB.getMediaCollectionId(userid);
-		ArrayList<backend.Media> mediaCollection =MediaCollectionDB.getMediaCollection( collectionid);
 		
+		Movie movie;
+		UseStub.setStubFlag(false);
+		// for when it is connected
+		//int id = this.user.getId();
+		//MediaCollection collection = new MediaCollection(id);
+		
+		MediaCollection collection = new MediaCollection(4);
+		ArrayList<backend.Media> mediaList = collection.getMediaList();
 		JButton mediaButton; 
 		URL url;
 		BufferedImage c;
 		
-		System.out.println(mediaCollection.size());
+		System.out.println(mediaList.size());
 		System.out.println("inside addmediaButtons");
-		for(backend.Media media: mediaCollection) {
+		for(backend.Media media: mediaList) {
 			
 			mediaButton = new JButton(media.getTitle());
 			
 			System.out.println(media.getId());
 			movie = new Movie(media.getId());
-			//movieIcon = new ImageIcon(getClass().getResource(movie.getPosterPath())).getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
 			System.out.println("inside forloop");
 			
 			
 			try {				
 				url = new URL(movie.getPosterPath());
 				c = ImageIO.read(url);
+				mediaButton.setIcon(new ImageIcon(c.getScaledInstance(350, 470, 0)));
 				//mediaButton.setIcon(new ImageIcon(c));
-				mediaButton.setIcon(new ImageIcon(c.getScaledInstance(250, 375, 0)));
 			} catch (Exception e) {
 				
 				e.printStackTrace();
 			}
-			
+			mediaButton.setText(null);
 			mediaButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			mediaButton.setBackground(Color.DARK_GRAY);
-			mediaButton.setSize(200, 375);
+			mediaButton.setBackground(Color.black);
+			//mediaButton.setSize(100, 275);
 			mediaButton.setBorder(null);
 			panel.add(mediaButton);
 			

@@ -43,7 +43,7 @@ import java.awt.FlowLayout;
 import javax.swing.JLayeredPane;
 
 @SuppressWarnings("serial")
-public class MediaCollectionUI  extends JFrame{
+public class VaultUI  extends JFrame{
 	private JPanel contentPane;
 	private MyTextField searchbar;
 	private User user;
@@ -51,7 +51,7 @@ public class MediaCollectionUI  extends JFrame{
     private PanelSearch search;
     private AllMoviesDB allMovies;
 	
-	public MediaCollectionUI () {
+	public VaultUI () {
 		allMovies = new AllMoviesDB();
 		setTitle("MediaVault");
 		setResizable(false);
@@ -111,7 +111,7 @@ public class MediaCollectionUI  extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MediaCollectionUI frame = new MediaCollectionUI();
+				VaultUI frame = new VaultUI();
 				frame.setLocationRelativeTo(null);
 				frame.setVisible(true);
 			}
@@ -140,7 +140,7 @@ public class MediaCollectionUI  extends JFrame{
 				LoginUI frame = new LoginUI();
 				frame.setLocationRelativeTo(null);
 				frame.setVisible(true);
-				MediaCollectionUI.this.dispose();
+				VaultUI.this.dispose();
 			}
 		});
 		logOutButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

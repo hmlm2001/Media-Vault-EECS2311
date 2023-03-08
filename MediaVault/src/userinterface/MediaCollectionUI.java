@@ -3,16 +3,12 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Cursor;
 
 import javax.swing.border.EmptyBorder;
@@ -23,20 +19,17 @@ import backend.UseStub;
 import backend.User;
 import persistence.MediaCollectionDB;
 import persistence.UserDB;
+import userinterface.swing.MyMouseAdapter;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.imageio.ImageIO;
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Font;
 import javax.swing.JScrollPane;
 import java.awt.FlowLayout;
-import javax.swing.JTextField;
 import javax.swing.JLayeredPane;
-import java.awt.GridLayout;
 
 @SuppressWarnings("serial")
 public class MediaCollectionUI  extends JFrame{
@@ -153,9 +146,7 @@ public class MediaCollectionUI  extends JFrame{
 		panel.setBackground(new Color(31, 31, 31));
 		panel.setBounds(0, 37, 1, 1000);
 		
-		System.out.println("before add");
 		addMediaButtons(panel);
-		System.out.println("after add");
 		//panel.setLayout(new GridLayout(0, 3 , 20, 20));
 		panel.setLayout(new FlowLayout());
 		//layeredPane.add(panel);
@@ -181,15 +172,12 @@ public class MediaCollectionUI  extends JFrame{
 		URL url;
 		BufferedImage c;
 		
-		System.out.println(mediaList.size());
-		System.out.println("inside addmediaButtons");
 		for(backend.Media media: mediaList) {
 			
 			mediaButton = new JButton(media.getTitle());
 			
 			System.out.println(media.getId());
 			movie = new Movie(media.getId());
-			System.out.println("inside forloop");
 			
 			
 			try {				
@@ -201,7 +189,7 @@ public class MediaCollectionUI  extends JFrame{
 				
 				e.printStackTrace();
 			}
-			//mediaButton.addActionListener(new MyMouseAdapter(media.getId()) {
+			mediaButton.addMouseListener(new MyMouseAdapter(media.getId()));
 				
 			
 			mediaButton.setText(null);

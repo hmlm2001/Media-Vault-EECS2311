@@ -3,7 +3,7 @@ package userinterface.swing;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import persistence.MovieDuplicate;
+import backend.*;
 import userinterface.MoviePageUI;
 
 /**
@@ -24,7 +24,7 @@ public class MyMouseAdapter extends MouseAdapter {
 	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		MoviePageUI frame = new MoviePageUI(new MovieDuplicate(movieId));
+		MoviePageUI frame = new MoviePageUI(new Movie(movieId));
     	frame.setLocationRelativeTo(null);
     	frame.toFront();
     	frame.requestFocus();

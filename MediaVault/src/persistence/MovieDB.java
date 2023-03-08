@@ -1,9 +1,6 @@
 package persistence;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
-
-import backend.Movie;
 
 public class MovieDB {
 	/**

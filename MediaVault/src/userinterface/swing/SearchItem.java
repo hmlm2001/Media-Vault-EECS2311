@@ -2,7 +2,6 @@ package userinterface.swing;
 
 import java.awt.Color;
 import javax.swing.JPanel;
-import persistence.*;
 import java.awt.Component;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -10,6 +9,8 @@ import java.awt.event.MouseEvent;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
+import backend.Movie;
 
 /**
  *
@@ -21,19 +22,19 @@ public class SearchItem extends JPanel {
 	 * This constructor initializes the search item and adds the given movie to the search list
 	 * @param movieDuplicate - movie to be used
 	 */
-    public SearchItem(MovieDuplicate movieDuplicate) {
+    public SearchItem(Movie movie) {
         initComponents();
-        setMovie(movieDuplicate);
+        setMovie(movie);
     }
 
     /**
      * Sets the text on each search item to the title of a movie
      * @param movieDuplicate - movie to be used
      */
-    private void setMovie(MovieDuplicate movieDuplicate) {
+    private void setMovie(Movie movie) {
         addEventMouse(this);
         addEventMouse(lbText);
-        lbText.setText(movieDuplicate.getTitle());
+        lbText.setText(movie.getTitle());
     }
 
     /**

@@ -2,10 +2,11 @@ package persistence;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import backend.*;
 import java.util.ArrayList;
 
 public class AllMoviesDB {
-	private ArrayList<MovieDuplicate> movieList;
+	private ArrayList<Movie> movieList;
 	
 	/**
 	 * Constructor for the class initializes the ArrayList then updates it.
@@ -24,19 +25,19 @@ public class AllMoviesDB {
 		result = JDBC_Connection.getResult("SELECT id FROM allmovies;");
 		try {
 			while (result.next()) {
-				MovieDuplicate movieDuplicate = new MovieDuplicate(result.getInt("id"));
-				this.movieList.add(movieDuplicate);
+				Movie movie = new Movie(result.getInt("id"));
+				this.movieList.add(movie);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 		
-	public boolean contains(MovieDuplicate movieDuplicate) {
+	public boolean contains(Movie movieDuplicate) {
 		return movieList.contains(movieDuplicate);
 	}
 	
-	public MovieDuplicate get(int index) {
+	public Movie get(int index) {
 		return movieList.get(index);
 	}
 	

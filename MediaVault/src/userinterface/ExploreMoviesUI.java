@@ -1,6 +1,7 @@
 package userinterface;
 
 import persistence.*;
+import backend.*;
 import userinterface.swing.*;
 
 import java.awt.Image;
@@ -20,7 +21,7 @@ import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.EventQueue;
+//import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -174,11 +175,11 @@ public class ExploreMoviesUI extends JFrame {
         menu.setFocusable(false);
         search.addEventClick(new EventClick() {
             @Override
-            public void itemClick(MovieDuplicate movieDuplicate) {
+            public void itemClick(Movie movie) {
                 menu.setVisible(false);
-                searchbar.setText(movieDuplicate.getTitle());
+                searchbar.setText(movie.getTitle());
                 
-                MoviePageUI frame = new MoviePageUI(new MovieDuplicate(movieDuplicate.getId()));
+                MoviePageUI frame = new MoviePageUI(new Movie(movie.getId()));
             	frame.setLocationRelativeTo(null);
             	frame.toFront();
             	frame.requestFocus();
@@ -595,9 +596,9 @@ public class ExploreMoviesUI extends JFrame {
      * @param search - the title to be searched for
      * @return a list of movies with titles containing the search query
      */
-    private List<MovieDuplicate> search(String search) {
+    private List<Movie> search(String search) {
     	int limitData = 10;
-        List<MovieDuplicate> list = new ArrayList<>();
+        List<Movie> list = new ArrayList<>();
         for (int i = 0; i < allMovies.size(); i++) {
         	if (allMovies.get(i).getTitle().toLowerCase().contains(search)) {
             	list.add(allMovies.get(i));

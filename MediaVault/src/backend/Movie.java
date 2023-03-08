@@ -1,6 +1,5 @@
 package backend;
 
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -32,7 +31,6 @@ public class Movie extends Media {
 					
 				}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		} else { //if using stub, use one of the following hardcoded values
@@ -110,5 +108,15 @@ public class Movie extends Media {
 	 */
 	public int getRuntime() {
 		return this.runtime;
+	}
+	
+	/**
+	 * @return the runtime of the movie as a string
+	 */
+	public String getRuntimeAsString() {
+		int runtimeInt = this.getRuntime();
+		int hours = runtimeInt / 60;
+		int minutes = runtimeInt % 60;
+		return hours + "h " + minutes + "m";
 	}
 }

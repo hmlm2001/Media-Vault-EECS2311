@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;
-import persistence.MovieDuplicate;
+import backend.*;
 
 /**
  *
@@ -31,9 +31,9 @@ public class PanelSearch extends JPanel {
      * Used to set the list of data (movies) to be searched
      * @param movieDuplicates - the list of movies to use
      */
-    public void setMovies(List<MovieDuplicate> movieDuplicates) {
+    public void setMovies(List<Movie> movies) {
         this.removeAll();
-        for (MovieDuplicate m : movieDuplicates) {
+        for (Movie m : movies) {
             SearchItem item = new SearchItem(m);
             //  add event
             item.addEvent(new ActionListener() {

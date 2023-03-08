@@ -18,15 +18,11 @@ import java.awt.Cursor;
 
 import javax.swing.border.EmptyBorder;
 
-import backend.MediaCollection;
-import backend.Movie;
-import backend.UseStub;
-import backend.User;
+import backend.*;
 import persistence.AllMoviesDB;
-import persistence.MediaCollectionDB;
-import persistence.MovieDB;
 import persistence.UserDB;
 import userinterface.swing.EventClick;
+import userinterface.swing.MyActionListener;
 import userinterface.swing.MyMouseAdapter;
 import userinterface.swing.MyTextField;
 import userinterface.swing.PanelSearch;
@@ -46,12 +42,11 @@ import javax.swing.JLayeredPane;
 public class VaultUI  extends JFrame{
 	private JPanel contentPane;
 	private MyTextField searchbar;
-	private User user;
 	private JPopupMenu menu;
     private PanelSearch search;
     private AllMoviesDB allMovies;
 	
-	public VaultUI () {
+	public VaultUI (int userId) {
 		allMovies = new AllMoviesDB();
 		setTitle("MediaVault");
 		setResizable(false);
@@ -80,9 +75,9 @@ public class VaultUI  extends JFrame{
 		
 		JButton moviesButton = new JButton("MOVIES");
 		moviesButton.setFont(new Font("Lucida Grande", Font.BOLD, 18));
-		moviesButton.addActionListener(new ActionListener() {
+		moviesButton.addActionListener(new MyActionListener(userId) {
 			public void actionPerformed(ActionEvent e) {
-				ExploreMoviesUI frame = new ExploreMoviesUI();
+				ExploreMoviesUI frame = new ExploreMoviesUI(userId);
 				frame.setLocationRelativeTo(null);
 				frame.setVisible(true);
 			}
@@ -103,23 +98,13 @@ public class VaultUI  extends JFrame{
 		navbar.add(moviesButton);
 		
 		JButton vaultButton = new JButton("VAULT");
-		
 		vaultButton.setForeground(Color.WHITE);
 		vaultButton.setBackground(Color.DARK_GRAY);
 		vaultButton.setFont(new Font("Lucida Grande", Font.BOLD, 18));
-		vaultButton.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				VaultUI frame = new VaultUI();
-				frame.setLocationRelativeTo(null);
-				frame.setVisible(true);
-			}
-		});
 		vaultButton.setBorder(null);
 		vaultButton.setBounds(203, 17, 76, 29);
 		navbar.add(vaultButton);
-		
+				
 		JButton userIcon = new JButton("");
 		userIcon.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -179,7 +164,7 @@ public class VaultUI  extends JFrame{
                 menu.setVisible(false);
                 searchbar.setText(movie.getTitle());
                 
-                MoviePageUI frame = new MoviePageUI(new Movie(movie.getId()));
+                MoviePageUI frame = new MoviePageUI(userId, new Movie(movie.getId()));
             	frame.setLocationRelativeTo(null);
             	frame.toFront();
             	frame.requestFocus();
@@ -191,47 +176,35 @@ public class VaultUI  extends JFrame{
 		layeredPane.setBounds(0, 61, 1280, 600);
 		contentPane.add(layeredPane);
 		
-		JButton WatchListVault = new JButton("   VAULT");
-		WatchListVault.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		layeredPane.setLayer(WatchListVault, 1);
-		WatchListVault.setHorizontalAlignment(SwingConstants.LEADING);
-		WatchListVault.setForeground(new Color(255, 255, 255));
-		WatchListVault.setFont(new Font("Georgia", Font.BOLD, 22));
-		WatchListVault.setBackground(new Color(31, 31, 31));
-		WatchListVault.setBorder(null);
-		WatchListVault.setBounds(0, 0, 1282, 73);
-		layeredPane.add(WatchListVault);
-		
 		JPanel panel = new JPanel();
 		layeredPane.setLayer(panel, 1);
 		panel.setForeground(new Color(192, 192, 192));
 		panel.setBackground(new Color(31, 31, 31));
 		panel.setBounds(0, 37, 1, 1000);
 		
-		addMediaButtons(panel);
+		addMediaButtons(panel, userId);
 		//panel.setLayout(new GridLayout(0, 3 , 20, 20));
 		panel.setLayout(new FlowLayout());
 		//layeredPane.add(panel);
 	
 		JScrollPane scrollPane_1 = new JScrollPane(panel);
-		scrollPane_1.setBounds(0, 70, 1284, 600);
+		scrollPane_1.setBounds(0, 40, 1284, 600);
 		layeredPane.add(scrollPane_1);
+		
+		JLabel userLabel = new JLabel("This is your vault, " + UserDB.getUsername(userId));
+		userLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		userLabel.setBounds(6, 9, 422, 16);
+		layeredPane.add(userLabel);
 	
 	}
 	
 	
-	private void addMediaButtons(JPanel panel ) {
+	private void addMediaButtons(JPanel panel, int userId) {
 		
 		Movie movie;
 		UseStub.setStubFlag(false);
-		// for when it is connected
-		//int id = this.user.getId();
-		//MediaCollection collection = new MediaCollection(id);
 		
-		MediaCollection collection = new MediaCollection(4);
+		MediaCollection collection = new MediaCollection(userId);
 		ArrayList<backend.Media> mediaList = collection.getMediaList();
 		JButton mediaButton; 
 		URL url;
@@ -253,7 +226,7 @@ public class VaultUI  extends JFrame{
 				
 				e.printStackTrace();
 			}
-			mediaButton.addMouseListener(new MyMouseAdapter(media.getId()));
+			mediaButton.addMouseListener(new MyMouseAdapter(userId, media.getId()));
 				
 			
 			mediaButton.setText(null);

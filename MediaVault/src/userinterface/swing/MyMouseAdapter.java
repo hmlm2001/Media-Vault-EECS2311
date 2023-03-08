@@ -10,13 +10,16 @@ import userinterface.MoviePageUI;
  * This class is used to open a movie page when the movie is clicked
  */
 public class MyMouseAdapter extends MouseAdapter {
+	private int userId;
 	private int movieId;
 	/**
-	 * This constructor sets the movie id based on the given input
-	 * @param id - id of the movie to be used
+	 * This constructor sets the user and movie ids based on the given input
+	 * @param userId - id of the user
+	 * @param movieId - id of the movie to be used
 	 */
-	public MyMouseAdapter(int id) {
-		this.movieId = id;
+	public MyMouseAdapter(int userId, int movieId) {
+		this.userId = userId;
+		this.movieId = movieId;
 	}
 	
 	/**
@@ -24,7 +27,7 @@ public class MyMouseAdapter extends MouseAdapter {
 	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		MoviePageUI frame = new MoviePageUI(new Movie(movieId));
+		MoviePageUI frame = new MoviePageUI(userId, new Movie(movieId));
     	frame.setLocationRelativeTo(null);
     	frame.toFront();
     	frame.requestFocus();

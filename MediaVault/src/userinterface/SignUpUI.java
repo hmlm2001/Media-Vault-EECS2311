@@ -1,5 +1,4 @@
 package userinterface;
-// import backend.*;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -12,6 +11,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
+
+import backend.User;
+import userinterface.swing.*;
+
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.ImageIcon;
@@ -89,13 +92,13 @@ public class SignUpUI extends JFrame {
 					successPrompt.setBounds(490, 350, 250, 16);
 					successPrompt.setText("Passwords do not match. Try again.");
 				} else if (backend.Login.createAccount(username, password)) {
-					// User user = new User(username); // for now
+					User user = new User(username);
 					successPrompt.setForeground(new Color(52, 200, 15));
 					successPrompt.setBounds(537, 350, 150, 16);
 					successPrompt.setText("Creating account...");
-					Timer t = new Timer(0, new ActionListener() {
+					Timer t = new Timer(0, new MyActionListener(user.getId()) {
 					    public void actionPerformed(ActionEvent e) {
-					    	ExploreMoviesUI frame = new ExploreMoviesUI();
+					    	ExploreMoviesUI frame = new ExploreMoviesUI(userId);
 					    	frame.setLocationRelativeTo(null);
 							frame.setVisible(true);
 							SignUpUI.this.dispose();

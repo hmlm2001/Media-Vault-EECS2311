@@ -65,7 +65,7 @@ public class ExploreMoviesUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ExploreMoviesUI() {
+	public ExploreMoviesUI(int userId) {
 		setTitle("MediaVault");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -116,11 +116,11 @@ public class ExploreMoviesUI extends JFrame {
 		vaultButton.setForeground(Color.GRAY);
 		vaultButton.setBackground(Color.DARK_GRAY);
 		vaultButton.setFont(new Font("Lucida Grande", Font.BOLD, 18));
-		vaultButton.addActionListener(new ActionListener() {
+		vaultButton.addActionListener(new MyActionListener(userId) {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MediaCollectionUI frame = new MediaCollectionUI();
+				VaultUI frame = new VaultUI(userId);
 				frame.setLocationRelativeTo(null);
 				frame.setVisible(true);
 			}
@@ -165,7 +165,6 @@ public class ExploreMoviesUI extends JFrame {
 		navbar.add(searchbar);
 		searchbar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		searchbar.setPrefixIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search.png")));
-		
 		searchbar.addMouseListener(new java.awt.event.MouseAdapter() {
 		    public void mouseClicked(java.awt.event.MouseEvent evt) {
 		        txtSearchMouseClicked(evt);
@@ -188,7 +187,7 @@ public class ExploreMoviesUI extends JFrame {
                 menu.setVisible(false);
                 searchbar.setText(movie.getTitle());
                 
-                MoviePageUI frame = new MoviePageUI(new Movie(movie.getId()));
+                MoviePageUI frame = new MoviePageUI(userId, new Movie(movie.getId()));
             	frame.setLocationRelativeTo(null);
             	frame.toFront();
             	frame.requestFocus();
@@ -203,6 +202,7 @@ public class ExploreMoviesUI extends JFrame {
         mainScrollPane.setBounds(0, 61, 1300, 572);
         contentPane.add(mainScrollPane);
         mainScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        mainScrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(10, 0));
         mainScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         
         JPanel mainContent = new JPanel();
@@ -211,6 +211,11 @@ public class ExploreMoviesUI extends JFrame {
         mainContent.setBackground(Color.WHITE);
         mainContent.setLayout(null);
         
+        JLabel userLabel = new JLabel("Welcome to MediaVault, " + UserDB.getUsername(userId));
+		userLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		userLabel.setBounds(6, 9, 422, 16);
+		mainContent.add(userLabel);
+		
         // Action Movies
         JLabel actionLabel = new JLabel("ACTION");
         actionLabel.setBounds(605, 6, 78, 22);
@@ -280,7 +285,7 @@ public class ExploreMoviesUI extends JFrame {
 	    			Image poster = new ImageIcon(image).getImage().getScaledInstance(195, 265, Image.SCALE_SMOOTH);
 	    			
 	        		actionMoviePosters[movieCount] = createMoviePoster(new ImageIcon(poster), xPosition, 0);
-	        		actionMoviePosters[movieCount].addMouseListener(new MyMouseAdapter(id));
+	        		actionMoviePosters[movieCount].addMouseListener(new MyMouseAdapter(userId, id));
 	        		actionMovieLabels[movieCount] = createMovieLabel(title, xPosition, 270);
 	    	        actionContent.add(actionMoviePosters[movieCount]);
 	    	        actionContent.add(actionMovieLabels[movieCount]);
@@ -363,7 +368,7 @@ public class ExploreMoviesUI extends JFrame {
 	    			Image poster = new ImageIcon(image).getImage().getScaledInstance(195, 265, Image.SCALE_SMOOTH);
 	    			
 	        		animationMoviePosters[movieCount] = createMoviePoster(new ImageIcon(poster), xPosition, 0);
-	        		animationMoviePosters[movieCount].addMouseListener(new MyMouseAdapter(id));
+	        		animationMoviePosters[movieCount].addMouseListener(new MyMouseAdapter(userId, id));
 	        		animationMovieLabels[movieCount] = createMovieLabel(title, xPosition, 270);
 	    	        animationContent.add(animationMoviePosters[movieCount]);
 	    	        animationContent.add(animationMovieLabels[movieCount]);
@@ -446,7 +451,7 @@ public class ExploreMoviesUI extends JFrame {
 	    			Image poster = new ImageIcon(image).getImage().getScaledInstance(195, 265, Image.SCALE_SMOOTH);
 	    			
 	        		dramaMoviePosters[movieCount] = createMoviePoster(new ImageIcon(poster), xPosition, 0);
-	        		dramaMoviePosters[movieCount].addMouseListener(new MyMouseAdapter(id));
+	        		dramaMoviePosters[movieCount].addMouseListener(new MyMouseAdapter(userId, id));
 	        		dramaMovieLabels[movieCount] = createMovieLabel(title, xPosition, 270);
 	    	        dramaContent.add(dramaMoviePosters[movieCount]);
 	    	        dramaContent.add(dramaMovieLabels[movieCount]);
@@ -529,7 +534,7 @@ public class ExploreMoviesUI extends JFrame {
 	    			Image poster = new ImageIcon(image).getImage().getScaledInstance(195, 265, Image.SCALE_SMOOTH);
 	    			
 	        		horrorMoviePosters[movieCount] = createMoviePoster(new ImageIcon(poster), xPosition, 0);
-	        		horrorMoviePosters[movieCount].addMouseListener(new MyMouseAdapter(id));
+	        		horrorMoviePosters[movieCount].addMouseListener(new MyMouseAdapter(userId, id));
 	        		horrorMovieLabels[movieCount] = createMovieLabel(title, xPosition, 270);
 	    	        horrorContent.add(horrorMoviePosters[movieCount]);
 	    	        horrorContent.add(horrorMovieLabels[movieCount]);

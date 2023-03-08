@@ -14,7 +14,7 @@ public class Encryption {
 	 * @return returns true if account creation is successful, false otherwise
 	 */
 	public static boolean encryptNewAccount(String username, String password) {
-		return LoginDB.newAccount(encrypt(username),encrypt(password));
+		return LoginDB.newAccount(encrypt(username),encrypt(password), username);
 	}
 	/**
 	 * Encrypts a username password pair and sends it to LoginDB to verify login

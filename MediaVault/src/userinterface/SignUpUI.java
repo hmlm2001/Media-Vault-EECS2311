@@ -1,6 +1,5 @@
 package userinterface;
-import backend.Login;
-import backend.User;
+// import backend.*;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -90,13 +89,13 @@ public class SignUpUI extends JFrame {
 					successPrompt.setBounds(490, 350, 250, 16);
 					successPrompt.setText("Passwords do not match. Try again.");
 				} else if (backend.Login.createAccount(username, password)) {
-					User user = new User(username); // for now
+					// User user = new User(username); // for now
 					successPrompt.setForeground(new Color(52, 200, 15));
-					successPrompt.setBounds(535, 350, 150, 16);
-					successPrompt.setText("Sign up successful!");
-					Timer t = new Timer(1000, new ActionListener() {
+					successPrompt.setBounds(537, 350, 150, 16);
+					successPrompt.setText("Creating account...");
+					Timer t = new Timer(0, new ActionListener() {
 					    public void actionPerformed(ActionEvent e) {
-					    	ExploreUI frame = new ExploreUI();
+					    	ExploreMoviesUI frame = new ExploreMoviesUI();
 					    	frame.setLocationRelativeTo(null);
 							frame.setVisible(true);
 							SignUpUI.this.dispose();

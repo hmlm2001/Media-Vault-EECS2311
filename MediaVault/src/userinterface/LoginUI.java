@@ -80,11 +80,11 @@ public class LoginUI extends JFrame {
 				if (backend.Login.login(username, password)) {
 					// TODO: Implement user
 					successPrompt.setForeground(new Color(52, 200, 15));
-					successPrompt.setBounds(543, 343, 110, 16);
-					successPrompt.setText("Login successful!");
-					Timer t = new Timer(1000, new ActionListener() {
+					successPrompt.setBounds(550, 343, 110, 16);
+					successPrompt.setText("Logging in...");
+					Timer t = new Timer(0, new ActionListener() {
 					    public void actionPerformed(ActionEvent e) {
-					    	ExploreUI frame = new ExploreUI();
+					    	ExploreMoviesUI frame = new ExploreMoviesUI();
 					    	frame.setLocationRelativeTo(null);
 							frame.setVisible(true);
 							LoginUI.this.dispose();

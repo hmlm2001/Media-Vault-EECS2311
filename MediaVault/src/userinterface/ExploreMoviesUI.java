@@ -39,7 +39,7 @@ import javax.swing.border.LineBorder;
 public class ExploreMoviesUI extends JFrame {
 
 	private JPanel contentPane;
-	private MovieDB allMovies;
+	private AllMoviesDB allMovies;
 	private MyTextField searchbar;
 	private JPopupMenu menu;
     private PanelSearch search;
@@ -91,15 +91,6 @@ public class ExploreMoviesUI extends JFrame {
 		navbar.add(mediaVaultLogo);
 		
 		JButton moviesButton = new JButton("MOVIES");
-		moviesButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ExploreMoviesUI frame = new ExploreMoviesUI();
-				frame.setLocationRelativeTo(null);
-				frame.setVisible(true);
-				ExploreMoviesUI.this.dispose();
-			}
-		});
-		moviesButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		moviesButton.setFont(new Font("Lucida Grande", Font.BOLD, 18));
 		moviesButton.setForeground(Color.WHITE);
 		moviesButton.setBackground(Color.DARK_GRAY);
@@ -183,11 +174,11 @@ public class ExploreMoviesUI extends JFrame {
         menu.setFocusable(false);
         search.addEventClick(new EventClick() {
             @Override
-            public void itemClick(Movie movie) {
+            public void itemClick(MovieDuplicate movieDuplicate) {
                 menu.setVisible(false);
-                searchbar.setText(movie.getTitle());
+                searchbar.setText(movieDuplicate.getTitle());
                 
-                MoviePageUI frame = new MoviePageUI(new Movie(movie.getId()));
+                MoviePageUI frame = new MoviePageUI(new MovieDuplicate(movieDuplicate.getId()));
             	frame.setLocationRelativeTo(null);
             	frame.toFront();
             	frame.requestFocus();
@@ -196,7 +187,7 @@ public class ExploreMoviesUI extends JFrame {
         });
         
         // Main Section
-		allMovies = new MovieDB();
+		allMovies = new AllMoviesDB();
 			
         JScrollPane mainScrollPane = new JScrollPane();
         mainScrollPane.setBounds(0, 61, 1300, 572);
@@ -604,9 +595,9 @@ public class ExploreMoviesUI extends JFrame {
      * @param search - the title to be searched for
      * @return a list of movies with titles containing the search query
      */
-    private List<Movie> search(String search) {
+    private List<MovieDuplicate> search(String search) {
     	int limitData = 10;
-        List<Movie> list = new ArrayList<>();
+        List<MovieDuplicate> list = new ArrayList<>();
         for (int i = 0; i < allMovies.size(); i++) {
         	if (allMovies.get(i).getTitle().toLowerCase().contains(search)) {
             	list.add(allMovies.get(i));

@@ -19,21 +19,21 @@ public class SearchItem extends JPanel {
 
 	/**
 	 * This constructor initializes the search item and adds the given movie to the search list
-	 * @param movie - movie to be used
+	 * @param movieDuplicate - movie to be used
 	 */
-    public SearchItem(Movie movie) {
+    public SearchItem(MovieDuplicate movieDuplicate) {
         initComponents();
-        setMovie(movie);
+        setMovie(movieDuplicate);
     }
 
     /**
      * Sets the text on each search item to the title of a movie
-     * @param movie - movie to be used
+     * @param movieDuplicate - movie to be used
      */
-    private void setMovie(Movie movie) {
+    private void setMovie(MovieDuplicate movieDuplicate) {
         addEventMouse(this);
         addEventMouse(lbText);
-        lbText.setText(movie.getTitle());
+        lbText.setText(movieDuplicate.getTitle());
     }
 
     /**

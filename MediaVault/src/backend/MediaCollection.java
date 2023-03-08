@@ -18,11 +18,11 @@ public class MediaCollection {
 	 * @param userid is the user's id
 	 */
 	public MediaCollection(int userid) {
-		if (!UseStub.getStubFlag()) {	//if not using stub, use DB
+		if (!UseStub.getStubFlag()) {	//if use DB
 			this.id = MediaCollectionDB.getMediaCollectionId(userid); //get the collection id associated with the user
 			mediaList = MediaCollectionDB.getMediaCollection(this.id); //get the ArrayList<Media> associated with the collection id
-		} else {	//if using stub, use hardcoded values where users with id 1, 2 and 3 have collections with existing movies
-			mediaList = new ArrayList<Media>();
+		} else {	//if using stub, use hardcoded values where users with id 1, 2 and 3 have collections with existing movies with correspondig ids
+			mediaList = new ArrayList<Media>(); //creates the mediaList in stub
 			if (userid == 1) {
 				this.id=1;
 				mediaList.add(new Movie(631842));
@@ -67,7 +67,7 @@ public class MediaCollection {
 	 */
 	public boolean removeMedia(int id) {
 		
-		for (int i = 0; i<this.mediaList.size();i++) {
+		for (int i = 0; i<this.mediaList.size();i++) { //go through each element in mediaList and check if the media id matches with input id, if so, remove
 			if (this.mediaList.get(i).getId()==id) {
 				this.mediaList.remove(i);
 				if (!UseStub.getStubFlag()) return MediaCollectionDB.removeMediaCollection(this.id, id);

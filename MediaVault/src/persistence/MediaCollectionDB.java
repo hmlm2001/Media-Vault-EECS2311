@@ -21,7 +21,6 @@ public class MediaCollectionDB {
 				return result.getInt(1);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		JDBC_Connection.execute("INSERT INTO mediacollections(userid) VALUES ("+userid+");"); //create a new mediacollection for the new user
@@ -31,10 +30,9 @@ public class MediaCollectionDB {
 				return result.getInt(1);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return 0; //default return incase anythign goes wrong
+		return 0; //default return incase anything goes wrong
 	}
 	/**
 	 * get the movies held in the media collection
@@ -47,10 +45,9 @@ public class MediaCollectionDB {
 		result = JDBC_Connection.getResult("SELECT * FROM mediarelations WHERE mediaCollectionID='"+collectionid+"';");
 		try {
 			while (result.next()) {
-				collection.add(new Movie(result.getInt(1)));
+				collection.add(new Movie(result.getInt(1))); //get all the movies for a media collection and store them in collection
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return collection;

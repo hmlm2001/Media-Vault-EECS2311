@@ -14,10 +14,9 @@ public class UserDB {
 		result = JDBC_Connection.getResult("SELECT userID FROM users WHERE username='"+username+"';");
 		try {
 			while (result.next()) {
-				return result.getInt(1);
+				return result.getInt(1); //get the id associated with a username
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return 0;

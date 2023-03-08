@@ -13,7 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import persistence.Movie;
+import persistence.MovieDuplicate;
 import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
 import java.awt.Font;
@@ -30,8 +30,8 @@ public class MoviePageUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MoviePageUI(Movie movie) {
-		setTitle(movie.getTitle());
+	public MoviePageUI(MovieDuplicate movieDuplicate) {
+		setTitle(movieDuplicate.getTitle());
 		setResizable(false);
 		setBounds(100, 100, 800, 550);
 		contentPane = new JPanel();
@@ -41,7 +41,7 @@ public class MoviePageUI extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		String path = movie.getPosterPath();
+		String path = movieDuplicate.getPosterPath();
 		try {
 			URL url = new URL(path);
 			BufferedImage image = ImageIO.read(url);
@@ -54,19 +54,19 @@ public class MoviePageUI extends JFrame {
 			e.printStackTrace();
 		}
 		
-		JLabel title = new JLabel("<html>" + movie.getTitle() + "</html>");
+		JLabel title = new JLabel("<html>" + movieDuplicate.getTitle() + "</html>");
 		title.setVerticalAlignment(SwingConstants.BOTTOM);
 		title.setFont(new Font("Lucida Grande", Font.BOLD, 22));
 		title.setBounds(399, 10, 383, 53);
 		contentPane.add(title);
 		
-		JLabel releaseAndGenre = new JLabel(movie.getReleaseDate() + " | " + movie.getGenre());
+		JLabel releaseAndGenre = new JLabel(movieDuplicate.getReleaseDate() + " | " + movieDuplicate.getGenre());
 		releaseAndGenre.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
 		releaseAndGenre.setBounds(399, 67, 383, 31);
 		releaseAndGenre.setVerticalAlignment(JLabel.TOP);
 		contentPane.add(releaseAndGenre);
 		
-		JLabel runtime = new JLabel(movie.getRuntimeAsString());
+		JLabel runtime = new JLabel(movieDuplicate.getRuntimeAsString());
 		runtime.setVerticalAlignment(SwingConstants.TOP);
 		runtime.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
 		runtime.setBounds(399, 98, 383, 31);
@@ -78,7 +78,7 @@ public class MoviePageUI extends JFrame {
 		overviewLabel.setBounds(399, 123, 383, 31);
 		contentPane.add(overviewLabel);
 		
-		JLabel overview = new JLabel("<html>" + movie.getOverview() + "</html>");
+		JLabel overview = new JLabel("<html>" + movieDuplicate.getOverview() + "</html>");
 		overview.setVerticalAlignment(SwingConstants.TOP);
 		overview.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
 		overview.setBounds(399, 158, 383, 308);

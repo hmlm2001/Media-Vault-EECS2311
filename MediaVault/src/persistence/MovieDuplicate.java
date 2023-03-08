@@ -3,7 +3,7 @@ package persistence;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Movie {
+public class MovieDuplicate {
 	private int id;
 	private String title;
 	private String releaseDate;
@@ -17,7 +17,7 @@ public class Movie {
 	 * Getters are used to retrieve other info when needed by sending queries to the DB.
 	 * @param id is the id of the movie in the database
 	 */
-	public Movie(int id) {
+	public MovieDuplicate(int id) {
 		this.id = id;
 	}
 	

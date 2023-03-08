@@ -13,55 +13,57 @@ import org.junit.jupiter.api.Test;
 
 class MediaCollectionTest {
 
-	MediaCollection medias;
+	MediaCollection user1Collection;
+	MediaCollection user3Collection;
 	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	
 	@BeforeEach
 	void init() {
-		medias = new MediaCollection();
+		UseStub.setStubFlag(true);
+		user1Collection = new MediaCollection(1);
+		user3Collection = new MediaCollection(3);
 	}
 	
 	// Testing the addition of media
 	@Test
 	void addMediaTest1() throws ParseException {
-		assertTrue(medias.addMedia(new Media("Test1", dateFormat.parse("2022-02-02"))));
+		assertTrue(user1Collection.addMedia(new Movie(505642)));
 	}
 
 	// Testing the addition of duplicate media 
 	@Test
 	void addMediaTest2() throws ParseException {
-		Media med = new Media("Test1", dateFormat.parse("2022-02-02"));
-		medias.addMedia(med);
-		assertFalse(medias.addMedia(med));
+		Movie med = new Movie(505642);
+		user1Collection.addMedia(med);
+		assertFalse(user1Collection.addMedia(med));
 	}
 	
 	// Testing the removal of existing media
 	@Test
 	void removeMediaTest1() throws ParseException {
-		Media med = new Media("Test1", dateFormat.parse("2022-02-02"));
-		medias.addMedia(med);
-		assertTrue(medias.removeMedia(med));
+		Movie med = new Movie(505642);
+		user1Collection.addMedia(med);
+		assertTrue(user1Collection.removeMedia(505642));
 	}
 	
 	// Testing the removal of non-existing media
 	@Test
 	void removeMediaTest2() throws ParseException {
-		Media med = new Media("Test1", dateFormat.parse("2022-02-02"));
-		assertFalse(medias.removeMedia(med));
+		Movie med = new Movie(315162);
+		assertFalse(user1Collection.removeMedia(315162));
 	}	
 	
 	// Testing getMediaList
 	@Test
 	void getMediaListTest() throws ParseException {
 		ArrayList<Media> actual = new ArrayList<>();
-		actual.add(new Media("Test1", dateFormat.parse("2022-02-02")));
-		actual.add(new Media("Test2", dateFormat.parse("2022-02-02")));
-		actual.add(new Media("Test3", dateFormat.parse("2022-02-02")));
+	
+		actual.add(new Movie(646389));
+		actual.add(new Movie(772515));
 		
-		medias.addMedia(new Media("Test1", dateFormat.parse("2022-02-02")));
-		medias.addMedia(new Media("Test2", dateFormat.parse("2022-02-02")));
-		medias.addMedia(new Media("Test3", dateFormat.parse("2022-02-02")));
-		assertEquals(actual.size(), medias.size());
+		
+		
+		assertTrue(actual.equals(user1Collection.getMediaList()));
 	}	
 
 }

@@ -26,14 +26,14 @@ import java.awt.Cursor;
 public class MoviePageUI extends JFrame {
 
 	private JPanel contentPane;
-	
+		
 	/**
 	 * Create the frame.
 	 */
 	public MoviePageUI(Movie movie) {
 		setTitle(movie.getTitle());
 		setResizable(false);
-		setBounds(100, 100, 800, 550);
+		setBounds(100, 100, 820, 580);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -45,10 +45,10 @@ public class MoviePageUI extends JFrame {
 		try {
 			URL url = new URL(path);
 			BufferedImage image = ImageIO.read(url);
-			Image poster = new ImageIcon(image).getImage().getScaledInstance(375, 500, Image.SCALE_SMOOTH);
+			Image poster = new ImageIcon(image).getImage().getScaledInstance(400, 520, Image.SCALE_SMOOTH);
 			JLabel moviePoster = new JLabel(new ImageIcon(poster));
 			moviePoster.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-			moviePoster.setBounds(16, 10, 371, 498);
+			moviePoster.setBounds(16, 10, 391, 521);
 			contentPane.add(moviePoster);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -57,45 +57,45 @@ public class MoviePageUI extends JFrame {
 		JLabel title = new JLabel("<html>" + movie.getTitle() + "</html>");
 		title.setVerticalAlignment(SwingConstants.BOTTOM);
 		title.setFont(new Font("Lucida Grande", Font.BOLD, 22));
-		title.setBounds(399, 10, 383, 53);
+		title.setBounds(419, 10, 383, 53);
 		contentPane.add(title);
 		
 		JLabel releaseAndGenre = new JLabel(movie.getReleaseDate() + " | " + movie.getGenre());
 		releaseAndGenre.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
-		releaseAndGenre.setBounds(399, 67, 383, 31);
+		releaseAndGenre.setBounds(419, 67, 383, 31);
 		releaseAndGenre.setVerticalAlignment(JLabel.TOP);
 		contentPane.add(releaseAndGenre);
 		
 		JLabel runtime = new JLabel(movie.getRuntimeAsString());
 		runtime.setVerticalAlignment(SwingConstants.TOP);
 		runtime.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
-		runtime.setBounds(399, 98, 383, 31);
+		runtime.setBounds(419, 98, 383, 31);
 		contentPane.add(runtime);
 		
 		JLabel overviewLabel = new JLabel("Overview");
 		overviewLabel.setVerticalAlignment(SwingConstants.BOTTOM);
 		overviewLabel.setFont(new Font("Lucida Grande", Font.BOLD, 18));
-		overviewLabel.setBounds(399, 123, 383, 31);
+		overviewLabel.setBounds(419, 121, 383, 31);
 		contentPane.add(overviewLabel);
 		
 		JLabel overview = new JLabel("<html>" + movie.getOverview() + "</html>");
 		overview.setVerticalAlignment(SwingConstants.TOP);
 		overview.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
-		overview.setBounds(399, 158, 383, 308);
+		overview.setBounds(419, 160, 389, 314);
 		contentPane.add(overview);
 		
 		JLabel successPrompt = new JLabel();
 		contentPane.add(successPrompt);
 		
-		JButton addToVaultButton = new JButton("+ Add to Vault");
-		addToVaultButton.setBorder(new LineBorder(new Color(0, 0, 0)));
-		addToVaultButton.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		addToVaultButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		addToVaultButton.addActionListener(new ActionListener() {
+		JButton addButton = new JButton("+ Add to Vault");
+		addButton.setBorder(new LineBorder(new Color(0, 0, 0)));
+		addButton.setFont(new Font("Lucida Grande", Font.BOLD, 16));
+		addButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		addButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				successPrompt.setForeground(new Color(52, 200, 15));
-				successPrompt.setBounds(518, 498, 200, 20);
+				successPrompt.setBounds(536, 517, 200, 20);
 				successPrompt.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 				successPrompt.setText("Successfully Added!");
 				Timer t = new Timer(1300, new ActionListener() {
@@ -107,10 +107,35 @@ public class MoviePageUI extends JFrame {
 				t.start();
 			}
 		});
-		addToVaultButton.setOpaque(true);
-		addToVaultButton.setBackground(Color.WHITE);
-		addToVaultButton.setBounds(495, 470, 181, 28);
-		contentPane.add(addToVaultButton);
+		addButton.setOpaque(true);
+		addButton.setBackground(Color.WHITE);
+		addButton.setBounds(419, 480, 169, 28);
+		contentPane.add(addButton);
+		
+		JButton removeButton = new JButton("- Remove from Vault");
+		removeButton.setOpaque(true);
+		removeButton.setFont(new Font("Lucida Grande", Font.BOLD, 16));
+		removeButton.setBorder(new LineBorder(new Color(0, 0, 0)));
+		removeButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		removeButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				successPrompt.setForeground(new Color(52, 200, 15));
+				successPrompt.setBounds(536, 517, 200, 20);
+				successPrompt.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+				successPrompt.setText("Successfully Removed!");
+				Timer t = new Timer(1300, new ActionListener() {
+				    public void actionPerformed(ActionEvent e) {
+						MoviePageUI.this.dispose();
+				    }
+				});
+				t.setRepeats(false);
+				t.start();
+			}
+		});
+		removeButton.setBackground(Color.WHITE);
+		removeButton.setBounds(605, 480, 203, 28);
+		contentPane.add(removeButton);
 		
 	}
 }

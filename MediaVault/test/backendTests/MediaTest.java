@@ -5,19 +5,22 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import backend.Media;
+import backend.UseStub;
 
 class MediaTest {
-
+	
 	Media movie1;
 	Media movie2;
 	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	
 	@BeforeEach
 	void init() throws ParseException {
+		UseStub.setStubFlag(true);
 		movie1 = new Media("Movie1", dateFormat.parse("2022-02-02"));
 		movie2 = new Media("Movie2", dateFormat.parse("2021-05-02"));
 	}
@@ -40,6 +43,11 @@ class MediaTest {
 	@Test
 	void getReleaseDateTest2() throws ParseException {
 		assertEquals(dateFormat.parse("2021-05-02"), movie2.getReleaseDate());
+	}
+	
+	@AfterAll
+	void cleanup() {
+		UseStub.setStubFlag(false);
 	}
 
 }

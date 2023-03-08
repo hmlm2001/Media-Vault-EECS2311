@@ -3,7 +3,11 @@ package persistence;
 import java.sql.*;
 
 public class JDBC_Connection {
-	
+	/**
+	 * Used for queries that result in a ResultSet
+	 * @param query is the query that will be forwarded to the DB
+	 * @return the ResultSet of values
+	 */
 	public static ResultSet getResult(String query) {
 		String url = "jdbc:mysql://localhost:3306/mediavault";
 		String user = "mediavaultadmin";
@@ -27,7 +31,11 @@ public class JDBC_Connection {
 		
 		return null;
 	}
-	
+	/**
+	 * Used for queries where no output is expected, only the success boolean
+	 * @param query is the command to be executed
+	 * @return true if successful, false otherwise
+	 */
 	public static boolean execute(String query) {
 		String url = "jdbc:mysql://localhost:3306/mediavault";
 		String user = "mediavaultadmin";

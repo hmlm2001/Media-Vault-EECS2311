@@ -116,6 +116,15 @@ public class ExploreMoviesUI extends JFrame {
 		vaultButton.setForeground(Color.GRAY);
 		vaultButton.setBackground(Color.DARK_GRAY);
 		vaultButton.setFont(new Font("Lucida Grande", Font.BOLD, 18));
+		vaultButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MediaCollectionUI frame = new MediaCollectionUI();
+				frame.setLocationRelativeTo(null);
+				frame.setVisible(true);
+			}
+		});
 		vaultButton.setBorder(null);
 		vaultButton.setBounds(203, 17, 76, 29);
 		navbar.add(vaultButton);

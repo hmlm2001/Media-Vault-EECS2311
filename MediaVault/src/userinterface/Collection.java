@@ -8,7 +8,7 @@ public class Collection {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MediaCollectionUI frame = new MediaCollectionUI();
+					VaultUI frame = new VaultUI(4);
 					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
 				} catch (Exception e) {

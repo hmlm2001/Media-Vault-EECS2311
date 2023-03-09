@@ -45,6 +45,12 @@ public class VaultUI extends JFrame{
 	private JPopupMenu menu;
     private PanelSearch search;
     private AllMoviesDB allMovies;
+    
+    /**
+     * Displays all movies the user has added to their vault.
+     * uses the frame with the same navigation bar as the explore page. 
+     * @param userId the id of the user currently logged in
+     */
 	
 	public VaultUI (int userId) {
 		allMovies = new AllMoviesDB();
@@ -210,7 +216,11 @@ public class VaultUI extends JFrame{
 		layeredPane.add(userLabel);
 	
 	}
-	
+	/**
+	 * iterates through the user's vault and adds each movie to the display panel
+	 * @param panel the panel to display movies
+	 * @param userId the id of the user currently logged in
+	 */
 	
 	private void addMediaButtons(JPanel panel, int userId) {
 		

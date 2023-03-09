@@ -1,5 +1,6 @@
 package userinterface;
 import java.awt.Image;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -15,6 +16,7 @@ import javax.swing.JPopupMenu;
 
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Dimension;
 
 import javax.swing.border.EmptyBorder;
 
@@ -34,6 +36,10 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+
 import javax.swing.JScrollPane;
 import java.awt.FlowLayout;
 import javax.swing.JLayeredPane;
@@ -201,9 +207,8 @@ public class VaultUI extends JFrame{
 		panel.setBounds(0, 37, 1, 1000);
 		
 		addMediaButtons(panel, userId);
-		//panel.setLayout(new GridLayout(0, 3 , 20, 20));
 		panel.setLayout(new FlowLayout());
-		//layeredPane.add(panel);
+		
 	
 		JScrollPane scrollPane_1 = new JScrollPane(panel);
 		
@@ -224,12 +229,15 @@ public class VaultUI extends JFrame{
 	
 	private void addMediaButtons(JPanel panel, int userId) {
 		
-		Movie movie;
 		UseStub.setStubFlag(false);
+		Movie movie;		
+		JButton mediaButton;
+		JButton removeButton;
+		JPanel moviepane;
 		
 		MediaCollection collection = new MediaCollection(userId);
 		ArrayList<backend.Media> mediaList = collection.getMediaList();
-		JButton mediaButton; 
+		
 		URL url;
 		BufferedImage c;
 		if (collection.size() == 0) {
@@ -240,10 +248,19 @@ public class VaultUI extends JFrame{
 		} else {
 			for(backend.Media media: mediaList) {
 				
+				moviepane = new JPanel();
+				moviepane.setBounds(0, 0, 100, 200);				
+				moviepane.setForeground(new Color(192, 192, 192));
+				moviepane.setBackground(new Color(31, 31, 31));
+				moviepane.setLayout(new GridBagLayout());
+				
+				GridBagConstraints constraints = new GridBagConstraints();
+				constraints.fill = GridBagConstraints.HORIZONTAL;
+				
 				mediaButton = new JButton(media.getTitle());
+				removeButton = new JButton("remove");
 				
-				movie = new Movie(media.getId());
-				
+				movie = new Movie(media.getId());				
 				
 				try {				
 					url = new URL(movie.getPosterPath());
@@ -254,14 +271,40 @@ public class VaultUI extends JFrame{
 					
 					e.printStackTrace();
 				}
-				mediaButton.addMouseListener(new MyMouseAdapter(userId, media.getId()));
-					
+				mediaButton.addMouseListener(new MyMouseAdapter(userId, media.getId()));				
 				
 				mediaButton.setText(null);
 				mediaButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 				mediaButton.setBackground(Color.black);
 				mediaButton.setBorder(null);
-				panel.add(mediaButton);
+				mediaButton.setBounds(0, 0, 100, 200);
+				constraints.fill = GridBagConstraints.HORIZONTAL;
+				constraints.gridwidth = 3;
+				constraints.gridx=0;
+				constraints.gridy = 0;
+				moviepane.add(mediaButton,constraints);
+				
+				
+				Image removeIcon = new ImageIcon(getClass().getResource("/images/icons/remove.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+				removeButton.setIcon(new ImageIcon(removeIcon));
+				removeButton.setPreferredSize(new Dimension(30,30));
+			
+				removeButton.setText(null);
+				removeButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+				removeButton.setBackground(new Color(31, 31, 31));
+				removeButton.setBorder(null);
+				constraints.fill = GridBagConstraints.HORIZONTAL;
+				constraints.gridwidth = 1;
+				constraints.gridx=2;
+				constraints.gridy = 1;
+				constraints.insets = new Insets(10,0,10,0);
+				
+				
+				
+				moviepane.add(removeButton, constraints);
+				//moviepane.setLayer(removeButton, 1);
+				panel.add(moviepane);
+				//panel.add(mediaButton);
 				
 			}
 		}

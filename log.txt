@@ -100,6 +100,12 @@ Meeting Notes
 - Talked about user requirments and stories
 - Spoke to the user, they specified what parts need work and what parts work well
 
+Mate Progress:
+- On Saturday the implementation of SQL commands was started, organized desing approach and started working on the assigned portion.
+- Tested how to implement stub with a single command, the class UseStub.java was born on this day
+- Modnay was the main implementation of the stub and DB, based on the previous day's brainstorming and testing
+- UML updated for backend, since the UI was done in seperate parth, the UML will be updated to accurately potray the project design on Wednesday when each class can be accurately created with put from its creator
+
 8th March 2023
 The meeting was during the Lecture time from 11:30am to 1:30pm. This meeting was for mergning tasks that everyone should have finished by the deadline.
 The mergning took a while as some issues arose with previous commits on main, however, in the end everything was successfully merged.

@@ -86,7 +86,7 @@ Tasks Assignments + Estimates
 		Explore				-Isaac	[3 days]
 		MediaCollection (vaults)	-Ruth	[3 days]
 		Search Bar			-Isaac	[1 day]
-		Individual Pages		-Isaac	[2 days
+		Individual Pages		-Isaac	[2 days]
 	Persistence/Other
 		Tests				-Ruth/Herman	[4 days]
 		Stubs				-Mate		[2 days]
@@ -99,3 +99,25 @@ Meeting Notes
 - Went into detail about how to implement features
 - Talked about user requirments and stories
 - Spoke to the user, they specified what parts need work and what parts work well
+
+8th March 2023
+The meeting was during the Lecture time from 11:30am to 1:30pm. This meeting was for mergning tasks that everyone should have finished by the deadline.
+The mergning took a while as some issues arose with previous commits on main, however, in the end everything was successfully merged.
+Below are the team member's reflection with the time taken as opposed ot the estimate.
+Tasks Assignments + Estimates vs Time Taken
+	Backend
+		Vault 				-Mate	Estimated:[3 days]	Time Taken:[2 days]
+	User Interface	
+		Explore				-Isaac	Estimated:[3 days]	Time Taken:[3 days]
+		MediaCollection (vaults)	-Ruth	Estimated:[3 days]	Time Taken:[3 days]
+		Search Bar			-Isaac	Estimated:[1 day]	Time Taken:[1 days]
+		Individual Pages		-Isaac	Estimated:[2 days]	Time Taken:[2 days]
+	Persistence/Other
+		Tests				-Ruth/Herman	 Estimated:[4 days]	Time Taken:[4 days]
+		Stubs				-Mate		 Estimated:[2 days]	Time Taken:[2 days]
+		UML				-Mate		 Estimated:[4 days]	Time Taken:Done on the day of the merge [5 days], needed details from everyone
+		Explain why no books 		-Herman/Muhammad Estimated:[2 days]	Time Taken:[3 days]
+		Redo Detailed User Stories	-Herman/Muhammad Estimated:[2 days]	Time Taken:[3 days]
+		
+9th March 2023
+This was the final meeting of the group before the submission. Everything was organized and submitted according to outlines of the iteration. Users stories, design choices and meeting notes were inspected and updated to accurately potray the development process of the project.

@@ -14,3 +14,6 @@ For the purposes of the assignment a stub DB was implemented. To switch over fro
 
 ## Running MediaVault
 To run MediaVault, simply compile and run the **MediaVault.java** file located in MediaVault/src/userinterface.
+
+## Required Documents
+The required documents for each iteration are stored in Planning Documents.

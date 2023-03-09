@@ -16,26 +16,25 @@ public class LoginDB{
 	 * @return true if operation is successful
 	 */
 	public static boolean newAccount(String username, String password, String unEncUser) {
-		if (!UseStub.getStubFlag()) { //if it needs to use the DB
+		if (!UseStub.getStubFlag()) { //checks if it needs to use the DB
 			ResultSet result;
 			result = JDBC_Connection.getResult("SELECT * FROM logins WHERE usernameEnc='"+username+"';");
 			try {
 				while (result.next()) {
-					if(username.compareTo(result.getString(1))==0) return false; //checks if user exists
+					if(username.compareTo(result.getString(1))==0) return false;
 				}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			JDBC_Connection.execute("INSERT INTO logins(usernameEnc,passwordEnc) VALUES ('"+username+"','"+password+"');");
-			JDBC_Connection.execute("INSERT INTO users(username) VALUES ('"+username+")"); //if users doesn't exist then create a login and a user
+			JDBC_Connection.execute("INSERT INTO users(username) VALUES ('"+unEncUser+"');");
 			return true;
-		} else { // if it needs to use the Stub DB
-			if (logins==null) LoginDB.createStubLogins(); //create stub if it hasnt been created
-			if (logins.containsKey(username)) { //if a user doesnt exists
+		} else { // checks if it needs to use the Stub DB
+			if (logins==null) LoginDB.createStubLogins();
+			if (logins.containsKey(username)) {
 				return false;
-			} else { //if user exists
-				logins.put(username,password); //put the new user and create User
+			} else {
+				logins.put(username,password);
 				new User(unEncUser);
 				return true;
 			}
@@ -48,20 +47,21 @@ public class LoginDB{
 	 * @return true if the username and password combo match the ones on file, false otherwise 
 	 */
 	public static boolean verifyLogin(String username, String password) {
-		if (!UseStub.getStubFlag()) { //if it needs to use DB, then do the below
+		if (!UseStub.getStubFlag()) {
 			ResultSet result;
 			result = JDBC_Connection.getResult("SELECT * FROM logins WHERE usernameEnc='"+username+"';");
 			try {
 				while (result.next()) {
-					return result.getString(2).compareTo(password)==0; //checks the password of the gotten username
+					return result.getString(2).compareTo(password)==0;
 				}
 			} catch (SQLException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		} else {	//if it needs to use the stub DB then do the below
-			if (logins==null) LoginDB.createStubLogins(); //checks if the stub has already been created
-			if (logins.get(username)==null) return false; //if a username doesn't exist
-			if (logins.get(username).compareTo(password)==0) return true; //if the user and exists and the password matches
+		} else {
+			if (logins==null) LoginDB.createStubLogins();
+			if (logins.get(username)==null) return false;
+			if (logins.get(username).compareTo(password)==0) return true;
 		}
 		return false;
 	}
@@ -70,7 +70,6 @@ public class LoginDB{
 	 * user1, 111
 	 * user2, 222
 	 * user3, 333
-	 * NOTE: They are encrypted and thus they have to put into hardcode
 	 */
 	private static void createStubLogins() {
 		logins=new HashMap<String,String>();

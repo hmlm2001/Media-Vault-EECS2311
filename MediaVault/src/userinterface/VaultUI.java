@@ -39,7 +39,7 @@ import java.awt.FlowLayout;
 import javax.swing.JLayeredPane;
 
 @SuppressWarnings("serial")
-public class VaultUI  extends JFrame{
+public class VaultUI extends JFrame{
 	private JPanel contentPane;
 	private MyTextField searchbar;
 	private JPopupMenu menu;
@@ -80,6 +80,7 @@ public class VaultUI  extends JFrame{
 				ExploreMoviesUI frame = new ExploreMoviesUI(userId);
 				frame.setLocationRelativeTo(null);
 				frame.setVisible(true);
+				VaultUI.this.dispose();
 			}
 		});
 		moviesButton.addMouseListener(new MouseAdapter() {
@@ -102,6 +103,17 @@ public class VaultUI  extends JFrame{
 		vaultButton.setBackground(Color.DARK_GRAY);
 		vaultButton.setFont(new Font("Lucida Grande", Font.BOLD, 18));
 		vaultButton.setBorder(null);
+		vaultButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		vaultButton.addActionListener(new MyActionListener(userId) {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VaultUI frame = new VaultUI(userId);
+				frame.setLocationRelativeTo(null);
+				frame.setVisible(true);
+				VaultUI.this.dispose();
+			}
+		});
 		vaultButton.setBounds(203, 17, 76, 29);
 		navbar.add(vaultButton);
 				
@@ -188,6 +200,7 @@ public class VaultUI  extends JFrame{
 		//layeredPane.add(panel);
 	
 		JScrollPane scrollPane_1 = new JScrollPane(panel);
+		
 		scrollPane_1.setBounds(0, 40, 1284, 600);
 		layeredPane.add(scrollPane_1);
 		
@@ -209,32 +222,38 @@ public class VaultUI  extends JFrame{
 		JButton mediaButton; 
 		URL url;
 		BufferedImage c;
-		
-		for(backend.Media media: mediaList) {
-			
-			mediaButton = new JButton(media.getTitle());
-			
-			movie = new Movie(media.getId());
-			
-			
-			try {				
-				url = new URL(movie.getPosterPath());
-				c = ImageIO.read(url);
-				mediaButton.setIcon(new ImageIcon(c.getScaledInstance(350, 470, 0)));
+		if (collection.size() == 0) {
+			JLabel emptyVaultLabel = new JLabel("Nothing to see here...Search for movies and add them to your vault!");
+			emptyVaultLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+			emptyVaultLabel.setForeground(Color.WHITE);
+			panel.add(emptyVaultLabel);
+		} else {
+			for(backend.Media media: mediaList) {
 				
-			} catch (Exception e) {
+				mediaButton = new JButton(media.getTitle());
 				
-				e.printStackTrace();
+				movie = new Movie(media.getId());
+				
+				
+				try {				
+					url = new URL(movie.getPosterPath());
+					c = ImageIO.read(url);
+					mediaButton.setIcon(new ImageIcon(c.getScaledInstance(350, 470, 0)));
+					
+				} catch (Exception e) {
+					
+					e.printStackTrace();
+				}
+				mediaButton.addMouseListener(new MyMouseAdapter(userId, media.getId()));
+					
+				
+				mediaButton.setText(null);
+				mediaButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+				mediaButton.setBackground(Color.black);
+				mediaButton.setBorder(null);
+				panel.add(mediaButton);
+				
 			}
-			mediaButton.addMouseListener(new MyMouseAdapter(userId, media.getId()));
-				
-			
-			mediaButton.setText(null);
-			mediaButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			mediaButton.setBackground(Color.black);
-			mediaButton.setBorder(null);
-			panel.add(mediaButton);
-			
 		}
 	
 	}

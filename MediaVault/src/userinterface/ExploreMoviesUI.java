@@ -21,7 +21,6 @@ import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import java.awt.Cursor;
 import java.awt.Dimension;
-//import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -44,23 +43,6 @@ public class ExploreMoviesUI extends JFrame {
 	private MyTextField searchbar;
 	private JPopupMenu menu;
     private PanelSearch search;
-
-//	/**
-//	 * Launch the application.
-//	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					ExploreMoviesUI frame = new ExploreMoviesUI();
-//					frame.setLocationRelativeTo(null);
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
 	
 	/**
 	 * Create the frame.
@@ -123,6 +105,7 @@ public class ExploreMoviesUI extends JFrame {
 				VaultUI frame = new VaultUI(userId);
 				frame.setLocationRelativeTo(null);
 				frame.setVisible(true);
+				ExploreMoviesUI.this.dispose();
 			}
 		});
 		vaultButton.setBorder(null);
@@ -266,7 +249,7 @@ public class ExploreMoviesUI extends JFrame {
 			}
 		});
         actionRightButton.setBorder(new LineBorder(new Color(0, 0, 0)));
-        actionRightButton.setBackground(Color.DARK_GRAY);
+        actionRightButton.setBackground(Color.WHITE);
         actionRightButton.setBounds(705, 4, 29, 29);
         mainContent.add(actionRightButton);
         
@@ -349,7 +332,7 @@ public class ExploreMoviesUI extends JFrame {
 			}
 		});
         animationRightButton.setBorder(new LineBorder(new Color(0, 0, 0)));
-        animationRightButton.setBackground(Color.DARK_GRAY);
+        animationRightButton.setBackground(Color.WHITE);
         animationRightButton.setBounds(709, 350, 29, 29);
         mainContent.add(animationRightButton);
         
@@ -432,7 +415,7 @@ public class ExploreMoviesUI extends JFrame {
 			}
 		});
         dramaRightButton.setBorder(new LineBorder(new Color(0, 0, 0)));
-        dramaRightButton.setBackground(Color.DARK_GRAY);
+        dramaRightButton.setBackground(Color.WHITE);
         dramaRightButton.setBounds(700, 696, 29, 29);
         mainContent.add(dramaRightButton);
         
@@ -515,7 +498,7 @@ public class ExploreMoviesUI extends JFrame {
 			}
 		});
         horrorRightButton.setBorder(new LineBorder(new Color(0, 0, 0)));
-        horrorRightButton.setBackground(Color.DARK_GRAY);
+        horrorRightButton.setBackground(Color.WHITE);
         horrorRightButton.setBounds(705, 1042, 29, 29);
         mainContent.add(horrorRightButton);
         

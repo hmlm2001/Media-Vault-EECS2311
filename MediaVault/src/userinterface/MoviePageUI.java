@@ -16,6 +16,7 @@ import javax.swing.border.EmptyBorder;
 import backend.*;
 import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
+
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
@@ -30,7 +31,9 @@ public class MoviePageUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MoviePageUI(Movie movie) {
+	public MoviePageUI(int userId, Movie movie) {
+		MediaCollection movieList = new MediaCollection(userId);
+		
 		setTitle(movie.getTitle());
 		setResizable(false);
 		setBounds(100, 100, 820, 580);
@@ -94,17 +97,31 @@ public class MoviePageUI extends JFrame {
 		addButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				successPrompt.setForeground(new Color(52, 200, 15));
-				successPrompt.setBounds(536, 517, 200, 20);
-				successPrompt.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-				successPrompt.setText("Successfully Added!");
-				Timer t = new Timer(1300, new ActionListener() {
-				    public void actionPerformed(ActionEvent e) {
-						MoviePageUI.this.dispose();
-				    }
-				});
-				t.setRepeats(false);
-				t.start();
+				if (movieList.addMedia(movie)) {
+					successPrompt.setForeground(new Color(52, 200, 15));
+					successPrompt.setBounds(536, 517, 200, 20);
+					successPrompt.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+					successPrompt.setText("Successfully Added!");
+					Timer t = new Timer(500, new ActionListener() {
+					    public void actionPerformed(ActionEvent e) {
+							MoviePageUI.this.dispose();
+					    }
+					});
+					t.setRepeats(false);
+					t.start();
+				} else {
+					successPrompt.setForeground(Color.RED);
+					successPrompt.setBounds(536, 517, 200, 20);
+					successPrompt.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+					successPrompt.setText("Already in Vault!");
+					Timer t = new Timer(500, new ActionListener() {
+					    public void actionPerformed(ActionEvent e) {
+							MoviePageUI.this.dispose();
+					    }
+					});
+					t.setRepeats(false);
+					t.start();
+				}
 			}
 		});
 		addButton.setOpaque(true);
@@ -121,9 +138,9 @@ public class MoviePageUI extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				successPrompt.setForeground(new Color(52, 200, 15));
-				successPrompt.setBounds(536, 517, 200, 20);
+				successPrompt.setBounds(533, 517, 200, 20);
 				successPrompt.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-				successPrompt.setText("Successfully Removed!");
+				successPrompt.setText("Nothing's happened!");
 				Timer t = new Timer(1300, new ActionListener() {
 				    public void actionPerformed(ActionEvent e) {
 						MoviePageUI.this.dispose();

@@ -33,25 +33,32 @@ class UserTest {
 		existingUser = new User("user1");
 	}
 
-	//Test 1 new user
+	/**
+	 * Test 1 new user
+	 */
 	@Test
 	void newUserTest() {
 		assertTrue(newUser != null);
 		assertEquals(newUser.getUsername(), "Mate");
 		assertTrue(newUser.getMediaList() != null);
-		assertEquals(newUser.getMediaList().size(), 0);
+		assertEquals(0,newUser.getMediaList().size());
 	}
 
-	//Test exixting user
-		@Test
-		void existingUserTest() {
-			assertTrue(existingUser != null);
-			assertEquals(existingUser.getUsername(), "user1");
-			assertTrue(existingUser.getMediaList() != null);
-			assertEquals(existingUser.getMediaList().size(), 0);
-		}
+	/**
+	 * Test exixting user
+	 */
+	@Test
+	void existingUserTest() {
+		assertTrue(existingUser != null);
+		assertEquals(existingUser.getUsername(), "user1");
+		assertTrue(existingUser.getMediaList() != null);
+		assertEquals(1,existingUser.getMediaList().size());
+	}
 		
-	//Test adding media
+	/**
+	 * Test adding media
+	 * @throws ParseException
+	 */
 	@Test
 	void UserTest2() throws ParseException {
 		assertTrue(newUser != null);
@@ -65,18 +72,20 @@ class UserTest {
 		
 		assertEquals(newUser.getMediaList().size(), 1);
 		
-		assertEquals(newUser.getMediaList().get(0), media);
+		assertEquals(newUser.getMediaList().get(0).getId(), media.getId());
 	}
 	
-	//Test adding duplicate media
+	/**
+	 * Test adding duplicate media
+	 * @throws ParseException
+	 */
 	@Test
 	void UserTest2_1() throws ParseException {
 		assertTrue(newUser != null);
 		assertTrue(newUser.getMediaList() != null);
 		assertEquals(newUser.getMediaList().size(), 0);
 		
-		//Date date = dateFormat.parse("2010-03-26");
-		//Movie media = new Movie(315162);
+		
 		assertTrue(newUser.addMedia(315162));
 		
 		assertTrue(newUser.getMediaList() != null);
@@ -84,7 +93,10 @@ class UserTest {
 		assertFalse(newUser.addMedia(315162));
 	}
 	
-	//Test adding multiple media
+	/**
+	 * Test adding multiple media
+	 * @throws ParseException
+	 */
 	@Test
 	void UserTest2_2() throws ParseException {
 		assertTrue(newUser != null);
@@ -96,18 +108,20 @@ class UserTest {
 		assertEquals(newUser.getMediaList().size(), 1);
 		assertTrue(newUser.addMedia(646389));
 		assertEquals(newUser.getMediaList().size(), 2);
-		assertEquals(newUser.getMediaList().get(0), media);
-		assertEquals(newUser.getMediaList().get(1), media1);
+		assertEquals(newUser.getMediaList().get(0).getId(), media.getId());
+		assertEquals(newUser.getMediaList().get(1).getId(), media1.getId());
 	}
 	
-	//Test removing media
+	/**
+	 * Test removing media
+	 * @throws ParseException
+	 */
 	@Test
 	void UserTest3() throws ParseException {
 		assertTrue(newUser != null);
 		assertTrue(newUser.getMediaList() != null);
 		assertEquals(newUser.getMediaList().size(), 0);
-		//Date date = dateFormat.parse("2010-03-26");
-		//Movie media = new Movie(315162);
+	
 		assertTrue(newUser.addMedia(315162));
 		assertTrue(newUser.getMediaList() != null);
 		assertEquals(newUser.getMediaList().size(), 1);
@@ -115,14 +129,16 @@ class UserTest {
 		assertEquals(newUser.getMediaList().size(), 0);
 	}
 	
-	//Test removing media that isn't in collection
+	/**
+	 * Test removing media that isn't in collection
+	 * @throws ParseException
+	 */
 	@Test
 	void UserTest3_1() throws ParseException {
 		assertTrue(newUser != null);
 		assertTrue(newUser.getMediaList() != null);
 		assertEquals(newUser.getMediaList().size(), 0);
-		//Date date = dateFormat.parse("2010-03-26");
-		//Movie media = new Movie(315162);
+		
 		assertTrue(newUser.addMedia(315162));
 		assertTrue(newUser.getMediaList() != null);
 		assertEquals(newUser.getMediaList().size(), 1);
@@ -130,13 +146,16 @@ class UserTest {
 		assertEquals(newUser.getMediaList().size(), 1);
 	}
 	
-	//Test removing media from a collection of multiple media
+	/**
+	 * Test removing media from a collection of multiple media
+	 * @throws ParseException
+	 */
 	@Test
 	void UserTest3_2() throws ParseException {
 		assertTrue(newUser != null);
 		assertTrue(newUser.getMediaList() != null);
 		assertEquals(newUser.getMediaList().size(), 0);
-		//Date date = dateFormat.parse("2010-03-26");
+		
 		Movie media = new Movie(315162);
 		Movie media1 = new Movie(646389);
 		assertTrue(newUser.addMedia(315162));
@@ -144,14 +163,16 @@ class UserTest {
 		assertEquals(newUser.getMediaList().size(), 1);
 		assertTrue(newUser.addMedia(646389));
 		assertEquals(newUser.getMediaList().size(), 2);
-		assertEquals(newUser.getMediaList().get(0), media);
-		assertEquals(newUser.getMediaList().get(1), media1);
+		assertEquals(newUser.getMediaList().get(0).getId(), media.getId());
+		assertEquals(newUser.getMediaList().get(1).getId(), media1.getId());
 		assertTrue(newUser.removeMedia(315162));
 		assertEquals(newUser.getMediaList().size(), 1);
-		assertEquals(newUser.getMediaList().get(0), media1);
+		assertEquals(newUser.getMediaList().get(0).getId(), media1.getId());
 	}
 	
-	//Test two users
+	/**
+	 * Test two users
+	 */
 	@Test
 	void UserTest4() {
 		assertTrue(newUser != null);
@@ -168,7 +189,10 @@ class UserTest {
 		assertFalse(newUser.getMediaList() == user1.getMediaList());
 	}
 	
-	//Test two users with different collections sizes
+	/**
+	 * Test two users with different collections sizes
+	 * @throws ParseException
+	 */
 	@Test
 	void UserTest4_1() throws ParseException {
 		assertTrue(newUser != null);
@@ -183,14 +207,17 @@ class UserTest {
 		assertTrue(newUser != user1);
 		assertFalse(newUser.getUsername().equals(user1.getUsername()));
 		assertFalse(newUser.getMediaList() == user1.getMediaList());
-		//Movie media = new Movie(315162);
+		
 		assertTrue(newUser.addMedia(315162));
 		assertEquals(1, newUser.getMediaList().size());
 		assertEquals(0, user1.getMediaList().size());
 		assertFalse(newUser.getMediaList() == user1.getMediaList());
 	}
 	
-	//Test two users with different media
+	/**
+	 * Test two users with different media
+	 * @throws ParseException
+	 */
 	@Test
 	void UserTest4_2() throws ParseException {
 		assertTrue(newUser != null);
@@ -205,9 +232,9 @@ class UserTest {
 		assertTrue(newUser != user1);
 		assertFalse(newUser.getUsername().equals(user1.getUsername()));
 		assertFalse(newUser.getMediaList() == user1.getMediaList());
-		//Movie media = new Movie(315162);
+		
 		assertTrue(newUser.addMedia(315162));
-		//Movie media1 = new Movie(646389);
+		
 		assertTrue(user1.addMedia(646389));
 		assertEquals(newUser.getMediaList().size(), 1);
 		assertEquals(user1.getMediaList().size(), 1);
@@ -215,7 +242,10 @@ class UserTest {
 		assertFalse(newUser.getMediaList().get(0) == user1.getMediaList().get(0));
 	}
 		
-	//Test two users with the same media
+	/**
+	 * Test two users with the same media
+	 * @throws ParseException
+	 */
 	@Test
 	void UserTest4_3() throws ParseException {
 		assertTrue(newUser != null);
@@ -230,16 +260,19 @@ class UserTest {
 		assertTrue(newUser != user1);
 		assertFalse(newUser.getUsername().equals(user1.getUsername()));
 		assertFalse(newUser.getMediaList() == user1.getMediaList());
-		//Movie media = new Movie(315162);
+		
 		assertTrue(newUser.addMedia(315162));
 		assertTrue(user1.addMedia(315162));
 		assertEquals(newUser.getMediaList().size(), 1);
 		assertEquals(user1.getMediaList().size(), 1);
 		assertFalse(newUser.getMediaList() == user1.getMediaList());
-		assertTrue(newUser.getMediaList().get(0) == user1.getMediaList().get(0));
+		assertTrue(newUser.getMediaList().get(0).getId() == user1.getMediaList().get(0).getId());
 	}
 		
-	//Test removing media from one of two users
+	/**
+	 * Test removing media from one of two users
+	 * @throws ParseException
+	 */
 	@Test
 	void UserTest4_4() throws ParseException {
 		assertTrue(newUser != null);
@@ -254,7 +287,6 @@ class UserTest {
 		assertTrue(newUser != user1);
 		assertFalse(newUser.getUsername().equals(user1.getUsername()));
 		assertFalse(newUser.getMediaList() == user1.getMediaList());
-		//Movie media = new Movie(315162);
 		assertTrue(newUser.addMedia(315162));
 		assertTrue(user1.addMedia(315162));
 		assertEquals(newUser.getMediaList().size(), 1);

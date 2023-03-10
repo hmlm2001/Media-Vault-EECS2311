@@ -24,13 +24,19 @@ class MediaCollectionTest {
 		user3Collection = new MediaCollection(3);
 	}
 	
-	// Testing the addition of media
+	/**
+	 *  Testing the addition of media
+	 * @throws ParseException
+	 */
 	@Test
 	void addMediaTest1() throws ParseException {
 		assertTrue(user1Collection.addMedia(new Movie(505642)));
 	}
 
-	// Testing the addition of duplicate media 
+	/**
+	 * Testing the addition of duplicate media 
+	 * @throws ParseException
+	 */
 	@Test
 	void addMediaTest2() throws ParseException {
 		Movie med = new Movie(505642);
@@ -38,7 +44,10 @@ class MediaCollectionTest {
 		assertFalse(user1Collection.addMedia(med));
 	}
 	
-	// Testing the removal of existing media
+	/**
+	 *  Testing the removal of existing media
+	 * @throws ParseException
+	 */
 	@Test
 	void removeMediaTest1() throws ParseException {
 		Movie med = new Movie(505642);
@@ -46,14 +55,20 @@ class MediaCollectionTest {
 		assertTrue(user1Collection.removeMedia(505642));
 	}
 	
-	// Testing the removal of non-existing media
+	/**
+	 *  Testing the removal of non-existing media
+	 * @throws ParseException
+	 */
 	@Test
 	void removeMediaTest2() throws ParseException {
 		Movie med = new Movie(315162);
 		assertFalse(user1Collection.removeMedia(315162));
 	}	
 	
-	// Testing getMediaList
+	/**
+	 *  Testing getMediaList
+	 * @throws ParseException
+	 */
 	@Test
 	void getMediaListTest() throws ParseException {
 		ArrayList<Media> user3list = new ArrayList<>();

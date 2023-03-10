@@ -59,7 +59,13 @@ Feb 13th:
 	Tested object creation and read from file.
 Feb 15:
 	added case insensitivity to the search function of all media. remains to be tested.
-
+	
+Muhammad's Progress: 
+Feb 13th: 
+	completd the AllMedia and media collection code.
+Feb 15th:
+	helped with creating the stub database
+	
 Progress as of 15 February:
 	All parts of the iteration 1 requirements have been completed. Now just need a day to properly connect them all and write appropriate test cases.
 	Time estimates were mostly accurate. All members contributed and managed to do their assigned tasks.

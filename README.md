@@ -9,11 +9,14 @@ MediaVault is a software application with the main purpose of storing a collecti
 The MediaVault database must be initialized using MySQL before running the main application.
 To initialize the database, run the **SETUP.sql** script (located in MediaVault/database) with the root MySQL user.
 
-## Switching to Stub
-For the purposes of the assignment a stub DB was implemented. To switch over from standard DB to stub DB, the following command has to be issued: **UseStub.setStubFlag(true);**
-
 ## Running MediaVault
 To run MediaVault, simply compile and run the **MediaVault.java** file located in MediaVault/src/userinterface.
 
+## Switching to Stub
+For the purposes of the assignment a stub DB was implemented. To switch over from the real DB to the stub DB, set the stub flag to true in MediaVault.java using the following line of code in the main method:
+```
+UseStub.setStubFlag(true);
+```
+
 ## Required Documents
-The required documents for each iteration are stored in Planning Documents.
+The required documents for each iteration are stored in "Planning Documents".

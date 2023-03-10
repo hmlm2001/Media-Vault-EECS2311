@@ -42,7 +42,7 @@ class MediaCollectionTest {
 	@Test
 	void removeMediaTest1() throws ParseException {
 		Movie med = new Movie(505642);
-		user1Collection.addMedia(med);
+		assertTrue(user1Collection.addMedia(med));
 		assertTrue(user1Collection.removeMedia(505642));
 	}
 	
@@ -56,14 +56,14 @@ class MediaCollectionTest {
 	// Testing getMediaList
 	@Test
 	void getMediaListTest() throws ParseException {
-		ArrayList<Media> actual = new ArrayList<>();
+		ArrayList<Media> user3list = new ArrayList<>();
+		
+		user3list= user3Collection.getMediaList();
+		
+		assertEquals(646389,user3list.get(0).getId());
+		assertEquals(772515,user3list.get(1).getId());	
+		
 	
-		actual.add(new Movie(646389));
-		actual.add(new Movie(772515));
-		
-		
-		
-		assertTrue(actual.equals(user1Collection.getMediaList()));
 	}	
 
 }

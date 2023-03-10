@@ -68,6 +68,7 @@ public class MediaCollection {
 			if (this.mediaList.get(i).getId()==id) {
 				this.mediaList.remove(i);
 				if (!UseStub.getStubFlag()) return MediaCollectionDB.removeMediaCollection(this.id, id);
+				return true;
 			}
 		}
 		return false;

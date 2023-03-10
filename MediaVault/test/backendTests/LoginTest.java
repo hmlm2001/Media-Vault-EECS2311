@@ -2,12 +2,18 @@ package backendTests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import backend.*;
 
 class LoginTest {
 	
+	@BeforeEach 
+	void init() {
+		UseStub.setStubFlag(true);
+	}
 	//Try creating an account
 	@Test
 	void LoginTest1() {
@@ -34,6 +40,11 @@ class LoginTest {
 		Login.createAccount("Herman", "123");
 		assertFalse(Login.login("Mohammed", "123"));
 		assertFalse(Login.login("Herman", "1234"));
+	}
+	
+	@AfterAll 
+	void clean() {
+		UseStub.setStubFlag(false);
 	}
 
 }

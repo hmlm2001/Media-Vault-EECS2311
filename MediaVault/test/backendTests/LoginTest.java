@@ -49,10 +49,4 @@ class LoginTest {
 		assertFalse(Login.login("Mohammed", "123"));
 		assertFalse(Login.login("Herman", "1234"));
 	}
-	
-	@AfterAll 
-	void clean() {
-		UseStub.setStubFlag(false);
-	}
-
 }

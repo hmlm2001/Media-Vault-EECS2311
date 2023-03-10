@@ -112,6 +112,12 @@ Mate Progress:
 - Modnay was the main implementation of the stub and DB, based on the previous day's brainstorming and testing
 - UML updated for backend, since the UI was done in seperate parth, the UML will be updated to accurately potray the project design on Wednesday when each class can be accurately created with put from its creator
 
+Ruth progress:
+- created new MediaCollectionUI class to display movies in a user's vault with the same basic layoutas the previous UIs. 
+- refactored iteration1 unit tests to work with new formats, added new tests for newly added methods and set the UseStub flag to true for all unit tests.
+- added a basic addMediaButtons method to creat buttons for each movie in the vault and added a non-functional remove from vault button.
+- created integration tests for database classes, later refactored them
+
 8th March 2023
 The meeting was during the Lecture time from 11:30am to 1:30pm. This meeting was for mergning tasks that everyone should have finished by the deadline.
 The mergning took a while as some issues arose with previous commits on main, however, in the end everything was successfully merged.

@@ -118,6 +118,11 @@ Ruth progress:
 - added a basic addMediaButtons method to creat buttons for each movie in the vault and added a non-functional remove from vault button.
 - created integration tests for database classes, later refactored them
 
+Isaac's progress:
+- 4th and 5th March: Created ExploreMoviesUI and organized the movies to be displayed in the explore page by genre.
+- 6th March: Created MoviePageUI to display individual movie information for specific movies. Linked MoviePageUI with ExploreMoviesUI. Started working on search bar.
+- 7th March: Finished search bar implementation that allows users search through the library for specific movies.
+
 8th March 2023
 The meeting was during the Lecture time from 11:30am to 1:30pm. This meeting was for mergning tasks that everyone should have finished by the deadline.
 The mergning took a while as some issues arose with previous commits on main, however, in the end everything was successfully merged.
@@ -126,10 +131,10 @@ Tasks Assignments + Estimates vs Time Taken
 	Backend
 		Vault 				-Mate	Estimated:[3 days]	Time Taken:[2 days]
 	User Interface	
-		Explore				-Isaac	Estimated:[3 days]	Time Taken:[3 days]
+		Explore				-Isaac	Estimated:[3 days]	Time Taken:[2 days]
 		MediaCollection (vaults)	-Ruth	Estimated:[3 days]	Time Taken:[3 days]
-		Search Bar			-Isaac	Estimated:[1 day]	Time Taken:[1 days]
-		Individual Pages		-Isaac	Estimated:[2 days]	Time Taken:[2 days]
+		Search Bar			-Isaac	Estimated:[1 day]	Time Taken:[2 days]
+		Individual Pages		-Isaac	Estimated:[2 days]	Time Taken:[1 day]
 	Persistence/Other
 		Tests				-Ruth/Herman	 Estimated:[4 days]	Time Taken:[4 days]
 		Stubs				-Mate		 Estimated:[2 days]	Time Taken:[2 days]

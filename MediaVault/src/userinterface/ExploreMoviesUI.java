@@ -82,10 +82,6 @@ public class ExploreMoviesUI extends JFrame {
 		navbar.add(moviesButton);
 		
 		JButton vaultButton = new JButton("VAULT");
-		vaultButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		vaultButton.addMouseListener(new MouseAdapter() {
 			public void mouseEntered(MouseEvent e) {
 				vaultButton.setForeground(Color.WHITE);

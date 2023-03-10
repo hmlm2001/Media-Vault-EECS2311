@@ -38,11 +38,11 @@ import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 
 import javax.swing.JScrollPane;
 import java.awt.FlowLayout;
 import javax.swing.JLayeredPane;
+import javax.swing.ScrollPaneConstants;
 
 @SuppressWarnings("serial")
 public class VaultUI extends JFrame{
@@ -211,8 +211,9 @@ public class VaultUI extends JFrame{
 		
 	
 		JScrollPane scrollPane_1 = new JScrollPane(panel);
+		scrollPane_1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		
-		scrollPane_1.setBounds(0, 40, 1284, 600);
+		scrollPane_1.setBounds(0, 40, 1284, 550);
 		layeredPane.add(scrollPane_1);
 		
 		JLabel userLabel = new JLabel("This is your vault, " + UserDB.getUsername(userId));
@@ -293,6 +294,16 @@ public class VaultUI extends JFrame{
 				removeButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 				removeButton.setBackground(new Color(31, 31, 31));
 				removeButton.setBorder(null);
+				removeButton.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						collection.removeMedia(media.getId());
+						VaultUI frame = new VaultUI(userId);
+						frame.setLocationRelativeTo(null);
+						frame.setVisible(true);
+						VaultUI.this.dispose();
+					}
+				});
 				constraints.fill = GridBagConstraints.HORIZONTAL;
 				constraints.gridwidth = 1;
 				constraints.gridx=2;

@@ -61,7 +61,6 @@ class MediaCollectionTest {
 	 */
 	@Test
 	void removeMediaTest2() throws ParseException {
-		Movie med = new Movie(315162);
 		assertFalse(user1Collection.removeMedia(315162));
 	}	
 	

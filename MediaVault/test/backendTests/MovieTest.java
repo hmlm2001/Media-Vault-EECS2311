@@ -2,7 +2,6 @@ package backendTests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -10,7 +9,6 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import backend.Media;
 import backend.Movie;
 import backend.UseStub;
 

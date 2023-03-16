@@ -55,7 +55,7 @@ public class ExploreMoviesUI extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ExploreMoviesUI frame = new ExploreMoviesUI(1);
+					ExploreMoviesUI frame = new ExploreMoviesUI(10);
 					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -216,11 +216,25 @@ public class ExploreMoviesUI extends JFrame {
 		userLabel.setBounds(6, 9, 422, 16);
 		mainContent.add(userLabel);
 		
-		// Add genre sections (separated by 355px each vertically)
-		addGenreSection(mainContent, userId, "Action", 8, 10);
-		addGenreSection(mainContent, userId, "Animation", 8, 365);
-		addGenreSection(mainContent, userId, "Drama", 8, 715);
-		addGenreSection(mainContent, userId, "Thriller", 8, 1065);
+		// Creating an instance of the user's vault
+		MediaCollection collection = new MediaCollection(userId);
+		// If the user has no movies in their vault, display default explore page
+		if (collection.size() == 0) {
+			// Add genre sections (separated by 355px each vertically)
+			addGenreSection(mainContent, userId, "Action", 8, 10);
+			addGenreSection(mainContent, userId, "Animation", 8, 365);
+			addGenreSection(mainContent, userId, "Drama", 8, 715);
+			addGenreSection(mainContent, userId, "Thriller", 8, 1065);
+		} // If the user has movies in their vault, display recommended section with the rest of explore page
+		else {
+			List<Media> recommended = new ArrayList<>();
+			recommended.add(new Movie(411));
+			recommended.add(new Movie(19995));
+			addRecommended(mainContent, userId, recommended, 10);
+			addGenreSection(mainContent, userId, "Action", 8, 365);
+			addGenreSection(mainContent, userId, "Animation", 8, 715);
+			addGenreSection(mainContent, userId, "Drama", 8, 1065);
+		}
 	}
 	
 	/**
@@ -303,6 +317,82 @@ public class ExploreMoviesUI extends JFrame {
 	    	        
 	        		movieCount++;
 	    		}
+	    	}
+	        			        
+	    } catch (Exception e) {
+	    	e.printStackTrace();
+	    }
+	}
+	
+	// TODO: ADD JAVADOC
+	private void addRecommended(JPanel panel, int userId, List<Media> recommended, int yPosition) {
+		JLabel label = new JLabel("RECOMMENDED");
+	    label.setBounds(570, yPosition, 180, 22);
+	    label.setFont(new Font("Lucida Grande", Font.BOLD, 19));
+	    label.setBackground(Color.WHITE);
+	    panel.add(label);
+	    
+	    JPanel content = new JPanel();
+	    content.setBackground(Color.DARK_GRAY);
+	    content.setLayout(new FlowLayout(FlowLayout.CENTER, 3, 3));
+	    JScrollPane scrollPane = new JScrollPane(content);
+	    
+	    scrollPane.setViewportView(content);
+	    scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+	    scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+	    scrollPane.setBounds(6, yPosition+34, 1275, 310);
+	    panel.add(scrollPane);
+	    JViewport viewport = scrollPane.getViewport();
+	    
+	    JButton leftButton = new JButton("<");
+	    leftButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+	    leftButton.setFont(new Font("Lucida Grande", Font.BOLD, 18));
+	    leftButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) { 
+				Point origin = viewport.getViewPosition();
+				Point newOrigin = new Point(origin.x-150, origin.y);
+				if (origin.x != 0) { 
+					viewport.setViewPosition(newOrigin);
+				}
+			}
+		});
+	    leftButton.setBorder(new LineBorder(new Color(0, 0, 0)));
+	    leftButton.setBackground(Color.WHITE);
+	    leftButton.setBounds(530, yPosition-2, 29, 29);
+	    panel.add(leftButton);
+	    
+	    JButton rightButton = new JButton(">");
+	    rightButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+	    rightButton.setFont(new Font("Lucida Grande", Font.BOLD, 18));
+	    rightButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Point origin = viewport.getViewPosition();
+				Point newOrigin = new Point(origin.x+150, origin.y);
+				viewport.setViewPosition(newOrigin);
+			}
+		});
+	    rightButton.setBorder(new LineBorder(new Color(0, 0, 0)));
+	    rightButton.setBackground(Color.WHITE);
+	    rightButton.setBounds(735, yPosition-2, 29, 29);
+	    panel.add(rightButton);
+	    
+	    try {
+	    	for (Media media : recommended) {
+	    		int id = media.getId();
+	    		Movie movie = new Movie(id);
+        		String path = movie.getPosterPath();
+    	        URL url = new URL(path);
+    			BufferedImage image = ImageIO.read(url);
+    			Image poster = new ImageIcon(image).getImage().getScaledInstance(225, 300, Image.SCALE_SMOOTH);
+    			
+    			JButton moviePoster = new JButton(new ImageIcon(poster));
+        		moviePoster.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        		moviePoster.setBorder(null);
+        		moviePoster.setBackground(Color.black);
+        		moviePoster.addMouseListener(new MyMouseAdapter(userId, id));
+    	        content.add(moviePoster);
 	    	}
 	        			        
 	    } catch (Exception e) {

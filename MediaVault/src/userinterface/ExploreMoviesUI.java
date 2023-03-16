@@ -35,6 +35,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JViewport;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.LineBorder;
+import java.awt.FlowLayout;
 
 @SuppressWarnings("serial")
 public class ExploreMoviesUI extends JFrame {
@@ -205,7 +206,7 @@ public class ExploreMoviesUI extends JFrame {
         mainScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         
         JPanel mainContent = new JPanel();
-        mainContent.setPreferredSize(new Dimension(1300, 1382));
+        mainContent.setPreferredSize(new Dimension(1300, 1415));
         mainScrollPane.setViewportView(mainContent);
         mainContent.setBackground(Color.WHITE);
         mainContent.setLayout(null);
@@ -215,11 +216,11 @@ public class ExploreMoviesUI extends JFrame {
 		userLabel.setBounds(6, 9, 422, 16);
 		mainContent.add(userLabel);
 		
-		// Add genre sections (separated by 345px each vertically)
-		addGenreSection(mainContent, userId, "Action", 7);
-		addGenreSection(mainContent, userId, "Animation", 352);
-		addGenreSection(mainContent, userId, "Drama", 697);
-		addGenreSection(mainContent, userId, "Thriller", 1042);
+		// Add genre sections (separated by 355px each vertically)
+		addGenreSection(mainContent, userId, "Action", 8, 10);
+		addGenreSection(mainContent, userId, "Animation", 8, 365);
+		addGenreSection(mainContent, userId, "Drama", 8, 715);
+		addGenreSection(mainContent, userId, "Thriller", 8, 1065);
 	}
 	
 	/**
@@ -229,25 +230,24 @@ public class ExploreMoviesUI extends JFrame {
 	 * @param genre - the genre to be added (first letter capitalized)
 	 * @param yPosition - the starting y position of the section
 	 */
-	private void addGenreSection(JPanel panel, int userId, String genre, int yPosition) {
+	private void addGenreSection(JPanel panel, int userId, String genre, int numOfMovies, int yPosition) {
 	    JLabel label = new JLabel(genre.toUpperCase(), SwingConstants.CENTER);
 	    label.setBounds(582, yPosition, 130, 22);
 	    label.setFont(new Font("Lucida Grande", Font.BOLD, 19));
 	    label.setBackground(Color.WHITE);
 	    panel.add(label);
 	    
-	    JScrollPane scrollPane = new JScrollPane();
+	    JPanel content = new JPanel();
+	    content.setBackground(Color.DARK_GRAY);
+	    content.setLayout(new FlowLayout(FlowLayout.CENTER, 3, 3));
+	    JScrollPane scrollPane = new JScrollPane(content);
+	    
+	    scrollPane.setViewportView(content);
 	    scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 	    scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-	    scrollPane.setBounds(6, yPosition+34, 1275, 300);
+	    scrollPane.setBounds(6, yPosition+34, 1275, 310);
 	    panel.add(scrollPane);
 	    JViewport viewport = scrollPane.getViewport();
-	    
-	    JPanel content = new JPanel();
-	    content.setPreferredSize(new Dimension(3412, 270));
-	    scrollPane.setViewportView(content);
-	    content.setBackground(Color.WHITE);
-	    content.setLayout(null);
 	    
 	    JButton leftButton = new JButton("<");
 	    leftButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -285,9 +285,8 @@ public class ExploreMoviesUI extends JFrame {
 	    
 	    try {
 	    	int movieCount = 0;
-	    	int xPosition = 1;
-	    	JLabel[] moviePosters = new JLabel[9];
-	    	for (int i = 0; i < allMovies.size() && movieCount < 9; i++) {
+	    	JButton[] moviePosters = new JButton[numOfMovies];
+	    	for (int i = 0; i < allMovies.size() && movieCount < numOfMovies; i++) {
 	    		if (allMovies.get(i).getGenre().equals(genre)) {
 	        		String path = allMovies.get(i).getPosterPath();
 	        		int id = allMovies.get(i).getId();
@@ -295,11 +294,13 @@ public class ExploreMoviesUI extends JFrame {
 	    			BufferedImage image = ImageIO.read(url);
 	    			Image poster = new ImageIcon(image).getImage().getScaledInstance(225, 300, Image.SCALE_SMOOTH);
 	    			
-	        		moviePosters[movieCount] = createMoviePoster(new ImageIcon(poster), xPosition);
+	        		moviePosters[movieCount] = new JButton(new ImageIcon(poster));
+	        		moviePosters[movieCount].setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+	        		moviePosters[movieCount].setBorder(null);
+	        		moviePosters[movieCount].setBackground(Color.black);
 	        		moviePosters[movieCount].addMouseListener(new MyMouseAdapter(userId, id));
 	    	        content.add(moviePosters[movieCount]);
 	    	        
-	    	        xPosition += 240;
 	        		movieCount++;
 	    		}
 	    	}
@@ -309,20 +310,6 @@ public class ExploreMoviesUI extends JFrame {
 	    }
 	}
 	
-	/**
-	 * Used to create movie posters using a JLabel
-	 * @param img - the poster to be used
-	 * @param x - the x coordinate of the image
-	 * @param y - the y coordinate of the image
-	 * @return JLabel containing the poster
-	 */
-	private JLabel createMoviePoster(ImageIcon img, int x) {
-		JLabel moviePoster = new JLabel(img);
-		moviePoster.setBounds(x, 0, 225, 300);
-		moviePoster.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		return moviePoster;
-	}
-			
 	/**
 	 * Used to show the menu when the searchbar is clicked
 	 * @param evt - occurs when the mouse is clicked

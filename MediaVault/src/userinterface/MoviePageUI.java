@@ -36,6 +36,7 @@ public class MoviePageUI extends JFrame {
 		
 		setTitle(movie.getTitle());
 		setResizable(false);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 820, 580);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
@@ -132,6 +133,16 @@ public class MoviePageUI extends JFrame {
 		JButton reviewsButton = new JButton("View Reviews");
 		reviewsButton.setOpaque(true);
 		reviewsButton.setFont(new Font("Lucida Grande", Font.BOLD, 16));
+		reviewsButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ReviewsUI frame = new ReviewsUI(userId, movie);
+		    	frame.setLocationRelativeTo(null);
+		    	frame.toFront();
+		    	frame.requestFocus();
+				frame.setVisible(true);
+			}
+		});
 		reviewsButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		reviewsButton.setBorder(new LineBorder(new Color(0, 0, 0)));
 		reviewsButton.setBackground(Color.WHITE);

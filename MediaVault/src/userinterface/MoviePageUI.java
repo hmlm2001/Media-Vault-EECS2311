@@ -102,7 +102,7 @@ public class MoviePageUI extends JFrame {
 					successPrompt.setBounds(540, 516, 200, 20);
 					successPrompt.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 					successPrompt.setText("Successfully Added!");
-					Timer t = new Timer(500, new ActionListener() {
+					Timer t = new Timer(800, new ActionListener() {
 					    public void actionPerformed(ActionEvent e) {
 							MoviePageUI.this.dispose();
 					    }
@@ -114,7 +114,7 @@ public class MoviePageUI extends JFrame {
 					successPrompt.setBounds(550, 516, 200, 20);
 					successPrompt.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 					successPrompt.setText("Already in Vault!");
-					Timer t = new Timer(500, new ActionListener() {
+					Timer t = new Timer(800, new ActionListener() {
 					    public void actionPerformed(ActionEvent e) {
 							MoviePageUI.this.dispose();
 					    }
@@ -126,8 +126,17 @@ public class MoviePageUI extends JFrame {
 		});
 		addButton.setOpaque(true);
 		addButton.setBackground(Color.WHITE);
-		addButton.setBounds(515, 480, 192, 31);
+		addButton.setBounds(621, 480, 181, 31);
 		contentPane.add(addButton);
+		
+		JButton reviewsButton = new JButton("View Reviews");
+		reviewsButton.setOpaque(true);
+		reviewsButton.setFont(new Font("Lucida Grande", Font.BOLD, 16));
+		reviewsButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		reviewsButton.setBorder(new LineBorder(new Color(0, 0, 0)));
+		reviewsButton.setBackground(Color.WHITE);
+		reviewsButton.setBounds(421, 480, 181, 31);
+		contentPane.add(reviewsButton);
 		
 	}
 }

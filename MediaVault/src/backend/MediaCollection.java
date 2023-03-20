@@ -22,15 +22,15 @@ public class MediaCollection {
 			mediaList = new ArrayList<Media>();
 			if (userid == 1) {
 				this.id=1;
-				mediaList.add(new Movie(631842));
+				mediaList.add(new Movie(631842).setStatus("Compeleted"));
 			} else if (userid == 2) {
 				this.id=2;
-				mediaList.add(new Movie(505642));
-				mediaList.add(new Movie(315162));
+				mediaList.add(new Movie(505642).setStatus("Yet to Watch"));
+				mediaList.add(new Movie(315162).setStatus("In Prograss"));
 			} else if (userid == 3) {
 				this.id=3;
-				mediaList.add(new Movie(646389));
-				mediaList.add(new Movie(772515));
+				mediaList.add(new Movie(646389).setStatus("Yet to Watch"));
+				mediaList.add(new Movie(772515).setStatus("Compeleted"));
 			}
 		}
 	}
@@ -80,5 +80,11 @@ public class MediaCollection {
 	 */
 	public int size() {
 		return mediaList.size();
+	}
+	
+	public static void main(String[] args) {
+		MediaCollection media = new MediaCollection(1);
+		ArrayList<Media> med = media.getMediaList();
+		System.out.println(med.get(1).getStatus( + " AA"));
 	}
 }

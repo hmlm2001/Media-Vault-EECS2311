@@ -7,7 +7,7 @@ public abstract class Media {
 	
 	public Media(int id) {
 		this.id=id;
-		this.status="";
+		this.status="---";
 	}
 	/**
 	 * @return the title of the movie
@@ -25,6 +25,7 @@ public abstract class Media {
 		return this.status;
 	}
 	public Media setStatus(String status) { 
+		this.status=status;
 		return this;
 	}
 }

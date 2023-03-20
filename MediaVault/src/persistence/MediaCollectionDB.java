@@ -45,10 +45,9 @@ public class MediaCollectionDB {
 		result = JDBC_Connection.getResult("SELECT * FROM mediarelations WHERE mediaCollectionID='"+collectionid+"';");
 		try {
 			while (result.next()) {
-				collection.add(new Movie(result.getInt(1)).setStatus(result.getString(3))); //get all the movies for a media collection and store them in collection
+				collection.add(new Movie(result.getInt(1)).setStatus(result.getString(3))); //get all the movies for a media collection and store them in collection, also get the status
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 		return collection;
 	}

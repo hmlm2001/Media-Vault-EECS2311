@@ -81,10 +81,4 @@ public class MediaCollection {
 	public int size() {
 		return mediaList.size();
 	}
-	
-	public static void main(String[] args) {
-		MediaCollection media = new MediaCollection(1);
-		ArrayList<Media> med = media.getMediaList();
-		System.out.println(med.get(1).getStatus());
-	}
 }

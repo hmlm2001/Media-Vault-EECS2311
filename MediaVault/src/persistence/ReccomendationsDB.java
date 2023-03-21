@@ -8,6 +8,12 @@ import backend.Media;
 import backend.Movie;
 
 public class ReccomendationsDB {
+	/**
+	 * Gets the recommendations that are not in the vault already
+	 * @param mediaCollectionId is the id of the collection that must be excluded
+	 * @param n is the number of recommendations
+	 * @return an arraylist of media containing the recommendations
+	 */
 	public static ArrayList<Media> get(int mediaCollectionId, int n){
 		ArrayList<Media> list = new ArrayList<Media>();
 		ResultSet result;

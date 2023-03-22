@@ -23,8 +23,36 @@ public class ReviewDB {
 		}
 		return reviews;
 	}
-
-	public static void add(int id, String review) {
+	public static boolean userReviewed(int movieId, String username) {
+		ResultSet result;
+		result = JDBC_Connection.getResult("SELECT * FROM review WHERE username='"+username+"'AND movieid="+movieId+";");
+		try {
+			if (result.next() == false) {
+			      return false;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return true;
+	}
+	
+	public static boolean add(int movieId, Review reviewObj) {
+		String username = reviewObj.getUser().getUsername();
+		String review = reviewObj.getReview();
+		if (!userReviewed(movieId,username)) {
+			
+		} else {
+			
+		}
+		return true;
 		
+		
+	}
+	public static void main (String[] args) {
+		System.out.println(ReviewDB.userReviewed(631842, "user1"));
+		System.out.println(ReviewDB.userReviewed(63182, "user1"));
+		System.out.println(ReviewDB.userReviewed(631842, "user2"));
+		System.out.println(ReviewDB.userReviewed(631842, "user3"));
 	}
 }

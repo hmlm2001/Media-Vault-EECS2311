@@ -8,11 +8,9 @@ import java.awt.Image;
 import java.awt.Point;
 
 import javax.imageio.ImageIO;
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
 import javax.swing.border.EmptyBorder;
 
 import java.awt.Color;
@@ -42,16 +40,11 @@ public class ExploreMoviesUI extends JFrame {
 
 	private JPanel contentPane;
 	private AllMoviesDB allMovies;
-	private MyTextField searchbar;
-	private JPopupMenu menu;
-    private PanelSearch search;
     
     /**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		//Switch to true to use stub DB
-		UseStub.setStubFlag(false);
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -86,14 +79,7 @@ public class ExploreMoviesUI extends JFrame {
 		navbar.setBounds(0, 0, 1650, 61);
 		contentPane.add(navbar);
 		navbar.setLayout(null);
-		
-		JLabel mediaVaultLogo = new JLabel("");
-		mediaVaultLogo.setHorizontalAlignment(SwingConstants.CENTER);
-		Image mv_logo = new ImageIcon(getClass().getResource("/images/logos/mv-logo-white-with-text-no-bg.png")).getImage().getScaledInstance(110, 110, Image.SCALE_SMOOTH);
-		mediaVaultLogo.setIcon(new ImageIcon(mv_logo));
-		mediaVaultLogo.setBounds(3, 6, 88, 59);
-		navbar.add(mediaVaultLogo);
-		
+				
 		JButton moviesButton = new JButton("MOVIES");
 		moviesButton.setFont(new Font("Lucida Grande", Font.BOLD, 18));
 		moviesButton.setForeground(Color.WHITE);
@@ -159,42 +145,9 @@ public class ExploreMoviesUI extends JFrame {
 		logOutButton.setBounds(1185, 17, 88, 29);
 		navbar.add(logOutButton);
 		
-		// Searchbar
-		searchbar = new MyTextField();
-		searchbar.setBounds(520, 13, 550, 40);
-		navbar.add(searchbar);
-		searchbar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		searchbar.setPrefixIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search.png")));
-		searchbar.addMouseListener(new java.awt.event.MouseAdapter() {
-		    public void mouseClicked(java.awt.event.MouseEvent evt) {
-		        txtSearchMouseClicked(evt);
-		    }
-		});
-		searchbar.addKeyListener(new java.awt.event.KeyAdapter() {
-		    public void keyReleased(java.awt.event.KeyEvent evt) {
-		        txtSearchKeyReleased(evt);
-		    }
-		});
+		SearchbarLogoSetup setup = new SearchbarLogoSetup(navbar);
+		setup.setUserId(userId);
 		
-		menu = new JPopupMenu();
-        search = new PanelSearch();
-        menu.setBorder(BorderFactory.createLineBorder(new Color(164, 164, 164)));
-        menu.add(search);
-        menu.setFocusable(false);
-        search.addEventClick(new EventClick() {
-            @Override
-            public void itemClick(Movie movie) {
-                menu.setVisible(false);
-                searchbar.setText(movie.getTitle());
-                
-                MoviePageUI frame = new MoviePageUI(userId, new Movie(movie.getId()));
-            	frame.setLocationRelativeTo(null);
-            	frame.toFront();
-            	frame.requestFocus();
-        		frame.setVisible(true);
-            }
-        });
-        
         // Main Section
 		allMovies = new AllMoviesDB();
 			
@@ -323,8 +276,14 @@ public class ExploreMoviesUI extends JFrame {
 	    	e.printStackTrace();
 	    }
 	}
-	
-	// TODO: ADD JAVADOC
+
+	/**
+	 * Used to create a scrollable section for recommended movies
+	 * @param panel - the panel in which the sections should be added to
+	 * @param userId - the userId of the current user
+	 * @param recommended - a list of recommended movies for the user
+	 * @param yPosition - the starting y-position of the section
+	 */
 	private void addRecommended(JPanel panel, int userId, List<Media> recommended, int yPosition) {
 		JLabel label = new JLabel("RECOMMENDED");
 	    label.setBounds(570, yPosition, 180, 22);
@@ -400,48 +359,4 @@ public class ExploreMoviesUI extends JFrame {
 	    }
 	}
 	
-	/**
-	 * Used to show the menu when the searchbar is clicked
-	 * @param evt - occurs when the mouse is clicked
-	 */
-	private void txtSearchMouseClicked(java.awt.event.MouseEvent evt) {
-        if (search.getItemSize() > 0) {
-            menu.show(searchbar, 0, searchbar.getHeight());
-        }
-    }
-	
-	/**
-	 * Used to search the database when a key is pressed
-	 * @param evt - occurs when a key is released
-	 */
-    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {
-        String text = searchbar.getText().trim().toLowerCase();
-        search.setMovies(search(text));
-        if (search.getItemSize() > 0) {
-            menu.show(searchbar, 0, searchbar.getHeight());
-            menu.setPopupSize(menu.getWidth(), (search.getItemSize() * 35) + 2);
-        } else {
-            menu.setVisible(false);
-        }
-    }
-
-    /**
-     * Used to search through all the movies database 
-     * @param search - the title to be searched for
-     * @return a list of movies with titles containing the search query
-     */
-    private List<Movie> search(String search) {
-    	int limitData = 10;
-        List<Movie> list = new ArrayList<>();
-        for (int i = 0; i < allMovies.size(); i++) {
-        	if (allMovies.get(i).getTitle().toLowerCase().contains(search)) {
-            	list.add(allMovies.get(i));
-            	
-                if (list.size() == limitData) {
-                    break;
-                }
-            }
-        }
-        return list;
-    }
 }

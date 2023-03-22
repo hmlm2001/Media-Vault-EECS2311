@@ -54,7 +54,7 @@ public class ExploreMoviesUI extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ExploreMoviesUI frame = new ExploreMoviesUI(10);
+					ExploreMoviesUI frame = new ExploreMoviesUI(new User(10));
 					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -67,7 +67,8 @@ public class ExploreMoviesUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ExploreMoviesUI(int userId) {
+	public ExploreMoviesUI(User user) {
+		int userId = user.getId(); 
 		setTitle("MediaVault");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -142,7 +143,7 @@ public class ExploreMoviesUI extends JFrame {
 		MouseListener popupListener = new PopupListener(profilePopup);
 		userIcon.addMouseListener(popupListener);
 		
-		JLabel username = new JLabel(UserDB.getUsername(userId));
+		JLabel username = new JLabel(user.getUsername());
 	    username.setBackground(new Color(31, 31, 31));
 		username.setForeground(Color.WHITE);
 		username.setFont(username.getFont().deriveFont(Font.ITALIC));
@@ -156,7 +157,7 @@ public class ExploreMoviesUI extends JFrame {
 	    menuItem.addActionListener(new ActionListener() {
 	    	@Override
 	    	public void actionPerformed(ActionEvent e) {
-	    		ProfileUI frame = new ProfileUI(userId);
+	    		ProfileUI frame = new ProfileUI(user);
 	    		frame.setLocationRelativeTo(null);
 				frame.setVisible(true);
 				ExploreMoviesUI.this.dispose();

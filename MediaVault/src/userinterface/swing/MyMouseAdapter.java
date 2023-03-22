@@ -27,7 +27,7 @@ public class MyMouseAdapter extends MouseAdapter {
 	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		MoviePageUI frame = new MoviePageUI(userId, new Movie(movieId));
+		MoviePageUI frame = new MoviePageUI(new User(userId), new Movie(movieId));
     	frame.setLocationRelativeTo(null);
     	frame.toFront();
     	frame.requestFocus();

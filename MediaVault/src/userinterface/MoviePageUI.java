@@ -31,7 +31,8 @@ public class MoviePageUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MoviePageUI(int userId, Movie movie) {
+	public MoviePageUI(User user, Movie movie) {
+		int userId = user.getId();
 		MediaCollection movieList = new MediaCollection(userId);
 		
 		setTitle(movie.getTitle());

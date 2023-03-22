@@ -12,6 +12,8 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.border.EmptyBorder;
 
+import backend.User;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
@@ -42,7 +44,7 @@ public class ProfileUI extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ProfileUI frame = new ProfileUI(10);
+					ProfileUI frame = new ProfileUI(new User(10));
 					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -55,7 +57,7 @@ public class ProfileUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ProfileUI(int userId) {
+	public ProfileUI(User user) {
 		setTitle("MediaVault");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -89,11 +91,11 @@ public class ProfileUI extends JFrame {
 				moviesButton.setForeground(Color.GRAY);
 			}
 		});
-		moviesButton.addActionListener(new MyActionListener(userId) {
+		moviesButton.addActionListener(new MyActionListener(user.getId()) {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ExploreMoviesUI frame = new ExploreMoviesUI(userId);
+				ExploreMoviesUI frame = new ExploreMoviesUI(user);
 				frame.setLocationRelativeTo(null);
 				frame.setVisible(true);
 				ProfileUI.this.dispose();
@@ -114,11 +116,11 @@ public class ProfileUI extends JFrame {
 		vaultButton.setForeground(Color.GRAY);
 		vaultButton.setBackground(Color.DARK_GRAY);
 		vaultButton.setFont(new Font("Lucida Grande", Font.BOLD, 18));
-		vaultButton.addActionListener(new MyActionListener(userId) {
+		vaultButton.addActionListener(new MyActionListener(user.getId()) {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VaultUI frame = new VaultUI(userId);
+				VaultUI frame = new VaultUI(user.getId());
 				frame.setLocationRelativeTo(null);
 				frame.setVisible(true);
 				ProfileUI.this.dispose();
@@ -129,7 +131,7 @@ public class ProfileUI extends JFrame {
 		navbar.add(vaultButton);
 		
 		SearchbarLogoSetup setup = new SearchbarLogoSetup(navbar);
-		setup.setUserId(userId);
+		setup.setUserId(user.getId());
 		
 		// User Icon
 		JButton userIcon = new JButton();
@@ -149,7 +151,7 @@ public class ProfileUI extends JFrame {
 		MouseListener popupListener = new PopupListener(profilePopup);
 		userIcon.addMouseListener(popupListener);
 		
-		JLabel username = new JLabel(UserDB.getUsername(userId));
+		JLabel username = new JLabel(user.getUsername());
 	    username.setBackground(new Color(31, 31, 31));
 		username.setForeground(Color.WHITE);
 		username.setFont(username.getFont().deriveFont(Font.ITALIC));
@@ -163,7 +165,7 @@ public class ProfileUI extends JFrame {
 	    menuItem.addActionListener(new ActionListener() {
 	    	@Override
 	    	public void actionPerformed(ActionEvent e) {
-	    		ProfileUI frame = new ProfileUI(userId);
+	    		ProfileUI frame = new ProfileUI(user);
 	    		frame.setLocationRelativeTo(null);
 				frame.setVisible(true);
 				ProfileUI.this.dispose();

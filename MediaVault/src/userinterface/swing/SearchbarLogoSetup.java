@@ -64,7 +64,7 @@ public class SearchbarLogoSetup {
                 menu.setVisible(false);
                 searchbar.setText(movie.getTitle());
                 
-                MoviePageUI frame = new MoviePageUI(userId, new Movie(movie.getId()));
+                MoviePageUI frame = new MoviePageUI(new User(userId), new Movie(movie.getId()));
             	frame.setLocationRelativeTo(null);
             	frame.toFront();
             	frame.requestFocus();

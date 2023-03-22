@@ -98,7 +98,7 @@ public class SignUpUI extends JFrame {
 					successPrompt.setText("Creating account...");
 					Timer t = new Timer(0, new MyActionListener(user.getId()) {
 					    public void actionPerformed(ActionEvent e) {
-					    	ExploreMoviesUI frame = new ExploreMoviesUI(userId);
+					    	ExploreMoviesUI frame = new ExploreMoviesUI(user);
 					    	frame.setLocationRelativeTo(null);
 							frame.setVisible(true);
 							SignUpUI.this.dispose();

@@ -20,23 +20,5 @@ public class UserDB {
 			e.printStackTrace();
 		}
 		return 0;
-	}
-	
-	/**
-	 * gets the username associated with an id
-	 * @param id is the id of the account
-	 * @return the username associated with the id
-	 */
-	public static String getUsername(int id) {
-		ResultSet result;
-		result = JDBC_Connection.getResult("SELECT username FROM users WHERE userID='"+id+"';");
-		try {
-			while (result.next()) {
-				return result.getString(1); //get the username associated with an id
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
+	}	
 }

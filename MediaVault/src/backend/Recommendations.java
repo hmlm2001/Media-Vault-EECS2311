@@ -3,7 +3,7 @@ package backend;
 
 import java.util.ArrayList;
 
-import persistence.ReccomendationsDB;
+import persistence.RecommendationsDB;
 
 
 
@@ -27,6 +27,6 @@ public class Recommendations {
 				list.add(new Movie(631842));		//add the same movie n times if using stub
 			}
 		}
-		return ReccomendationsDB.get(user.getCollectionId(), n); //go to db if not using stub
+		return RecommendationsDB.get(user.getCollectionId(), n); //go to db if not using stub
 	}
 }

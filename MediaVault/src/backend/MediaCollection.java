@@ -73,6 +73,18 @@ public class MediaCollection {
 		}
 		return false;
 	}
+	public boolean setStatus(int id, String Status) {
+		for (int i = 0; i<this.mediaList.size();i++) {
+			if (this.mediaList.get(i).getId()==id) {
+				String oldStatus = this.mediaList.get(i).getStatus();
+				this.mediaList.get(i).setStatus(Status);
+				if (!UseStub.getStubFlag()) 
+					return MediaCollectionDB.setStatus(this.id, id,oldStatus, Status  );				
+				return true;
+			}			
+		}
+		return false;
+	}
 	
 	/**
 	 * returns the size of the mediaList

@@ -252,12 +252,14 @@ private void addMediaButtons(JPanel panel, int userId) {
 		URL url;
 		BufferedImage c;
 		int i = collection.size();
+		
 		if (collection.size() == 0) {
 			JLabel emptyVaultLabel = new JLabel("Nothing to see here...Search for movies and add them to your vault!");
 			emptyVaultLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 			emptyVaultLabel.setForeground(Color.WHITE);
 			panel.add(emptyVaultLabel);
 		} else {
+			int index = 0;
 			for(backend.Media media: mediaList) {
 				
 				moviepane = new JPanel();
@@ -330,7 +332,9 @@ private void addMediaButtons(JPanel panel, int userId) {
 				selection.setBackground(new Color(31, 31, 31));
 				selection.setBorder(null);
 				selection.setForeground(Color.WHITE);
-				selection.setVisible(false);
+				selection.setVisible(true);
+				
+				statusList.add(media.getStatus());
 				
 			
 			    //Create the popup menu.
@@ -357,8 +361,8 @@ private void addMediaButtons(JPanel panel, int userId) {
 			    menuItem.addActionListener(new ActionListener() {
 			    	@Override
 			    	public void actionPerformed(ActionEvent e) {
-			    		media.setStatus("Yet to Watch");
-			    		//status.setText("Yet to Watch");
+			    		collection.setStatus(media.getId(),"Yet to Watch");
+			    		//statusList.set(index++, "Yet to watch");
 			    		selection.setText("Yet to Watch");
 			    		SwingUtilities.updateComponentTreeUI(selection);
 			    	}
@@ -371,10 +375,10 @@ private void addMediaButtons(JPanel panel, int userId) {
 			    menuItem.addActionListener(new ActionListener() {
 			    	@Override
 			    	public void actionPerformed(ActionEvent e) {
-			    		media.setStatus("Completed");
+			    		collection.setStatus(media.getId(),"Completed");
 			    		//status.setText("Completed");
 			    		selection.setText("Completed");
-			    		SwingUtilities.updateComponentTreeUI(moviepane);
+			    		SwingUtilities.updateComponentTreeUI(selection);
 			    	}
 			    });
 			    popup.add(menuItem);
@@ -386,13 +390,13 @@ private void addMediaButtons(JPanel panel, int userId) {
 			    menuItem.addActionListener(new ActionListener() {
 			    	@Override
 			    	public void actionPerformed(ActionEvent e) {
-			    		media.setStatus("In Progress");			    		
+			    		collection.setStatus(media.getId(),"In Progress");			    		
 			    		selection.setText("In Progress");			    		
 			    		selection.setVisible(true);
 			    		moviepane.setVisible(false);
-			    		SwingUtilities.updateComponentTreeUI(moviepane);
+			    		SwingUtilities.updateComponentTreeUI(selection);
 			    		moviepane.setVisible(true);
-			    		SwingUtilities.updateComponentTreeUI(moviepane);
+			    		//SwingUtilities.updateComponentTreeUI(moviepane);
 			    	}
 			    });
 			    popup.add(menuItem);

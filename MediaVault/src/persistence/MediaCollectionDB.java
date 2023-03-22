@@ -67,4 +67,9 @@ public class MediaCollectionDB {
 	public static boolean removeMediaCollection(int collectionid, int mediaid) {
 		return JDBC_Connection.execute("DELETE FROM mediarelations WHERE mediaID='"+mediaid+"' AND mediaCollectionID='"+collectionid+"';");
 	}
+	
+	public static boolean setStatus(int collectionid, int mediaid, String oldStatus, String newStatus) {
+		return JDBC_Connection.execute("UPDATE mediarelations SET mediaStatus = REPLACE(mediaStatus,'"+oldStatus+"', '"+newStatus+"') WHERE mediaID='"+mediaid+"' AND mediaCollectionID='"+collectionid+"';");
+	}
+	
 }

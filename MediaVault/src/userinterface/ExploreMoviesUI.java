@@ -8,13 +8,16 @@ import java.awt.Image;
 import java.awt.Point;
 
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.border.EmptyBorder;
 
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import java.awt.Cursor;
@@ -24,6 +27,7 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.net.URL;
 import java.util.ArrayList;
@@ -40,6 +44,8 @@ public class ExploreMoviesUI extends JFrame {
 
 	private JPanel contentPane;
 	private AllMoviesDB allMovies;
+	private JPopupMenu profilePopup;
+	private JMenuItem menuItem;
     
     /**
 	 * Launch the application.
@@ -115,38 +121,65 @@ public class ExploreMoviesUI extends JFrame {
 		vaultButton.setBounds(203, 17, 76, 29);
 		navbar.add(vaultButton);
 		
-		JButton userIcon = new JButton("");
+		SearchbarLogoSetup setup = new SearchbarLogoSetup(navbar);
+		setup.setUserId(userId);
+		
+		// User Icon
+		JButton userIcon = new JButton();
 		userIcon.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		Image user_icon = new ImageIcon(getClass().getResource("/images/icons/user-icon.png")).getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+		Image user_icon = new ImageIcon(getClass().getResource("/images/icons/user-icon2.png")).getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
 		userIcon.setIcon(new ImageIcon(user_icon));
 		userIcon.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		userIcon.setBackground(Color.DARK_GRAY);
+		userIcon.setBackground(Color.BLACK);
 		userIcon.setBorder(null);
-		userIcon.setBounds(1116, 6, 53, 53);
-		navbar.add(userIcon);
+		userIcon.setBounds(1233, 4, 53, 53);
 		
-		JButton logOutButton = new JButton("LOG OUT");
-		logOutButton.setBackground(Color.DARK_GRAY);
-		logOutButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				LoginUI frame = new LoginUI();
+		// Popup Menu for user icon
+		profilePopup = new JPopupMenu();
+		MouseListener popupListener = new PopupListener(profilePopup);
+		userIcon.addMouseListener(popupListener);
+		
+		JLabel username = new JLabel(UserDB.getUsername(userId));
+	    username.setBackground(new Color(31, 31, 31));
+		username.setForeground(Color.WHITE);
+		username.setFont(username.getFont().deriveFont(Font.ITALIC));
+        username.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        username.setCursor(Cursor.getDefaultCursor());
+	    profilePopup.add(username);
+	    
+	    menuItem = new JMenuItem("Profile");
+	    menuItem.setBackground(new Color(31, 31, 31));
+		menuItem.setForeground(Color.WHITE);
+	    menuItem.addActionListener(new ActionListener() {
+	    	@Override
+	    	public void actionPerformed(ActionEvent e) {
+	    		ProfileUI frame = new ProfileUI(userId);
+	    		frame.setLocationRelativeTo(null);
+				frame.setVisible(true);
+				ExploreMoviesUI.this.dispose();
+	    	}
+	    });
+	    profilePopup.add(menuItem);
+	    
+	    menuItem = new JMenuItem("Log Out");
+	    menuItem.setBackground(new Color(31, 31, 31));
+		menuItem.setForeground(Color.WHITE);
+	    menuItem.addActionListener(new ActionListener() {
+	    	@Override
+	    	public void actionPerformed(ActionEvent e) {
+	    		LoginUI frame = new LoginUI();
 				frame.setLocationRelativeTo(null);
 				frame.setVisible(true);
 				ExploreMoviesUI.this.dispose();
-			}
-		});
-		logOutButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		logOutButton.setForeground(Color.WHITE);
-		logOutButton.setFont(new Font("Lucida Grande", Font.BOLD, 18));
-		logOutButton.setBorder(null);
-		logOutButton.setBounds(1185, 17, 88, 29);
-		navbar.add(logOutButton);
-		
-		SearchbarLogoSetup setup = new SearchbarLogoSetup(navbar);
-		setup.setUserId(userId);
+	    	}
+	    });
+	    profilePopup.add(menuItem);
+	    profilePopup.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		profilePopup.setBackground(new Color(31, 31, 31));
+		navbar.add(userIcon);
 		
         // Main Section
 		allMovies = new AllMoviesDB();
@@ -164,11 +197,6 @@ public class ExploreMoviesUI extends JFrame {
         mainContent.setBackground(Color.WHITE);
         mainContent.setLayout(null);
         
-        JLabel userLabel = new JLabel("Welcome to MediaVault, " + UserDB.getUsername(userId));
-		userLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		userLabel.setBounds(6, 9, 422, 16);
-		mainContent.add(userLabel);
-		
 		// Creating an instance of the user's vault
 		MediaCollection collection = new MediaCollection(userId);
 		// If the user has no movies in their vault, display default explore page

@@ -38,7 +38,7 @@ public class SearchbarLogoSetup {
 		// Searchbar
 		allMovies = new AllMoviesDB();
 		searchbar = new MyTextField();
-		searchbar.setBounds(520, 13, 550, 40);
+		searchbar.setBounds(660, 10, 550, 40);
 		navbar.add(searchbar);
 		searchbar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		searchbar.setPrefixIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search.png")));

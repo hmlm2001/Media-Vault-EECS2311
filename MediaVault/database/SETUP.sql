@@ -44,10 +44,15 @@ CREATE TABLE allmovies (
 );
 
 Create table review (
-	userid int not null,
+    username varchar(50),
     movieid int not null,
-    review varchar(900)
+    review varchar(900),
+    PRIMARY KEY(username,movieid)
 );
+
+
+INSERT INTO review VALUES
+('user1',631842,'Who is knocking at the cabin???'),('user2',631842,'Great movie, would recommend!'),('user3',631842,'I watched this twice!'),('user4',631842,'I hate this');
 
 
 INSERT INTO users(username) VALUES
@@ -58,7 +63,7 @@ INSERT INTO mediacollections(userid) VALUES
 (1), (2), (3), (4);
 
 INSERT INTO mediarelations(mediacollectionid, mediaid,mediastatus) VALUES
-(1, 631842, 'Completed'),(1, 1058949, 'Completed'),(1, 32516, 'Completed'),(1, 32516, 'Completed'), (1, 505642,'In Progress'), (2, 631842,'Completed'), (3, 631842,'Yet to Watch'), (4, 631842,'In Progress'), (4,19995,'In Progress');
+(1, 631842, 'Completed'),(1, 1058949, 'Completed'),(1, 32516, 'Completed'),(1, 1078862, 'Completed'), (1, 505642,'In Progress'), (2, 631842,'Completed'), (3, 631842,'Yet to Watch'), (4, 631842,'In Progress'), (4,19995,'In Progress');
 
 INSERT INTO logins(usernameEnc,passwordEnc) VALUES
 ('9ec62c20118ff506dac139ec30a521d12b9883e55da92b7d9adeefe09ed4e0bd152e2a099339871424263784f8103391f83b781c432f45eccb03e18e28060d2f','fb131bc57a477c8c9d068f1ee5622ac304195a77164ccc2d75d82dfe1a727ba8d674ed87f96143b2b416aacefb555e3045c356faa23e6d21de72b85822e39fdd'),

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import backend.Media;
 import backend.Movie;
 
-public class ReccomendationsDB {
+public class RecommendationsDB {
 	/**
 	 * Gets the recommendations that are not in the vault already
 	 * @param mediaCollectionId is the id of the collection that must be excluded

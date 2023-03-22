@@ -20,7 +20,13 @@ public class Recommendations {
 	 * @param n the number of recommendations
 	 * @return the arraylist of media containing the reccomendations
 	 */
-	public static ArrayList<Media> get(int mediaCollectonId, int n){
-		return ReccomendationsDB.get(mediaCollectonId, n);
+	public static ArrayList<Media> get(User user, int n){
+		if (UseStub.getStubFlag()) {
+			ArrayList<Media> list = new ArrayList<Media>();
+			for (int i =0; i<n;i++) {
+				list.add(new Movie(631842));		//add the same movie n times if using stub
+			}
+		}
+		return ReccomendationsDB.get(user.getCollectionId(), n); //go to db if not using stub
 	}
 }

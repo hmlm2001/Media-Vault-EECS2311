@@ -81,4 +81,11 @@ public class MediaCollection {
 	public int size() {
 		return mediaList.size();
 	}
+	/** 
+	 * gets the id of the collection
+	 * @return the id of the collection
+	 */
+	protected int getId() {
+		return this.id;
+	}
 }

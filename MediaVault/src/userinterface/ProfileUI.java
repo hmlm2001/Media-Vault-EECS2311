@@ -1,6 +1,5 @@
 package userinterface;
 
-import persistence.*;
 import userinterface.swing.*;
 
 import java.awt.Image;
@@ -44,7 +43,7 @@ public class ProfileUI extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ProfileUI frame = new ProfileUI(new User(10));
+					ProfileUI frame = new ProfileUI(new User("user10"));
 					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -131,7 +130,7 @@ public class ProfileUI extends JFrame {
 		navbar.add(vaultButton);
 		
 		SearchbarLogoSetup setup = new SearchbarLogoSetup(navbar);
-		setup.setUserId(user.getId());
+		setup.setUser(user);
 		
 		// User Icon
 		JButton userIcon = new JButton();

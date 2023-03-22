@@ -54,7 +54,7 @@ public class ExploreMoviesUI extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ExploreMoviesUI frame = new ExploreMoviesUI(new User(10));
+					ExploreMoviesUI frame = new ExploreMoviesUI(new User("user10"));
 					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -123,7 +123,7 @@ public class ExploreMoviesUI extends JFrame {
 		navbar.add(vaultButton);
 		
 		SearchbarLogoSetup setup = new SearchbarLogoSetup(navbar);
-		setup.setUserId(userId);
+		setup.setUser(user);
 		
 		// User Icon
 		JButton userIcon = new JButton();
@@ -203,19 +203,19 @@ public class ExploreMoviesUI extends JFrame {
 		// If the user has no movies in their vault, display default explore page
 		if (collection.size() == 0) {
 			// Add genre sections (separated by 355px each vertically)
-			addGenreSection(mainContent, userId, "Action", 8, 10);
-			addGenreSection(mainContent, userId, "Animation", 8, 365);
-			addGenreSection(mainContent, userId, "Drama", 8, 715);
-			addGenreSection(mainContent, userId, "Thriller", 8, 1065);
+			addGenreSection(mainContent, user, "Action", 8, 10);
+			addGenreSection(mainContent, user, "Animation", 8, 365);
+			addGenreSection(mainContent, user, "Drama", 8, 715);
+			addGenreSection(mainContent, user, "Thriller", 8, 1065);
 		} // If the user has movies in their vault, display recommended section with the rest of explore page
 		else {
 			List<Media> recommended = new ArrayList<>();
 			recommended.add(new Movie(411));
 			recommended.add(new Movie(19995));
-			addRecommended(mainContent, userId, recommended, 10);
-			addGenreSection(mainContent, userId, "Action", 8, 365);
-			addGenreSection(mainContent, userId, "Animation", 8, 715);
-			addGenreSection(mainContent, userId, "Drama", 8, 1065);
+			addRecommended(mainContent, user, recommended, 10);
+			addGenreSection(mainContent, user, "Action", 8, 365);
+			addGenreSection(mainContent, user, "Animation", 8, 715);
+			addGenreSection(mainContent, user, "Drama", 8, 1065);
 		}
 	}
 	
@@ -226,7 +226,7 @@ public class ExploreMoviesUI extends JFrame {
 	 * @param genre - the genre to be added (first letter capitalized)
 	 * @param yPosition - the starting y position of the section
 	 */
-	private void addGenreSection(JPanel panel, int userId, String genre, int numOfMovies, int yPosition) {
+	private void addGenreSection(JPanel panel, User user, String genre, int numOfMovies, int yPosition) {
 	    JLabel label = new JLabel(genre.toUpperCase(), SwingConstants.CENTER);
 	    label.setBounds(582, yPosition, 130, 22);
 	    label.setFont(new Font("Lucida Grande", Font.BOLD, 19));
@@ -294,7 +294,7 @@ public class ExploreMoviesUI extends JFrame {
 	        		moviePosters[movieCount].setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 	        		moviePosters[movieCount].setBorder(null);
 	        		moviePosters[movieCount].setBackground(Color.black);
-	        		moviePosters[movieCount].addMouseListener(new MyMouseAdapter(userId, id));
+	        		moviePosters[movieCount].addMouseListener(new MyMouseAdapter(user, id));
 	    	        content.add(moviePosters[movieCount]);
 	    	        
 	        		movieCount++;
@@ -313,7 +313,7 @@ public class ExploreMoviesUI extends JFrame {
 	 * @param recommended - a list of recommended movies for the user
 	 * @param yPosition - the starting y-position of the section
 	 */
-	private void addRecommended(JPanel panel, int userId, List<Media> recommended, int yPosition) {
+	private void addRecommended(JPanel panel, User user, List<Media> recommended, int yPosition) {
 		JLabel label = new JLabel("RECOMMENDED");
 	    label.setBounds(570, yPosition, 180, 22);
 	    label.setFont(new Font("Lucida Grande", Font.BOLD, 19));
@@ -379,7 +379,7 @@ public class ExploreMoviesUI extends JFrame {
         		moviePoster.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         		moviePoster.setBorder(null);
         		moviePoster.setBackground(Color.black);
-        		moviePoster.addMouseListener(new MyMouseAdapter(userId, id));
+        		moviePoster.addMouseListener(new MyMouseAdapter(user, id));
     	        content.add(moviePoster);
 	    	}
 	        			        

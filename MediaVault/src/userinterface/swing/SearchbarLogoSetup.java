@@ -24,7 +24,7 @@ public class SearchbarLogoSetup {
 	private MyTextField searchbar;
 	private JPopupMenu menu;
     private PanelSearch search;
-    private int userId;
+    private User user;
     
 	public SearchbarLogoSetup(JPanel navbar) {
 		
@@ -65,7 +65,7 @@ public class SearchbarLogoSetup {
                 menu.setVisible(false);
                 searchbar.setText(movie.getTitle());
                 
-                MoviePageUI frame = new MoviePageUI(new User(userId), new Movie(movie.getId()));
+                MoviePageUI frame = new MoviePageUI(user, new Movie(movie.getId()));
             	frame.setLocationRelativeTo(null);
             	frame.toFront();
             	frame.requestFocus();
@@ -77,8 +77,8 @@ public class SearchbarLogoSetup {
 	 * Used to set the userId for the searchbar setup
 	 * @param userId - userId to be used
 	 */
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	/**

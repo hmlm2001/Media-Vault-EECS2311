@@ -111,7 +111,7 @@ public class ExploreMoviesUI extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VaultUI frame = new VaultUI(userId);
+				VaultUI frame = new VaultUI(user);
 				frame.setLocationRelativeTo(null);
 				frame.setVisible(true);
 				ExploreMoviesUI.this.dispose();

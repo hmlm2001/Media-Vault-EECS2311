@@ -119,7 +119,7 @@ public class ProfileUI extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VaultUI frame = new VaultUI(user.getId());
+				VaultUI frame = new VaultUI(user);
 				frame.setLocationRelativeTo(null);
 				frame.setVisible(true);
 				ProfileUI.this.dispose();

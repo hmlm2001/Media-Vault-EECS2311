@@ -64,7 +64,7 @@ public class VaultUI extends JFrame{
      * @param userId the id of the user currently logged in
      */
 	
-	public VaultUI (int userId) {
+	public VaultUI (User user) {
 		allMovies = new AllMoviesDB();
 		setTitle("MediaVault");
 		setResizable(false);
@@ -93,9 +93,9 @@ public class VaultUI extends JFrame{
 		
 		JButton moviesButton = new JButton("MOVIES");
 		moviesButton.setFont(new Font("Lucida Grande", Font.BOLD, 18));
-		moviesButton.addActionListener(new MyActionListener(userId) {
+		moviesButton.addActionListener(new MyActionListener(user.getId()) {
 			public void actionPerformed(ActionEvent e) {
-				ExploreMoviesUI frame = new ExploreMoviesUI(userId);
+				ExploreMoviesUI frame = new ExploreMoviesUI(user);
 				frame.setLocationRelativeTo(null);
 				frame.setVisible(true);
 				VaultUI.this.dispose();
@@ -122,11 +122,11 @@ public class VaultUI extends JFrame{
 		vaultButton.setFont(new Font("Lucida Grande", Font.BOLD, 18));
 		vaultButton.setBorder(null);
 		vaultButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		vaultButton.addActionListener(new MyActionListener(userId) {
+		vaultButton.addActionListener(new MyActionListener(user.getId()) {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VaultUI frame = new VaultUI(userId);
+				VaultUI frame = new VaultUI(user);
 				frame.setLocationRelativeTo(null);
 				frame.setVisible(true);
 				VaultUI.this.dispose();
@@ -194,7 +194,7 @@ public class VaultUI extends JFrame{
                 menu.setVisible(false);
                 searchbar.setText(movie.getTitle());
                 
-                MoviePageUI frame = new MoviePageUI(userId, new Movie(movie.getId()));
+                MoviePageUI frame = new MoviePageUI(user, new Movie(movie.getId()));
             	frame.setLocationRelativeTo(null);
             	frame.toFront();
             	frame.requestFocus();
@@ -212,7 +212,7 @@ public class VaultUI extends JFrame{
 		panel.setBackground(new Color(31, 31, 31));
 		panel.setBounds(0, 37, 1, 1000);
 		
-		addMediaButtons(panel, userId);
+		addMediaButtons(panel, user);
 		panel.setLayout(new FlowLayout());
 		
 	
@@ -222,7 +222,7 @@ public class VaultUI extends JFrame{
 		scrollPane_1.setBounds(0, 40, 1284, 550);
 		layeredPane.add(scrollPane_1);
 		
-		JLabel userLabel = new JLabel("This is your vault, " + UserDB.getUsername(userId));
+		JLabel userLabel = new JLabel("This is your vault, " + user.getUsername());
 		userLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		userLabel.setBounds(6, 9, 422, 16);
 		layeredPane.add(userLabel);
@@ -234,7 +234,7 @@ public class VaultUI extends JFrame{
 	 * @param userId the id of the user currently logged in
 	 */
 	
-private void addMediaButtons(JPanel panel, int userId) {
+private void addMediaButtons(JPanel panel, User user) {
 		
 		UseStub.setStubFlag(false);
 		Movie movie;		
@@ -245,7 +245,7 @@ private void addMediaButtons(JPanel panel, int userId) {
 		JMenuItem menuItem;
 		
 		
-		MediaCollection collection = new MediaCollection(userId);
+		MediaCollection collection = new MediaCollection(user.getId());
 		ArrayList<backend.Media> mediaList = collection.getMediaList();
 		ArrayList<String> statusList = new ArrayList<String>(collection.size());
 		
@@ -285,7 +285,7 @@ private void addMediaButtons(JPanel panel, int userId) {
 					
 					e.printStackTrace();
 				}
-				mediaButton.addMouseListener(new MyMouseAdapter(userId, media.getId()));				
+				mediaButton.addMouseListener(new MyMouseAdapter(user, media.getId()));				
 				
 				mediaButton.setText(null);
 				mediaButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -312,7 +312,7 @@ private void addMediaButtons(JPanel panel, int userId) {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						collection.removeMedia(media.getId());
-						VaultUI frame = new VaultUI(userId);
+						VaultUI frame = new VaultUI(user);
 						frame.setLocationRelativeTo(null);
 						frame.setVisible(true);
 						VaultUI.this.dispose();

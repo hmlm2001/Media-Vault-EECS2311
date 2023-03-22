@@ -41,18 +41,12 @@ public class ReviewDB {
 		String username = reviewObj.getUser().getUsername();
 		String review = reviewObj.getReview();
 		if (!userReviewed(movieId,username)) {
-			
+			JDBC_Connection.execute("INSERT INTO review VALUES ('"+username+"',"+movieId+",'"+review+"');");
 		} else {
-			
+			JDBC_Connection.execute("REPLACE INTO review VALUES ('"+username+"',"+movieId+",'"+review+"');");
 		}
 		return true;
 		
 		
-	}
-	public static void main (String[] args) {
-		System.out.println(ReviewDB.userReviewed(631842, "user1"));
-		System.out.println(ReviewDB.userReviewed(63182, "user1"));
-		System.out.println(ReviewDB.userReviewed(631842, "user2"));
-		System.out.println(ReviewDB.userReviewed(631842, "user3"));
 	}
 }

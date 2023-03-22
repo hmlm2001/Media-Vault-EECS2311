@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.net.URL;
 import java.util.ArrayList;
@@ -31,6 +32,7 @@ import userinterface.swing.PanelSearch;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -42,6 +44,7 @@ import java.awt.GridBagLayout;
 import javax.swing.JScrollPane;
 import java.awt.FlowLayout;
 import javax.swing.JLayeredPane;
+import javax.swing.JMenuItem;
 import javax.swing.ScrollPaneConstants;
 
 @SuppressWarnings("serial")
@@ -51,6 +54,9 @@ public class VaultUI extends JFrame{
 	private JPopupMenu menu;
     private PanelSearch search;
     private AllMoviesDB allMovies;
+    private JPopupMenu popup;
+    private JButton status;
+    private JPanel moviepane;
     
     /**
      * Displays all movies the user has added to their vault.
@@ -228,25 +234,32 @@ public class VaultUI extends JFrame{
 	 * @param userId the id of the user currently logged in
 	 */
 	
-	private void addMediaButtons(JPanel panel, int userId) {
+private void addMediaButtons(JPanel panel, int userId) {
 		
 		UseStub.setStubFlag(false);
 		Movie movie;		
 		JButton mediaButton;
 		JButton removeButton;
-		JPanel moviepane;
+		
+		
+		JMenuItem menuItem;
+		
 		
 		MediaCollection collection = new MediaCollection(userId);
 		ArrayList<backend.Media> mediaList = collection.getMediaList();
+		ArrayList<String> statusList = new ArrayList<String>(collection.size());
 		
 		URL url;
 		BufferedImage c;
+		int i = collection.size();
+		
 		if (collection.size() == 0) {
 			JLabel emptyVaultLabel = new JLabel("Nothing to see here...Search for movies and add them to your vault!");
 			emptyVaultLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 			emptyVaultLabel.setForeground(Color.WHITE);
 			panel.add(emptyVaultLabel);
 		} else {
+			int index = 0;
 			for(backend.Media media: mediaList) {
 				
 				moviepane = new JPanel();
@@ -279,8 +292,9 @@ public class VaultUI extends JFrame{
 				mediaButton.setBackground(Color.black);
 				mediaButton.setBorder(null);
 				mediaButton.setBounds(0, 0, 100, 200);
+				
 				constraints.fill = GridBagConstraints.HORIZONTAL;
-				constraints.gridwidth = 3;
+				constraints.gridwidth = 4;
 				constraints.gridx=0;
 				constraints.gridy = 0;
 				moviepane.add(mediaButton,constraints);
@@ -304,16 +318,121 @@ public class VaultUI extends JFrame{
 						VaultUI.this.dispose();
 					}
 				});
-				constraints.fill = GridBagConstraints.HORIZONTAL;
+				//constraints.fill = GridBagConstraints.HORIZONTAL;
 				constraints.gridwidth = 1;
+				constraints.weightx = 0.1;
+				constraints.gridx=3;
+				constraints.gridy = 1;
+				constraints.insets = new Insets(10,0,10,0);	
+				constraints.anchor = GridBagConstraints.CENTER;
+				
+				moviepane.add(removeButton, constraints);
+				JLabel selection = new JLabel(media.getStatus());
+				//JLabel selection = new JLabel(media.getStatus());
+				selection.setBackground(new Color(31, 31, 31));
+				selection.setBorder(null);
+				selection.setForeground(Color.WHITE);
+				selection.setVisible(true);
+				
+				statusList.add(media.getStatus());
+				
+			
+			    //Create the popup menu.
+			    popup = new JPopupMenu();
+			    
+			    status = new JButton();
+			    
+			    
+			    //status.setText(media.getStatus);
+			    status.setText("STATUS");
+				status.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+				status.setBackground(new Color(31, 31, 31));
+				status.setBorder(null);
+				status.setForeground(Color.WHITE);
+				
+			    MouseListener popupListener = new PopupListener();
+			    status.addMouseListener(popupListener);
+			    
+			    
+			    menuItem = new JMenuItem("Yet to Watch");
+			    menuItem.setBackground(new Color(31, 31, 31));
+				menuItem.setBorder(null);
+				menuItem.setForeground(Color.WHITE);
+			    menuItem.addActionListener(new ActionListener() {
+			    	@Override
+			    	public void actionPerformed(ActionEvent e) {
+			    		collection.setStatus(media.getId(),"Yet to Watch");
+			    		//statusList.set(index++, "Yet to watch");
+			    		selection.setText("Yet to Watch");
+			    		SwingUtilities.updateComponentTreeUI(selection);
+			    	}
+			    });
+			    popup.add(menuItem);
+			    menuItem = new JMenuItem("Completed");
+			    menuItem.setBackground(new Color(31, 31, 31));
+				menuItem.setBorder(null);
+				menuItem.setForeground(Color.WHITE);
+			    menuItem.addActionListener(new ActionListener() {
+			    	@Override
+			    	public void actionPerformed(ActionEvent e) {
+			    		collection.setStatus(media.getId(),"Completed");
+			    		//status.setText("Completed");
+			    		selection.setText("Completed");
+			    		SwingUtilities.updateComponentTreeUI(selection);
+			    	}
+			    });
+			    popup.add(menuItem);
+			    
+			    menuItem = new JMenuItem("In Progress");
+			    menuItem.setBackground(new Color(31, 31, 31));
+				menuItem.setBorder(null);
+				menuItem.setForeground(Color.WHITE);
+			    menuItem.addActionListener(new ActionListener() {
+			    	@Override
+			    	public void actionPerformed(ActionEvent e) {
+			    		collection.setStatus(media.getId(),"In Progress");			    		
+			    		selection.setText("In Progress");			    		
+			    		selection.setVisible(true);
+			    		moviepane.setVisible(false);
+			    		SwingUtilities.updateComponentTreeUI(selection);
+			    		moviepane.setVisible(true);
+			    		//SwingUtilities.updateComponentTreeUI(moviepane);
+			    	}
+			    });
+			    popup.add(menuItem);
+			    
+			    
+			    popup.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+				popup.setBackground(new Color(31, 31, 31));
+				popup.setBorder(null);
+			    
+			    
+			    
+			    
+				//constraints.fill = GridBagConstraints.HORIZONTAL;
+				constraints.gridwidth = 1;
+				constraints.weightx = 0.3;
+				constraints.gridx=1;
+				constraints.gridy = 1;
+				constraints.insets = new Insets(10,0,10,0);
+				constraints.anchor = GridBagConstraints.EAST;
+				
+				moviepane.add(status, constraints);
+				status.setVisible(false);
+	    		status.setVisible(true);
+				
+				
+			
+				constraints.gridwidth = 1;
+				constraints.weightx = 0.6;
 				constraints.gridx=2;
 				constraints.gridy = 1;
 				constraints.insets = new Insets(10,0,10,0);
 				
 				
 				
-				moviepane.add(removeButton, constraints);
-				//moviepane.setLayer(removeButton, 1);
+				moviepane.add(selection,constraints);
+				
 				panel.add(moviepane);
 				//panel.add(mediaButton);
 				
@@ -364,5 +483,16 @@ public class VaultUI extends JFrame{
             }
         }
         return list;
+    }
+    
+    public class PopupListener extends MouseAdapter{
+    	public void mousePressed(MouseEvent e) {
+            ShowPopup(e);
+        }
+    	private void ShowPopup(MouseEvent e) {    		
+    			popup.show(e.getComponent(),
+                       e.getX(), e.getY());
+    		
+        }
     }
 }

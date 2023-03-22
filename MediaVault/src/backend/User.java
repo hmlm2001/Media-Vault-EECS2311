@@ -12,6 +12,7 @@ public class User {
 	public static HashMap<String, Integer> stub;
 	private String username;
 	private int id;
+	private int userIcon;
 	private static final AtomicInteger count = new AtomicInteger(0); //for global id for stub users 
 	/**
 	 * Create a user with username and search for its id, if non-existent then create it
@@ -49,6 +50,18 @@ public class User {
 	 */
 	public int getId() {
 		return this.id;
+	}
+	/**
+	 * @return the user's icon
+	 */
+	public int getUserIcon() {
+		return userIcon;
+	}
+	/**
+	 * @param userIcon - the userIcon to be set
+	 */
+	public void setUserIcon(int userIcon) {
+		this.userIcon = userIcon;
 	}
 	/**
 	 * adds a media to a user's personal vault

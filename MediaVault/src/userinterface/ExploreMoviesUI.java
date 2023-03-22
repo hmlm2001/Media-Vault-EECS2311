@@ -30,7 +30,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
@@ -209,9 +208,7 @@ public class ExploreMoviesUI extends JFrame {
 			addGenreSection(mainContent, user, "Thriller", 8, 1065);
 		} // If the user has movies in their vault, display recommended section with the rest of explore page
 		else {
-			List<Media> recommended = new ArrayList<>();
-			recommended.add(new Movie(411));
-			recommended.add(new Movie(19995));
+			List<Media> recommended = Recommendations.get(user, 8);
 			addRecommended(mainContent, user, recommended, 10);
 			addGenreSection(mainContent, user, "Action", 8, 365);
 			addGenreSection(mainContent, user, "Animation", 8, 715);

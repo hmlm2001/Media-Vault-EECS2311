@@ -12,7 +12,7 @@ public class User {
 	public static HashMap<String, Integer> stub;
 	private String username;
 	private int id;
-	private int userIcon;
+	private int userIcon = 1;
 	private static final AtomicInteger count = new AtomicInteger(0); //for global id for stub users 
 	/**
 	 * Create a user with username and search for its id, if non-existent then create it

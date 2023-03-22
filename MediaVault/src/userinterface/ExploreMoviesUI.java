@@ -22,7 +22,6 @@ import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -46,23 +45,6 @@ public class ExploreMoviesUI extends JFrame {
 	private JPopupMenu profilePopup;
 	private JMenuItem menuItem;
     
-    /**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ExploreMoviesUI frame = new ExploreMoviesUI(new User("user10"));
-					frame.setLocationRelativeTo(null);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	
 	/**
 	 * Create the frame.
 	 */

@@ -12,6 +12,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 import backend.Movie;
+import backend.User;
+
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -25,7 +27,7 @@ public class ReviewsUI extends JFrame {
 //		EventQueue.invokeLater(new Runnable() {
 //			public void run() {
 //				try {
-//					ReviewsUI frame = new ReviewsUI(10, new Movie(411));
+//					ReviewsUI frame = new ReviewsUI(new User("user10"), new Movie(411));
 //			    	frame.setLocationRelativeTo(null);
 //			    	frame.toFront();
 //			    	frame.requestFocus();
@@ -40,7 +42,7 @@ public class ReviewsUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ReviewsUI(int userId, Movie movie) {
+	public ReviewsUI(User user, Movie movie) {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setTitle("Reviews - " + movie.getTitle());
 		setResizable(false);

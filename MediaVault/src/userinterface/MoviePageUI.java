@@ -137,11 +137,12 @@ public class MoviePageUI extends JFrame {
 		reviewsButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ReviewsUI frame = new ReviewsUI(userId, movie);
+				ReviewsUI frame = new ReviewsUI(user, movie);
 		    	frame.setLocationRelativeTo(null);
 		    	frame.toFront();
-		    	frame.requestFocus();
+		    	frame.addFocusListener(null);;
 				frame.setVisible(true);
+				MoviePageUI.this.setFocusable(false);
 			}
 		});
 		reviewsButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

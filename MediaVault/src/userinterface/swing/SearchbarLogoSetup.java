@@ -14,6 +14,7 @@ import javax.swing.JPopupMenu;
 import javax.swing.SwingConstants;
 
 import backend.Movie;
+import backend.User;
 import persistence.AllMoviesDB;
 import userinterface.MoviePageUI;
 

@@ -12,7 +12,7 @@ public class ReviewDB {
 	public static ArrayList<Review> get(Media media){
 		ArrayList<Review> reviews = new ArrayList<Review>();
 		ResultSet result;
-		result = JDBC_Connection.getResult("SELECT * FROM review ORDER BY rand() LIMIT 2;");
+		result = JDBC_Connection.getResult("SELECT * FROM review ORDER BY rand() LIMIT 3;");
 		try {
 			while (result.next()) {
 				Review review = new Review(new User(result.getString(1)),result.getString(3));

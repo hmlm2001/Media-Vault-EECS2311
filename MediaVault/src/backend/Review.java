@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import persistence.ReviewDB;
 
 public class Review {
-	User user;
-	String review;
+	private User user;
+	private String review;
 	
 	public Review(User user, String review) {
 		this.user=user;
@@ -16,7 +16,10 @@ public class Review {
 	public static ArrayList<Review> get(Media media){
 		return ReviewDB.get(media);
 	}
-	public static void main(String[] args) {
-		
+	public User getUser() {
+		return this.user;
+	}
+	public String getReview() {
+		return this.review;
 	}
 }

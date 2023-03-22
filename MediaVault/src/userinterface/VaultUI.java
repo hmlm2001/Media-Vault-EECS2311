@@ -357,8 +357,8 @@ private void addMediaButtons(JPanel panel, int userId) {
 			    menuItem.addActionListener(new ActionListener() {
 			    	@Override
 			    	public void actionPerformed(ActionEvent e) {
-			    		//media.setStatus("Yet to Watch");
-			    		status.setText("Yet to Watch");
+			    		media.setStatus("Yet to Watch");
+			    		//status.setText("Yet to Watch");
 			    		selection.setText("Yet to Watch");
 			    		SwingUtilities.updateComponentTreeUI(selection);
 			    	}
@@ -371,9 +371,10 @@ private void addMediaButtons(JPanel panel, int userId) {
 			    menuItem.addActionListener(new ActionListener() {
 			    	@Override
 			    	public void actionPerformed(ActionEvent e) {
-			    		//media.setStatus("Completed");
-			    		status.setText("Completed");
+			    		media.setStatus("Completed");
+			    		//status.setText("Completed");
 			    		selection.setText("Completed");
+			    		SwingUtilities.updateComponentTreeUI(moviepane);
 			    	}
 			    });
 			    popup.add(menuItem);
@@ -478,5 +479,16 @@ private void addMediaButtons(JPanel panel, int userId) {
             }
         }
         return list;
+    }
+    
+    public class PopupListener extends MouseAdapter{
+    	public void mousePressed(MouseEvent e) {
+            ShowPopup(e);
+        }
+    	private void ShowPopup(MouseEvent e) {    		
+    			popup.show(e.getComponent(),
+                       e.getX(), e.getY());
+    		
+        }
     }
 }

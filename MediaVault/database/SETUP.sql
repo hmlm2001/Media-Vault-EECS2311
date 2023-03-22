@@ -46,8 +46,13 @@ CREATE TABLE allmovies (
 Create table review (
 	userid int not null,
     movieid int not null,
-    review varchar(900)
+    review varchar(900),
+    PRIMARY KEY(userid,movieid)
 );
+
+
+INSERT INTO review VALUES
+(1,631842,'Who is knocking at the cabin???'),(2,631842,'Great movie, would recommend!'),(3,631842,'I watched this twice!'),(4,631842,'I hate this');
 
 
 INSERT INTO users(username) VALUES

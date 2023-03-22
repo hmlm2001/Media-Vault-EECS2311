@@ -73,4 +73,11 @@ public class User {
 	public ArrayList<Media> getMediaList() {
 		return this.mediaList.getMediaList(); 
 	} 
+	/**
+	 * gets the id of the media collection
+	 * @return the id of the collection
+	 */
+	protected int getCollectionId() {
+		return mediaList.getId();
+	}
 }

@@ -27,7 +27,7 @@ public class LoginDB{
 				e.printStackTrace();
 			}
 			JDBC_Connection.execute("INSERT INTO logins(usernameEnc,passwordEnc) VALUES ('"+username+"','"+password+"');");
-			JDBC_Connection.execute("INSERT INTO users(username) VALUES ('"+unEncUser+"');");
+			JDBC_Connection.execute("INSERT INTO users(username,userIcon) VALUES ('"+unEncUser+"',"+1+");");
 			return true;
 		} else { // checks if it needs to use the Stub DB
 			if (logins==null) LoginDB.createStubLogins();

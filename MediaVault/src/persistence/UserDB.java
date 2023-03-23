@@ -21,4 +21,30 @@ public class UserDB {
 		}
 		return 0;
 	}	
+	/**
+	 * gets the user icon associated with a user
+	 * @param username is the username of the user inputted
+	 * @return the integer value id of the icon
+	 */
+	public static int getIcon(String username) { 
+		ResultSet result;
+		result = JDBC_Connection.getResult("SELECT userIcon FROM users WHERE username='"+username+"';");
+		try {
+			while (result.next()) {
+				return result.getInt(1); //get the id associated with a username
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	/**
+	 * Updates the icon associated with an existing user
+	 * @param username is the username of the user
+	 * @param icon is the new icon value
+	 * @return true if updated successfully, false otherwise
+	 */
+	public static boolean setIcon(String username, int icon) {
+		return JDBC_Connection.execute("UPDATE users SET userIcon="+icon+" WHERE username='"+username+"';");
+	}
 }

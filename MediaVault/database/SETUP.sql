@@ -11,6 +11,7 @@ USE mediavault;
 CREATE TABLE users (
 	username VARCHAR(100) NOT NULL,
     userID INT NOT NULL AUTO_INCREMENT,
+    userIcon INT DEFAULT 1,
     PRIMARY KEY (userID)
 );
 
@@ -55,9 +56,9 @@ INSERT INTO review VALUES
 ('user1',631842,'Who is knocking at the cabin???'),('user2',631842,'Great movie, would recommend!'),('user3',631842,'I watched this twice!'),('user4',631842,'I hate this');
 
 
-INSERT INTO users(username) VALUES
-('user1'),('user2'),('user3'),('user4'),('user5'),('user6'),('user7'),('user8'),
-('user9'),('user10'),('user11');
+INSERT INTO users(username,userIcon) VALUES
+('user1',1),('user2',2),('user3',3),('user4',3),('user5',4),('user6',1),('user7',6),('user8',7),
+('user9',7),('user10',1),('user11',2);
 
 INSERT INTO mediacollections(userid) VALUES 
 (1), (2), (3), (4);

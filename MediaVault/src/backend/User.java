@@ -22,6 +22,7 @@ public class User {
 		this.username = username;
 		if (!UseStub.getStubFlag()) { //checks if DB is being used
 			this.id = UserDB.getId(username);
+			this.userIcon = UserDB.getIcon(username);
 		} else {	//if stub is being used use the hardcoded values in makeStub
 			if (stub==null) User.makeStub();
 			if (!stub.containsKey(username)) stub.put(username, count.incrementAndGet());
@@ -62,6 +63,7 @@ public class User {
 	 */
 	public void setUserIcon(int userIcon) {
 		this.userIcon = userIcon;
+		UserDB.setIcon(username, userIcon);
 	}
 	/**
 	 * adds a media to a user's personal vault

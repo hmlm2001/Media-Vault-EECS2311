@@ -74,6 +74,16 @@ public class ExploreMoviesUI extends JFrame {
 		moviesButton.setBackground(Color.DARK_GRAY);
 		moviesButton.setBorder(null);
 		moviesButton.setBounds(103, 17, 76, 29);
+		moviesButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		moviesButton.addActionListener(new MyActionListener(userId) {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ExploreMoviesUI frame = new ExploreMoviesUI(user);
+				frame.setLocationRelativeTo(null);
+				frame.setVisible(true);
+				ExploreMoviesUI.this.dispose();
+			}
+		});
 		navbar.add(moviesButton);
 		
 		JButton vaultButton = new JButton("VAULT");
@@ -90,7 +100,6 @@ public class ExploreMoviesUI extends JFrame {
 		vaultButton.setBackground(Color.DARK_GRAY);
 		vaultButton.setFont(new Font("Lucida Grande", Font.BOLD, 18));
 		vaultButton.addActionListener(new MyActionListener(userId) {
-			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				VaultUI frame = new VaultUI(user);
@@ -108,11 +117,7 @@ public class ExploreMoviesUI extends JFrame {
 		
 		// User Icon
 		JButton userIcon = new JButton();
-		userIcon.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		Image user_icon = new ImageIcon(getClass().getResource("/images/icons/user-icon2.png")).getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+		Image user_icon = new ImageIcon(getClass().getResource("/images/icons/user-icon" + Integer.toString(user.getUserIcon()) + ".png")).getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
 		userIcon.setIcon(new ImageIcon(user_icon));
 		userIcon.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		userIcon.setBackground(Color.BLACK);

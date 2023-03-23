@@ -137,7 +137,7 @@ public class MoviePageUI extends JFrame {
 		reviewsButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ReviewsUI frame = new ReviewsUI(user, movie);
+				ViewReviewsUI frame = new ViewReviewsUI(user, movie);
 		    	frame.setLocationRelativeTo(null);
 		    	frame.toFront();
 		    	frame.addFocusListener(null);;

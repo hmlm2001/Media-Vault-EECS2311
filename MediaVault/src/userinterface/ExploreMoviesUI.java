@@ -175,7 +175,7 @@ public class ExploreMoviesUI extends JFrame {
         mainScrollPane.setBounds(0, 61, 1305, 572);
         contentPane.add(mainScrollPane);
         mainScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        mainScrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(20, 0));
+        mainScrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(45, 0));
         mainScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         
         JPanel mainContent = new JPanel();

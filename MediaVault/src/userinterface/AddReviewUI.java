@@ -67,7 +67,7 @@ public class AddReviewUI extends JFrame {
 		reviewTextArea.setLineWrap(true);
 		reviewTextArea.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		reviewTextArea.setFocusable(true);
-		// Limiting the text area to accept a maximum of 600 characters
+		// Limiting the text area to accept a maximum of 600 characters & preventing it from accepting apostrophes
 		reviewTextArea.addKeyListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent e) {
@@ -76,14 +76,18 @@ public class AddReviewUI extends JFrame {
 			        e.consume();
 			        String shortened = reviewTextArea.getText().substring(0, max);
 			        reviewTextArea.setText(shortened);
-			    } else if(reviewTextArea.getText().length() >= max) {
+			    } else if (reviewTextArea.getText().length() >= max) {
 			        e.consume();
 			    }
 			}
 			@Override
 			public void keyPressed(KeyEvent e) {return;}
 			@Override
-			public void keyReleased(KeyEvent e) {return;	}
+			public void keyReleased(KeyEvent e) {
+				if (reviewTextArea.getText().contains("'")) {
+					reviewTextArea.setText(reviewTextArea.getText().substring(0, reviewTextArea.getText().length()-1));
+				}
+			}
 			
 		});
 		contentPane.add(scrollPane);

@@ -8,6 +8,8 @@ import java.awt.Cursor;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.Timer;
@@ -58,6 +60,19 @@ public class LoginUI extends JFrame {
 		usernameField = new JTextField();
 		usernameField.setBorder(new LineBorder(new Color(0, 0, 0)));
 		usernameField.setBounds(439, 140, 325, 30);
+		// Preventing users from typing apostrophes in this field to prevent sql database errors
+		usernameField.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent e) {return;}
+			@Override
+			public void keyPressed(KeyEvent e) {return;}
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if (usernameField.getText().contains("'")) {
+					usernameField.setText(usernameField.getText().substring(0, usernameField.getText().length()-1));
+				}
+			}
+		});
 		contentPane.add(usernameField);
 		usernameField.setColumns(10);
 		
@@ -68,6 +83,20 @@ public class LoginUI extends JFrame {
 		passwordField = new JPasswordField();
 		passwordField.setBorder(new LineBorder(new Color(0, 0, 0)));
 		passwordField.setBounds(439, 228, 325, 30);
+		// Preventing users from typing apostrophes in this field to prevent sql database errors
+		passwordField.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent e) {return;}
+			@Override
+			public void keyPressed(KeyEvent e) {return;}
+			@Override
+			public void keyReleased(KeyEvent e) {
+				String password = new String(passwordField.getPassword());
+				if (password.contains("'")) {
+					passwordField.setText(password.substring(0, password.length()-1));
+				}
+			}
+		});
 		contentPane.add(passwordField);
 		
 		JLabel passwordLabel = new JLabel("PASSWORD");

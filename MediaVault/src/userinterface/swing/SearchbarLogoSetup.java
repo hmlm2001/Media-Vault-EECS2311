@@ -67,8 +67,6 @@ public class SearchbarLogoSetup {
                 
                 MoviePageUI frame = new MoviePageUI(user, new Movie(movie.getId()));
             	frame.setLocationRelativeTo(null);
-            	frame.toFront();
-            	frame.requestFocus();
         		frame.setVisible(true);
             }
         });

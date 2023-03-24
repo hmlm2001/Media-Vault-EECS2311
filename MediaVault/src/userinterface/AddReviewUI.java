@@ -5,6 +5,7 @@ import java.awt.Cursor;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -29,7 +30,7 @@ import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 
 @SuppressWarnings("serial")
-public class AddReviewUI extends JFrame {
+public class AddReviewUI extends JDialog {
 
 	private JPanel contentPane;
 
@@ -37,6 +38,7 @@ public class AddReviewUI extends JFrame {
 	 * Create the frame.
 	 */
 	public AddReviewUI(User user, Movie movie) {
+		setModal(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setTitle("Add Review - " + movie.getTitle());
 		setResizable(false);
@@ -106,11 +108,12 @@ public class AddReviewUI extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Review.add(movie, new Review(user, reviewTextArea.getText()));
+				AddReviewUI.this.setVisible(false);
+				AddReviewUI.this.dispose();
 				ViewReviewsUI frame = new ViewReviewsUI(user, movie);
 				frame.setLocationRelativeTo(null);
-		    	frame.setAlwaysOnTop(true);
+				frame.setAlwaysOnTop(true);
 				frame.setVisible(true);
-				AddReviewUI.this.dispose();
 			}
 		});
 		contentPane.add(addButton);

@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.net.URL;
 
@@ -23,10 +21,12 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import javax.swing.JButton;
+import javax.swing.JDialog;
+
 import java.awt.Cursor;
 
 @SuppressWarnings("serial")
-public class MoviePageUI extends JFrame {
+public class MoviePageUI extends JDialog {
 
 	private JPanel contentPane;
 		
@@ -38,6 +38,7 @@ public class MoviePageUI extends JFrame {
 		MediaCollection movieList = new MediaCollection(userId);
 		
 		setTitle(movie.getTitle());
+		setModal(true);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 820, 580);
@@ -141,22 +142,7 @@ public class MoviePageUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				ViewReviewsUI frame = new ViewReviewsUI(user, movie);
 				frame.setLocationRelativeTo(null);
-		        frame.setAlwaysOnTop(true);
-		        
-		        // Add a window listener to disable the MoviePageUI frame when the ViewReviews frame is shown
-		        frame.addWindowListener(new WindowAdapter() {
-		            @Override
-		            public void windowOpened(WindowEvent e) {
-		                MoviePageUI.this.setEnabled(false);
-		                ExploreMoviesUI.openFrameCount++;
-		            }
-		            // Enable the MoviePageUI frame when the ViewReviews frame is closed
-		            @Override
-		            public void windowClosed(WindowEvent e) {
-		            	MoviePageUI.this.setEnabled(true);
-		            	ExploreMoviesUI.openFrameCount--;
-		            }
-		        });
+				frame.setAlwaysOnTop(true);
 		        frame.setVisible(true);
 			}
 		});

@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -21,14 +22,12 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import javax.swing.SwingConstants;
 import javax.swing.JSeparator;
 
 @SuppressWarnings("serial")
-public class ViewReviewsUI extends JFrame {
+public class ViewReviewsUI extends JDialog {
 
 	private JPanel contentPane;
 
@@ -36,6 +35,7 @@ public class ViewReviewsUI extends JFrame {
 	 * Create the frame.
 	 */
 	public ViewReviewsUI(User user, Movie movie) {
+		setModal(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setTitle("Reviews - " + movie.getTitle());
 		setResizable(false);
@@ -71,23 +71,12 @@ public class ViewReviewsUI extends JFrame {
 		addReviewButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				ViewReviewsUI.this.setVisible(false);
+				ViewReviewsUI.this.dispose();
 				AddReviewUI frame = new AddReviewUI(user, movie);
 				frame.setLocationRelativeTo(null);
-		        frame.setAlwaysOnTop(true);
-		        
-		        // Add a window listener to count the number of open frames
-		        frame.addWindowListener(new WindowAdapter() {
-		            @Override
-		            public void windowOpened(WindowEvent e) {
-		                ExploreMoviesUI.openFrameCount++;
-		            }
-		            @Override
-		            public void windowClosed(WindowEvent e) {
-		            	ExploreMoviesUI.openFrameCount--;
-		            }
-		        });
-		        frame.setVisible(true);				
-				ViewReviewsUI.this.dispose();
+				frame.setAlwaysOnTop(true);
+		        frame.setVisible(true);		
 			}
 		});
 		contentPane.add(addReviewButton);

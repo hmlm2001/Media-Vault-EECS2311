@@ -28,8 +28,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.net.URL;
 import java.util.List;
@@ -43,7 +41,6 @@ import java.awt.FlowLayout;
 @SuppressWarnings("serial")
 public class ExploreMoviesUI extends JFrame {
 
-	public static int openFrameCount = 0;
 	private JPanel contentPane;
 	private AllMoviesDB allMovies;
 	private JPopupMenu profilePopup;
@@ -161,15 +158,10 @@ public class ExploreMoviesUI extends JFrame {
 	    menuItem.addActionListener(new ActionListener() {
 	    	@Override
 	    	public void actionPerformed(ActionEvent e) {
-	    		// Only log out if there is no other window open
-	    		if (openFrameCount == 0) {
-	    			LoginUI frame = new LoginUI();
-					frame.setLocationRelativeTo(null);
-					frame.setVisible(true);
-					ExploreMoviesUI.this.dispose();
-	    		} else {
-	    			menuItem.setEnabled(false);
-	    		}
+    			LoginUI frame = new LoginUI();
+				frame.setLocationRelativeTo(null);
+				frame.setVisible(true);
+				ExploreMoviesUI.this.dispose();
 	    	}
 	    });
 	    profilePopup.add(menuItem);
@@ -292,22 +284,6 @@ public class ExploreMoviesUI extends JFrame {
 						public void actionPerformed(ActionEvent e) {
 							MoviePageUI frame = new MoviePageUI(user, new Movie(id));
 							frame.setLocationRelativeTo(null);
-	        		        frame.setAlwaysOnTop(true);
-	        		        
-	        		        // Add a window listener to disable the ExploreMoviesUI frame when the MoviePageUI frame is shown
-	        		        frame.addWindowListener(new WindowAdapter() {
-	        		            @Override
-	        		            public void windowOpened(WindowEvent e) {
-	        		                ExploreMoviesUI.this.setEnabled(false);
-	        		                openFrameCount++;
-	        		            }
-	        		            // Enable the ExploreMoviesUI frame when the MoviePageUI frame is closed
-	        		            @Override
-	        		            public void windowClosed(WindowEvent e) {
-	        		            	ExploreMoviesUI.this.setEnabled(true);
-	        		            	openFrameCount--;
-	        		            }
-	        		        });
 	        		        frame.setVisible(true);
 						}
 	        		});
@@ -400,22 +376,6 @@ public class ExploreMoviesUI extends JFrame {
         		    public void actionPerformed(ActionEvent e) {
         		        MoviePageUI frame = new MoviePageUI(user, new Movie(id));
         		        frame.setLocationRelativeTo(null);
-        		        frame.setAlwaysOnTop(true);
-        		        
-        		        // Add a window listener to disable the ExploreMoviesUI frame when the MoviePageUI frame is shown
-        		        frame.addWindowListener(new WindowAdapter() {
-        		            @Override
-        		            public void windowOpened(WindowEvent e) {
-        		                ExploreMoviesUI.this.setEnabled(false);
-        		                openFrameCount++;
-        		            }
-        		            // Enable the ExploreMoviesUI frame when the MoviePageUI frame is closed
-        		            @Override
-        		            public void windowClosed(WindowEvent e) {
-        		            	ExploreMoviesUI.this.setEnabled(true);
-        		            	openFrameCount--;
-        		            }
-        		        });
         		        frame.setVisible(true);
         		    }
         		});

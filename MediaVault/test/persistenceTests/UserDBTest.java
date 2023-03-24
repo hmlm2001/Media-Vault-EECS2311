@@ -37,8 +37,8 @@ class UserDBTest {
 	 */
 	@Test
 	void getIconTest() {
-		assertEquals(1,UserDB.getIcon("user1"));
-		assertEquals(2,UserDB.getIcon("user2"));		
+		assertEquals(4,UserDB.getIcon("user10"));
+		assertEquals(5,UserDB.getIcon("user11"));		
 	}
 	
 	/**

@@ -5,7 +5,6 @@ import backend.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -15,7 +14,6 @@ class MediaCollectionTest {
 
 	MediaCollection user1Collection;
 	MediaCollection user3Collection;
-	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	
 	@BeforeEach
 	void init() {
@@ -25,7 +23,7 @@ class MediaCollectionTest {
 	}
 	
 	/**
-	 *  Testing the addition of media
+	 * Testing the addition of media
 	 * @throws ParseException
 	 */
 	@Test
@@ -71,13 +69,45 @@ class MediaCollectionTest {
 	@Test
 	void getMediaListTest() throws ParseException {
 		ArrayList<Media> user3list = new ArrayList<>();
-		
-		user3list= user3Collection.getMediaList();
+		user3list = user3Collection.getMediaList();
 		
 		assertEquals(646389,user3list.get(0).getId());
 		assertEquals(772515,user3list.get(1).getId());	
-		
-	
 	}	
-
+	
+	/**
+	 * Testing setStatus for existing media
+	 */
+	@Test 
+	void setStatusTest() {
+		assertTrue(user3Collection.setStatus(646389, "Completed"));
+		assertTrue(user3Collection.setStatus(772515, "Yet to Watch"));
+	}
+	
+	/**
+	 * Testing setStatus for non-existing media
+	 */
+	@Test 
+	void setStatusTest2() {
+		assertFalse(user1Collection.setStatus(646389, "Completed"));
+		assertFalse(user1Collection.setStatus(772515, "Yet to Watch"));
+	}
+	
+	/**
+	 * Testing size
+	 */
+	@Test
+	void sizeTest() {
+		assertEquals(1,user1Collection.size());
+		assertEquals(2,user3Collection.size());
+	}
+	
+	/**
+	 * Testing getId
+	 */
+	@Test
+	void getIdTest() {
+		assertEquals(1,user1Collection.getId());
+		assertEquals(3,user3Collection.getId());
+	}
 }

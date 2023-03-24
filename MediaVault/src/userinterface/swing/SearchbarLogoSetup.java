@@ -26,6 +26,10 @@ public class SearchbarLogoSetup {
     private PanelSearch search;
     private User user;
     
+    /**
+     * This class setups the MediaVault logo and searchbar in the given navigation bar
+     * @param navbar to setup the searchbar and logo
+     */
 	public SearchbarLogoSetup(JPanel navbar) {
 		
 		// Logo

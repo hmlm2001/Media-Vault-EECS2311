@@ -31,5 +31,23 @@ class UserDBTest {
 		assertEquals(0,UserDB.getId("user"));
 		assertEquals(0,UserDB.getId("123"));		
 	}
+	
+	/**
+	 * Tests if getIcon returns the correct userIcon.
+	 */
+	@Test
+	void getIconTest() {
+		assertEquals(1,UserDB.getIcon("user1"));
+		assertEquals(2,UserDB.getIcon("user2"));		
+	}
+	
+	/**
+	 * Tests if getIcon returns 0 for non existent users. 
+	 */
+	@Test
+	void getIconTest2() {
+		assertEquals(0,UserDB.getIcon("user"));
+		assertEquals(0,UserDB.getIcon("123"));		
+	}
 
 }

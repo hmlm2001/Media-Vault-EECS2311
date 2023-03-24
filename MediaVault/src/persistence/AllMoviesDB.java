@@ -33,14 +33,27 @@ public class AllMoviesDB {
 		}
 	}
 		
-	public boolean contains(Movie movieDuplicate) {
-		return movieList.contains(movieDuplicate);
+	/**
+	 * Checks if a movie is in the movie list
+	 * @param movie to be checked
+	 * @return true if the movie is in movieList, false otherwise
+	 */
+	public boolean contains(Movie movie) {
+		return movieList.contains(movie);
 	}
 	
+	/**
+	 * Gets a movie from the movie list given an index
+	 * @param index of the element to be returned
+	 * @return the movie at the given index
+	 */
 	public Movie get(int index) {
 		return movieList.get(index);
 	}
 	
+	/**
+	 * @return the size of the movie lists
+	 */
 	public int size() {
 		return movieList.size();
 	}

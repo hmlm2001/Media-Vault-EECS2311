@@ -73,6 +73,13 @@ public class MediaCollection {
 		}
 		return false;
 	}
+	
+	/**
+	 * Set the status of a movie in a user's vault
+	 * @param id of the movie
+	 * @param Status to be set
+	 * @return true if successful, false otherwise
+	 */
 	public boolean setStatus(int id, String Status) {
 		for (int i = 0; i<this.mediaList.size();i++) {
 			if (this.mediaList.get(i).getId()==id) {
@@ -97,7 +104,7 @@ public class MediaCollection {
 	 * gets the id of the collection
 	 * @return the id of the collection
 	 */
-	protected int getId() {
+	public int getId() {
 		return this.id;
 	}
 }

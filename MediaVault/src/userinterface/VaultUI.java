@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.net.URL;
 import java.util.ArrayList;
@@ -283,10 +285,24 @@ private void addMediaButtons(JPanel panel, User user) {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						MoviePageUI frame = new MoviePageUI(user, new Movie(media.getId()));
-				    	frame.setLocationRelativeTo(null);
-				    	frame.toFront();
-				    	frame.requestFocus();
-						frame.setVisible(true);
+						frame.setLocationRelativeTo(null);
+        		        frame.setAlwaysOnTop(true);
+        		        
+        		        // Add a window listener to disable the VaultUI frame when the MoviePageUI frame is shown
+        		        frame.addWindowListener(new WindowAdapter() {
+        		            @Override
+        		            public void windowOpened(WindowEvent e) {
+        		                VaultUI.this.setEnabled(false);
+        		                ExploreMoviesUI.openFrameCount++;
+        		            }
+        		            // Enable the VaultUI frame when the MoviePageUI frame is closed
+        		            @Override
+        		            public void windowClosed(WindowEvent e) {
+        		            	VaultUI.this.setEnabled(true);
+        		            	ExploreMoviesUI.openFrameCount--;
+        		            }
+        		        });
+        		        frame.setVisible(true);
 					}
         		});
 				

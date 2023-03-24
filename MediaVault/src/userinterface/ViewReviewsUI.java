@@ -21,6 +21,8 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import javax.swing.SwingConstants;
 import javax.swing.JSeparator;
@@ -70,9 +72,21 @@ public class ViewReviewsUI extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				AddReviewUI frame = new AddReviewUI(user, movie);
-	    		frame.setLocationRelativeTo(null);
-				frame.setVisible(true);
-				frame.setFocusable(true);
+				frame.setLocationRelativeTo(null);
+		        frame.setAlwaysOnTop(true);
+		        
+		        // Add a window listener to count the number of open frames
+		        frame.addWindowListener(new WindowAdapter() {
+		            @Override
+		            public void windowOpened(WindowEvent e) {
+		                ExploreMoviesUI.openFrameCount++;
+		            }
+		            @Override
+		            public void windowClosed(WindowEvent e) {
+		            	ExploreMoviesUI.openFrameCount--;
+		            }
+		        });
+		        frame.setVisible(true);				
 				ViewReviewsUI.this.dispose();
 			}
 		});

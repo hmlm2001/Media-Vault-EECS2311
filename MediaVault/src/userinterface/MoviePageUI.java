@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.net.URL;
 
@@ -104,7 +106,7 @@ public class MoviePageUI extends JFrame {
 					successPrompt.setBounds(540, 516, 200, 20);
 					successPrompt.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 					successPrompt.setText("Successfully Added!");
-					Timer t = new Timer(800, new ActionListener() {
+					Timer t = new Timer(700, new ActionListener() {
 					    public void actionPerformed(ActionEvent e) {
 							MoviePageUI.this.dispose();
 					    }
@@ -116,7 +118,7 @@ public class MoviePageUI extends JFrame {
 					successPrompt.setBounds(550, 516, 200, 20);
 					successPrompt.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 					successPrompt.setText("Already in Vault!");
-					Timer t = new Timer(800, new ActionListener() {
+					Timer t = new Timer(700, new ActionListener() {
 					    public void actionPerformed(ActionEvent e) {
 							MoviePageUI.this.dispose();
 					    }
@@ -138,11 +140,24 @@ public class MoviePageUI extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ViewReviewsUI frame = new ViewReviewsUI(user, movie);
-		    	frame.setLocationRelativeTo(null);
-		    	frame.toFront();
-		    	frame.addFocusListener(null);;
-				frame.setVisible(true);
-				MoviePageUI.this.setFocusable(false);
+				frame.setLocationRelativeTo(null);
+		        frame.setAlwaysOnTop(true);
+		        
+		        // Add a window listener to disable the MoviePageUI frame when the ViewReviews frame is shown
+		        frame.addWindowListener(new WindowAdapter() {
+		            @Override
+		            public void windowOpened(WindowEvent e) {
+		                MoviePageUI.this.setEnabled(false);
+		                ExploreMoviesUI.openFrameCount++;
+		            }
+		            // Enable the MoviePageUI frame when the ViewReviews frame is closed
+		            @Override
+		            public void windowClosed(WindowEvent e) {
+		            	MoviePageUI.this.setEnabled(true);
+		            	ExploreMoviesUI.openFrameCount--;
+		            }
+		        });
+		        frame.setVisible(true);
 			}
 		});
 		reviewsButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

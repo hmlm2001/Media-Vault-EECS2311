@@ -107,9 +107,8 @@ public class AddReviewUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Review.add(movie, new Review(user, reviewTextArea.getText()));
 				ViewReviewsUI frame = new ViewReviewsUI(user, movie);
-		    	frame.setLocationRelativeTo(null);
-		    	frame.toFront();
-		    	frame.requestFocus();
+				frame.setLocationRelativeTo(null);
+		    	frame.setAlwaysOnTop(true);
 				frame.setVisible(true);
 				AddReviewUI.this.dispose();
 			}

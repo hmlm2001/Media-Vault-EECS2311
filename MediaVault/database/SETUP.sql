@@ -4,7 +4,6 @@ GRANT ALL PRIVILEGES ON * . * TO 'mediavaultadmin'@'localhost';
 FLUSH PRIVILEGES;
 
 -- Create mediavault database
-DROP DATABASE mediavault;
 CREATE DATABASE mediavault;
 USE mediavault;
 
@@ -53,12 +52,13 @@ Create table review (
 
 
 INSERT INTO review VALUES
-('user1',631842,'Who is knocking at the cabin???'),('user2',631842,'Great movie, would recommend!'),('user3',631842,'I watched this twice!'),('user4',631842,'I hate this');
+('user1',631842,'Who is knocking at the cabin???'),('user2',631842,'Great movie, would recommend!'),('user3',631842,'I watched this twice!'),('user4',631842,'I hate this'),
+('user1',411,'This movie made no sense. Animals do not talk in real life.'),('user2',411,'Great movie, loved it!'),('user5',19995,'Overrated. Way too long.'),('user7',505642,'Shed a tear watching this. RIP Chadwick.');
 
 
 INSERT INTO users(username,userIcon) VALUES
-('user1',1),('user2',2),('user3',3),('user4',3),('user5',4),('user6',1),('user7',6),('user8',7),
-('user9',7),('user10',1),('user11',2);
+('user1',2),('user2',3),('user3',4),('user4',5),('user5',6),('user6',7),('user7',1),('user8',2),
+('user9',3),('user10',4),('user11',5);
 
 INSERT INTO mediacollections(userid) VALUES 
 (1), (2), (3), (4);

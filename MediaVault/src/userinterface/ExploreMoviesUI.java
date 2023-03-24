@@ -75,7 +75,7 @@ public class ExploreMoviesUI extends JFrame {
 		moviesButton.setBorder(null);
 		moviesButton.setBounds(103, 17, 76, 29);
 		moviesButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		moviesButton.addActionListener(new MyActionListener(userId) {
+		moviesButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ExploreMoviesUI frame = new ExploreMoviesUI(user);
@@ -99,7 +99,7 @@ public class ExploreMoviesUI extends JFrame {
 		vaultButton.setForeground(Color.GRAY);
 		vaultButton.setBackground(Color.DARK_GRAY);
 		vaultButton.setFont(new Font("Lucida Grande", Font.BOLD, 18));
-		vaultButton.addActionListener(new MyActionListener(userId) {
+		vaultButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				VaultUI frame = new VaultUI(user);
@@ -278,7 +278,16 @@ public class ExploreMoviesUI extends JFrame {
 	        		moviePosters[movieCount].setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 	        		moviePosters[movieCount].setBorder(null);
 	        		moviePosters[movieCount].setBackground(Color.black);
-	        		moviePosters[movieCount].addMouseListener(new MyMouseAdapter(user, id));
+	        		moviePosters[movieCount].addActionListener(new ActionListener() {
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							MoviePageUI frame = new MoviePageUI(user, new Movie(id));
+					    	frame.setLocationRelativeTo(null);
+					    	frame.toFront();
+					    	frame.requestFocus();
+							frame.setVisible(true);
+						}
+	        		});
 	    	        content.add(moviePosters[movieCount]);
 	    	        
 	        		movieCount++;
@@ -363,7 +372,16 @@ public class ExploreMoviesUI extends JFrame {
         		moviePoster.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         		moviePoster.setBorder(null);
         		moviePoster.setBackground(Color.black);
-        		moviePoster.addMouseListener(new MyMouseAdapter(user, id));
+        		moviePoster.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						MoviePageUI frame = new MoviePageUI(user, new Movie(id));
+				    	frame.setLocationRelativeTo(null);
+				    	frame.toFront();
+				    	frame.requestFocus();
+						frame.setVisible(true);
+					}
+        		});
     	        content.add(moviePoster);
 	    	}
 	        			        

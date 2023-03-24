@@ -90,7 +90,7 @@ public class ProfileUI extends JFrame {
 				moviesButton.setForeground(Color.GRAY);
 			}
 		});
-		moviesButton.addActionListener(new MyActionListener(user.getId()) {
+		moviesButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -115,7 +115,7 @@ public class ProfileUI extends JFrame {
 		vaultButton.setForeground(Color.GRAY);
 		vaultButton.setBackground(Color.DARK_GRAY);
 		vaultButton.setFont(new Font("Lucida Grande", Font.BOLD, 18));
-		vaultButton.addActionListener(new MyActionListener(user.getId()) {
+		vaultButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {

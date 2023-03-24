@@ -22,6 +22,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
@@ -38,7 +40,7 @@ public class AddReviewUI extends JFrame {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setTitle("Add Review - " + movie.getTitle());
 		setResizable(false);
-		setBounds(100, 100, 700, 300);
+		setBounds(100, 100, 700, 310);
 		
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
@@ -66,7 +68,7 @@ public class AddReviewUI extends JFrame {
 		scrollPane.setBounds(6, 71, 688, 152);
 		reviewTextArea.setLineWrap(true);
 		reviewTextArea.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		reviewTextArea.setFocusable(true);
+		reviewTextArea.requestFocus();
 		// Limiting the text area to accept a maximum of 600 characters & preventing it from accepting apostrophes
 		reviewTextArea.addKeyListener(new KeyListener() {
 			@Override
@@ -98,7 +100,7 @@ public class AddReviewUI extends JFrame {
 		addButton.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		addButton.setBorder(new LineBorder(new Color(0, 0, 0)));
 		addButton.setBackground(Color.WHITE);
-		addButton.setBounds(274, 235, 163, 31);
+		addButton.setBounds(274, 238, 163, 31);
 		addButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		addButton.addActionListener(new ActionListener() {
 			@Override
@@ -113,5 +115,12 @@ public class AddReviewUI extends JFrame {
 			}
 		});
 		contentPane.add(addButton);
+		
+		// Setting the focus of the frame to be the text area
+		addWindowFocusListener(new WindowAdapter() {
+		    public void windowGainedFocus(WindowEvent e) {
+		        reviewTextArea.requestFocusInWindow();
+		    }
+		});
 	}
 }

@@ -23,12 +23,7 @@ import javax.swing.border.EmptyBorder;
 
 import backend.*;
 import persistence.AllMoviesDB;
-import persistence.UserDB;
-import userinterface.swing.EventClick;
-import userinterface.swing.MyActionListener;
-import userinterface.swing.MyMouseAdapter;
-import userinterface.swing.MyTextField;
-import userinterface.swing.PanelSearch;
+import userinterface.swing.*;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -93,7 +88,7 @@ public class VaultUI extends JFrame{
 		
 		JButton moviesButton = new JButton("MOVIES");
 		moviesButton.setFont(new Font("Lucida Grande", Font.BOLD, 18));
-		moviesButton.addActionListener(new MyActionListener(user.getId()) {
+		moviesButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ExploreMoviesUI frame = new ExploreMoviesUI(user);
 				frame.setLocationRelativeTo(null);
@@ -122,7 +117,7 @@ public class VaultUI extends JFrame{
 		vaultButton.setFont(new Font("Lucida Grande", Font.BOLD, 18));
 		vaultButton.setBorder(null);
 		vaultButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		vaultButton.addActionListener(new MyActionListener(user.getId()) {
+		vaultButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -282,10 +277,18 @@ private void addMediaButtons(JPanel panel, User user) {
 					mediaButton.setIcon(new ImageIcon(c.getScaledInstance(350, 470, 0)));
 					
 				} catch (Exception e) {
-					
 					e.printStackTrace();
 				}
-				mediaButton.addMouseListener(new MyMouseAdapter(user, media.getId()));				
+				mediaButton.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						MoviePageUI frame = new MoviePageUI(user, new Movie(media.getId()));
+				    	frame.setLocationRelativeTo(null);
+				    	frame.toFront();
+				    	frame.requestFocus();
+						frame.setVisible(true);
+					}
+        		});
 				
 				mediaButton.setText(null);
 				mediaButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

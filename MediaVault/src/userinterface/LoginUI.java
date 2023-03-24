@@ -16,7 +16,6 @@ import javax.swing.Timer;
 import javax.swing.border.LineBorder;
 
 import backend.User;
-import userinterface.swing.MyActionListener;
 
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
@@ -115,7 +114,7 @@ public class LoginUI extends JFrame {
 					successPrompt.setForeground(new Color(52, 200, 15));
 					successPrompt.setBounds(550, 343, 110, 16);
 					successPrompt.setText("Logging in...");
-					Timer t = new Timer(0, new MyActionListener(user.getId()) {
+					Timer t = new Timer(0, new ActionListener() {
 					    public void actionPerformed(ActionEvent e) {
 					    	ExploreMoviesUI frame = new ExploreMoviesUI(user);
 					    	frame.setLocationRelativeTo(null);

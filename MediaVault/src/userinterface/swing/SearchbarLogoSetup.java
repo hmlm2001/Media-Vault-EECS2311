@@ -74,8 +74,8 @@ public class SearchbarLogoSetup {
         });
 	}
 	/**
-	 * Used to set the userId for the searchbar setup
-	 * @param userId - userId to be used
+	 * Used to set the user for the searchbar setup
+	 * @param user - user to be used
 	 */
 	public void setUser(User user) {
 		this.user = user;

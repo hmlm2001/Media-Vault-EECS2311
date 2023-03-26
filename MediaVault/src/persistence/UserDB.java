@@ -11,7 +11,8 @@ public class UserDB {
 	 */
 	public static int getId(String username) {
 		ResultSet result;
-		result = JDBC_Connection.getResult("SELECT userID FROM users WHERE username='"+username+"';");
+		ActiveConnection activeCon = JDBC_Connection.getResult("SELECT userID FROM users WHERE username='"+username+"';");
+		result = activeCon.result;
 		try {
 			while (result.next()) {
 				return result.getInt(1); //get the id associated with a username
@@ -19,6 +20,7 @@ public class UserDB {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		activeCon.closeConnection();
 		return 0;
 	}	
 	/**
@@ -28,7 +30,8 @@ public class UserDB {
 	 */
 	public static int getIcon(String username) { 
 		ResultSet result;
-		result = JDBC_Connection.getResult("SELECT userIcon FROM users WHERE username='"+username+"';");
+		ActiveConnection activeCon = JDBC_Connection.getResult("SELECT userIcon FROM users WHERE username='"+username+"';");
+		result = activeCon.result;
 		try {
 			while (result.next()) {
 				return result.getInt(1); //get the id associated with a username
@@ -36,6 +39,7 @@ public class UserDB {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		activeCon.closeConnection();
 		return 0;
 	}
 	/**

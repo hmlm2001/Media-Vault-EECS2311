@@ -15,7 +15,8 @@ public class MediaCollectionDB {
 	 */
 	public static int getMediaCollectionId(int userid) {
 		ResultSet result;
-		result = JDBC_Connection.getResult("SELECT * FROM mediacollections WHERE userid='"+userid+"';"); //first goes through, if it does not return anything then it means that no collection exists yet (new user)
+		ActiveConnection activeCon = JDBC_Connection.getResult("SELECT * FROM mediacollections WHERE userid='"+userid+"';"); //first goes through, if it does not return anything then it means that no collection exists yet (new user)
+		result = activeCon.result;
 		try {
 			while (result.next()) {
 				return result.getInt(1);
@@ -23,8 +24,10 @@ public class MediaCollectionDB {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		activeCon.closeConnection();
 		JDBC_Connection.execute("INSERT INTO mediacollections(userid) VALUES ("+userid+");"); //create a new mediacollection for the new user
-		result = JDBC_Connection.getResult("SELECT * FROM mediacollections WHERE userid='"+userid+"';"); //now get the id that was assigned to the mediacollection
+		activeCon = JDBC_Connection.getResult("SELECT * FROM mediacollections WHERE userid='"+userid+"';"); //now get the id that was assigned to the mediacollection
+		result = activeCon.result;
 		try {
 			while (result.next()) {
 				return result.getInt(1);
@@ -32,6 +35,7 @@ public class MediaCollectionDB {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		activeCon.closeConnection();
 		return 0; //default return incase anything goes wrong
 	}
 	/**
@@ -42,13 +46,15 @@ public class MediaCollectionDB {
 	public static ArrayList<Media> getMediaCollection(int collectionid) {
 		ArrayList<Media> collection = new ArrayList<Media>();
 		ResultSet result;
-		result = JDBC_Connection.getResult("SELECT * FROM mediarelations WHERE mediaCollectionID='"+collectionid+"';");
+		ActiveConnection activeCon = JDBC_Connection.getResult("SELECT * FROM mediarelations WHERE mediaCollectionID='"+collectionid+"';");
+		result = activeCon.result;
 		try {
 			while (result.next()) {
 				collection.add(new Movie(result.getInt(1)).setStatus(result.getString(3))); //get all the movies for a media collection and store them in collection, also get the status
 			}
 		} catch (SQLException e) {
 		}
+		activeCon.closeConnection();
 		return collection;
 	}
 	/**

@@ -17,7 +17,8 @@ public class RecommendationsDB {
 	public static ArrayList<Media> get(int mediaCollectionId, int n){
 		ArrayList<Media> list = new ArrayList<Media>();
 		ResultSet result;
-		result = JDBC_Connection.getResult("SELECT title,id FROM allmovies WHERE id NOT IN(SELECT mediaid FROM mediarelations WHERE mediacollectionid="+mediaCollectionId+") ORDER BY rand() LIMIT "+n+";");
+		ActiveConnection activeCon = JDBC_Connection.getResult("SELECT title,id FROM allmovies WHERE id NOT IN(SELECT mediaid FROM mediarelations WHERE mediacollectionid="+mediaCollectionId+") ORDER BY rand() LIMIT "+n+";");
+		result = activeCon.result;
 		try {
 			while (result.next()) {
 				Movie movie = new Movie(result.getInt("id"));
@@ -26,6 +27,7 @@ public class RecommendationsDB {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		activeCon.closeConnection();
 		return list;
 	}
 }

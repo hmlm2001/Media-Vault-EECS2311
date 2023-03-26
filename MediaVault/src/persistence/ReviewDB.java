@@ -17,7 +17,8 @@ public class ReviewDB {
 	public static ArrayList<Review> get(Media media){
 		ArrayList<Review> reviews = new ArrayList<Review>();
 		ResultSet result;
-		result = JDBC_Connection.getResult("SELECT * FROM review WHERE movieid='"+media.getId()+"' ORDER BY rand() LIMIT 3;");
+		ActiveConnection activeCon = JDBC_Connection.getResult("SELECT * FROM review WHERE movieid='"+media.getId()+"' ORDER BY rand() LIMIT 3;");
+		result = activeCon.result;
 		try {
 			while (result.next()) {
 				Review review = new Review(new User(result.getString(1)),result.getString(3));
@@ -26,6 +27,7 @@ public class ReviewDB {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		activeCon.closeConnection();
 		return reviews;
 	}
 	/**
@@ -36,7 +38,8 @@ public class ReviewDB {
 	 */
 	public static boolean userReviewed(int movieId, String username) {
 		ResultSet result;
-		result = JDBC_Connection.getResult("SELECT * FROM review WHERE username='"+username+"' AND movieid="+movieId+";");
+		ActiveConnection activeCon = JDBC_Connection.getResult("SELECT * FROM review WHERE username='"+username+"' AND movieid="+movieId+";");
+		result = activeCon.result;
 		try {
 			if (result.next() == false) {
 			      return false;
@@ -44,6 +47,7 @@ public class ReviewDB {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		activeCon.closeConnection();
 		return true;
 	}
 	/**

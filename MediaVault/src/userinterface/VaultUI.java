@@ -1,6 +1,7 @@
 package userinterface;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -20,6 +21,7 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 
 import backend.*;
 import persistence.AllMoviesDB;
@@ -37,6 +39,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
 import javax.swing.JScrollPane;
+import javax.swing.JViewport;
+
 import java.awt.FlowLayout;
 import javax.swing.JLayeredPane;
 import javax.swing.JMenuItem;
@@ -240,6 +244,51 @@ private void addMediaButtons(JPanel panel, User user) {
 		URL url;
 		BufferedImage c;
 		
+		JPanel content = new JPanel();
+	    content.setBackground(Color.DARK_GRAY);
+	    content.setLayout(new FlowLayout(FlowLayout.CENTER, 3, 3));
+	    JScrollPane scrollPane = new JScrollPane(content);
+	    
+	    scrollPane.setViewportView(content);
+	    scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+	    scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+	    scrollPane.setBounds(6, 20+34, 1275, 310);
+	    panel.add(scrollPane);
+	    JViewport viewport = scrollPane.getViewport();
+	    
+	    JButton leftButton = new JButton("<");
+	    leftButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+	    leftButton.setFont(new Font("Lucida Grande", Font.BOLD, 18));
+	    leftButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) { 
+				Point origin = viewport.getViewPosition();
+				Point newOrigin = new Point(origin.x-150, origin.y);
+				if (origin.x != 0) { 
+					viewport.setViewPosition(newOrigin);
+				}
+			}
+		});
+	    leftButton.setBorder(new LineBorder(new Color(0, 0, 0)));
+	    leftButton.setBackground(Color.WHITE);
+	    leftButton.setBounds(530, 20-2, 29, 29);
+	    panel.add(leftButton);
+	    
+	    JButton rightButton = new JButton(">");
+	    rightButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+	    rightButton.setFont(new Font("Lucida Grande", Font.BOLD, 18));
+	    rightButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Point origin = viewport.getViewPosition();
+				Point newOrigin = new Point(origin.x+150, origin.y);
+				viewport.setViewPosition(newOrigin);
+			}
+		});
+	    rightButton.setBorder(new LineBorder(new Color(0, 0, 0)));
+	    rightButton.setBackground(Color.WHITE);
+	    rightButton.setBounds(735, 20-2, 29, 29);
+	    panel.add(rightButton);
 		
 		if (collection.size() == 0) {
 			JLabel emptyVaultLabel = new JLabel("Nothing to see here...Search for movies and add them to your vault!");
@@ -356,7 +405,6 @@ private void addMediaButtons(JPanel panel, User user) {
 			    	@Override
 			    	public void actionPerformed(ActionEvent e) {
 			    		collection.setStatus(media.getId(),"Yet to Watch");
-			    		//statusList.set(index++, "Yet to watch");
 			    		selection.setText("Yet to Watch");
 			    		SwingUtilities.updateComponentTreeUI(selection);
 			    	}
@@ -386,11 +434,10 @@ private void addMediaButtons(JPanel panel, User user) {
 			    	public void actionPerformed(ActionEvent e) {
 			    		collection.setStatus(media.getId(),"In Progress");			    		
 			    		selection.setText("In Progress");			    		
-			    		selection.setVisible(true);
-			    		moviepane.setVisible(false);
+			    		selection.setVisible(true);			    		
 			    		SwingUtilities.updateComponentTreeUI(selection);
-			    		moviepane.setVisible(true);
-			    		//SwingUtilities.updateComponentTreeUI(moviepane);
+			    		
+			    		
 			    	}
 			    });
 			    statuspopup.add(menuItem);
@@ -428,65 +475,11 @@ private void addMediaButtons(JPanel panel, User user) {
 				moviepane.add(selection,constraints);
 				
 				panel.add(moviepane);
-				//panel.add(mediaButton);
+				
 				
 			}
 		}
 	
 	}
-//	/**
-//	 * Used to show the menu when the searchbar is clicked
-//	 * @param evt - occurs when the mouse is clicked
-//	 */
-//	private void txtSearchMouseClicked(java.awt.event.MouseEvent evt) {
-//        if (search.getItemSize() > 0) {
-//            menu.show(searchbar, 0, searchbar.getHeight());
-//        }
-//    }
-	
-//	/**
-//	 * Used to search the database when a key is pressed
-//	 * @param evt - occurs when a key is released
-//	 */
-//    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {
-//        String text = searchbar.getText().trim().toLowerCase();
-//        search.setMovies(search(text));
-//        if (search.getItemSize() > 0) {
-//            menu.show(searchbar, 0, searchbar.getHeight());
-//            menu.setPopupSize(menu.getWidth(), (search.getItemSize() * 35) + 2);
-//        } else {
-//            menu.setVisible(false);
-//        }
-//    }
-//
-//    /**
-//     * Used to search through all the movies database 
-//     * @param search - the title to be searched for
-//     * @return a list of movies with titles containing the search query
-//     */
-//    private List<Movie> search(String search) {
-//    	int limitData = 10;
-//        List<Movie> list = new ArrayList<>();
-//        for (int i = 0; i < allMovies.size(); i++) {
-//        	if (allMovies.get(i).getTitle().toLowerCase().contains(search)) {
-//            	list.add(allMovies.get(i));
-//            	
-//                if (list.size() == limitData) {
-//                    break;
-//                }
-//            }
-//        }
-//        return list;
-//    }
-//    
-//    public class PopupListener extends MouseAdapter{
-//    	public void mousePressed(MouseEvent e) {
-//            ShowPopup(e);
-//        }
-//    	private void ShowPopup(MouseEvent e) {    		
-//    			popup.show(e.getComponent(),
-//                       e.getX(), e.getY());
-//    		
-//        }
-//    }
+
 }

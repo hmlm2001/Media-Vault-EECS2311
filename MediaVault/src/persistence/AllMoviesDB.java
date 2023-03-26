@@ -22,7 +22,8 @@ public class AllMoviesDB {
 	 */
 	private void updateMovieList() {
 		ResultSet result;
-		result = JDBC_Connection.getResult("SELECT id FROM allmovies;");
+		ActiveConnection activeCon = JDBC_Connection.getResult("SELECT id FROM allmovies;");
+		result = activeCon.result;
 		try {
 			while (result.next()) {
 				Movie movie = new Movie(result.getInt("id"));
@@ -31,6 +32,7 @@ public class AllMoviesDB {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		activeCon.closeConnection();
 	}
 		
 	/**

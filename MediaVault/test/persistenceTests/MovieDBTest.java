@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 
 import backend.UseStub;
+import persistence.ActiveConnection;
 import persistence.MovieDB;
 
 class MovieDBTest {
@@ -24,9 +25,11 @@ class MovieDBTest {
 	 */
 	@Test
 	void getMovieTest() throws SQLException {
-		ResultSet result = MovieDB.getMovie(505642);
+		ActiveConnection activeCon = MovieDB.getMovie(505642);
+		ResultSet result = activeCon.result;
 		result.next();
 		assertEquals(505642,result.getInt(1));
+		activeCon.closeConnection();
 				
 	}
 	/**
@@ -35,8 +38,10 @@ class MovieDBTest {
 	 */
 	@Test
 	void getMovieTest2() throws SQLException {
-		ResultSet result = MovieDB.getMovie(00000);
+		ActiveConnection activeCon = MovieDB.getMovie(00000);
+		ResultSet result = activeCon.result;
 		assertFalse(result.next());
+		activeCon.closeConnection();
 				
 	}
 

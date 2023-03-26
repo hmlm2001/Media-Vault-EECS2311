@@ -3,6 +3,7 @@ package backend;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import persistence.ActiveConnection;
 import persistence.MovieDB;
 
 public class Movie extends Media {
@@ -18,9 +19,12 @@ public class Movie extends Media {
 	 */
 	public Movie(int id) {
 		super(id);
+		ResultSet result = null;
+		ActiveConnection activeCon = null;
 		if (!UseStub.getStubFlag()) {	//checks if the DB is being used
 			try {
-				ResultSet result=MovieDB.getMovie(this.getId());	//get the values associated with the id
+				activeCon = MovieDB.getMovie(this.getId());
+				result= activeCon.result;	//get the values associated with the id
 				while (result.next()) { //assign the values
 					this.title=result.getString(2);
 					this.releaseDate=result.getString(3);
@@ -33,6 +37,7 @@ public class Movie extends Media {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
+			activeCon.closeConnection();
 		} else { //if using stub, use one of the following hardcoded values
 			if (id==631842){
 				this.title="Knock at the Cabin";

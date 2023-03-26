@@ -18,7 +18,8 @@ public class LoginDB{
 	public static boolean newAccount(String username, String password, String unEncUser) {
 		if (!UseStub.getStubFlag()) { //checks if it needs to use the DB
 			ResultSet result;
-			result = JDBC_Connection.getResult("SELECT * FROM logins WHERE usernameEnc='"+username+"';");
+			ActiveConnection activeCon = JDBC_Connection.getResult("SELECT * FROM logins WHERE usernameEnc='"+username+"';");
+			result = activeCon.result;
 			try {
 				while (result.next()) {
 					if(username.compareTo(result.getString(1))==0) return false;
@@ -26,6 +27,7 @@ public class LoginDB{
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
+			activeCon.closeConnection();
 			JDBC_Connection.execute("INSERT INTO logins(usernameEnc,passwordEnc) VALUES ('"+username+"','"+password+"');");
 			JDBC_Connection.execute("INSERT INTO users(username,userIcon) VALUES ('"+unEncUser+"',"+1+");");
 			return true;
@@ -49,7 +51,8 @@ public class LoginDB{
 	public static boolean verifyLogin(String username, String password) {
 		if (!UseStub.getStubFlag()) {
 			ResultSet result;
-			result = JDBC_Connection.getResult("SELECT * FROM logins WHERE usernameEnc='"+username+"';");
+			ActiveConnection activeCon = JDBC_Connection.getResult("SELECT * FROM logins WHERE usernameEnc='"+username+"';");
+			result = activeCon.result;
 			try {
 				while (result.next()) {
 					return result.getString(2).compareTo(password)==0;
@@ -58,6 +61,7 @@ public class LoginDB{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			activeCon.closeConnection();
 		} else {
 			if (logins==null) LoginDB.createStubLogins();
 			if (logins.get(username)==null) return false;

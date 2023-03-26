@@ -57,7 +57,7 @@ public class MediaCollectionDB {
 	 * @param mediaid is the media to be added
 	 */
 	public static boolean addMediaCollection(int collectionid, int mediaid) {
-		return JDBC_Connection.execute("INSERT INTO mediarelations(mediaID,mediaCollectionID) VALUES ('"+mediaid+"','"+collectionid+"');");
+		return JDBC_Connection.execute("INSERT INTO mediarelations(mediaID,mediaCollectionID,mediaStatus) VALUES ('"+mediaid+"','"+collectionid+"','---');");
 	}
 	/**
 	 * add to the media collection

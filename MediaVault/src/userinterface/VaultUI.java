@@ -49,9 +49,12 @@ public class VaultUI extends JFrame{
 	private JPopupMenu menu;
     private PanelSearch search;
     private AllMoviesDB allMovies;
-    private JPopupMenu popup;
+    private JPopupMenu statuspopup;
     private JButton status;
     private JPanel moviepane;
+    private JScrollPane scrollpane;
+    private JPopupMenu profilePopup;
+	private JMenuItem menuItem;
     
     /**
      * Displays all movies the user has added to their vault.
@@ -130,70 +133,62 @@ public class VaultUI extends JFrame{
 		vaultButton.setBounds(203, 17, 76, 29);
 		navbar.add(vaultButton);
 				
-		JButton userIcon = new JButton("");
-		userIcon.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		Image user_icon = new ImageIcon(getClass().getResource("/images/icons/user-icon.png")).getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+		SearchbarLogoSetup setup = new SearchbarLogoSetup(navbar);
+		setup.setUser(user);
+		
+		// User Icon
+		JButton userIcon = new JButton();
+		Image user_icon = new ImageIcon(getClass().getResource("/images/icons/user-icon" + Integer.toString(user.getUserIcon()) + ".png")).getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
 		userIcon.setIcon(new ImageIcon(user_icon));
 		userIcon.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		userIcon.setBackground(Color.DARK_GRAY);
+		userIcon.setBackground(Color.BLACK);
 		userIcon.setBorder(null);
-		userIcon.setBounds(1116, 6, 53, 53);
-		navbar.add(userIcon);
+		userIcon.setBounds(1233, 4, 53, 53);
 		
-		JButton logOutButton = new JButton("LOG OUT");
-		logOutButton.setBackground(Color.DARK_GRAY);
-		logOutButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				LoginUI frame = new LoginUI();
+		// Popup Menu for user icon
+		profilePopup = new JPopupMenu();
+		MouseListener popupListener = new PopupListener(profilePopup);
+		userIcon.addMouseListener(popupListener);
+		
+		JLabel username = new JLabel(user.getUsername());
+	    username.setBackground(new Color(31, 31, 31));
+		username.setForeground(Color.WHITE);
+		username.setFont(username.getFont().deriveFont(Font.ITALIC));
+        username.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        username.setCursor(Cursor.getDefaultCursor());
+	    profilePopup.add(username);
+	    
+	    menuItem = new JMenuItem("Profile");
+	    menuItem.setBackground(new Color(31, 31, 31));
+		menuItem.setForeground(Color.WHITE);
+	    menuItem.addActionListener(new ActionListener() {
+	    	@Override
+	    	public void actionPerformed(ActionEvent e) {
+	    		ProfileUI frame = new ProfileUI(user);
+	    		frame.setLocationRelativeTo(null);
+				frame.setVisible(true);
+				VaultUI.this.dispose();
+	    	}
+	    });
+	    profilePopup.add(menuItem);
+	    
+	    menuItem = new JMenuItem("Log Out");
+	    menuItem.setBackground(new Color(31, 31, 31));
+		menuItem.setForeground(Color.WHITE);
+	    menuItem.addActionListener(new ActionListener() {
+	    	@Override
+	    	public void actionPerformed(ActionEvent e) {
+    			LoginUI frame = new LoginUI();
 				frame.setLocationRelativeTo(null);
 				frame.setVisible(true);
 				VaultUI.this.dispose();
-			}
-		});
-		logOutButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		logOutButton.setForeground(Color.WHITE);
-		logOutButton.setFont(new Font("Lucida Grande", Font.BOLD, 18));
-		logOutButton.setBorder(null);
-		logOutButton.setBounds(1185, 17, 88, 29);
-		navbar.add(logOutButton);
+	    	}
+	    });
+	    profilePopup.add(menuItem);
+	    profilePopup.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		profilePopup.setBackground(new Color(31, 31, 31));
+		navbar.add(userIcon);
 		
-		// Searchbar
-		searchbar = new MyTextField();
-		searchbar.setBounds(520, 13, 550, 40);
-		navbar.add(searchbar);
-		searchbar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		searchbar.setPrefixIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search.png")));
-		
-		searchbar.addMouseListener(new java.awt.event.MouseAdapter() {
-		    public void mouseClicked(java.awt.event.MouseEvent evt) {
-		        txtSearchMouseClicked(evt);
-		    }
-		});
-		searchbar.addKeyListener(new java.awt.event.KeyAdapter() {
-		    public void keyReleased(java.awt.event.KeyEvent evt) {
-		        txtSearchKeyReleased(evt);
-		    }
-		});
-		
-		menu = new JPopupMenu();
-        search = new PanelSearch();
-        menu.setBorder(BorderFactory.createLineBorder(new Color(164, 164, 164)));
-        menu.add(search);
-        menu.setFocusable(false);
-        search.addEventClick(new EventClick() {
-            @Override
-            public void itemClick(Movie movie) {
-                menu.setVisible(false);
-                searchbar.setText(movie.getTitle());
-                
-                MoviePageUI frame = new MoviePageUI(user, new Movie(movie.getId()));
-            	frame.setLocationRelativeTo(null);
-        		frame.setVisible(true);
-            }
-        });
 		
 		JLayeredPane layeredPane = new JLayeredPane();
 		layeredPane.setBounds(0, 61, 1280, 600);
@@ -244,7 +239,7 @@ private void addMediaButtons(JPanel panel, User user) {
 		
 		URL url;
 		BufferedImage c;
-		int i = collection.size();
+		
 		
 		if (collection.size() == 0) {
 			JLabel emptyVaultLabel = new JLabel("Nothing to see here...Search for movies and add them to your vault!");
@@ -252,7 +247,7 @@ private void addMediaButtons(JPanel panel, User user) {
 			emptyVaultLabel.setForeground(Color.WHITE);
 			panel.add(emptyVaultLabel);
 		} else {
-			int index = 0;
+			
 			for(backend.Media media: mediaList) {
 				
 				moviepane = new JPanel();
@@ -337,7 +332,7 @@ private void addMediaButtons(JPanel panel, User user) {
 				
 			
 			    //Create the popup menu.
-			    popup = new JPopupMenu();
+			    statuspopup = new JPopupMenu();
 			    
 			    status = new JButton();
 			    
@@ -349,7 +344,7 @@ private void addMediaButtons(JPanel panel, User user) {
 				status.setBorder(null);
 				status.setForeground(Color.WHITE);
 				
-			    MouseListener popupListener = new PopupListener();
+			    MouseListener popupListener = new PopupListener(statuspopup);
 			    status.addMouseListener(popupListener);
 			    
 			    
@@ -366,7 +361,7 @@ private void addMediaButtons(JPanel panel, User user) {
 			    		SwingUtilities.updateComponentTreeUI(selection);
 			    	}
 			    });
-			    popup.add(menuItem);
+			    statuspopup.add(menuItem);
 			    menuItem = new JMenuItem("Completed");
 			    menuItem.setBackground(new Color(31, 31, 31));
 				menuItem.setBorder(null);
@@ -380,7 +375,7 @@ private void addMediaButtons(JPanel panel, User user) {
 			    		SwingUtilities.updateComponentTreeUI(selection);
 			    	}
 			    });
-			    popup.add(menuItem);
+			    statuspopup.add(menuItem);
 			    
 			    menuItem = new JMenuItem("In Progress");
 			    menuItem.setBackground(new Color(31, 31, 31));
@@ -398,12 +393,12 @@ private void addMediaButtons(JPanel panel, User user) {
 			    		//SwingUtilities.updateComponentTreeUI(moviepane);
 			    	}
 			    });
-			    popup.add(menuItem);
+			    statuspopup.add(menuItem);
 			    
 			    
-			    popup.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-				popup.setBackground(new Color(31, 31, 31));
-				popup.setBorder(null);
+			    statuspopup.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+				statuspopup.setBackground(new Color(31, 31, 31));
+				statuspopup.setBorder(null);
 			    
 			    
 			    
@@ -439,59 +434,59 @@ private void addMediaButtons(JPanel panel, User user) {
 		}
 	
 	}
-	/**
-	 * Used to show the menu when the searchbar is clicked
-	 * @param evt - occurs when the mouse is clicked
-	 */
-	private void txtSearchMouseClicked(java.awt.event.MouseEvent evt) {
-        if (search.getItemSize() > 0) {
-            menu.show(searchbar, 0, searchbar.getHeight());
-        }
-    }
+//	/**
+//	 * Used to show the menu when the searchbar is clicked
+//	 * @param evt - occurs when the mouse is clicked
+//	 */
+//	private void txtSearchMouseClicked(java.awt.event.MouseEvent evt) {
+//        if (search.getItemSize() > 0) {
+//            menu.show(searchbar, 0, searchbar.getHeight());
+//        }
+//    }
 	
-	/**
-	 * Used to search the database when a key is pressed
-	 * @param evt - occurs when a key is released
-	 */
-    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {
-        String text = searchbar.getText().trim().toLowerCase();
-        search.setMovies(search(text));
-        if (search.getItemSize() > 0) {
-            menu.show(searchbar, 0, searchbar.getHeight());
-            menu.setPopupSize(menu.getWidth(), (search.getItemSize() * 35) + 2);
-        } else {
-            menu.setVisible(false);
-        }
-    }
-
-    /**
-     * Used to search through all the movies database 
-     * @param search - the title to be searched for
-     * @return a list of movies with titles containing the search query
-     */
-    private List<Movie> search(String search) {
-    	int limitData = 10;
-        List<Movie> list = new ArrayList<>();
-        for (int i = 0; i < allMovies.size(); i++) {
-        	if (allMovies.get(i).getTitle().toLowerCase().contains(search)) {
-            	list.add(allMovies.get(i));
-            	
-                if (list.size() == limitData) {
-                    break;
-                }
-            }
-        }
-        return list;
-    }
-    
-    public class PopupListener extends MouseAdapter{
-    	public void mousePressed(MouseEvent e) {
-            ShowPopup(e);
-        }
-    	private void ShowPopup(MouseEvent e) {    		
-    			popup.show(e.getComponent(),
-                       e.getX(), e.getY());
-    		
-        }
-    }
+//	/**
+//	 * Used to search the database when a key is pressed
+//	 * @param evt - occurs when a key is released
+//	 */
+//    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {
+//        String text = searchbar.getText().trim().toLowerCase();
+//        search.setMovies(search(text));
+//        if (search.getItemSize() > 0) {
+//            menu.show(searchbar, 0, searchbar.getHeight());
+//            menu.setPopupSize(menu.getWidth(), (search.getItemSize() * 35) + 2);
+//        } else {
+//            menu.setVisible(false);
+//        }
+//    }
+//
+//    /**
+//     * Used to search through all the movies database 
+//     * @param search - the title to be searched for
+//     * @return a list of movies with titles containing the search query
+//     */
+//    private List<Movie> search(String search) {
+//    	int limitData = 10;
+//        List<Movie> list = new ArrayList<>();
+//        for (int i = 0; i < allMovies.size(); i++) {
+//        	if (allMovies.get(i).getTitle().toLowerCase().contains(search)) {
+//            	list.add(allMovies.get(i));
+//            	
+//                if (list.size() == limitData) {
+//                    break;
+//                }
+//            }
+//        }
+//        return list;
+//    }
+//    
+//    public class PopupListener extends MouseAdapter{
+//    	public void mousePressed(MouseEvent e) {
+//            ShowPopup(e);
+//        }
+//    	private void ShowPopup(MouseEvent e) {    		
+//    			popup.show(e.getComponent(),
+//                       e.getX(), e.getY());
+//    		
+//        }
+//    }
 }

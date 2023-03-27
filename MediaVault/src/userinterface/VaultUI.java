@@ -193,26 +193,83 @@ public class VaultUI extends JFrame{
 		profilePopup.setBackground(new Color(31, 31, 31));
 		navbar.add(userIcon);
 		
+		JPanel panel = new JPanel();
+		JScrollPane scrollPane = new JScrollPane(panel);
 		
 		JLayeredPane layeredPane = new JLayeredPane();
 		layeredPane.setBounds(0, 61, 1280, 600);
-		contentPane.add(layeredPane);
+		contentPane.add(layeredPane);		
 		
-		JPanel panel = new JPanel();
-		layeredPane.setLayer(panel, 1);
+		
+		layeredPane.setLayer(scrollPane, 1);
 		panel.setForeground(new Color(192, 192, 192));
 		panel.setBackground(new Color(31, 31, 31));
-		panel.setBounds(0, 37, 1, 1000);
+		panel.setBounds(0, 57, 1, 1000);
 		
-		addMediaButtons(panel, user);
+		
+	    
+	    scrollPane.setViewportView(panel);
+	    scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+	    scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+	    scrollPane.setBounds(6, 54, 1275, 310);
+	    
+	    JPanel Scroll = new JPanel();
+	    Scroll.setBounds(500,0,300, 50);
+	    Scroll.setBackground(Color.WHITE); 
+	    
+	    
+	    JViewport viewport = scrollPane.getViewport();
+	    
+	    JButton leftButton = new JButton(" < ");
+	    leftButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+	    leftButton.setFont(new Font("Lucida Grande", Font.BOLD, 23));
+	    leftButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) { 
+				Point origin = viewport.getViewPosition();
+				Point newOrigin = new Point(origin.x-150, origin.y);
+				if (origin.x != 0) { 
+					viewport.setViewPosition(newOrigin);
+				}
+			}
+		});
+	    leftButton.setBorder(new LineBorder(new Color(0, 0, 0)));
+	    leftButton.setBackground(Color.WHITE);
+	    leftButton.setBounds(530, 13, 40, 40);
+	    Scroll.add(leftButton);
+	    
+	    JLabel label = new JLabel("     ", SwingConstants.CENTER);
+	    label.setBounds(582, 20, 130, 22);
+	    label.setFont(new Font("Lucida Grande", Font.BOLD, 19));
+	    label.setBackground(Color.WHITE);
+	    Scroll.add(label);
+	    
+	    JButton rightButton = new JButton(" > ");
+	    rightButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+	    rightButton.setFont(new Font("Lucida Grande", Font.BOLD, 23));
+	    rightButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Point origin = viewport.getViewPosition();
+				Point newOrigin = new Point(origin.x+150, origin.y);
+				viewport.setViewPosition(newOrigin);
+			}
+		});
+	    rightButton.setBorder(new LineBorder(new Color(0, 0, 0)));
+	    rightButton.setBackground(Color.WHITE);
+	    rightButton.setBounds(735, 13, 40, 40);
+	    Scroll.add(rightButton);
+	    
+	    layeredPane.add(Scroll);
+	    
+	    addMediaButtons(panel, user);
 		panel.setLayout(new FlowLayout());
-		
 	
-		JScrollPane scrollPane_1 = new JScrollPane(panel);
-		scrollPane_1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		//JScrollPane scrollPane_1 = new JScrollPane(panel);
+		//scrollPane_1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		
-		scrollPane_1.setBounds(0, 40, 1284, 550);
-		layeredPane.add(scrollPane_1);
+		scrollPane.setBounds(0, 40, 1284, 550);
+		layeredPane.add(scrollPane);
 		
 		JLabel userLabel = new JLabel("This is your vault, " + user.getUsername());
 		userLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
@@ -244,51 +301,7 @@ private void addMediaButtons(JPanel panel, User user) {
 		URL url;
 		BufferedImage c;
 		
-		JPanel content = new JPanel();
-	    content.setBackground(Color.DARK_GRAY);
-	    content.setLayout(new FlowLayout(FlowLayout.CENTER, 3, 3));
-	    JScrollPane scrollPane = new JScrollPane(content);
-	    
-	    scrollPane.setViewportView(content);
-	    scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-	    scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-	    scrollPane.setBounds(6, 20+34, 1275, 310);
-	    panel.add(scrollPane);
-	    JViewport viewport = scrollPane.getViewport();
-	    
-	    JButton leftButton = new JButton("<");
-	    leftButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-	    leftButton.setFont(new Font("Lucida Grande", Font.BOLD, 18));
-	    leftButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) { 
-				Point origin = viewport.getViewPosition();
-				Point newOrigin = new Point(origin.x-150, origin.y);
-				if (origin.x != 0) { 
-					viewport.setViewPosition(newOrigin);
-				}
-			}
-		});
-	    leftButton.setBorder(new LineBorder(new Color(0, 0, 0)));
-	    leftButton.setBackground(Color.WHITE);
-	    leftButton.setBounds(530, 20-2, 29, 29);
-	    panel.add(leftButton);
-	    
-	    JButton rightButton = new JButton(">");
-	    rightButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-	    rightButton.setFont(new Font("Lucida Grande", Font.BOLD, 18));
-	    rightButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Point origin = viewport.getViewPosition();
-				Point newOrigin = new Point(origin.x+150, origin.y);
-				viewport.setViewPosition(newOrigin);
-			}
-		});
-	    rightButton.setBorder(new LineBorder(new Color(0, 0, 0)));
-	    rightButton.setBackground(Color.WHITE);
-	    rightButton.setBounds(735, 20-2, 29, 29);
-	    panel.add(rightButton);
+		
 		
 		if (collection.size() == 0) {
 			JLabel emptyVaultLabel = new JLabel("Nothing to see here...Search for movies and add them to your vault!");

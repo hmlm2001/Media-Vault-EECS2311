@@ -12,8 +12,14 @@ import javax.swing.JPopupMenu;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.AxisLocation;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.general.PieDataset;
+import org.jfree.chart.ChartPanel;
 
 import backend.*;
 
@@ -68,11 +74,10 @@ public class ProfileUI extends JFrame {
 		setTitle("MediaVault");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1305, 700);
+		setBounds(100, 100, 1305, 700);		
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 			
@@ -258,11 +263,15 @@ public class ProfileUI extends JFrame {
 		totalWatchtimeLabel.setBounds(10, 275, 214, 23);
 		contentPane.add(totalWatchtimeLabel);
 		
+		// Vault Status Distribution
+		CategoryDataset barDataset = collection.createStatusDataset();
+		
+		this.displayStatusDistribution(contentPane, barDataset);
+		
 		// Vault Genre Distribution
 		PieDataset pieDataset = collection.createGenreDataset();
 		
-		// Vault Status Distribution
-		CategoryDataset barDataset = collection.createStatusDataset();
+		this.displayGenreDistribution(contentPane, pieDataset);
 	}
 	
 	/**
@@ -298,11 +307,33 @@ public class ProfileUI extends JFrame {
 		}
 	}
 	
+	/**
+	 * Displays the user's movie genre distribution as a pie chart
+	 * @param statsPanel
+	 * @param pieDataset
+	 */
 	private void displayGenreDistribution(JPanel statsPanel, PieDataset pieDataset) {
+		JFreeChart pieChart = ChartFactory.createPieChart("Genre Distribution", pieDataset, true, true, false);
 		
+		ChartPanel piePanel = new ChartPanel(pieChart);
+		statsPanel.add(piePanel);
+		piePanel.setBounds(10, 311 + ChartPanel.DEFAULT_HEIGHT + 13, ChartPanel.DEFAULT_WIDTH, ChartPanel.DEFAULT_HEIGHT);
 	}
 	
+	/**
+	 * Displays the user's movie status distribution as a bar chart
+	 * @param statsPanel
+	 * @param barDataset
+	 */
 	private void displayStatusDistribution(JPanel statsPanel, CategoryDataset barDataset) {
-		
+		JFreeChart barChart = ChartFactory.createBarChart("Status Distribution", "Category", "Number of Movies", barDataset, PlotOrientation.HORIZONTAL, false, true, false);
+		barChart.setBackgroundPaint(Color.lightGray);
+		CategoryPlot plot = barChart.getCategoryPlot();
+        plot.setRangeAxisLocation(AxisLocation.BOTTOM_OR_LEFT);
+        
+        ChartPanel barPanel = new ChartPanel(barChart);
+        statsPanel.add(barPanel);
+        barPanel.setBounds(10, 311, ChartPanel.DEFAULT_WIDTH, ChartPanel.DEFAULT_HEIGHT);
+        barPanel.setVisible(true);
 	}
 }

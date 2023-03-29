@@ -152,7 +152,4 @@ public class MediaCollection {
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 		return dataset;
 	}
-	public static void main (String [] args) {
-		
-	}
 }

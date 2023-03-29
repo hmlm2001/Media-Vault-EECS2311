@@ -1,6 +1,7 @@
 package backend;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
@@ -132,6 +133,17 @@ public class MediaCollection {
 	// TODO: Implement
 	public PieDataset createGenreDataset() {
 		DefaultPieDataset dataset = new DefaultPieDataset();
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		for (Media media : mediaList) {
+			String key = media.getGenre();
+			int count = 0;
+			if (map.containsKey(key)) {
+				count = map.get(key);
+				map.put(key, count);
+			} else {
+				map.put(key, count);
+			}
+		}
 		return dataset;
 	}
 	

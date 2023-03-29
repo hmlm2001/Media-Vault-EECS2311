@@ -117,32 +117,38 @@ public class MediaCollection {
 	
 	/**
 	 * gets the total watch time for completed media
-	 * @return
+	 * @return the watch time 
 	 */
 	public String getTotalWatchtime() {
 		int watchtimeInt = 0;
-		for (Media media : mediaList) {
-			if (media.getStatus().equals("Completed")) {
+		for (Media media : mediaList) { //go through all media in the user's vault
+			if (media.getStatus().equals("Completed")) { //only add it if the user has finished watching the media
 				watchtimeInt += media.getRuntime();
 			}
 		}
-		String watchtimeStr = (watchtimeInt / 60) + "h " + (watchtimeInt % 60) + "m";
+		String watchtimeStr = (watchtimeInt / 60) + "h " + (watchtimeInt % 60) + "m"; //return the correct format for the data
 		return watchtimeStr;
 	}
 	
-	// TODO: Implement
+	/**
+	 * gets the pie chart dataset
+	 * @return the PieDataSet
+	 */
 	public PieDataset createGenreDataset() {
-		DefaultPieDataset dataset = new DefaultPieDataset();
-		HashMap<String, Integer> map = new HashMap<String, Integer>();
-		for (Media media : mediaList) {
-			String key = media.getGenre();
-			int count = 0;
-			if (map.containsKey(key)) {
-				count = map.get(key);
+		DefaultPieDataset dataset = new DefaultPieDataset(); //create the dataset
+		HashMap<String, Integer> map = new HashMap<String, Integer>(); //create a map for easier input into the dataset
+		for (Media media : mediaList) { //go through each media
+			String key = media.getGenre(); //set the key so it wont have to reference .getGenre() every time
+			int count = 1;
+			if (map.containsKey(key)) { //if the key is already existent, increase its count
+				count = map.get(key)+1;
 				map.put(key, count);
-			} else {
+			} else { 					//if the key is not already existent, set its count to 1
 				map.put(key, count);
 			}
+		}
+		for (String key : map.keySet()) {	//go through each key and input it into the dataset
+			dataset.setValue(key, map.get(key));
 		}
 		return dataset;
 	}

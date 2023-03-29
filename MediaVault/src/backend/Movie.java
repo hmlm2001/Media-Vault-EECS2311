@@ -10,8 +10,6 @@ public class Movie extends Media {
 	private String releaseDate;
 	private String overview;
 	private String posterPath;
-	private String genre;
-	private int runtime;
 	
 	/**
 	 * Takes the id and sets up an object of movie with the help of the database

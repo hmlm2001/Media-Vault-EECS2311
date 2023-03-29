@@ -19,7 +19,7 @@ public class User {
 	 * @param username
 	 */
 	public User(String username) {
-		this.username = username;
+		this.username = username.toLowerCase();
 		if (!UseStub.getStubFlag()) { //checks if DB is being used
 			this.id = UserDB.getId(username);
 			this.userIcon = UserDB.getIcon(username);

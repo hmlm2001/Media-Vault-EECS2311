@@ -102,18 +102,6 @@ public class Movie extends Media {
 	public String getPosterPath() {
 		return this.posterPath;
 	}
-	/**
-	 * @return the genre of the movie
-	 */
-	public String getGenre() {
-		return this.genre;
-	}
-	/**
-	 * @return the runtime of the movie in minutes
-	 */
-	public int getRuntime() {
-		return this.runtime;
-	}
 	
 	/**
 	 * @return the runtime of the movie as a string

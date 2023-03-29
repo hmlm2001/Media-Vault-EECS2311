@@ -4,10 +4,14 @@ public abstract class Media {
 	private int id;
 	protected String title;
 	private String status;
+	private String genre;
+	private int runtime;
 	
 	public Media(int id) {
 		this.id=id;
 		this.status="---";
+		this.runtime=0;
+		this.genre="---";
 	}
 	/**
 	 * @return the title of the movie
@@ -36,5 +40,15 @@ public abstract class Media {
 	public Media setStatus(String status) { 
 		this.status=status;
 		return this;
+	}
+	
+	public String getGenre() {
+		return this.genre;
+	}
+	/**
+	 * @return the runtime of the movie in minutes
+	 */
+	public int getRuntime() {
+		return this.runtime;
 	}
 }

@@ -114,13 +114,15 @@ public class MediaCollection {
 		return this.id;
 	}
 	
-	// TODO: Implement
+	/**
+	 * gets the total watch time for completed media
+	 * @return
+	 */
 	public String getTotalWatchtime() {
 		int watchtimeInt = 0;
 		for (Media media : mediaList) {
-			Movie movie = new Movie(media.getId());
-			if (movie.getStatus().equals("Completed")) {
-				watchtimeInt += movie.getRuntime();
+			if (media.getStatus().equals("Completed")) {
+				watchtimeInt += media.getRuntime();
 			}
 		}
 		String watchtimeStr = (watchtimeInt / 60) + "h " + (watchtimeInt % 60) + "m";
@@ -137,5 +139,8 @@ public class MediaCollection {
 	public CategoryDataset createStatusDataset() {
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 		return dataset;
+	}
+	public static void main (String [] args) {
+		
 	}
 }

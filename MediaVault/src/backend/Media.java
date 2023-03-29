@@ -4,8 +4,8 @@ public abstract class Media {
 	private int id;
 	protected String title;
 	private String status;
-	private String genre;
-	private int runtime;
+	protected String genre;
+	protected int runtime;
 	
 	public Media(int id) {
 		this.id=id;

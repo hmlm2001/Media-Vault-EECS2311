@@ -2,6 +2,11 @@ package backend;
 
 import java.util.ArrayList;
 
+import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.data.general.PieDataset;
+
 import persistence.MediaCollectionDB;
 
 public class MediaCollection {
@@ -37,7 +42,7 @@ public class MediaCollection {
 	/**
 	 * @return the collection
 	 */
-	public ArrayList<Media> getMediaList(){
+	public ArrayList<Media> getMediaList() {
 		return mediaList;
 	}
 	
@@ -100,11 +105,37 @@ public class MediaCollection {
 	public int size() {
 		return mediaList.size();
 	}
+	
 	/** 
 	 * gets the id of the collection
 	 * @return the id of the collection
 	 */
 	public int getId() {
 		return this.id;
+	}
+	
+	// TODO: Implement
+	public String getTotalWatchtime() {
+		int watchtimeInt = 0;
+		for (Media media : mediaList) {
+			Movie movie = new Movie(media.getId());
+			if (movie.getStatus().equals("Completed")) {
+				watchtimeInt += movie.getRuntime();
+			}
+		}
+		String watchtimeStr = (watchtimeInt / 60) + "h " + (watchtimeInt % 60) + "m";
+		return watchtimeStr;
+	}
+	
+	// TODO: Implement
+	public PieDataset createGenreDataset() {
+		DefaultPieDataset dataset = new DefaultPieDataset();
+		return dataset;
+	}
+	
+	// TODO: Implement
+	public CategoryDataset createStatusDataset() {
+		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+		return dataset;
 	}
 }

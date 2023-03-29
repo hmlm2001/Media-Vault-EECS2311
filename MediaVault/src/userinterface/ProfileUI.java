@@ -12,7 +12,10 @@ import javax.swing.JPopupMenu;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
-import backend.User;
+import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.general.PieDataset;
+
+import backend.*;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -40,27 +43,28 @@ public class ProfileUI extends JFrame {
     private JPopupMenu profilePopup;
     private JMenuItem menuItem;
     
-//    /**
-//	 * Launch the application.
-//	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					ProfileUI frame = new ProfileUI(new User("user1"));
-//					frame.setLocationRelativeTo(null);
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
+    /**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ProfileUI frame = new ProfileUI(new User("user1"));
+					frame.setLocationRelativeTo(null);
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 	
 	/**
 	 * Create the frame.
 	 */
 	public ProfileUI(User user) {
+		MediaCollection collection = new MediaCollection(user.getId());
 		setTitle("MediaVault");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -246,10 +250,19 @@ public class ProfileUI extends JFrame {
 		personalizationSeparator_1.setBounds(10, 266, 950, 12);
 		contentPane.add(personalizationSeparator_1);
 		
-		JLabel totalWatchtimeLabel = new JLabel("Total Watchtime: ");
+		//TODO: Make stats panel with flow layout
+		
+		// Total Watchtime
+		JLabel totalWatchtimeLabel = new JLabel("Total Watchtime: " + collection.getTotalWatchtime());
 		totalWatchtimeLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		totalWatchtimeLabel.setBounds(10, 275, 214, 23);
 		contentPane.add(totalWatchtimeLabel);
+		
+		// Vault Genre Distribution
+		PieDataset pieDataset = collection.createGenreDataset();
+		
+		// Vault Status Distribution
+		CategoryDataset barDataset = collection.createStatusDataset();
 	}
 	
 	/**
@@ -283,5 +296,13 @@ public class ProfileUI extends JFrame {
 			});
 			userIconPanel.add(pfp);
 		}
+	}
+	
+	private void displayGenreDistribution(JPanel statsPanel, PieDataset pieDataset) {
+		
+	}
+	
+	private void displayStatusDistribution(JPanel statsPanel, CategoryDataset barDataset) {
+		
 	}
 }

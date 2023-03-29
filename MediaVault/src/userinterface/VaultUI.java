@@ -10,7 +10,6 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -24,7 +23,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 import backend.*;
-import persistence.AllMoviesDB;
 import userinterface.swing.*;
 
 import javax.swing.JLabel;
@@ -49,14 +47,9 @@ import javax.swing.ScrollPaneConstants;
 @SuppressWarnings("serial")
 public class VaultUI extends JFrame{
 	private JPanel contentPane;
-	private MyTextField searchbar;
-	private JPopupMenu menu;
-    private PanelSearch search;
-    private AllMoviesDB allMovies;
-    private JPopupMenu statuspopup;
+    private JPopupMenu statusPopup;
     private JButton status;
     private JPanel moviepane;
-    private JScrollPane scrollpane;
     private JPopupMenu profilePopup;
 	private JMenuItem menuItem;
     
@@ -65,9 +58,7 @@ public class VaultUI extends JFrame{
      * uses the frame with the same navigation bar as the explore page. 
      * @param userId the id of the user currently logged in
      */
-	
 	public VaultUI (User user) {
-		allMovies = new AllMoviesDB();
 		setTitle("MediaVault");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -206,8 +197,6 @@ public class VaultUI extends JFrame{
 		panel.setBackground(new Color(31, 31, 31));
 		panel.setBounds(0, 57, 1, 1000);
 		
-		
-	    
 	    scrollPane.setViewportView(panel);
 	    scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 	    scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -265,16 +254,8 @@ public class VaultUI extends JFrame{
 	    addMediaButtons(panel, user);
 		panel.setLayout(new FlowLayout());
 	
-		//JScrollPane scrollPane_1 = new JScrollPane(panel);
-		//scrollPane_1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		
 		scrollPane.setBounds(0, 40, 1284, 550);
 		layeredPane.add(scrollPane);
-		
-		JLabel userLabel = new JLabel("This is your vault, " + user.getUsername());
-		userLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		userLabel.setBounds(6, 9, 422, 16);
-		layeredPane.add(userLabel);
 	
 	}
 	/**
@@ -282,17 +263,13 @@ public class VaultUI extends JFrame{
 	 * @param panel the panel to display movies
 	 * @param userId the id of the user currently logged in
 	 */
-	
-private void addMediaButtons(JPanel panel, User user) {
+	private void addMediaButtons(JPanel panel, User user) {
 		
 		UseStub.setStubFlag(false);
 		Movie movie;		
 		JButton mediaButton;
 		JButton removeButton;
-		
-		
 		JMenuItem menuItem;
-		
 		
 		MediaCollection collection = new MediaCollection(user.getId());
 		ArrayList<backend.Media> mediaList = collection.getMediaList();
@@ -300,8 +277,6 @@ private void addMediaButtons(JPanel panel, User user) {
 		
 		URL url;
 		BufferedImage c;
-		
-		
 		
 		if (collection.size() == 0) {
 			JLabel emptyVaultLabel = new JLabel("Nothing to see here...Search for movies and add them to your vault!");
@@ -356,7 +331,7 @@ private void addMediaButtons(JPanel panel, User user) {
 				moviepane.add(mediaButton,constraints);
 				
 				
-				Image removeIcon = new ImageIcon(getClass().getResource("/images/icons/remove.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+				Image removeIcon = new ImageIcon(getClass().getResource("/images/remove.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 				removeButton.setIcon(new ImageIcon(removeIcon));
 				removeButton.setPreferredSize(new Dimension(30,30));
 			
@@ -374,7 +349,6 @@ private void addMediaButtons(JPanel panel, User user) {
 						VaultUI.this.dispose();
 					}
 				});
-				//constraints.fill = GridBagConstraints.HORIZONTAL;
 				constraints.gridwidth = 1;
 				constraints.weightx = 0.1;
 				constraints.gridx=3;
@@ -384,7 +358,6 @@ private void addMediaButtons(JPanel panel, User user) {
 				
 				moviepane.add(removeButton, constraints);
 				JLabel selection = new JLabel(media.getStatus());
-				//JLabel selection = new JLabel(media.getStatus());
 				selection.setBackground(new Color(31, 31, 31));
 				selection.setBorder(null);
 				selection.setForeground(Color.WHITE);
@@ -394,19 +367,17 @@ private void addMediaButtons(JPanel panel, User user) {
 				
 			
 			    //Create the popup menu.
-			    statuspopup = new JPopupMenu();
+			    statusPopup = new JPopupMenu();
 			    
 			    status = new JButton();
 			    
-			    
-			    //status.setText(media.getStatus);
 			    status.setText("STATUS");
 				status.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 				status.setBackground(new Color(31, 31, 31));
 				status.setBorder(null);
 				status.setForeground(Color.WHITE);
 				
-			    MouseListener popupListener = new PopupListener(statuspopup);
+			    MouseListener popupListener = new PopupListener(statusPopup);
 			    status.addMouseListener(popupListener);
 			    
 			    
@@ -422,7 +393,7 @@ private void addMediaButtons(JPanel panel, User user) {
 			    		SwingUtilities.updateComponentTreeUI(selection);
 			    	}
 			    });
-			    statuspopup.add(menuItem);
+			    statusPopup.add(menuItem);
 			    menuItem = new JMenuItem("Completed");
 			    menuItem.setBackground(new Color(31, 31, 31));
 				menuItem.setBorder(null);
@@ -431,12 +402,11 @@ private void addMediaButtons(JPanel panel, User user) {
 			    	@Override
 			    	public void actionPerformed(ActionEvent e) {
 			    		collection.setStatus(media.getId(),"Completed");
-			    		//status.setText("Completed");
 			    		selection.setText("Completed");
 			    		SwingUtilities.updateComponentTreeUI(selection);
 			    	}
 			    });
-			    statuspopup.add(menuItem);
+			    statusPopup.add(menuItem);
 			    
 			    menuItem = new JMenuItem("In Progress");
 			    menuItem.setBackground(new Color(31, 31, 31));
@@ -453,17 +423,12 @@ private void addMediaButtons(JPanel panel, User user) {
 			    		
 			    	}
 			    });
-			    statuspopup.add(menuItem);
+			    statusPopup.add(menuItem);
 			    
+			    statusPopup.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+				statusPopup.setBackground(new Color(31, 31, 31));
+				statusPopup.setBorder(null);
 			    
-			    statuspopup.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-				statuspopup.setBackground(new Color(31, 31, 31));
-				statuspopup.setBorder(null);
-			    
-			    
-			    
-			    
-				//constraints.fill = GridBagConstraints.HORIZONTAL;
 				constraints.gridwidth = 1;
 				constraints.weightx = 0.3;
 				constraints.gridx=1;
@@ -475,15 +440,11 @@ private void addMediaButtons(JPanel panel, User user) {
 				status.setVisible(false);
 	    		status.setVisible(true);
 				
-				
-			
 				constraints.gridwidth = 1;
 				constraints.weightx = 0.6;
 				constraints.gridx=2;
 				constraints.gridy = 1;
 				constraints.insets = new Insets(10,0,10,0);
-				
-				
 				
 				moviepane.add(selection,constraints);
 				

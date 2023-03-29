@@ -1,7 +1,5 @@
 package persistence;
 
-import java.sql.ResultSet;
-
 public class MovieDB {
 	/**
 	 * takes an input of id and returns a tuple from the allmovies

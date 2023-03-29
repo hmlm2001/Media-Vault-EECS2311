@@ -142,10 +142,9 @@ public class MediaCollection {
 			int count = 1;
 			if (map.containsKey(key)) { //if the key is already existent, increase its count
 				count = map.get(key)+1;
-				map.put(key, count);
-			} else { 					//if the key is not already existent, set its count to 1
-				map.put(key, count);
 			}
+			map.put(key, count);	//put it in the map
+			
 		}
 		for (String key : map.keySet()) {	//go through each key and input it into the dataset
 			dataset.setValue(key, map.get(key));
@@ -153,9 +152,24 @@ public class MediaCollection {
 		return dataset;
 	}
 	
-	// TODO: Implement
+	/**
+	 * creates a category dataset for the abrchart that contains the number for each status
+	 * @return
+	 */
 	public CategoryDataset createStatusDataset() {
-		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+		DefaultCategoryDataset dataset = new DefaultCategoryDataset();	//create relevant objs
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		for (Media media: mediaList) {	//go through each media
+			String key = media.getStatus();	//get the status of the current media
+			int count = 1;					//set count to 1 
+			if (map.containsKey(key)) {		//if  the status is already started, increase its count by 1
+				count=map.get(key)+1;
+			} 
+			map.put(key, count);
+		}
+		for (String key : map.keySet()) {	//go through each key and input it into the dataset
+			dataset.addValue(map.get(key), key, "Statuses");
+		}
 		return dataset;
 	}
 }

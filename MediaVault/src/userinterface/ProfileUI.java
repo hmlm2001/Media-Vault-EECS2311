@@ -343,8 +343,8 @@ public class ProfileUI extends JFrame {
 	 * @param barDataset
 	 */
 	private void displayStatusDistribution(JPanel statsPanel, CategoryDataset barDataset) {
-		JFreeChart barChart = ChartFactory.createBarChart("Status Distribution", "Category", "Number of Movies", barDataset, PlotOrientation.HORIZONTAL, false, true, false);
-		barChart.setBackgroundPaint(Color.lightGray);
+		JFreeChart barChart = ChartFactory.createBarChart("Status Distribution", "Status", "Number of Movies", barDataset, PlotOrientation.VERTICAL, true, true, false);
+		barChart.setBackgroundPaint(Color.white);
 		CategoryPlot plot = barChart.getCategoryPlot();
         plot.setRangeAxisLocation(AxisLocation.BOTTOM_OR_LEFT);
         

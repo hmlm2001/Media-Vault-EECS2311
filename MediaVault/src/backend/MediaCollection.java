@@ -153,7 +153,7 @@ public class MediaCollection {
 	}
 	
 	/**
-	 * creates a category dataset for the abrchart that contains the number for each status
+	 * creates a category dataset for the barchart that contains the number for each status
 	 * @return
 	 */
 	public CategoryDataset createStatusDataset() {

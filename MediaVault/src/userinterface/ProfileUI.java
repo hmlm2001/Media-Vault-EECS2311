@@ -51,23 +51,6 @@ public class ProfileUI extends JFrame {
 	private JPanel contentPane;
     private JPopupMenu profilePopup;
     private JMenuItem menuItem;
-    
-    /**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ProfileUI frame = new ProfileUI(new User("user1"));
-					frame.setLocationRelativeTo(null);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 	
 	/**
 	 * Create the frame.
@@ -334,7 +317,7 @@ public class ProfileUI extends JFrame {
 		
 		ChartPanel piePanel = new ChartPanel(pieChart);
 		statsPanel.add(piePanel);
-		piePanel.setBounds(23 + ChartPanel.DEFAULT_WIDTH * 371 / ChartPanel.DEFAULT_HEIGHT, 250, ChartPanel.DEFAULT_WIDTH * 376 / ChartPanel.DEFAULT_HEIGHT, 376);
+		piePanel.setBounds(23 + ChartPanel.DEFAULT_WIDTH * 347 / ChartPanel.DEFAULT_HEIGHT, 250, ChartPanel.DEFAULT_WIDTH * 347 / ChartPanel.DEFAULT_HEIGHT, 347);
 	}
 	
 	/**
@@ -350,7 +333,7 @@ public class ProfileUI extends JFrame {
         
         ChartPanel barPanel = new ChartPanel(barChart);
         statsPanel.add(barPanel);
-        barPanel.setBounds(10, 250, ChartPanel.DEFAULT_WIDTH * 371 / ChartPanel.DEFAULT_HEIGHT, 376);
+        barPanel.setBounds(10, 250, ChartPanel.DEFAULT_WIDTH * 347 / ChartPanel.DEFAULT_HEIGHT, 347);
         barPanel.setVisible(true);
 	}
 }

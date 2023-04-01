@@ -168,7 +168,7 @@ public class MediaCollection {
 			map.put(key, count);
 		}
 		for (String key : map.keySet()) {	//go through each key and input it into the dataset
-			dataset.addValue(map.get(key), key, "Statuses");
+			dataset.addValue(map.get(key), key, "");
 		}
 		return dataset;
 	}

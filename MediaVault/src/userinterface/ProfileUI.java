@@ -35,7 +35,6 @@ import javax.swing.JComponent;
 
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionListener;
@@ -326,7 +325,7 @@ public class ProfileUI extends JFrame {
 	 * @param barDataset
 	 */
 	private void displayStatusDistribution(JPanel statsPanel, CategoryDataset barDataset) {
-		JFreeChart barChart = ChartFactory.createBarChart("Status Distribution", "Status", "Number of Movies", barDataset, PlotOrientation.VERTICAL, true, true, false);
+		JFreeChart barChart = ChartFactory.createBarChart("Status Distribution", "Status Frequency", "Number of Movies", barDataset, PlotOrientation.VERTICAL, true, true, false);
 		barChart.setBackgroundPaint(Color.white);
 		CategoryPlot plot = barChart.getCategoryPlot();
         plot.setRangeAxisLocation(AxisLocation.BOTTOM_OR_LEFT);

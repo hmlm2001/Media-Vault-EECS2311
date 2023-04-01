@@ -313,8 +313,10 @@ public class ProfileUI extends JFrame {
 	 */
 	private void displayGenreDistribution(JPanel statsPanel, PieDataset pieDataset) {
 		JFreeChart pieChart = ChartFactory.createPieChart("Genre Distribution", pieDataset, true, true, false);
+		pieChart.getPlot().setBackgroundPaint(Color.white);
+		pieChart.getPlot().setOutlinePaint(null);
 		
-		ChartPanel piePanel = new ChartPanel(pieChart);
+		ChartPanel piePanel = new ChartPanel(pieChart);		
 		statsPanel.add(piePanel);
 		piePanel.setBounds(23 + ChartPanel.DEFAULT_WIDTH * 347 / ChartPanel.DEFAULT_HEIGHT, 250, ChartPanel.DEFAULT_WIDTH * 347 / ChartPanel.DEFAULT_HEIGHT, 347);
 	}
@@ -326,9 +328,11 @@ public class ProfileUI extends JFrame {
 	 */
 	private void displayStatusDistribution(JPanel statsPanel, CategoryDataset barDataset) {
 		JFreeChart barChart = ChartFactory.createBarChart("Status Distribution", "Status Frequency", "Number of Movies", barDataset, PlotOrientation.VERTICAL, true, true, false);
-		barChart.setBackgroundPaint(Color.white);
+		barChart.getPlot().setBackgroundPaint(Color.white);
+		barChart.getPlot().setOutlinePaint(null);
 		CategoryPlot plot = barChart.getCategoryPlot();
         plot.setRangeAxisLocation(AxisLocation.BOTTOM_OR_LEFT);
+       
         
         ChartPanel barPanel = new ChartPanel(barChart);
         statsPanel.add(barPanel);

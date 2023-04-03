@@ -181,7 +181,6 @@ public class ProfileUI extends JFrame {
 		profilePopup.setBackground(new Color(31, 31, 31));
 		navbar.add(userIcon);		
         
-		//TODO add everything below into scrollpane
 		JPanel statsPane = new JPanel();
 		statsPane.setBackground(Color.WHITE);
 		statsPane.setLayout(null);
@@ -253,8 +252,6 @@ public class ProfileUI extends JFrame {
 		JSeparator personalizationSeparator_1 = new JSeparator();
 		personalizationSeparator_1.setBounds(10, 205, 950, 12);
 		statsPane.add(personalizationSeparator_1);
-		
-		//TODO: Make stats panel with flow layout
 		
 		// Total Watchtime
 		JLabel totalWatchtimeLabel = new JLabel("Total Watchtime: " + collection.getTotalWatchtime());

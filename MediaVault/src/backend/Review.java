@@ -15,6 +15,7 @@ public class Review {
 	public Review(User user, String review) {
 		this.user=user;
 		this.review=review;
+		if (review.contains("'")) this.review = "---";
 	}
 	/**
 	 * Get an array list containing 3 random reviews from the DB

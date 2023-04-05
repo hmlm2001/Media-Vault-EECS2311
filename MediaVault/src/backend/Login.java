@@ -8,6 +8,7 @@ public class Login {
 	 * @return true if new account has been created, false otherwise
 	 */
 	public static boolean createAccount(String username, String password) {
+		if (username.contains("'") || password.contains("'")) return false;
 		return Encryption.encryptNewAccount(username.toLowerCase(), password);
 	}
 	/**
@@ -17,6 +18,7 @@ public class Login {
 	 * @return true if login is successful, false otherwise
 	 */
 	public static boolean login(String username, String password) {
+		if (username.contains("'") || password.contains("'")) return false;
 		return Encryption.encryptVerifyLogin(username.toLowerCase(), password);
 	}
 }

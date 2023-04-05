@@ -144,3 +144,36 @@ Tasks Assignments + Estimates vs Time Taken
 		
 9th March 2023
 This was the final meeting of the group before the submission. Everything was organized and submitted according to outlines of the iteration. Users stories, design choices and meeting notes were inspected and updated to accurately potray the development process of the project.
+
+15th March 2023
+This meeting was the beginning of Iteration 3 requirments. We managed to assess what user stories were promised, and what have yet to implemented. After assessing that, the team wrote down all features that must be implemented so that all of our user stories are satisfied. 
+The list of items that we still needed to implement were:
+ - Recommendations
+ - Status
+ - Reviews
+ - Profile Page
+ 	- Personalization
+	- Stats
+ - New JUnit Tests & Integration Test
+For the first week, the team decided to implement Recommendations and Statuses over before the next meeting. 
+
+18th March 2023
+Recommendations has been fully implemented in all three layers, it is completed.
+Statuses backend and persistence has been fully implemented, still need the user interface for it. Testing has been done on statuses (Backend and persistence), and it works without issues.
+Still need to implement:
+ - Status (Backend)
+ - Reviews
+ - Profile Page
+ 	- Personalization
+	- Stats
+ - New JUnit Tests & Integration Test
+
+22nd March 2023
+
+29th March 2023
+
+2nd April 2023
+
+5th April 2023
+
+

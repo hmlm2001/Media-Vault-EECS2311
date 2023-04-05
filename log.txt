@@ -145,6 +145,7 @@ Tasks Assignments + Estimates vs Time Taken
 9th March 2023
 This was the final meeting of the group before the submission. Everything was organized and submitted according to outlines of the iteration. Users stories, design choices and meeting notes were inspected and updated to accurately potray the development process of the project.
 
+ITERATION 3
 15th March 2023
 This meeting was the beginning of Iteration 3 requirments. We managed to assess what user stories were promised, and what have yet to implemented. After assessing that, the team wrote down all features that must be implemented so that all of our user stories are satisfied. 
 The list of items that we still needed to implement were:
@@ -155,25 +156,89 @@ The list of items that we still needed to implement were:
  	- Personalization
 	- Stats
  - New JUnit Tests & Integration Test
-For the first week, the team decided to implement Recommendations and Statuses over before the next meeting. 
+For the first week, the team decided to implement Recommendations and Statuses over before the next meeting.
+Time estimates for the tasks:
+Tasks Assignments + Estimates vs Time Taken
+	Recommendations
+		Recommendations 			-Mate		Estimated:[2 days]
+		Status 					-Mate		Estimated:[2 days]
+		Reviews 				-Mate		Estimated:[2 days]
+		Profile Page 				-Muhammed	Estimated:[3 days]
+	User Interface	
+		Recommendations 			-Isaac		Estimated:[3 days]
+		Status 					-Ruth		Estimated:[3 days]
+		Reviews 				-Isaac		Estimated:[6 days]
+		Profile Page 				-Herman		Estimated:[6 days]
+	Persistence
+		Recommendations 			-Mate		Estimated:[2 days]
+		Status 					-Isaac		Estimated:[2 days]
+		Reviews 				-Mate		Estimated:[2 days]
+		Profile Page 				-Muhammed	Estimated:[3 days]
+	Other
+		UML					-Mate		 	Estimated:[Make as project moves]
+		Redo Detailed User Stories		-Herman/Muhammad 	Estimated:[4 days]
+		Tests					-Isaac			Estimated:[Make as project moves]
+		
 
 18th March 2023
 Recommendations has been fully implemented in all three layers, it is completed.
 Statuses backend and persistence has been fully implemented, still need the user interface for it. Testing has been done on statuses (Backend and persistence), and it works without issues.
 Still need to implement:
- - Status (Backend)
+ - Status (User Interface)
  - Reviews
  - Profile Page
  	- Personalization
 	- Stats
  - New JUnit Tests & Integration Test
+Tasks Assignments + Estimates vs Time Taken
+	Recommendations
+		Recommendations 			-Mate		Estimated:[2 days]	Time Taken:[2 days]
+		Status 					-Mate		Estimated:[2 days]	Time Taken:[2 days]
+	User Interface	
+		Recommendations 			-Isaac		Estimated:[3 days]	Time Taken:[3 days]
+		Status 					-Ruth		Estimated:[3 days]	Time Taken:[Need 2 more days]
+	Persistence
+		Recommendations 			-Mate		Estimated:[2 days]	Time Taken:[1 days]
+		Status 					-Isaac		Estimated:[2 days]	Time Taken:[2 days]
+Team decided that by the next meeting reviews and status should be fully implemented.
 
 22nd March 2023
+ Received Lab Test 5. Decided to figure it out and allocate tasks so everyone has a fair amount of work. 
+ The Status has been fully implemented on all layers and has been tested and shown full funcitonality. The same goes for reviews.
+ Still need to implement:
+ - Profile Page
+ 	- Personalization
+	- Stats
+ - New JUnit Tests & Integration Test
+Tasks Assignments + Estimates vs Time Taken
+	Recommendations
+		Reviews 				-Mate		Estimated:[2 days]	Time Taken:[2 days]
+	User Interface	
+		Status 					-Ruth		Estimated:[3 days]	Time Taken:[5 days]
+		Reviews 				-Isaac		Estimated:[6 days]	Time Taken:[2 days]
+	Persistence
+		Reviews 				-Mate		Estimated:[2 days]	Time Taken:[2 days]
+Team decided that by next meeting, all features should be impelemnted, with only minor things (such as the uml diagram as well as some refactoring) left to do.
 
 29th March 2023
+ By this time everyone has submitted their Lab Test 5, and all promised features have been implemented.
+ Tasks Assignments + Estimates vs Time Taken
+	Recommendations
+		Profile Page 				-Muhammed	Estimated:[3 days]	Time Taken:[3 days]
+	User Interface	
+		Profile Page 				-Herman		Estimated:[6 days]	Time Taken:[6 days]
+	Persistence
+		Profile Page 				-Muhammed	Estimated:[3 days]	Time Taken:[1 days]
+	Other
+		UML					-Mate		 	Complete
+		Redo Detailed User Stories		-Herman/Muhammad 	Estimated:[4 days]	Time Taken:[4 days]
+		Tests					-Isaac			Complete
+ Assigned everyone a segment of the video and started final testing in preperation of the demo.
 
 2nd April 2023
+ Did the demo. Unfortunately one group member was unable to make it due to commute issues.
 
 5th April 2023
+ Final meeting of the group. Working out minor details for submission. Such as the wiki, log, and collecting everything that we need to submit.
 
 

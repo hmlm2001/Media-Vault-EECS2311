@@ -44,7 +44,7 @@ CREATE TABLE allmovies (
 );
 
 Create table review (
-    username varchar(50),
+    username varchar(100),
     movieid int not null,
     review varchar(900),
     PRIMARY KEY(username,movieid)

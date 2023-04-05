@@ -22,4 +22,4 @@ UseStub.setStubFlag(true);
 ```
 
 ## Required Documents
-The required documents for each iteration are stored in "Planning Documents".
+The required documents for each iteration are stored in ![Planning Documents](/Planning\ Documents/).

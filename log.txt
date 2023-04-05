@@ -164,8 +164,8 @@ Tasks Assignments + Estimates vs Time Taken
 		Reviews 				-Mate		Estimated:[2 days]
 		Profile Page 				-Muhammed	Estimated:[3 days]
 	User Interface	
-		Recommendations 			-Isaac		Estimated:[5 days]
-		Status 					-Ruth		Estimated:[5 days]
+		Recommendations 			-Isaac		Estimated:[3 days]
+		Status 					-Ruth		Estimated:[3 days]
 		Reviews 				-Isaac		Estimated:[6 days]
 		Profile Page 				-Herman		Estimated:[6 days]
 	Persistence
@@ -176,21 +176,48 @@ Tasks Assignments + Estimates vs Time Taken
 	Other
 		UML					-Mate		 	Estimated:[Make as project moves]
 		Redo Detailed User Stories		-Herman/Muhammad 	Estimated:[4 days]
-		Tests					-Isaac			Estimated:[6 days]
+		Tests					-Isaac			Estimated:[Make as project moves]
 		
 
 18th March 2023
 Recommendations has been fully implemented in all three layers, it is completed.
 Statuses backend and persistence has been fully implemented, still need the user interface for it. Testing has been done on statuses (Backend and persistence), and it works without issues.
 Still need to implement:
- - Status (Backend)
+ - Status (User Interface)
  - Reviews
  - Profile Page
  	- Personalization
 	- Stats
  - New JUnit Tests & Integration Test
+Tasks Assignments + Estimates vs Time Taken
+	Recommendations
+		Recommendations 			-Mate		Estimated:[2 days]	Time Taken:[2 days]
+		Status 					-Mate		Estimated:[2 days]	Time Taken:[2 days]
+	User Interface	
+		Recommendations 			-Isaac		Estimated:[3 days]	Time Taken:[3 days]
+		Status 					-Ruth		Estimated:[3 days]	Time Taken:[Need 2 more days]
+	Persistence
+		Recommendations 			-Mate		Estimated:[2 days]	Time Taken:[1 days]
+		Status 					-Isaac		Estimated:[2 days]	Time Taken:[2 days]
+Team decided that by the next meeting reviews and status should be fully implemented.
 
 22nd March 2023
+ Received Lab Test 5. Decided to figure it out and allocate tasks so everyone has a fair amount of work. 
+ The Status has been fully implemented on all layers and has been tested and shown full funcitonality. The same goes for reviews.
+ Still need to implement:
+ - Profile Page
+ 	- Personalization
+	- Stats
+ - New JUnit Tests & Integration Test
+Tasks Assignments + Estimates vs Time Taken
+	Recommendations
+		Reviews 				-Mate		Estimated:[2 days]	Time Taken:[2 days]
+	User Interface	
+		Status 					-Ruth		Estimated:[3 days]	Time Taken:[5 days]
+		Reviews 				-Isaac		Estimated:[6 days]	Time Taken:[2 days]
+	Persistence
+		Reviews 				-Mate		Estimated:[2 days]	Time Taken:[2 days]
+Team decided
 
 29th March 2023
 

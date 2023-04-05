@@ -155,7 +155,29 @@ The list of items that we still needed to implement were:
  	- Personalization
 	- Stats
  - New JUnit Tests & Integration Test
-For the first week, the team decided to implement Recommendations and Statuses over before the next meeting. 
+For the first week, the team decided to implement Recommendations and Statuses over before the next meeting.
+Time estimates for the tasks:
+Tasks Assignments + Estimates vs Time Taken
+	Recommendations
+		Recommendations 			-Mate		Estimated:[2 days]
+		Status 					-Mate		Estimated:[2 days]
+		Reviews 				-Mate		Estimated:[2 days]
+		Profile Page 				-Muhammed	Estimated:[3 days]
+	User Interface	
+		Recommendations 			-Isaac		Estimated:[5 days]
+		Status 					-Ruth		Estimated:[5 days]
+		Reviews 				-Isaac		Estimated:[6 days]
+		Profile Page 				-Herman		Estimated:[6 days]
+	Persistence
+		Recommendations 			-Mate		Estimated:[2 days]
+		Status 					-Isaac		Estimated:[2 days]
+		Reviews 				-Mate		Estimated:[2 days]
+		Profile Page 				-Muhammed	Estimated:[3 days]
+	Other
+		UML					-Mate		 	Estimated:[Make as project moves]
+		Redo Detailed User Stories		-Herman/Muhammad 	Estimated:[4 days]
+		Tests					-Isaac			Estimated:[6 days]
+		
 
 18th March 2023
 Recommendations has been fully implemented in all three layers, it is completed.

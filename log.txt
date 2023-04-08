@@ -159,7 +159,7 @@ The list of items that we still needed to implement were:
 For the first week, the team decided to implement Recommendations and Statuses over before the next meeting.
 Time estimates for the tasks:
 Tasks Assignments + Estimates vs Time Taken
-	Recommendations
+	Backend
 		Recommendations 			-Mate		Estimated:[2 days]
 		Status 					-Mate		Estimated:[2 days]
 		Reviews 				-Mate		Estimated:[2 days]
@@ -191,7 +191,7 @@ Still need to implement:
 	- Stats
  - New JUnit Tests & Integration Test
 Tasks Assignments + Estimates vs Time Taken
-	Recommendations
+	Backend
 		Recommendations 			-Mate		Estimated:[2 days]	Time Taken:[2 days]
 		Status 					-Mate		Estimated:[2 days]	Time Taken:[2 days]
 	User Interface	
@@ -211,7 +211,7 @@ Team decided that by the next meeting reviews and status should be fully impleme
 	- Stats
  - New JUnit Tests & Integration Test
 Tasks Assignments + Estimates vs Time Taken
-	Recommendations
+	Backend
 		Reviews 				-Mate		Estimated:[2 days]	Time Taken:[2 days]
 	User Interface	
 		Status 					-Ruth		Estimated:[3 days]	Time Taken:[5 days]
@@ -223,7 +223,7 @@ Team decided that by next meeting, all features should be impelemnted, with only
 29th March 2023
  By this time everyone has submitted their Lab Test 5, and all promised features have been implemented.
  Tasks Assignments + Estimates vs Time Taken
-	Recommendations
+	Backend
 		Profile Page 				-Muhammed	Estimated:[3 days]	Time Taken:[3 days]
 	User Interface	
 		Profile Page 				-Herman		Estimated:[6 days]	Time Taken:[6 days]
